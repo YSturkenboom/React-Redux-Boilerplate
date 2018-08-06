@@ -1,0 +1,10 @@
+@mixin background-cover {
+  background-position: center center;
+  background-size: cover;
+}
+
+@mixin align-vertical {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}

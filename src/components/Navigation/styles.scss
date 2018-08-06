@@ -1,0 +1,251 @@
+@import '../../theme/variables';
+
+.Navigation {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 100;
+
+  .nav-container {
+    padding: 0;
+    background-color: #fff;
+    border-radius: 32px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.075);
+    transition: width 0.3s, border-radius 0.3s;
+
+    .container {
+      position: relative;
+      height: 64px;
+      padding: 0 5px 0 90px;
+    }
+  }
+
+  @media #{$max-xs} {
+    position: fixed;
+    top: auto !important;
+    bottom: 0;
+
+    .nav-container {
+      border-radius: 0;
+      box-shadow: 0 -4px 6px rgba(0,0,0,0.075);
+
+      .container {
+        padding: 0;
+      }
+    }
+  }
+
+  .nav-logo {
+    position: absolute;
+    display: inline-block;
+    top: -12px;
+    left: 0;
+    height: 90px;
+    width: 90px;
+    transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &.is-top {
+    transition: top 0.3s;
+  }
+
+  &.scrolled {
+    position: fixed;
+    top: 0;
+
+    .nav-container {
+      width: 100%;
+      border-radius: 0;
+    }
+
+    .nav-logo {
+      top: 0;
+      left: 12px;
+      height: 64px;
+      width: 64px;
+    }
+  }
+
+  .nav-left, .nav-right {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: 100%;
+  }
+
+  .nav-right {
+    float: right;
+    border-left: 1px solid #ddd;
+    padding-left: 10px;
+
+    @media #{$max-md} {
+      padding-left: 0;
+      border: 0;
+    }
+  }
+
+  .nav-item > a {
+    display: inline-block;
+    height: 100%;
+    padding: 21px 30px 0;
+    color: $font-color-dark;
+    text-decoration: none;
+
+    @media #{$max-md} {
+      padding: 21px 25px 0;
+    }
+
+    &.btn {
+      padding: 10px 25px;
+      height: auto;
+      margin: 9px 0 0 10px;
+      color: #fff;
+    }
+  }
+
+  .nav-item {
+    height: 100%;
+    float: left;
+
+    .svg-inline--fa {
+      margin-left: 7px;
+      position: relative;
+      top: 1px;
+    }
+  }
+
+  .nav-left {
+    float: left;
+    padding-left: 10px;
+
+    @media #{$max-xs} {
+      padding-left: 5px;
+    }
+
+    .nav-item {
+      margin: 0 5px;
+
+      & > a {
+        padding: 21px 15px 0;
+
+        @media #{$max-xs} {
+          padding: 21px 10px 0;
+        }
+      }
+
+      @media #{$max-md} {
+        margin: 0;
+      }
+    }
+  }
+
+  .nav-item > .dropdown-menu {
+    margin: 0;
+    border: 0;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.075);
+
+    @media #{$max-md} {
+      right: 25px;
+    }
+
+    @media #{$max-xs} {
+      right: 0;
+      top: auto;
+      bottom: 64px;
+      box-shadow: 0 -4px 6px rgba(0,0,0,0.075);
+      border: 0;
+      border-radius: 0;
+      border-top-left-radius: 3px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    li {
+      a {
+        font-size: 16px;
+        padding: 10px 30px;
+        outline: 0;
+
+        @media #{$max-xs} {
+          font-size: 14px;
+        }
+
+        &:hover, &:focus {
+          background-color: $color-white;
+        }
+      }
+
+      &.active {
+        a {
+          background-color: $color-white;
+          padding-left: 27px;
+        }
+      }
+    }
+  }
+
+  .nav-item.dropdown {
+    border-right: 1px solid #ddd;
+
+    .caret {
+      @media #{$max-xs} {
+        transform: rotate(180deg) translateY(1px);
+      }
+    }
+
+    &.open .caret {
+      transform: none;
+
+      @media #{$min-sm} {
+        transform: rotate(180deg) translateY(1px);
+      }
+    }
+
+    @media #{$max-md} {
+      border: 0;
+    }
+  }
+
+  #dropdown-profile {
+    max-width: 240px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-right: 44px;
+
+    & > .caret {
+      position: absolute;
+      right: 30px;
+      top: 31px;
+    }
+
+    @media #{$max-md} {
+      max-width: 230px;
+      padding-right: 39px;
+
+      & > .caret {
+        right: 25px;
+      }
+    }
+
+    @media #{$max-xs} {
+      padding-left: 15px;
+      padding-right: 30px;
+
+      & > .caret {
+        top: 30px;
+        right: 15px;
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+@import '../../theme/variables';
+
+.Login {
+  .login-background {
+    position: absolute;
+    background-image: url('../../../public/images/background-default.jpg');
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .login-content {
+    padding: 50px 15px;
+    text-align: center;
+    position: relative;
+  }
+
+  h1 {
+    font-weight: bold;
+    color: $color-white;
+    text-shadow: 0 2px 7px rgba(0, 0, 0, 0.075);
+  }
+
+  .alert {
+    margin-top: 10px;
+  }
+
+  .login-window {
+    background-color: $color-white;
+    border-radius: 20px;
+    margin: 30px auto 10px;
+    width: 100%;
+    max-width: 370px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.125);
+
+    .login-window-header {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      padding: 10px 30px;
+
+      h4, p {
+        color: $color-white;
+      }
+    }
+
+    .login-window-body {
+      padding: 15px 30px 30px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      background-color: $color-white;
+    }
+
+    label {
+      color: $color-black;
+      width: 100%;
+      text-align: left;
+      margin-top: 10px;
+      font-weight: 400;
+
+      input {
+        display: block;
+        margin-top: 4px;
+      }
+    }
+
+    .help-block {
+      margin-bottom: 0;
+    }
+
+    .btn {
+      margin-top: 20px;
+    }
+  }
+}
