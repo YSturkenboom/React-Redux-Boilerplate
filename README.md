@@ -1,8 +1,6 @@
-### To start run:
+### To start development:
 
-1.  Create .env file in root folder with JWT_SECRET=...
-
-2.  Bash
+```bash
 yarn
-yarn build
-yarn start
+yarn dev
+```
