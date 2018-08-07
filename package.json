@@ -45,13 +45,13 @@
       }
     },
     "build": {
-      "command": "webpack --progress --hide-modules --config ./tools/webpack/config.babel.js",
+      "command": "webpack --progress --hide-modules --config ./tools/webpack/webpack.config.js",
       "env": {
         "NODE_ENV": "production"
       }
     },
     "analyze": {
-      "command": "webpack --progress --hide-modules --config ./tools/webpack/config.babel.js",
+      "command": "webpack --progress --hide-modules --config ./tools/webpack/webpack.config.js",
       "env": {
         "NODE_ENV": "analyze"
       }
@@ -172,6 +172,7 @@
         "never"
       ],
       "global-require": "off",
+      "no-console": "off",
       "no-underscore-dangle": "off",
       "no-use-before-define": "off",
       "function-paren-newline": "off",
@@ -279,7 +280,7 @@
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
     "react-dev-utils": "^5.0.1",
-    "react-dom": "^16.4.1",
+    "react-dom": "16.4.2",
     "react-helmet": "^5.2.0",
     "react-hot-loader": "^4.3.4",
     "react-redux": "^5.0.7",
@@ -338,6 +339,7 @@
     "react-test-renderer": "^16.4.1",
     "redux-mock-store": "^1.5.3",
     "sass-loader": "^7.0.3",
+    "style-loader": "^0.22.0",
     "stylelint": "^9.4.0",
     "stylelint-config-recommended-scss": "^3.2.0",
     "stylelint-config-standard": "^18.2.0",

@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { hot } from 'react-hot-loader';
 
 class EnsureLoggedIn extends PureComponent {
   render() {
@@ -33,7 +32,6 @@ class EnsureLoggedIn extends PureComponent {
 const connector = connect(({ auth }) => ({ auth }));
 
 export default compose(
-  hot(module),
   withRouter,
   connector
 )(EnsureLoggedIn);

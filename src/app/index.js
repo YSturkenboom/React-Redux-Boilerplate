@@ -2,6 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import Helmet from 'react-helmet';
+import { hot } from 'react-hot-loader';
 import { Grid } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
 
@@ -39,4 +40,4 @@ const App = ({ route }) => (
   </div>
 );
 
-export default App;
+export default hot(module)(App);

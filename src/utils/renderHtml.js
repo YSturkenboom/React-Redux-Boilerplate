@@ -4,9 +4,9 @@ import serialize from 'serialize-javascript';
 import { minify } from 'html-minifier';
 
 export default (head, assets, htmlContent, initialState, loadableStateTag) => {
-  // Use pre-defined assets for development to prevent html from inserting wrong styles / scripts
+  // Use pre-defined assets in development. "main" is the default webpack generated name.
   const envAssets = __DEV__
-    ? { main: { js: '/assets/main.js', css: '/assets/main.css' } }
+    ? { js: '/assets/main.js', css: '/assets/main.css' }
     : assets;
 
   const html = `

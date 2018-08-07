@@ -10,7 +10,7 @@ import chalk from 'chalk';
 import openBrowser from 'react-dev-utils/openBrowser';
 
 import renderer from './renderer';
-import { port, host } from 'config';
+import { port, host } from './config';
 
 // Create Express server
 const app = express();
@@ -28,7 +28,7 @@ if (!__DEV__) {
 } else {
   /* Run express as webpack dev server */
   const webpack = require('webpack');
-  const webpackConfig = require('../tools/webpack/config.babel');
+  const webpackConfig = require('../tools/webpack/webpack.config');
   const compiler = webpack(webpackConfig);
 
   compiler.apply(new webpack.ProgressPlugin());
