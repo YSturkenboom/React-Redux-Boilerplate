@@ -1,14 +1,14 @@
-import path from 'path';
-import webpack from 'webpack';
-import ManifestPlugin from 'webpack-manifest-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
-import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
-import StyleLintPlugin from 'stylelint-webpack-plugin';
-import CompressionPlugin from 'compression-webpack-plugin';
-import ImageminPlugin from 'imagemin-webpack-plugin';
-import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+const path = require('path');
+const webpack = require('webpack');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isDev = nodeEnv === 'development';
