@@ -18,10 +18,10 @@ export const checkSession = () => async dispatch => {
   }
 };
 
-export const login = (username, password) => async dispatch => {
+export const login = (email, password) => async dispatch => {
   try {
     const res = await axios.post(`${apiUrl}/auth/login`, {
-      username,
+      email,
       password
     });
 

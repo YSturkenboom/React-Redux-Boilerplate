@@ -1,0 +1,15 @@
+@import 'variables';
+
+$body-bg: #f5f6fa;
+$body-color: $font-color-dark;
+$font-family-base: $font-primary;
+
+$theme-colors: (
+  'primary': $color-light-blue
+);
+
+$headings-font-weight: 700;
+$headings-line-height: 1.5;
+$headings-color: $title-color-dark;
+
+@import './node_modules/bootstrap/scss/bootstrap';

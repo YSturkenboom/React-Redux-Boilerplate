@@ -1,28 +1,30 @@
 @import '../theme/variables';
 
-// @font-face {
-//   font-family: 'Roboto Slab';
-//   src: url('../../../public/fonts/RobotoSlab-Regular.eot');
-//   src: url('../../../public/fonts/RobotoSlab-Regular.eot?#iefix') format('embedded-opentype'),
-//     url('../../../public/fonts/RobotoSlab-Regular.woff2') format('woff2'),
-//     url('../../../public/fonts/RobotoSlab-Regular.woff') format('woff'),
-//     url('../../../public/fonts/RobotoSlab-Regular.ttf') format('truetype');
-//   font-weight: normal;
-//   font-style: normal;
-// }
+@font-face {
+  font-family: 'Avenir';
+  font-weight: 400;
+  src: url('../fonts/710789a0-1557-48a1-8cec-03d52d663d74.eot?#iefix');
+  src:
+    url('../fonts/710789a0-1557-48a1-8cec-03d52d663d74.eot?#iefix') format('eot'),
+    url('../fonts/065a6b14-b2cc-446e-9428-271c570df0d9.woff2') format('woff2'),
+    url('../fonts/65d75eb0-2601-4da5-a9a4-9ee67a470a59.woff') format('woff'),
+    url('../fonts/c70e90bc-3c94-41dc-bf14-caa727c76301.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir';
+  font-weight: 700;
+  src: url('../fonts/6af9989e-235b-4c75-8c08-a83bdaef3f66.eot?#iefix');
+  src:
+    url('../fonts/6af9989e-235b-4c75-8c08-a83bdaef3f66.eot?#iefix') format('eot'),
+    url('../fonts/d513e15e-8f35-4129-ad05-481815e52625.woff2') format('woff2'),
+    url('../fonts/61bd362e-7162-46bd-b67e-28f366c4afbe.woff') format('woff'),
+    url('../fonts/ccd17c6b-e7ed-4b73-b0d2-76712a4ef46b.ttf') format('truetype');
+}
 
 body, html {
   height: 100%;
   width: 100%;
-}
-
-body {
-  background-color: $color-white;
-  font-family: $font-primary;
-}
-
-h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
-  font-family: $font-primary;
 }
 
 #react-view {
@@ -30,6 +32,6 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 
 .App {
-  min-height: 100%;
+  height: 100%;
   position: relative;
 }

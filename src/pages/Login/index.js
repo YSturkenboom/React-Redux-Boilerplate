@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
-import { Alert } from 'react-bootstrap';
+import { Alert, Button, Card, Form, FormGroup, Label, Input } from 'reactstrap';
 
 import { authActions } from 'actions';
 
@@ -13,7 +13,7 @@ class Login extends PureComponent {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: ''
     };
   }
@@ -28,9 +28,9 @@ class Login extends PureComponent {
     ev.preventDefault();
 
     const { login } = this.props;
-    const { username, password } = this.state;
+    const { email, password } = this.state;
 
-    login(username, password);
+    login(email, password);
   };
 
   handleInputChange = ev => {
@@ -42,7 +42,7 @@ class Login extends PureComponent {
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     const { isLoggedIn, error } = this.props.auth;
-    const { username, password } = this.state;
+    const { email, password } = this.state;
 
     if (isLoggedIn) {
       return <Redirect to={from} />;
@@ -52,53 +52,40 @@ class Login extends PureComponent {
       <div className="Login">
         <Helmet title="Login" />
 
-        <div className="login-background background" />
-
         {!this.props.auth.checkingSession && (
           <div className="login-content">
-            <a href="/">Home</a>
-            <h1 className="h2">Login</h1>
-            <div className="login-window">
-              <div className="login-window-header">
-                <h4>Login</h4>
-              </div>
+            <h1 className="text-center">Login</h1>
 
-              <div className="login-window-body">
-                {error && <Alert bsStyle="danger">{error}</Alert>}
+            <Card body className="login-window">
+              {error && <Alert color="danger">{error}</Alert>}
 
-                <form onSubmit={this.onSubmitVerify} autoComplete="off">
-                  <label htmlFor="Username">
-                    Username
-                    <input
-                      type="text"
-                      name="username"
-                      id="username"
-                      className="input-round"
-                      placeholder="Username"
-                      value={username}
-                      onChange={this.handleInputChange}
-                    />
-                  </label>
-                  <label htmlFor="password">
-                    Password
-                    <input
-                      type="password"
-                      name="password"
-                      id="password"
-                      className="input-round"
-                      placeholder="Password"
-                      value={password}
-                      onChange={this.handleInputChange}
-                    />
-                  </label>
-                  <input
-                    type="submit"
-                    className="btn btn-block"
-                    value="Login"
+              <Form onSubmit={this.onSubmitVerify}>
+                <FormGroup>
+                  <Label for="email">E-mail</Label>
+                  <Input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={email}
+                    onChange={this.handleInputChange}
+                    placeholder="E-mail"
                   />
-                </form>
-              </div>
-            </div>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="password">Password</Label>
+                  <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={this.handleInputChange}
+                  />
+                </FormGroup>
+
+                <Button color="primary">Login</Button>
+              </Form>
+            </Card>
           </div>
         )}
       </div>

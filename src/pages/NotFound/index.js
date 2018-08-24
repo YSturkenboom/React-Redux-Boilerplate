@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Badge } from 'react-bootstrap';
+import { Badge } from 'reactstrap';
 
 import { Header } from 'components';
 
@@ -18,7 +18,9 @@ export default ({ staticContext }) => {
 
       <div className="container container-medium">
         <div className="card card-big">
-          <Badge className="badge-big badge-error">foutmelding</Badge>
+          <Badge className="badge-big" color="danger">
+            foutmelding
+          </Badge>
 
           <h2>Oeps, pagina niet gevonden</h2>
           <p className="text-default">

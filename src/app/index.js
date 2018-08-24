@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import Helmet from 'react-helmet';
 import { hot } from 'react-hot-loader';
-import { Grid } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
 
 import { Navigation } from 'components';
@@ -12,7 +11,7 @@ import { EnsureLoggedIn, Login } from 'pages';
 import config from '../config';
 
 // Import your global styles here
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../theme/bootstrap.scss';
 import './styles.scss';
 
 const scrollToTop = () => {
@@ -31,7 +30,6 @@ const App = ({ route }) => (
 
     <EnsureLoggedIn>
       <Navigation />
-      <Grid fluid className="app-header background" />
 
       {renderRoutes(route.routes)}
     </EnsureLoggedIn>

@@ -5,9 +5,7 @@ import { minify } from 'html-minifier';
 
 export default (head, assets, htmlContent, initialState, loadableStateTag) => {
   // Use pre-defined assets in development. "main" is the default webpack generated name.
-  const envAssets = __DEV__
-    ? { js: '/assets/main.js', css: '/assets/main.css' }
-    : assets;
+  const envAssets = __DEV__ ? { js: '/assets/main.js' } : assets;
 
   const html = `
     <!doctype html>
