@@ -3,9 +3,11 @@
 $body-bg: #f5f6fa;
 $body-color: $font-color-dark;
 $font-family-base: $font-primary;
-$border-radius: 2.2px;
-$border-radius-lg: 2.2px;
-$border-radius-sm: 2.2px;
+$border-radius: $border-radius;
+$border-radius-lg: $border-radius;
+$border-radius-sm: $border-radius;
+$input-border-color: $color-border;
+$input-placeholder-color: $color-input-placeholder;
 
 $theme-colors: (
   'primary': $color-light-blue

@@ -12,11 +12,12 @@ import {
   Label,
   Input,
   InputGroup,
-  InputGroupAddon
+  InputGroupAddon,
+  InputGroupText
 } from 'reactstrap';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faStroopwafel } from '@fortawesome/pro-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock } from '@fortawesome/pro-solid-svg-icons';
 
 import { authActions } from 'actions';
 
@@ -79,7 +80,11 @@ class Login extends PureComponent {
                     E-mail
                   </Label>
                   <InputGroup>
-                    <InputGroupAddon addonType="prepend">@</InputGroupAddon>
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <FontAwesomeIcon icon={faEnvelope} />
+                      </InputGroupText>
+                    </InputGroupAddon>
                     <Input
                       type="email"
                       name="email"
@@ -97,7 +102,11 @@ class Login extends PureComponent {
                     Password
                   </Label>
                   <InputGroup>
-                    <InputGroupAddon addonType="prepend">@</InputGroupAddon>
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <FontAwesomeIcon icon={faLock} />
+                      </InputGroupText>
+                    </InputGroupAddon>
                     <Input
                       type="password"
                       name="password"

@@ -1,5 +1,4 @@
 @import '../../theme/variables';
-@import '../../theme/common';
 
 .Login {
   min-height: 100%;
@@ -7,6 +6,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url('../../images/background-login.png');
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: right bottom;
 
   img {
     display: block;
@@ -34,6 +37,12 @@
 
   .input-group-prepend .input-group-text {
     background: none;
+    min-width: 50px;
+
+    svg {
+      margin: 0 auto;
+      color: $color-blue;
+    }
   }
 
   button {
