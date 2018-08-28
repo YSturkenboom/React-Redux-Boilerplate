@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 import { Alert, Button, Card, Form, FormGroup, Label, Input } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStroopwafel } from '@fortawesome/pro-regular-svg-icons';
 
 import { authActions } from 'actions';
 
@@ -55,6 +57,7 @@ class Login extends PureComponent {
         {!this.props.auth.checkingSession && (
           <div className="login-content">
             <h1 className="text-center">Login</h1>
+            <FontAwesomeIcon icon={faStroopwafel} />
 
             <Card body className="login-window">
               {error && <Alert color="danger">{error}</Alert>}
