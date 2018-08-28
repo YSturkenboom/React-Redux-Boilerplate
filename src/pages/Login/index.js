@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
+
 import {
   Alert,
   Button,
@@ -13,6 +14,9 @@ import {
   InputGroup,
   InputGroupAddon
 } from 'reactstrap';
+
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faStroopwafel } from '@fortawesome/pro-regular-svg-icons';
 
 import { authActions } from 'actions';
 
