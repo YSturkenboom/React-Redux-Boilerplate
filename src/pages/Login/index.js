@@ -2,7 +2,17 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
-import { Alert, Button, Card, Form, FormGroup, Label, Input } from 'reactstrap';
+import {
+  Alert,
+  Button,
+  Card,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  InputGroup,
+  InputGroupAddon
+} from 'reactstrap';
 
 import { authActions } from 'actions';
 
@@ -54,37 +64,64 @@ class Login extends PureComponent {
 
         {!this.props.auth.checkingSession && (
           <div className="login-content">
-            <h1 className="text-center">Login</h1>
-
+            <img alt="logo" src={require('../../images/logo.png')} />
             <Card body className="login-window">
+              <h4 className="text-center">Login</h4>
+              <span className="spacer" />
               {error && <Alert color="danger">{error}</Alert>}
-
               <Form onSubmit={this.onSubmitVerify}>
                 <FormGroup>
-                  <Label for="email">E-mail</Label>
-                  <Input
-                    type="email"
-                    name="email"
-                    id="email"
-                    value={email}
-                    onChange={this.handleInputChange}
-                    placeholder="E-mail"
-                  />
+                  <Label hidden for="email">
+                    E-mail
+                  </Label>
+                  <InputGroup>
+                    <InputGroupAddon addonType="prepend">@</InputGroupAddon>
+                    <Input
+                      type="email"
+                      name="email"
+                      id="email"
+                      value={email}
+                      onChange={this.handleInputChange}
+                      placeholder="E-mail"
+                      required
+                      bsSize="lg"
+                    />
+                  </InputGroup>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="password">Password</Label>
-                  <Input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={this.handleInputChange}
-                  />
+                  <Label hidden for="password">
+                    Password
+                  </Label>
+                  <InputGroup>
+                    <InputGroupAddon addonType="prepend">@</InputGroupAddon>
+                    <Input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={this.handleInputChange}
+                      required
+                      bsSize="lg"
+                    />
+                  </InputGroup>
                 </FormGroup>
-
-                <Button color="primary">Login</Button>
+                <FormGroup check>
+                  <Input type="checkbox" id="signedIn" />
+                  <Label className="text-muted" check for="signedIn">
+                    <small>Keep me signed in</small>
+                  </Label>
+                </FormGroup>
+                <span className="spacer" />
+                <span className="spacer" />
+                <Button block size="lg" color="primary">
+                  Login
+                </Button>
               </Form>
+              <span className="spacer" />
+              <a href className="text-center text-muted">
+                <small>Forgot your password?</small>
+              </a>
             </Card>
           </div>
         )}
