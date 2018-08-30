@@ -6,11 +6,13 @@ import { connect } from 'react-redux';
 class EnsureLoggedIn extends PureComponent {
   render() {
     const { pathname } = this.props.location;
-    const { isLoggedIn } = this.props.auth;
+    // TODO: uncomment
+    // const { isLoggedIn } = this.props.auth;
 
     const currentURL = pathname !== '/logout' ? pathname : '/';
 
-    if (isLoggedIn) {
+    // TODO: change true to isLoggedIn
+    if (true) { // eslint-disable-line
       return this.props.children;
     }
 

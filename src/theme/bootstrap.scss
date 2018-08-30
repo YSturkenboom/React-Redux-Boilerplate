@@ -13,6 +13,15 @@ $theme-colors: (
   'primary': $color-light-blue
 );
 
+$red: #d0021b;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1300px
+);
+
 $headings-font-weight: 700;
 $headings-line-height: 1.5;
 $headings-color: $title-color-dark;

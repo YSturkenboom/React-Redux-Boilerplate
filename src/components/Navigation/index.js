@@ -15,34 +15,84 @@ import {
   DropdownItem
 } from 'reactstrap';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChartBar,
+  faEye,
+  faFileAlt,
+  faFileInvoiceDollar,
+  faBoxAlt,
+  faUser
+} from '@fortawesome/pro-light-svg-icons';
+// import { faChartBar } from '@fortawesome/pro-regular-svg-icons';
+
 import './styles.scss';
 
 class Navigation extends Component {
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen
+    }));
+  }
+
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
+        <Navbar className="nav" expand="md">
+          <NavbarBrand href="/">
+            <img alt="logo" src={require('../../images/logo.png')} />
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav navbar>
               <NavItem>
-                <NavLink href="/components/">Components</NavLink>
+                <NavLink href="/components/">
+                  <FontAwesomeIcon icon={faFileInvoiceDollar} />
+                  Facturen
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">
-                  GitHub
+                <NavLink href="/components/">
+                  <FontAwesomeIcon icon={faBoxAlt} />
+                  Artikelen
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/components/">
+                  <FontAwesomeIcon icon={faEye} />
+                  Overzicht
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/components/">
+                  <FontAwesomeIcon icon={faFileAlt} />
+                  Rapporten
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/components/">
+                  <FontAwesomeIcon icon={faChartBar} />
+                  Statistieken
                 </NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Options
+                  <FontAwesomeIcon icon={faUser} />
+                  Welcome
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Option 1</DropdownItem>
-                  <DropdownItem>Option 2</DropdownItem>
+                  <DropdownItem>Settings</DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>Reset</DropdownItem>
+                  <DropdownItem>Log out</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
