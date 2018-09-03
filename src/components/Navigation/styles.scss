@@ -3,6 +3,21 @@
 .nav {
   &bar {
     background-color: $color-blue;
+
+    &-nav {
+      justify-content: space-between;
+      width: 100%;
+
+      > div {
+        display: flex;
+        align-items: center;
+      }
+
+      .dropdown.nav-item {
+        padding: 15px 1rem;
+        border-left: 1px solid rgba(255, 255, 255, 0.25);
+      }
+    }
   }
 
   &.navbar-expand-md {
@@ -11,20 +26,29 @@
 
   &bar-brand {
     border-right: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 0 15px !important;
 
     img {
-      width: 200px;
+      width: 170px;
       height: auto;
-      padding: 15px;
+      padding: 22px 1rem;
     }
   }
 
   &-link {
     color: $font-color-light;
+    opacity: 0.65;
+    transition: 0.15s opacity ease-in;
 
     svg {
-      font-size: 20px;
+      font-size: 25px;
       margin-right: 10px;
+      vertical-align: bottom;
+    }
+
+    &:hover {
+      opacity: 1;
+      color: $font-color-light;
     }
   }
 

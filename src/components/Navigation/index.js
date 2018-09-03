@@ -49,41 +49,43 @@ class Navigation extends Component {
       <div>
         <Navbar className="nav" expand="md">
           <NavbarBrand href="/">
-            <img alt="logo" src={require('../../images/logo.png')} />
+            <img alt="logo" src={require('../../images/logo-white.png')} />
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav navbar>
-              <NavItem>
-                <NavLink href="/components/">
-                  <FontAwesomeIcon icon={faFileInvoiceDollar} />
-                  Facturen
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/components/">
-                  <FontAwesomeIcon icon={faBoxAlt} />
-                  Artikelen
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/components/">
-                  <FontAwesomeIcon icon={faEye} />
-                  Overzicht
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/components/">
-                  <FontAwesomeIcon icon={faFileAlt} />
-                  Rapporten
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/components/">
-                  <FontAwesomeIcon icon={faChartBar} />
-                  Statistieken
-                </NavLink>
-              </NavItem>
+              <div>
+                <NavItem>
+                  <NavLink href="/">
+                    <FontAwesomeIcon icon={faFileInvoiceDollar} />
+                    Facturen
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/articles/">
+                    <FontAwesomeIcon icon={faBoxAlt} />
+                    Artikelen
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/components/">
+                    <FontAwesomeIcon icon={faEye} />
+                    Overzicht
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/components/">
+                    <FontAwesomeIcon icon={faFileAlt} />
+                    Rapporten
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/components/">
+                    <FontAwesomeIcon icon={faChartBar} />
+                    Statistieken
+                  </NavLink>
+                </NavItem>
+              </div>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   <FontAwesomeIcon icon={faUser} />

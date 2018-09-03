@@ -4,6 +4,7 @@ table {
   margin: 0 0 1rem;
   background-color: white !important;
   min-width: 900px;
+  // table-layout: fixed;
 
   th {
     opacity: 0.5;
@@ -38,6 +39,8 @@ table {
     border-top: none !important;
     border-bottom: 1px solid rgba(198, 203, 212, 0.3) !important;
     cursor: pointer;
+    word-wrap: break-word;
+    max-width: 300px;
 
     &:first-child {
       padding-left: 30px;
@@ -145,7 +148,6 @@ table {
 
   .table--inner > td td:last-child {
     text-align: right;
-    color: $blue;
 
     svg {
       margin-left: 10px;
@@ -172,4 +174,8 @@ table {
       background: $green;
     }
   }
+}
+
+.Home table .table--inner > td td:last-child {
+  color: $blue;
 }

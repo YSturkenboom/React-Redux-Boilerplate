@@ -50,8 +50,10 @@ export default class Home extends PureComponent {
           invoiceNumber: 272,
           supplier: 'Voskamp',
           priceControl: 'Afgekeurd',
-          price: '€492,95',
-          excess: '€304,55',
+          quantity: 2,
+          price: 492.95,
+          total: 492.95,
+          excess: 304.55,
           pdf: 'https://translate.google.com/',
           items: [
             {
@@ -60,7 +62,10 @@ export default class Home extends PureComponent {
               price: 30.81,
               lowest: 25.12,
               agreed: 25.12,
-              quantity: 1
+              total: 30.81,
+              excess: 5.55,
+              quantity: 1,
+              priceControl: 'Afgekeurd'
             },
             {
               name: 'Verbandtrommel 86583 B-384 Houder',
@@ -68,7 +73,9 @@ export default class Home extends PureComponent {
               price: 35.81,
               lowest: 22.12,
               agreed: 22.12,
-              quantity: 1
+              total: 35.81,
+              quantity: 1,
+              priceControl: 'Goedgekeurd'
             }
           ]
         },
@@ -78,9 +85,11 @@ export default class Home extends PureComponent {
           customer: 'Kilgore Trout',
           invoiceNumber: 273,
           supplier: 'Voskamp',
-          priceControl: 'Afgekeurd',
-          price: '€292,95',
-          excess: '€205,55',
+          priceControl: 'Goedgekeurd',
+          quantity: 3,
+          price: 292.95,
+          total: 292.95,
+          excess: 205.55,
           pdf: 'https://translate.google.com/',
           items: [
             {
@@ -89,7 +98,9 @@ export default class Home extends PureComponent {
               price: 31.81,
               lowest: 27.12,
               agreed: 27.12,
-              quantity: 1
+              total: 31.81,
+              quantity: 1,
+              priceControl: 'Goedgekeurd'
             },
             {
               name: 'Verbandtrommel 86588 B-384 Houder',
@@ -97,7 +108,9 @@ export default class Home extends PureComponent {
               price: 21.81,
               lowest: 17.12,
               agreed: 17.12,
-              quantity: 1
+              total: 21.81,
+              quantity: 1,
+              priceControl: 'Goedgekeurd'
             },
             {
               name: 'Verbandtrommel 86587 B-384 Houder',
@@ -105,7 +118,9 @@ export default class Home extends PureComponent {
               price: 41.81,
               lowest: 17.12,
               agreed: 27.12,
-              quantity: 1
+              total: 41.81,
+              quantity: 1,
+              priceControl: 'Goedgekeurd'
             }
           ]
         }
@@ -251,13 +266,22 @@ export default class Home extends PureComponent {
         <td>{invoice.invoiceNumber}</td>
         <td>{invoice.supplier}</td>
         <td>
-          <span className="status status--rejected" />
+          {invoice.priceControl === 'Afgekeurd' ? (
+            <span className="status status--rejected" />
+          ) : (
+            <span className="status status--accepted" />
+          )}
           {invoice.priceControl}
         </td>
-        <td>3</td>
+        <td>{invoice.quantity}</td>
         <td>
-          {invoice.price}
-          <span className="status--rejected__quantity"> {invoice.excess}</span>
+          €{invoice.price.toLocaleString()}
+          {invoice.priceControl === 'Afgekeurd' ? (
+            <span className="status--rejected__quantity">
+              (+€
+              {invoice.excess.toLocaleString()})
+            </span>
+          ) : null}
         </td>
         <td>
           <FontAwesomeIcon icon={faArrowAltToBottom} />
@@ -299,18 +323,25 @@ export default class Home extends PureComponent {
     >
       <td>{invoice.name}</td>
       <td>{invoice.itemNumber}</td>
-      <td>€{invoice.price}</td>
-      <td>€{invoice.lowest}</td>
+      <td>€{invoice.price.toLocaleString()}</td>
+      <td>€{invoice.lowest.toLocaleString()}</td>
       <td>
-        <span className="status status--rejected" />€{invoice.lowest}
+        {invoice.priceControl === 'Afgekeurd' ? (
+          <span className="status status--rejected" />
+        ) : (
+          <span className="status status--accepted" />
+        )}
+        €{invoice.agreed.toLocaleString()}
       </td>
-      <td>€{invoice.agreed}</td>
+      <td>{invoice.quantity}</td>
       <td>
-        €{invoice.quantity * invoice.price}
-        <span className="status--rejected__quantity">
-          (+€
-          {invoice.price - invoice.lowest})
-        </span>
+        €{invoice.total.toLocaleString()}
+        {invoice.priceControl === 'Afgekeurd' ? (
+          <span className="status--rejected__quantity">
+            (+€
+            {invoice.excess.toLocaleString()})
+          </span>
+        ) : null}
       </td>
       <td>
         Details

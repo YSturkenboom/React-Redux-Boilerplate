@@ -1,5 +1,5 @@
 import App from 'app';
-import { Home, Logout, NotFound } from 'pages';
+import { Articles, Home, Logout, NotFound } from 'pages';
 
 export default [
   {
@@ -9,6 +9,11 @@ export default [
         path: '/',
         exact: true,
         component: Home
+      },
+      {
+        path: '/articles',
+        exact: true,
+        component: Articles
       },
       {
         path: '/logout',
