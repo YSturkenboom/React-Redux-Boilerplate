@@ -57,6 +57,7 @@
 
     .nav-link {
       cursor: pointer;
+      padding: 13px 1rem;
 
       &.active {
         color: $color-light-blue !important;
@@ -74,10 +75,4 @@
       }
     }
   }
-}
-
-.tab__container {
-  background-color: $color-white;
-  box-shadow: 0 2px 13px 0 rgba(0, 0, 0, 0.18);
-  margin-bottom: 30px;
 }

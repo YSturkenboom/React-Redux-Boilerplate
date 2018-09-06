@@ -1,0 +1,55 @@
+@import '../../theme/variables';
+
+
+.second-menu__container {
+  background-color: $color-white;
+  box-shadow: 0 2px 13px 0 rgba(0, 0, 0, 0.18);
+  margin-bottom: 30px;
+
+  > .container {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+  }
+
+  &--right {
+    display: flex;
+    align-items: center;
+
+    div:first-child {
+      height: 100%;
+      margin-right: 20px;
+    }
+  }
+
+  .search {
+    position: relative;
+
+    svg {
+      position: absolute;
+      top: calc(50% - 7px);
+      left: 20px;
+      transition: 0.2s color ease-in;
+    }
+
+    #search {
+      height: 100%;
+      border-radius: 0;
+      border-bottom: none;
+      border-top: none;
+      border-color: rgba(151, 151, 151, 0.3);
+      min-width: 300px;
+      padding-left: 40px;
+
+      &:focus {
+        border-color: rgba(151, 151, 151, 0.3);
+        outline: none;
+        box-shadow: none;
+
+        & + svg {
+          color: $color-light-blue;
+        }
+      }
+    }
+  }
+}

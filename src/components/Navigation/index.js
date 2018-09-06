@@ -68,7 +68,7 @@ class Navigation extends Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/components/">
+                  <NavLink href="/overview/">
                     <FontAwesomeIcon icon={faEye} />
                     Overzicht
                   </NavLink>

@@ -1,4 +1,6 @@
 import Header from './Header';
 import Navigation from './Navigation';
+import SecondNav from './SecondNav';
+import Filter from './Filter';
 
-export { Header, Navigation };
+export { Filter, Header, Navigation, SecondNav };

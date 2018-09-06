@@ -7,15 +7,8 @@ import { map } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/pro-regular-svg-icons';
 import { faTrash, faArrowAltToBottom } from '@fortawesome/pro-solid-svg-icons';
-
-import './styles.scss';
-
 import {
   Button,
-  Col,
-  Form,
-  FormGroup,
-  Input,
   Modal,
   ModalHeader,
   ModalBody,
@@ -26,11 +19,15 @@ import {
   Pagination,
   PaginationItem,
   PaginationLink,
-  Row,
   TabContent,
   TabPane,
   Table
 } from 'reactstrap';
+
+import { formatPrice } from '../../utils/formatting';
+import { Filter, SecondNav } from '../../components';
+
+import './styles.scss';
 
 export default class Home extends PureComponent {
   constructor(props) {
@@ -129,6 +126,7 @@ export default class Home extends PureComponent {
         {
           id: 3,
           date: '9/12/2017',
+          invoiceId: 272,
           customer: 'Kilgore Trout',
           topic: 'Mastermate factuur FC-328393293_s82 vviir Plegt-Vos B.V.',
           problem: 'Verkeerd PDF format ',
@@ -153,6 +151,7 @@ export default class Home extends PureComponent {
         {
           id: 4,
           date: '9/12/2017',
+          invoiceId: 273,
           customer: 'Kilgore Trout',
           topic: 'Mastermate factuur FC-328393293_s82 vviir Plegt-Vos B.V.',
           problem: 'Verkeerd PDF format ',
@@ -249,6 +248,7 @@ export default class Home extends PureComponent {
 
   renderTable = invoice => {
     const subtableItems = map(invoice.items, this.renderSubtableItems);
+
     return [
       <tr
         key={invoice.id}
@@ -275,11 +275,11 @@ export default class Home extends PureComponent {
         </td>
         <td>{invoice.quantity}</td>
         <td>
-          €{invoice.price.toLocaleString()}
+          €{formatPrice(invoice.price)}
           {invoice.priceControl === 'Afgekeurd' ? (
             <span className="status--rejected__quantity">
               (+€
-              {invoice.excess.toLocaleString()})
+              {formatPrice(invoice.excess)})
             </span>
           ) : null}
         </td>
@@ -292,6 +292,7 @@ export default class Home extends PureComponent {
         activetablerow={this.state.activetablerow}
         className="table--inner"
         tablerowid={invoice.id}
+        key={invoice.invoiceNumber}
       >
         <td colSpan="8">
           <Table>
@@ -323,15 +324,15 @@ export default class Home extends PureComponent {
     >
       <td>{invoice.name}</td>
       <td>{invoice.itemNumber}</td>
-      <td>€{invoice.price.toLocaleString()}</td>
-      <td>€{invoice.lowest.toLocaleString()}</td>
+      <td>€{formatPrice(invoice.price)}</td>
+      <td>€{formatPrice(invoice.lowest)}</td>
       <td>
         {invoice.priceControl === 'Afgekeurd' ? (
           <span className="status status--rejected" />
         ) : (
           <span className="status status--accepted" />
         )}
-        €{invoice.agreed.toLocaleString()}
+        €{formatPrice(invoice.agreed)}
       </td>
       <td>{invoice.quantity}</td>
       <td>
@@ -339,7 +340,7 @@ export default class Home extends PureComponent {
         {invoice.priceControl === 'Afgekeurd' ? (
           <span className="status--rejected__quantity">
             (+€
-            {invoice.excess.toLocaleString()})
+            {formatPrice(invoice.excess)})
           </span>
         ) : null}
       </td>
@@ -352,6 +353,7 @@ export default class Home extends PureComponent {
 
   renderWaitlistTable = invoice => {
     const subtableItems = map(invoice.items, this.renderWaitlistSubtableItems);
+
     return [
       <tr
         key={invoice.id}
@@ -375,6 +377,7 @@ export default class Home extends PureComponent {
         </td>
       </tr>,
       <tr
+        key={invoice.invoiceId}
         activetablerow={this.state.activetablerow}
         className="table--inner"
         tablerowid={invoice.id}
@@ -411,93 +414,34 @@ export default class Home extends PureComponent {
     return (
       <div className="Home">
         <Helmet title={title} />
-        <div className="tab__container">
-          <div className="container">
-            <div>
-              <Nav tabs>
-                <NavItem>
-                  <NavLink
-                    className={this.state.activeTab === '1' ? 'active' : null}
-                    onClick={() => {
-                      this.toggle('1');
-                    }}
-                  >
-                    Verwerkt
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={this.state.activeTab === '2' ? 'active' : null}
-                    onClick={() => {
-                      this.toggle('2');
-                    }}
-                  >
-                    Wachtlijst
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            </div>
-          </div>
-        </div>
+        <SecondNav>
+          <Nav tabs>
+            <NavItem>
+              <NavLink
+                className={this.state.activeTab === '1' ? 'active' : null}
+                onClick={() => {
+                  this.toggle('1');
+                }}
+              >
+                Verwerkt
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                className={this.state.activeTab === '2' ? 'active' : null}
+                onClick={() => {
+                  this.toggle('2');
+                }}
+              >
+                Wachtlijst
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </SecondNav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
             <div className="container">
-              <div>
-                <Row>
-                  <Col md="5" sm="12">
-                    <h1 className="h2">
-                      Facturen
-                      <small> (348)</small>
-                    </h1>
-                    <p>
-                      Totaal bedrag
-                      <b> € 124,894</b>
-                    </p>
-                  </Col>
-                  <Col md="7" sm="12">
-                    <Form>
-                      <FormGroup>
-                        <Input type="select" name="select" id="exampleSelect">
-                          <option value="" disabled selected>
-                            08/08/2016
-                          </option>
-                        </Input>
-                      </FormGroup>
-                      <FormGroup>
-                        <Input type="select" name="select" id="exampleSelect">
-                          <option value="" disabled selected>
-                            08/08/2016
-                          </option>
-                        </Input>
-                      </FormGroup>
-                      <FormGroup>
-                        <Input type="select" name="select" id="exampleSelect">
-                          <option value="" disabled selected>
-                            Leveranciers
-                          </option>
-                        </Input>
-                      </FormGroup>
-                      <FormGroup>
-                        <Input type="select" name="select" id="exampleSelect">
-                          <option value="" disabled selected>
-                            Afnemers
-                          </option>
-                        </Input>
-                      </FormGroup>
-                      <FormGroup>
-                        <Input type="select" name="select" id="exampleSelect">
-                          <option value="" disabled selected>
-                            Prijsafspraak
-                          </option>
-                          <option>Goedgekeurd</option>
-                          <option>Afgekeurd</option>
-                        </Input>
-                      </FormGroup>
-                      <p>Reset filters</p>
-                    </Form>
-                  </Col>
-                </Row>
-              </div>
+              <Filter />
               {this.invoiceTable()}
               <Pagination aria-label="Page navigation">
                 <p>
