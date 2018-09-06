@@ -19,7 +19,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/pro-solid-svg-icons';
 
-import { authActions } from 'actions';
+import { authActions } from '../../actions';
 
 import './styles.scss';
 

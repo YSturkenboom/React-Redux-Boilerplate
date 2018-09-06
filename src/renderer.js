@@ -10,8 +10,8 @@ import Helmet from 'react-helmet';
 import createHistory from 'history/createMemoryHistory';
 import chalk from 'chalk';
 
-import configureStore from 'utils/configureStore';
-import renderHtml from 'utils/renderHtml';
+import configureStore from './utils/configureStore';
+import renderHtml from './utils/renderHtml';
 
 import routes from './routes';
 import assets from '../public/webpack-assets.json';

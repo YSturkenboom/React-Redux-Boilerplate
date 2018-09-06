@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Badge } from 'reactstrap';
 
-import { Header } from 'components';
+import { Header } from '../../components';
 
 import './styles.scss';
 

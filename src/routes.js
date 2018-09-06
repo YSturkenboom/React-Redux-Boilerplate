@@ -1,5 +1,5 @@
-import App from 'app';
-import { Articles, Home, Logout, NotFound } from 'pages';
+import App from './app';
+import { Articles, Home, Logout, NotFound } from './pages';
 
 export default [
   {

@@ -7,7 +7,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { renderRoutes } from 'react-router-config';
 import { loadComponents } from 'loadable-components';
 
-import configureStore from 'utils/configureStore';
+import configureStore from './utils/configureStore';
 import routes from './routes';
 
 // Get the initial state from server-side rendering

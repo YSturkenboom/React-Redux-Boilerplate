@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { apiUrl } from 'config';
+import { apiUrl } from '../config';
 
 export const checkSession = () => async dispatch => {
   try {

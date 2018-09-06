@@ -8,7 +8,7 @@
   },
   "author": "Story of AMS B.V.",
   "license": "UNLICENSED",
-  "sideEffects": false,
+  "sideEffects": true,
   "scripts": {
     "dev": "better-npm-run dev",
     "start": "better-npm-run start",
@@ -29,7 +29,7 @@
   },
   "betterScripts": {
     "dev": {
-      "command": "nodemon ./index.js",
+      "command": "nodemon .",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
@@ -37,7 +37,7 @@
       }
     },
     "start": {
-      "command": "node ./index.js",
+      "command": "node .",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
@@ -45,13 +45,13 @@
       }
     },
     "build": {
-      "command": "webpack --progress --hide-modules --config ./tools/webpack/webpack.config.js",
+      "command": "webpack --progress --hide-modules --config ./tools/webpack/config.babel.js",
       "env": {
         "NODE_ENV": "production"
       }
     },
     "analyze": {
-      "command": "webpack --progress --hide-modules --config ./tools/webpack/webpack.config.js",
+      "command": "webpack -p --progress --hide-modules --config ./tools/webpack/config.babel.js",
       "env": {
         "NODE_ENV": "analyze"
       }
@@ -75,22 +75,19 @@
       }
     },
     "clean:build": {
-      "command": "rm -rf ./public/assets"
+      "command": "rimraf ./public/assets"
     },
     "clean:test": {
-      "command": "rm -rf ./coverage"
+      "command": "rimraf ./coverage"
     },
     "coveralls": {
       "command": "cat ./coverage/lcov.info | coveralls"
     }
   },
   "lint-staged": {
-    "./src ./tools ./index.js": [
-      "eslint"
-    ],
-    "./src/**/*.scss": [
-      "stylelint"
-    ]
+    "*.{js,jsx}": "eslint",
+    "*.css": "stylelint",
+    "*.{scss,sass}": "stylelint --syntax=scss"
   },
   "babel": {
     "presets": [
@@ -125,15 +122,15 @@
       "prettier/react"
     ],
     "plugins": [
-      "react",
+      "import",
       "lodash",
-      "prettier",
-      "import"
+      "react",
+      "prettier"
     ],
     "settings": {
       "import/resolver": {
         "webpack": {
-          "config": "./tools/webpack/webpack.config.js"
+          "config": "./tools/webpack/config.babel.js"
         }
       }
     },
@@ -162,9 +159,7 @@
       "import/no-extraneous-dependencies": [
         "error",
         {
-          "devDependencies": true,
-          "optionalDependencies": false,
-          "peerDependencies": false
+          "devDependencies": true
         }
       ],
       "comma-dangle": [
@@ -197,7 +192,7 @@
     "extends": [
       "stylelint-config-standard",
       "stylelint-config-recommended-scss",
-      "./node_modules/prettier-stylelint/config.js"
+      "stylelint-config-prettier"
     ],
     "plugins": [
       "stylelint-scss"
@@ -216,6 +211,9 @@
     }
   },
   "jest": {
+    "setupFiles": [
+      "raf/polyfill"
+    ],
     "setupTestFrameworkScriptFile": "<rootDir>/tools/jest/setup.js",
     "globals": {
       "__DEV__": true
@@ -230,8 +228,7 @@
       "!src/components/index.js",
       "!src/pages/index.js",
       "!src/pages/Home/index.js",
-      "!src/reducers/index.js",
-      "!src/**/__tests__"
+      "!src/reducers/index.js"
     ],
     "moduleNameMapper": {
       ".*\\.(css|scss|sass)$": "<rootDir>/tools/jest/styleMock.js",
@@ -249,22 +246,22 @@
     "last 2 versions"
   ],
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.55",
-    "@babel/preset-env": "^7.0.0-beta.55",
-    "@babel/preset-react": "^7.0.0-beta.55",
-    "@babel/register": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.3",
     "@fortawesome/pro-light-svg-icons": "^5.3.0",
     "@fortawesome/pro-regular-svg-icons": "^5.3.0",
     "@fortawesome/pro-solid-svg-icons": "^5.3.0",
     "@fortawesome/react-fontawesome": "^0.1.2",
     "asset-require-hook": "^1.2.0",
-    "autoprefixer": "^9.0.1",
+    "autoprefixer": "^9.1.3",
     "axios": "^0.18.0",
-    "babel-plugin-dynamic-import-node": "^2.0.0",
+    "babel-plugin-dynamic-import-node": "^2.1.0",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-transform-remove-console": "^6.9.4",
-    "better-npm-run": "^0.1.0",
+    "better-npm-run": "^0.1.1",
     "bootstrap": "^4.1.3",
     "chalk": "^2.4.1",
     "compression": "^1.7.3",
@@ -274,19 +271,19 @@
     "helmet": "^3.13.0",
     "history": "^4.7.2",
     "hpp": "^0.2.2",
-    "html-minifier": "^3.5.19",
-    "loadable-components": "^2.2.2",
+    "html-minifier": "^3.5.20",
+    "loadable-components": "^2.2.3",
     "lodash": "^4.17.10",
     "morgan": "^1.9.0",
-    "node-sass": "^4.9.2",
+    "node-sass": "^4.9.3",
     "normalize.css": "^8.0.0",
     "opn": "^5.3.0",
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dev-utils": "^5.0.1",
+    "react": "^16.4.2",
+    "react-dev-utils": "^5.0.2",
     "react-dom": "16.4.2",
     "react-helmet": "^5.2.0",
-    "react-hot-loader": "^4.3.4",
+    "react-hot-loader": "^4.3.5",
     "react-redux": "^5.0.7",
     "react-router-bootstrap": "^0.24.4",
     "react-router-config": "^1.0.0-beta.4",
@@ -300,65 +297,67 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.55",
-    "@babel/core": "^7.0.0-beta.55",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^8.2.6",
+    "babel-eslint": "^9.0.0",
     "babel-jest": "^23.4.2",
-    "babel-loader": "^8.0.0-beta.0",
-    "babel-plugin-istanbul": "^4.1.6",
-    "compression-webpack-plugin": "^1.1.11",
+    "babel-loader": "^8.0.0",
+    "babel-plugin-istanbul": "^5.0.1",
+    "compression-webpack-plugin": "^1.1.12",
     "coveralls": "^3.0.2",
     "css-loader": "^1.0.0",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-config-prettier": "^2.9.0",
+    "enzyme": "^3.5.0",
+    "enzyme-adapter-react-16": "^1.3.1",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.0.1",
     "eslint-import-resolver-webpack": "^0.10.1",
     "eslint-loader": "^2.1.0",
-    "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-lodash": "^2.7.0",
     "eslint-plugin-prettier": "^2.6.2",
-    "eslint-plugin-react": "^7.9.1",
-    "file-loader": "^1.1.11",
+    "eslint-plugin-react": "^7.11.0",
+    "file-loader": "^2.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "husky": "^0.14.3",
     "identity-obj-proxy": "^3.0.0",
     "imagemin-webpack-plugin": "^2.2.0",
-    "jest": "^23.4.2",
-    "lint-staged": "^7.2.0",
+    "jest": "^23.5.0",
+    "lint-staged": "^7.2.2",
     "lodash-webpack-plugin": "^0.11.5",
-    "mini-css-extract-plugin": "^0.4.1",
-    "nock": "^9.4.3",
-    "nodemon": "^1.18.3",
+    "mini-css-extract-plugin": "^0.4.2",
+    "nock": "^9.6.1",
+    "nodemon": "^1.18.4",
     "npm-run-all": "^4.1.3",
-    "optimize-css-assets-webpack-plugin": "^5.0.0",
-    "path": "^0.12.7",
-    "postcss": "^7.0.1",
-    "postcss-loader": "^2.1.6",
-    "prettier": "^1.14.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss": "^7.0.2",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^1.14.2",
     "prettier-stylelint": "^0.4.2",
     "raf": "^3.4.0",
-    "react-test-renderer": "^16.4.1",
+    "react-test-renderer": "^16.4.2",
     "redux-mock-store": "^1.5.3",
-    "sass-loader": "^7.0.3",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^7.1.0",
     "style-loader": "^0.22.0",
-    "stylelint": "^9.4.0",
+    "stylelint": "^9.5.0",
+    "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-recommended-scss": "^3.2.0",
     "stylelint-config-standard": "^18.2.0",
-    "stylelint-scss": "^3.2.0",
+    "stylelint-scss": "^3.3.0",
     "stylelint-webpack-plugin": "^0.10.5",
-    "url-loader": "^1.0.1",
-    "webpack": "^4.16.3",
+    "uglifyjs-webpack-plugin": "^1.3.0",
+    "url-loader": "^1.1.1",
+    "webpack": "^4.17.1",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-middleware": "^3.1.3",
-    "webpack-hot-middleware": "^2.22.3",
+    "webpack-dev-middleware": "^3.2.0",
+    "webpack-hot-middleware": "^2.23.0",
     "webpack-manifest-plugin": "^2.0.3"
   },
   "resolutions": {
-    "webpack-sources": "^1.1.0"
+    "webpack-sources": "^1.2.0"
   }
 }

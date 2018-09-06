@@ -1,14 +1,14 @@
-const path = require('path');
-const webpack = require('webpack');
-const ManifestPlugin = require('webpack-manifest-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+import path from 'path';
+import webpack from 'webpack';
+import ManifestPlugin from 'webpack-manifest-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
+import CompressionPlugin from 'compression-webpack-plugin';
+import ImageminPlugin from 'imagemin-webpack-plugin';
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import StyleLintPlugin from 'stylelint-webpack-plugin';
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isDev = nodeEnv === 'development';
@@ -27,11 +27,6 @@ const getPlugins = () => {
     new ManifestPlugin({
       fileName: path.resolve(process.cwd(), 'public/webpack-assets.json'),
       filter: file => file.isInitial
-    }),
-    new MiniCssExtractPlugin({
-      // Don't use hash in development, we need the persistent for "renderHtml.js"
-      filename: isDev ? '[name].css' : '[name].[contenthash:8].css',
-      chunkFilename: isDev ? '[id].chunk.css' : '[id].[contenthash:8].chunk.css'
     }),
     // Stylelint
     new StyleLintPlugin({ failOnError: stylelint }),
@@ -52,6 +47,10 @@ const getPlugins = () => {
   } else {
     plugins.push(
       // Production
+      new MiniCssExtractPlugin({
+        filename: '[name].[contenthash:8].css',
+        chunkFilename: '[id].[contenthash:8].chunk.css'
+      }),
       new webpack.HashedModuleIdsPlugin(),
       new CompressionPlugin({
         asset: '[path].gz[query]',
@@ -60,6 +59,7 @@ const getPlugins = () => {
         threshold: 10240,
         minRatio: 0.8
       }),
+      // new UglifyJsPlugin(),
       // Minimizing style for production
       new OptimizeCssAssetsPlugin(),
       // Smaller modular Lodash build
@@ -213,6 +213,10 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json']
   },
   cache: isDev,
+  stats: {
+    entrypoints: false,
+    children: false
+  },
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
   // https://webpack.github.io/docs/configuration.html#node

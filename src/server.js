@@ -28,7 +28,7 @@ if (!__DEV__) {
 } else {
   /* Run express as webpack dev server */
   const webpack = require('webpack');
-  const webpackConfig = require('../tools/webpack/webpack.config');
+  const webpackConfig = require('../tools/webpack/config.babel');
   const compiler = webpack(webpackConfig);
 
   compiler.apply(new webpack.ProgressPlugin());
