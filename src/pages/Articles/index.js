@@ -5,8 +5,9 @@ import Helmet from 'react-helmet';
 // import { Header } from 'components';
 import { map } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faAngleRight } from '@fortawesome/pro-regular-svg-icons';
 import { faArrowAltToBottom } from '@fortawesome/pro-solid-svg-icons';
+import { formatPrice } from 'utils/formatting';
+import { SecondNav } from 'components';
 
 import './styles.scss';
 
@@ -34,7 +35,7 @@ export default class Articles extends PureComponent {
           description: 'LOODVERVANGER UBIXFLEX ZWART 30 CM 12',
           articleNumber: 467372,
           supplier: 'Voskamp',
-          agreed: 3321,
+          agreed: 3321.5,
           lowest: 3321,
           highest: 3321,
           quantity: 20,
@@ -42,6 +43,7 @@ export default class Articles extends PureComponent {
           pdf: 'https://translate.google.com/',
           items: [
             {
+              itemNumber: 1,
               name: 'FC-VBT-0436400',
               customer: 'Kilgore Trout',
               date: '9/12/2017',
@@ -49,6 +51,7 @@ export default class Articles extends PureComponent {
               price: 71.5
             },
             {
+              itemNumber: 2,
               name: 'FC-VBT-0436400',
               customer: 'Kilgore Trout',
               date: '9/12/2017',
@@ -70,6 +73,7 @@ export default class Articles extends PureComponent {
           pdf: 'https://translate.google.com/',
           items: [
             {
+              itemNumber: 3,
               name: 'FC-VBT-0436400',
               customer: 'Kilgore Trout',
               date: '9/12/2017',
@@ -77,6 +81,7 @@ export default class Articles extends PureComponent {
               price: 71.5
             },
             {
+              itemNumber: 4,
               name: 'FC-VBT-0436400',
               customer: 'Kilgore Trout',
               date: '9/12/2017',
@@ -141,17 +146,18 @@ export default class Articles extends PureComponent {
         <td>{invoice.description}</td>
         <td>{invoice.articleNumber}</td>
         <td>{invoice.supplier}</td>
-        <td className="text-success">€{invoice.agreed.toLocaleString()}</td>
-        <td>€{invoice.lowest.toLocaleString()}</td>
-        <td>€{invoice.highest.toLocaleString()}</td>
+        <td className="text-success">€{formatPrice(invoice.agreed)}</td>
+        <td>€{formatPrice(invoice.lowest)}</td>
+        <td>€{formatPrice(invoice.highest)}</td>
         <td>{invoice.quantity}</td>
-        <td>€{invoice.total.toLocaleString()}</td>
+        <td>€{formatPrice(invoice.total)}</td>
         <td>
           <FontAwesomeIcon icon={faArrowAltToBottom} />
           <span className="toggle-collapse" />
         </td>
       </tr>,
       <tr
+        key={invoice.articleNumber}
         activetablerow={this.state.activetablerow}
         className="table--inner"
         tablerowid={invoice.id}
@@ -182,7 +188,7 @@ export default class Articles extends PureComponent {
       <td>{invoice.customer}</td>
       <td>{invoice.date}</td>
       <td>{invoice.quantity}</td>
-      <td>€{invoice.price.toLocaleString()}</td>
+      <td>€{formatPrice(invoice.price)}</td>
     </tr>
   );
 
@@ -192,6 +198,7 @@ export default class Articles extends PureComponent {
     return (
       <div className="Articles">
         <Helmet title={title} />
+        <SecondNav />
         <div className="container">
           <div>
             <Row>
@@ -205,30 +212,28 @@ export default class Articles extends PureComponent {
                 <Form>
                   <FormGroup>
                     <Input type="select" name="select" id="exampleSelect">
-                      <option value="" disabled selected>
+                      <option value="" disabled>
                         08/08/2016
                       </option>
                     </Input>
                   </FormGroup>
                   <FormGroup>
                     <Input type="select" name="select" id="exampleSelect">
-                      <option value="" disabled selected>
+                      <option value="" disabled>
                         08/08/2016
                       </option>
                     </Input>
                   </FormGroup>
                   <FormGroup>
                     <Input type="select" name="select" id="exampleSelect">
-                      <option value="" disabled selected>
+                      <option value="" disabled>
                         Leveranciers
                       </option>
                     </Input>
                   </FormGroup>
                   <FormGroup>
                     <Input type="select" name="select" id="exampleSelect">
-                      <option value="" disabled selected>
-                        Afnemers
-                      </option>
+                      <option defaultValue="">Afnemers</option>
                     </Input>
                   </FormGroup>
                   <p>Reset filters</p>

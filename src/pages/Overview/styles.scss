@@ -1,0 +1,76 @@
+@import '../../theme/variables';
+@import '../../theme/common';
+@import '../../theme/modules/forms';
+
+.Overview {
+  padding-bottom: 50px;
+  font-size: 14px;
+
+  .table {
+    table-layout: fixed;
+
+    th.hidden {
+      opacity: 0;
+    }
+
+    &--grey {
+      background-color: $body-bg;
+
+      td, th {
+        padding-bottom: 30px;
+      }
+
+      * {
+        border: none !important;
+      }
+    }
+
+    &--white {
+      background-color: white !important;
+    }
+
+    tbody th {
+      opacity: 1 !important;
+    }
+
+    td {
+      text-align: right;
+      cursor: auto;
+    }
+
+    &--main {
+      > tbody > tr > th, > tbody > tr > td {
+        background: $body-bg;
+        font-weight: bold;
+        border: none !important;
+      }
+    }
+
+    th:not(:first-child) {
+      text-align: right;
+    }
+
+    th:last-child {
+      opacity: 0.5;
+      padding-right: 30px;
+    }
+
+    tbody {
+      td:nth-child(2n + 1) {
+        background-color: $color-grey;
+      }
+    }
+
+    .table--inner--active {
+      background-color: $body-bg;
+    }
+  }
+
+  .table--inner table {
+    border-bottom: 20px solid #f5f6fa;
+
+    tr:not(:first-child) {
+      border-top: 1px solid rgba(198, 203, 212, 0.3);
+    }
+  }
+}

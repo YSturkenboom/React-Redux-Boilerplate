@@ -1,0 +1,43 @@
+@import '../../theme/variables';
+
+
+.filter {
+  display: flex;
+  flex-flow: row nowrap;
+
+  .form-group {
+    border-radius: 2px;
+    background-color: $color-white;
+    border: solid 1px #c6cbd4;
+    margin-right: 20px;
+
+    select {
+      border: none;
+      min-width: 125px;
+    }
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+
+    > * {
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .h2 {
+      padding-right: 20px;
+    }
+  }
+}
+
+form {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  max-width: 850px;
+  margin-left: auto;
+}
