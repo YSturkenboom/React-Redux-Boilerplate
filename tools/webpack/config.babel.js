@@ -28,6 +28,10 @@ const getPlugins = () => {
       fileName: path.resolve(process.cwd(), 'public/webpack-assets.json'),
       filter: file => file.isInitial
     }),
+    new MiniCssExtractPlugin({
+      filename: isDev ? '[name].css' : '[name].[contenthash:8].css',
+      chunkFilename: isDev ? '[id].chunk.css' : '[id].[contenthash:8].chunk.css'
+    }),
     // Stylelint
     new StyleLintPlugin({ failOnError: stylelint }),
     // Setup enviorment variables for client
@@ -47,10 +51,6 @@ const getPlugins = () => {
   } else {
     plugins.push(
       // Production
-      new MiniCssExtractPlugin({
-        filename: '[name].[contenthash:8].css',
-        chunkFilename: '[id].[contenthash:8].chunk.css'
-      }),
       new webpack.HashedModuleIdsPlugin(),
       new CompressionPlugin({
         asset: '[path].gz[query]',
@@ -149,7 +149,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css',
             options: {
@@ -166,7 +166,7 @@ module.exports = {
       {
         test: /\.(scss|sass)$/,
         use: [
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css',
             options: {

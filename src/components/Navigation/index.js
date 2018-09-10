@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { NavLink as RouterNavLink, withRouter } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -49,7 +49,7 @@ class Navigation extends Component {
     return (
       <div>
         <Navbar className="nav" expand="md">
-          <NavbarBrand href="/">
+          <NavbarBrand exact to="/" tag={RouterNavLink}>
             <img alt="logo" src={require('../../images/logo-white.png')} />
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
@@ -57,31 +57,31 @@ class Navigation extends Component {
             <Nav navbar>
               <div>
                 <NavItem>
-                  <NavLink href="/">
+                  <NavLink exact to="/" tag={RouterNavLink}>
                     <FontAwesomeIcon icon={faFileInvoiceDollar} />
                     Facturen
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/articles/">
+                  <NavLink to="/articles/" tag={RouterNavLink}>
                     <FontAwesomeIcon icon={faBoxAlt} />
                     Artikelen
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/overview/">
+                  <NavLink to="/overview/" tag={RouterNavLink}>
                     <FontAwesomeIcon icon={faEye} />
                     Overzicht
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/reports/">
+                  <NavLink to="/reports/" tag={RouterNavLink}>
                     <FontAwesomeIcon icon={faFileAlt} />
                     Rapporten
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/components/">
+                  <NavLink to="/components/" tag={RouterNavLink}>
                     <FontAwesomeIcon icon={faChartBar} />
                     Statistieken
                   </NavLink>
@@ -95,7 +95,9 @@ class Navigation extends Component {
                 <DropdownMenu right>
                   <DropdownItem>Settings</DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>Log out</DropdownItem>
+                  <DropdownItem to="/logout" tag={RouterNavLink}>
+                    Log out
+                  </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>

@@ -2,6 +2,8 @@ import axios from 'axios';
 
 import { apiUrl } from '../config';
 
+axios.defaults.withCredentials = true;
+
 export const checkSession = () => async dispatch => {
   try {
     const res = await axios.get(`${apiUrl}/auth/session`);
