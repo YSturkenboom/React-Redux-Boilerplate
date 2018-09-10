@@ -1,6 +1,7 @@
+import ArticleModal from './ArticleModal';
 import Navigation from './Navigation';
 import Tabs from './Tabs';
 import Filter from './Filter';
 import PaginationComponent from './Pagination';
 
-export { Filter, Navigation, PaginationComponent, Tabs };
+export { ArticleModal, Filter, Navigation, PaginationComponent, Tabs };

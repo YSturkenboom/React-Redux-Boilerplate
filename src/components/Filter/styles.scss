@@ -6,6 +6,7 @@
   flex-flow: row nowrap;
 
   .form-group {
+    position: relative;
     border-radius: 2px;
     background-color: $color-white;
     border: solid 1px #c6cbd4;
@@ -14,6 +15,48 @@
     select {
       border: none;
       min-width: 125px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding-right: 25px;
+
+      &::-ms-expand {
+        display: none;
+      }
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: $font-color-dark;
+      margin-bottom: 0;
+      height: calc(2.25rem + 2px);
+      padding: 0.375rem 25px 0.375rem 0.75rem;
+      text-align: left;
+
+      &:hover, &:focus {
+        text-decoration: none;
+      }
+    }
+
+    &::before, &::after {
+      position: absolute;
+      top: calc(50% - 4px);
+      content: '';
+      width: 2px;
+      height: 8px;
+      background-color: $color-light-blue;
+      transition: transform 0.1s ease-in;
+      border-radius: 1px;
+    }
+
+    &::before {
+      right: 10px;
+      transform: rotate(-135deg);
+    }
+
+    &::after {
+      right: 15px;
+      transform: rotate(135deg);
     }
   }
 
@@ -46,6 +89,166 @@ form {
 
     &:hover {
       text-decoration: none !important;
+    }
+  }
+}
+
+.filter-modal {
+  &.modal-dialog {
+    max-width: 940px !important;
+    margin: 12.75rem auto !important;
+
+    button.close {
+      display: none;
+    }
+  }
+
+  .modal {
+    &-content {
+      flex-direction: row-reverse !important;
+      flex-wrap: nowrap;
+      border: none !important;
+      box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.17);
+
+      > div:not(.modal-footer) {
+        width: 100%;
+      }
+    }
+
+    &-header {
+      background-color: #eff2f7;
+    }
+
+    &-body {
+      max-height: 360px;
+      overflow-y: scroll;
+      padding: 0 !important;
+
+      form {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        width: 100%;
+
+        label {
+          font-size: 14px;
+        }
+
+        > div {
+          width: 100%;
+          padding: 0.75rem 1rem;
+          border-bottom: 1px solid $color-border;
+
+          > .form-check label {
+            font-weight: bold;
+          }
+
+          .checkbox__container--subgroup {
+            display: flex;
+            flex-flow: row wrap;
+            margin-top: 0.5rem;
+            margin-left: 1.25rem;
+
+            .form-check {
+              margin-right: 1.25rem;
+            }
+          }
+        }
+      }
+    }
+
+    &-title {
+      width: 100%;
+
+      .search {
+        width: 100%;
+        position: relative;
+
+        svg {
+          position: absolute;
+          top: calc(50% - 8px);
+          right: 10px;
+          transition: 0.2s color ease-in;
+          font-size: 16px;
+        }
+
+        #search {
+          border-radius: 0;
+          border-color: rgba(151, 151, 151, 0.3);
+          min-width: 300px;
+          right: 30px;
+
+          &:focus {
+            border-color: rgba(151, 151, 151, 0.3);
+            outline: none;
+            box-shadow: none;
+
+            & + svg {
+              color: $color-light-blue;
+            }
+          }
+        }
+      }
+    }
+
+    &-footer {
+      flex-flow: column nowrap;
+      justify-content: flex-start !important;
+      border-right: 1px solid $color-border;
+      border-top: none !important;
+      padding: 0 !important;
+
+      .btn-link {
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid $color-border !important;
+        margin: 0 !important;
+        padding: 0.75rem 1rem;
+        color: $font-color-dark;
+        border-radius: 0 !important;
+
+        &:hover, &:focus {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+.supplier .modal-backdrop, .customer .modal-backdrop {
+  opacity: 0 !important;
+}
+
+.Home table {
+  transition: opacity 0.1s ease-in;
+}
+
+.modal-open {
+  .Home table {
+    opacity: 0.4;
+  }
+
+  &.supplier .btn-supplier {
+    border-color: $color-light-blue;
+
+    &::before {
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      transform: rotate(45deg);
+    }
+  }
+
+  &.customer .btn-customer {
+    border-color: $color-light-blue;
+
+    &::before {
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      transform: rotate(45deg);
     }
   }
 }

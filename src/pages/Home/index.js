@@ -1,13 +1,6 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Table
-} from 'reactstrap';
+import { Table } from 'reactstrap';
 
 import { map } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +8,12 @@ import { faAngleRight } from '@fortawesome/pro-regular-svg-icons';
 import { faTrash, faArrowAltToBottom } from '@fortawesome/pro-solid-svg-icons';
 
 import { formatPrice } from '../../utils/formatting';
-import { Filter, PaginationComponent, Tabs } from '../../components';
+import {
+  ArticleModal,
+  Filter,
+  PaginationComponent,
+  Tabs
+} from '../../components';
 
 import './styles.scss';
 
@@ -168,10 +166,12 @@ export default class Home extends PureComponent {
     this.pagesCount = Math.ceil(DATASET.length / this.pageSize);
 
     this.state = {
-      activetablerow: '0',
       modal: false,
-      activeInvoice: '0'
+      activeInvoice: '0',
+      activetablerow: '0'
     };
+
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   invoiceTable = () => {
@@ -398,8 +398,6 @@ export default class Home extends PureComponent {
   );
 
   render() {
-    const { activeInvoice, modal } = this.state;
-
     return (
       <div className="Home">
         <Helmet title={TITLES[0]} />
@@ -427,30 +425,11 @@ export default class Home extends PureComponent {
           tableFunction2={this.waitlistTable()}
           pagination2={<PaginationComponent pageCount={this.pagesCount} />}
         />
-        <Modal
-          isOpen={modal}
-          toggle={this.toggleModal}
-          activeInvoice={activeInvoice}
-        >
-          <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
-          <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.toggleModal}>
-              Do Something
-            </Button>{' '}
-            <Button color="secondary" onClick={this.toggleModal}>
-              Cancel
-            </Button>
-          </ModalFooter>
-        </Modal>
+        <ArticleModal
+          toggleModal={this.toggleModal}
+          modal={this.state.modal}
+          activeInvoice={this.state.activeInvoice}
+        />
       </div>
     );
   }
