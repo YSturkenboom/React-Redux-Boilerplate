@@ -1,184 +1,181 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
-// import { toast } from 'react-toastify';
-
-// import { Header } from 'components';
-import { map } from 'lodash';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight } from '@fortawesome/pro-regular-svg-icons';
-import { faTrash, faArrowAltToBottom } from '@fortawesome/pro-solid-svg-icons';
 import {
   Button,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  NavLink,
-  Nav,
-  NavItem,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  TabContent,
-  TabPane,
   Table
 } from 'reactstrap';
 
+import { map } from 'lodash';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight } from '@fortawesome/pro-regular-svg-icons';
+import { faTrash, faArrowAltToBottom } from '@fortawesome/pro-solid-svg-icons';
+
 import { formatPrice } from '../../utils/formatting';
-import { Filter, SecondNav } from '../../components';
+import { Filter, PaginationComponent, Tabs } from '../../components';
 
 import './styles.scss';
+
+const DATASET = [
+  {
+    id: 1,
+    date: '9/12/2017',
+    customer: 'Kilgore Trout',
+    invoiceNumber: 272,
+    supplier: 'Voskamp',
+    priceControl: 'Afgekeurd',
+    quantity: 2,
+    price: 492.95,
+    total: 492.95,
+    excess: 304.55,
+    pdf: 'https://translate.google.com/',
+    items: [
+      {
+        name: 'Verbandtrommel 86583 B-384 Houder',
+        itemNumber: 86173,
+        price: 30.81,
+        lowest: 25.12,
+        agreed: 25.12,
+        total: 30.81,
+        excess: 5.55,
+        quantity: 1,
+        priceControl: 'Afgekeurd'
+      },
+      {
+        name: 'Verbandtrommel 86583 B-384 Houder',
+        itemNumber: 86175,
+        price: 35.81,
+        lowest: 22.12,
+        agreed: 22.12,
+        total: 35.81,
+        quantity: 1,
+        priceControl: 'Goedgekeurd'
+      }
+    ]
+  },
+  {
+    id: 2,
+    date: '9/12/2017',
+    customer: 'Kilgore Trout',
+    invoiceNumber: 273,
+    supplier: 'Voskamp',
+    priceControl: 'Goedgekeurd',
+    quantity: 3,
+    price: 292.95,
+    total: 292.95,
+    excess: 205.55,
+    pdf: 'https://translate.google.com/',
+    items: [
+      {
+        name: 'Verbandtrommel 86583 B-384 Houder',
+        itemNumber: 86174,
+        price: 31.81,
+        lowest: 27.12,
+        agreed: 27.12,
+        total: 31.81,
+        quantity: 1,
+        priceControl: 'Goedgekeurd'
+      },
+      {
+        name: 'Verbandtrommel 86588 B-384 Houder',
+        itemNumber: 86176,
+        price: 21.81,
+        lowest: 17.12,
+        agreed: 17.12,
+        total: 21.81,
+        quantity: 1,
+        priceControl: 'Goedgekeurd'
+      },
+      {
+        name: 'Verbandtrommel 86587 B-384 Houder',
+        itemNumber: 86178,
+        price: 41.81,
+        lowest: 17.12,
+        agreed: 27.12,
+        total: 41.81,
+        quantity: 1,
+        priceControl: 'Goedgekeurd'
+      }
+    ]
+  }
+];
+const INVOICES = {
+  quantity: 348,
+  total: 124894
+};
+const TITLES = ['Facturen', 'Wachtlijst'];
+const WAITLIST = [
+  {
+    id: 3,
+    date: '9/12/2017',
+    invoiceId: 272,
+    customer: 'Kilgore Trout',
+    topic: 'Mastermate factuur FC-328393293_s82 vviir Plegt-Vos B.V.',
+    problem: 'Verkeerd PDF format ',
+    attachments: 2,
+    items: [
+      {
+        attachmentId: 115,
+        attachmentName: '3279327293_82745.PDF',
+        attachmentProblem: 'Verkeerde PDF format, bedrag onderwerp ontbreekt',
+        link: 'https://translate.google.com/'
+      },
+      {
+        attachmentId: 113,
+        attachmentName: '3279327293_82747.PDF',
+        attachmentProblem: 'Verkeerde PDF format, bedrag onderwerp ontbreekt',
+        link: 'https://translate.google.com/'
+      }
+    ]
+  },
+  {
+    id: 4,
+    date: '9/12/2017',
+    invoiceId: 273,
+    customer: 'Kilgore Trout',
+    topic: 'Mastermate factuur FC-328393293_s82 vviir Plegt-Vos B.V.',
+    problem: 'Verkeerd PDF format ',
+    attachments: 2,
+    items: [
+      {
+        attachmentId: 111,
+        attachmentName: '3279327293_82742.PDF',
+        attachmentProblem: 'Verkeerde PDF format, bedrag onderwerp ontbreekt',
+        link: 'https://translate.google.com/'
+      },
+      {
+        attachmentId: 112,
+        attachmentName: '3279327293_82741.PDF',
+        attachmentProblem: 'Verkeerde PDF format, bedrag onderwerp ontbreekt',
+        link: 'https://translate.google.com/'
+      }
+    ]
+  }
+];
+const WATCHLIST = {
+  quantity: 348,
+  total: 124894
+};
 
 export default class Home extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
+    this.pageSize = 20;
+    this.pagesCount = Math.ceil(DATASET.length / this.pageSize);
+
     this.state = {
-      activeTab: '1',
       activetablerow: '0',
       modal: false,
-      activeInvoice: '0',
-      data: [
-        {
-          id: 1,
-          date: '9/12/2017',
-          customer: 'Kilgore Trout',
-          invoiceNumber: 272,
-          supplier: 'Voskamp',
-          priceControl: 'Afgekeurd',
-          quantity: 2,
-          price: 492.95,
-          total: 492.95,
-          excess: 304.55,
-          pdf: 'https://translate.google.com/',
-          items: [
-            {
-              name: 'Verbandtrommel 86583 B-384 Houder',
-              itemNumber: 86173,
-              price: 30.81,
-              lowest: 25.12,
-              agreed: 25.12,
-              total: 30.81,
-              excess: 5.55,
-              quantity: 1,
-              priceControl: 'Afgekeurd'
-            },
-            {
-              name: 'Verbandtrommel 86583 B-384 Houder',
-              itemNumber: 86175,
-              price: 35.81,
-              lowest: 22.12,
-              agreed: 22.12,
-              total: 35.81,
-              quantity: 1,
-              priceControl: 'Goedgekeurd'
-            }
-          ]
-        },
-        {
-          id: 2,
-          date: '9/12/2017',
-          customer: 'Kilgore Trout',
-          invoiceNumber: 273,
-          supplier: 'Voskamp',
-          priceControl: 'Goedgekeurd',
-          quantity: 3,
-          price: 292.95,
-          total: 292.95,
-          excess: 205.55,
-          pdf: 'https://translate.google.com/',
-          items: [
-            {
-              name: 'Verbandtrommel 86583 B-384 Houder',
-              itemNumber: 86174,
-              price: 31.81,
-              lowest: 27.12,
-              agreed: 27.12,
-              total: 31.81,
-              quantity: 1,
-              priceControl: 'Goedgekeurd'
-            },
-            {
-              name: 'Verbandtrommel 86588 B-384 Houder',
-              itemNumber: 86176,
-              price: 21.81,
-              lowest: 17.12,
-              agreed: 17.12,
-              total: 21.81,
-              quantity: 1,
-              priceControl: 'Goedgekeurd'
-            },
-            {
-              name: 'Verbandtrommel 86587 B-384 Houder',
-              itemNumber: 86178,
-              price: 41.81,
-              lowest: 17.12,
-              agreed: 27.12,
-              total: 41.81,
-              quantity: 1,
-              priceControl: 'Goedgekeurd'
-            }
-          ]
-        }
-      ],
-      waitlist: [
-        {
-          id: 3,
-          date: '9/12/2017',
-          invoiceId: 272,
-          customer: 'Kilgore Trout',
-          topic: 'Mastermate factuur FC-328393293_s82 vviir Plegt-Vos B.V.',
-          problem: 'Verkeerd PDF format ',
-          attachments: 2,
-          items: [
-            {
-              attachmentId: 115,
-              attachmentName: '3279327293_82745.PDF',
-              attachmentProblem:
-                'Verkeerde PDF format, bedrag onderwerp ontbreekt',
-              link: 'https://translate.google.com/'
-            },
-            {
-              attachmentId: 113,
-              attachmentName: '3279327293_82747.PDF',
-              attachmentProblem:
-                'Verkeerde PDF format, bedrag onderwerp ontbreekt',
-              link: 'https://translate.google.com/'
-            }
-          ]
-        },
-        {
-          id: 4,
-          date: '9/12/2017',
-          invoiceId: 273,
-          customer: 'Kilgore Trout',
-          topic: 'Mastermate factuur FC-328393293_s82 vviir Plegt-Vos B.V.',
-          problem: 'Verkeerd PDF format ',
-          attachments: 2,
-          items: [
-            {
-              attachmentId: 111,
-              attachmentName: '3279327293_82742.PDF',
-              attachmentProblem:
-                'Verkeerde PDF format, bedrag onderwerp ontbreekt',
-              link: 'https://translate.google.com/'
-            },
-            {
-              attachmentId: 112,
-              attachmentName: '3279327293_82741.PDF',
-              attachmentProblem:
-                'Verkeerde PDF format, bedrag onderwerp ontbreekt',
-              link: 'https://translate.google.com/'
-            }
-          ]
-        }
-      ]
+      activeInvoice: '0'
     };
   }
 
   invoiceTable = () => {
-    const table = map(this.state.data, this.renderTable);
+    const table = map(DATASET, this.renderTable);
 
     return (
       <Table responsive>
@@ -200,7 +197,7 @@ export default class Home extends PureComponent {
   };
 
   waitlistTable = () => {
-    const table = map(this.state.waitlist, this.renderWaitlistTable);
+    const table = map(WAITLIST, this.renderWaitlistTable);
 
     return (
       <Table responsive>
@@ -219,20 +216,14 @@ export default class Home extends PureComponent {
     );
   };
 
-  toggle = tab => {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
-    }
-  };
-
   toggleCollapse = tableRow => {
-    if (this.state.activetablerow !== tableRow) {
+    const { activetablerow } = this.state;
+
+    if (activetablerow !== tableRow) {
       this.setState({
         activetablerow: tableRow
       });
-    } else if (this.state.activetablerow === tableRow) {
+    } else if (activetablerow === tableRow) {
       this.setState({
         activetablerow: '0'
       });
@@ -247,15 +238,14 @@ export default class Home extends PureComponent {
   };
 
   renderTable = invoice => {
+    const { activetablerow } = this.state;
     const subtableItems = map(invoice.items, this.renderSubtableItems);
 
     return [
       <tr
         key={invoice.id}
         className={
-          this.state.activetablerow === invoice.id
-            ? 'table--inner--active'
-            : null
+          activetablerow === invoice.id ? 'table--inner--active' : null
         }
         onClick={() => {
           this.toggleCollapse(invoice.id);
@@ -289,7 +279,7 @@ export default class Home extends PureComponent {
         </td>
       </tr>,
       <tr
-        activetablerow={this.state.activetablerow}
+        activetablerow={activetablerow}
         className="table--inner"
         tablerowid={invoice.id}
         key={invoice.invoiceNumber}
@@ -352,15 +342,14 @@ export default class Home extends PureComponent {
   );
 
   renderWaitlistTable = invoice => {
+    const { activetablerow } = this.state;
     const subtableItems = map(invoice.items, this.renderWaitlistSubtableItems);
 
     return [
       <tr
         key={invoice.id}
         className={
-          this.state.activetablerow === invoice.id
-            ? 'table--inner--active'
-            : null
+          activetablerow === invoice.id ? 'table--inner--active' : null
         }
         onClick={() => {
           this.toggleCollapse(invoice.id);
@@ -378,7 +367,7 @@ export default class Home extends PureComponent {
       </tr>,
       <tr
         key={invoice.invoiceId}
-        activetablerow={this.state.activetablerow}
+        activetablerow={activetablerow}
         className="table--inner"
         tablerowid={invoice.id}
       >
@@ -409,111 +398,39 @@ export default class Home extends PureComponent {
   );
 
   render() {
-    const title = 'Home';
+    const { activeInvoice, modal } = this.state;
 
     return (
       <div className="Home">
-        <Helmet title={title} />
-        <SecondNav>
-          <Nav tabs>
-            <NavItem>
-              <NavLink
-                className={this.state.activeTab === '1' ? 'active' : null}
-                onClick={() => {
-                  this.toggle('1');
-                }}
-              >
-                Verwerkt
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                className={this.state.activeTab === '2' ? 'active' : null}
-                onClick={() => {
-                  this.toggle('2');
-                }}
-              >
-                Wachtlijst
-              </NavLink>
-            </NavItem>
-          </Nav>
-        </SecondNav>
-        <TabContent activeTab={this.state.activeTab}>
-          <TabPane tabId="1">
-            <div className="container">
-              <Filter />
-              {this.invoiceTable()}
-              <Pagination aria-label="Page navigation">
-                <p>
-                  Bekijk
-                  <b> 1-20 </b>
-                  van
-                  <b> 348 </b>
-                </p>
-                <PaginationItem disabled>
-                  <PaginationLink previous href="#" />
-                </PaginationItem>
-                <PaginationItem active>
-                  <PaginationLink href="#">1</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">2</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">3</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">4</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">5</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink next href="#" />
-                </PaginationItem>
-              </Pagination>
-            </div>
-          </TabPane>
-          <TabPane tabId="2">
-            <div className="container">
-              <h1 className="h2">Wachtlijst</h1>
-              {this.waitlistTable()}
-              <Pagination aria-label="Page navigation">
-                <p>
-                  Bekijk
-                  <b> 1-20 </b>
-                  van
-                  <b> 348 </b>
-                </p>
-                <PaginationItem disabled>
-                  <PaginationLink previous href="#" />
-                </PaginationItem>
-                <PaginationItem active>
-                  <PaginationLink href="#">1</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">2</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">3</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">4</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">5</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink next href="#" />
-                </PaginationItem>
-              </Pagination>
-            </div>
-          </TabPane>
-        </TabContent>
+        <Helmet title={TITLES[0]} />
+        <Tabs
+          tabs
+          tab1="Verwerkt"
+          filter1={
+            <Filter
+              filterAdd
+              title={TITLES[0]}
+              quantity={INVOICES.quantity}
+              total={formatPrice(INVOICES.total)}
+            />
+          }
+          tableFunction1={this.invoiceTable()}
+          pagination1={<PaginationComponent pageCount={this.pagesCount} />}
+          tab2="Wachtlijst"
+          filter2={
+            <Filter
+              title={TITLES[1]}
+              quantity={WATCHLIST.quantity}
+              total={formatPrice(WATCHLIST.total)}
+            />
+          }
+          tableFunction2={this.waitlistTable()}
+          pagination2={<PaginationComponent pageCount={this.pagesCount} />}
+        />
         <Modal
-          isOpen={this.state.modal}
+          isOpen={modal}
           toggle={this.toggleModal}
-          activeInvoice={this.state.activeInvoice}
+          activeInvoice={activeInvoice}
         >
           <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
           <ModalBody>

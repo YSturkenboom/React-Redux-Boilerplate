@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
-
 import {
   Alert,
   Button,
@@ -18,7 +17,6 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/pro-solid-svg-icons';
-
 import { authActions } from '../../actions';
 
 import './styles.scss';

@@ -1,10 +1,5 @@
 import React, { PureComponent } from 'react';
-
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faSearch } from '@fortawesome/pro-regular-svg-icons';
-// import { faArrowAltToBottom } from '@fortawesome/pro-solid-svg-icons';
-
-import { Form, FormGroup, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Input } from 'reactstrap';
 
 import './styles.scss';
 
@@ -14,13 +9,17 @@ export default class Filter extends PureComponent {
       <div className="filter">
         <div>
           <h1 className="h2">
-            Facturen
-            <small> (348)</small>
+            {this.props.title}
+            {this.props.removeQuantity ? null : (
+              <small> ({this.props.quantity})</small>
+            )}
           </h1>
-          <p>
-            Totaal bedrag
-            <b> € 124,894</b>
-          </p>
+          {this.props.removeText ? null : (
+            <p>
+              Totaal bedrag
+              <b> {this.props.total}</b>
+            </p>
+          )}
         </div>
         <Form>
           <FormGroup>
@@ -38,29 +37,31 @@ export default class Filter extends PureComponent {
             </Input>
           </FormGroup>
           <FormGroup>
-            <Input type="select" name="select" id="exampleSelect">
+            <Input type="select" name="select">
               <option value="" disabled>
                 Leveranciers
               </option>
             </Input>
           </FormGroup>
           <FormGroup>
-            <Input type="select" name="select" id="exampleSelect">
+            <Input type="select" name="select">
               <option value="" disabled>
                 Afnemers
               </option>
             </Input>
           </FormGroup>
-          <FormGroup>
-            <Input type="select" name="select" id="exampleSelect">
-              <option value="" disabled>
-                Prijsafspraak
-              </option>
-              <option>Goedgekeurd</option>
-              <option>Afgekeurd</option>
-            </Input>
-          </FormGroup>
-          <p>Reset filters</p>
+          {this.props.filterAdd === true ? (
+            <FormGroup>
+              <Input type="select" name="select">
+                <option value="" disabled>
+                  Prijsafspraak
+                </option>
+                <option>Goedgekeurd</option>
+                <option>Afgekeurd</option>
+              </Input>
+            </FormGroup>
+          ) : null}
+          <Button color="link">Reset filters</Button>
         </Form>
       </div>
     );

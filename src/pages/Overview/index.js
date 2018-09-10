@@ -1,168 +1,296 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
-// import { toast } from 'react-toastify';
+import { Table } from 'reactstrap';
 
-// import { Header } from 'components';
 import { map } from 'lodash';
-import {
-  Col,
-  Form,
-  FormGroup,
-  Input,
-  // Pagination,
-  // PaginationItem,
-  // PaginationLink,
-  Row,
-  Table
-} from 'reactstrap';
-
 import { formatPrice } from '../../utils/formatting';
-import { SecondNav } from '../../components';
+import { Filter, PaginationComponent, Tabs } from '../../components';
 
 import './styles.scss';
+
+const DATA_CUSTOMERS = [
+  {
+    id: 1,
+    customerId: 1,
+    customer: 'Customer 1',
+    total: 134322,
+    totalPeriod: 4984,
+    january: 4984,
+    february: 4984,
+    march: 4984,
+    april: 4984,
+    may: 4984,
+    items: [
+      {
+        supplierId: 1,
+        supplier: 'Supplier 1',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      },
+      {
+        supplierId: 2,
+        supplier: 'Supplier 2',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      }
+    ]
+  },
+  {
+    id: 2,
+    customer: 'Customer 2',
+    customerId: 2,
+    total: 134322,
+    totalPeriod: 4984,
+    january: 4984,
+    february: 4984,
+    march: 4984,
+    april: 4984,
+    may: 4984,
+    items: [
+      {
+        supplierId: 3,
+        supplier: 'Supplier 1',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      },
+      {
+        supplierId: 4,
+        supplier: 'Supplier 2',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      },
+      {
+        supplierId: 5,
+        supplier: 'Supplier 3',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      }
+    ]
+  },
+  {
+    id: 3,
+    customer: 'Customer 3',
+    customerId: 3,
+    total: 134322,
+    totalPeriod: 4984,
+    january: 4984,
+    february: 4984,
+    march: 4984,
+    april: 4984,
+    may: 4984,
+    items: [
+      {
+        supplierId: 3,
+        supplier: 'Supplier 1',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      },
+      {
+        supplierId: 4,
+        supplier: 'Supplier 2',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      },
+      {
+        supplierId: 5,
+        supplier: 'Supplier 3',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      }
+    ]
+  }
+];
+const DATA_SUPPLIERS = [
+  {
+    id: 1,
+    customerId: 1,
+    customer: 'Supplier 1',
+    total: 134322,
+    totalPeriod: 4984,
+    january: 4984,
+    february: 4984,
+    march: 4984,
+    april: 4984,
+    may: 4984,
+    items: [
+      {
+        supplierId: 1,
+        supplier: 'Customer 1',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      },
+      {
+        supplierId: 2,
+        supplier: 'Customer 2',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      }
+    ]
+  },
+  {
+    id: 2,
+    customer: 'Supplier 2',
+    customerId: 2,
+    total: 134322,
+    totalPeriod: 4984,
+    january: 4984,
+    february: 4984,
+    march: 4984,
+    april: 4984,
+    may: 4984,
+    items: [
+      {
+        supplierId: 3,
+        supplier: 'Customer 1',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      },
+      {
+        supplierId: 4,
+        supplier: 'Customer 2',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      },
+      {
+        supplierId: 5,
+        supplier: 'Customer 3',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      }
+    ]
+  },
+  {
+    id: 3,
+    customer: 'Supplier 3',
+    customerId: 3,
+    total: 134322,
+    totalPeriod: 4984,
+    january: 4984,
+    february: 4984,
+    march: 4984,
+    april: 4984,
+    may: 4984,
+    items: [
+      {
+        supplierId: 3,
+        supplier: 'Customer 1',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      },
+      {
+        supplierId: 4,
+        supplier: 'Customer 2',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      },
+      {
+        supplierId: 5,
+        supplier: 'Customer 3',
+        total: 134322,
+        totalPeriod: 4984,
+        january: 4984,
+        february: 4984,
+        march: 4984,
+        april: 4984,
+        may: 4984
+      }
+    ]
+  }
+];
+const OVERVIEW_CUSTOMER = {
+  total: 124894
+};
+const OVERVIEW_SUPPLIERS = {
+  total: 124894
+};
+const TITLE = 'Overview';
 
 export default class Overview extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: [
-        {
-          id: 1,
-          customerId: 1,
-          customer: 'Trebbe',
-          total: 134322,
-          totalPeriod: 4984,
-          january: 4984,
-          february: 4984,
-          march: 4984,
-          april: 4984,
-          may: 4984,
-          items: [
-            {
-              supplierId: 1,
-              supplier: 'Trebbe',
-              total: 134322,
-              totalPeriod: 4984,
-              january: 4984,
-              february: 4984,
-              march: 4984,
-              april: 4984,
-              may: 4984
-            },
-            {
-              supplierId: 2,
-              supplier: 'Trebbe',
-              total: 134322,
-              totalPeriod: 4984,
-              january: 4984,
-              february: 4984,
-              march: 4984,
-              april: 4984,
-              may: 4984
-            }
-          ]
-        },
-        {
-          id: 2,
-          customer: 'Plegt Vos Noord',
-          customerId: 2,
-          total: 134322,
-          totalPeriod: 4984,
-          january: 4984,
-          february: 4984,
-          march: 4984,
-          april: 4984,
-          may: 4984,
-          items: [
-            {
-              supplierId: 3,
-              supplier: 'Plegt Vos Noord',
-              total: 134322,
-              totalPeriod: 4984,
-              january: 4984,
-              february: 4984,
-              march: 4984,
-              april: 4984,
-              may: 4984
-            },
-            {
-              supplierId: 4,
-              supplier: 'Plegt Vos Noord',
-              total: 134322,
-              totalPeriod: 4984,
-              january: 4984,
-              february: 4984,
-              march: 4984,
-              april: 4984,
-              may: 4984
-            },
-            {
-              supplierId: 5,
-              supplier: 'Plegt Vos Noord',
-              total: 134322,
-              totalPeriod: 4984,
-              january: 4984,
-              february: 4984,
-              march: 4984,
-              april: 4984,
-              may: 4984
-            }
-          ]
-        },
-        {
-          id: 3,
-          customer: 'Plegt Vos Noord',
-          customerId: 3,
-          total: 134322,
-          totalPeriod: 4984,
-          january: 4984,
-          february: 4984,
-          march: 4984,
-          april: 4984,
-          may: 4984,
-          items: [
-            {
-              supplierId: 3,
-              supplier: 'Plegt Vos Noord',
-              total: 134322,
-              totalPeriod: 4984,
-              january: 4984,
-              february: 4984,
-              march: 4984,
-              april: 4984,
-              may: 4984
-            },
-            {
-              supplierId: 4,
-              supplier: 'Plegt Vos Noord',
-              total: 134322,
-              totalPeriod: 4984,
-              january: 4984,
-              february: 4984,
-              march: 4984,
-              april: 4984,
-              may: 4984
-            },
-            {
-              supplierId: 5,
-              supplier: 'Plegt Vos Noord',
-              total: 134322,
-              totalPeriod: 4984,
-              january: 4984,
-              february: 4984,
-              march: 4984,
-              april: 4984,
-              may: 4984
-            }
-          ]
-        }
-      ]
+      activetablerow: '0'
     };
   }
 
-  invoiceTable = () => {
-    const table = map(this.state.data, this.renderTable);
+  invoiceTable = item => {
+    const table = map(item, this.renderTable);
     const dataAll = {
       id: 1,
       total: 134322,
@@ -203,11 +331,34 @@ export default class Overview extends PureComponent {
     );
   };
 
+  toggleCollapse = tableRow => {
+    const { activetablerow } = this.state;
+
+    if (activetablerow !== tableRow) {
+      this.setState({
+        activetablerow: tableRow
+      });
+    } else if (activetablerow === tableRow) {
+      this.setState({
+        activetablerow: '0'
+      });
+    }
+  };
+
   renderTable = invoice => {
+    const { activetablerow } = this.state;
     const subtableItems = map(invoice.items, this.renderSubtableItems);
 
     return [
-      <tr className="table--inner--active" key={invoice.id}>
+      <tr
+        key={invoice.id}
+        className={
+          activetablerow === invoice.id ? 'table--inner--active' : null
+        }
+        onClick={() => {
+          this.toggleCollapse(invoice.id);
+        }}
+      >
         <th>{invoice.customer}</th>
         <td>€{formatPrice(invoice.totalPeriod)}</td>
         <td>€{formatPrice(invoice.january)}</td>
@@ -217,7 +368,12 @@ export default class Overview extends PureComponent {
         <td>€{formatPrice(invoice.may)}</td>
         <td>€{formatPrice(invoice.total)}</td>
       </tr>,
-      <tr key={invoice.customerId} className="table--inner">
+      <tr
+        key={invoice.customerId}
+        activetablerow={activetablerow}
+        className="table--inner"
+        tablerowid={invoice.id}
+      >
         <td colSpan="8">
           <Table>
             <tbody>{subtableItems}</tbody>
@@ -241,89 +397,32 @@ export default class Overview extends PureComponent {
   );
 
   render() {
-    const title = 'Overview';
-
     return (
       <div className="Overview">
-        <Helmet title={title} />
-        <SecondNav />
-        <div className="container">
-          <div>
-            <Row>
-              <Col md="6" sm="12">
-                <h1 className="h2">
-                  {title}
-                  <small> (348)</small>
-                </h1>
-                <p>
-                  Totaal bedrag
-                  <b> € 124,894</b>
-                </p>
-              </Col>
-              <Col md="6" sm="12">
-                <Form>
-                  <FormGroup>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option value="" disabled>
-                        08/08/2016
-                      </option>
-                    </Input>
-                  </FormGroup>
-                  <FormGroup>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option value="" disabled>
-                        08/08/2016
-                      </option>
-                    </Input>
-                  </FormGroup>
-                  <FormGroup>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option value="" disabled>
-                        Leveranciers
-                      </option>
-                    </Input>
-                  </FormGroup>
-                  <FormGroup>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option defaultValue="">Afnemers</option>
-                    </Input>
-                  </FormGroup>
-                  <p>Reset filters</p>
-                </Form>
-              </Col>
-            </Row>
-          </div>
-          {this.invoiceTable()}
-          {/* <Pagination aria-label="Page navigation">
-            <p>
-              Bekijk
-              <b> 1-20 </b>
-              van
-              <b> 348 </b>
-            </p>
-            <PaginationItem disabled>
-              <PaginationLink previous href="#" />
-            </PaginationItem>
-            <PaginationItem active>
-              <PaginationLink href="#">1</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">2</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">3</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">4</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">5</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink next href="#" />
-            </PaginationItem>
-          </Pagination> */}
-        </div>
+        <Helmet title={TITLE} />
+        <Tabs
+          tabs
+          tab1="Afnemers"
+          filter1={
+            <Filter
+              removeQuantity
+              title={TITLE}
+              total={formatPrice(OVERVIEW_CUSTOMER.total)}
+            />
+          }
+          tableFunction1={this.invoiceTable(DATA_CUSTOMERS)}
+          pagination1={<PaginationComponent pageCount={this.pagesCount} />}
+          tab2="Leveranciers"
+          filter2={
+            <Filter
+              removeQuantity
+              title={TITLE}
+              total={formatPrice(OVERVIEW_SUPPLIERS.total)}
+            />
+          }
+          tableFunction2={this.invoiceTable(DATA_SUPPLIERS)}
+          pagination2={<PaginationComponent pageCount={this.pagesCount} />}
+        />
       </div>
     );
   }

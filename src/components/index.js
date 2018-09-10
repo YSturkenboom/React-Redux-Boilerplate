@@ -1,6 +1,6 @@
-import Header from './Header';
 import Navigation from './Navigation';
-import SecondNav from './SecondNav';
+import Tabs from './Tabs';
 import Filter from './Filter';
+import PaginationComponent from './Pagination';
 
-export { Filter, Header, Navigation, SecondNav };
+export { Filter, Navigation, PaginationComponent, Tabs };

@@ -40,9 +40,8 @@
 
     &--main {
       > tbody > tr > th, > tbody > tr > td {
-        background: $body-bg;
-        font-weight: bold;
-        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
       }
     }
 
@@ -59,18 +58,25 @@
       td:nth-child(2n + 1) {
         background-color: $color-grey;
       }
-    }
 
-    .table--inner--active {
-      background-color: $body-bg;
+      > tr > th, > tr > td {
+        border-bottom: 1px solid #f5f6fa !important;
+      }
     }
   }
 
-  .table--inner table {
-    border-bottom: 20px solid #f5f6fa;
-
-    tr:not(:first-child) {
+  .table--inner {
+    table tr:not(:first-child) {
       border-top: 1px solid rgba(198, 203, 212, 0.3);
     }
+
+    &--active {
+      // background-color: white;
+    }
   }
+}
+
+tbody > tr:not(.table--inner) > td, tbody > tr > th {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
 }

@@ -1,0 +1,37 @@
+@import '../../theme/variables';
+@import '../../theme/common';
+@import '../../theme/modules/forms';
+
+.Reports {
+  padding-bottom: 50px;
+  font-size: 14px;
+
+  .table {
+    td, th {
+      cursor: auto;
+
+      &:not(:first-child) {
+        text-align: right;
+      }
+    }
+
+    th:last-child {
+      opacity: 0.5;
+      padding-right: 30px;
+    }
+
+    tbody {
+      td:nth-child(2n) {
+        background-color: $color-grey;
+      }
+
+      > tr:first-child td {
+        border-top: 4px solid $body-bg !important;
+      }
+    }
+
+    &--container {
+      padding-bottom: 60px;
+    }
+  }
+}

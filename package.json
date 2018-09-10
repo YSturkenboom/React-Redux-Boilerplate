@@ -116,7 +116,6 @@
   "eslintConfig": {
     "parser": "babel-eslint",
     "extends": [
-      "plugin:lodash/recommended",
       "airbnb",
       "prettier",
       "prettier/react"
@@ -171,9 +170,6 @@
       "no-underscore-dangle": "off",
       "no-use-before-define": "off",
       "function-paren-newline": "off",
-      "lodash/import-scope": "off",
-      "lodash/prefer-noop": "off",
-      "lodash/prefer-lodash-typecheck": "off",
       "prettier/prettier": [
         "error",
         {
@@ -199,6 +195,7 @@
     ],
     "rules": {
       "string-quotes": "single",
+      "no-descending-specificity": null,
       "selector-pseudo-class-no-unknown": [
         true,
         {

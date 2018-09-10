@@ -2,8 +2,6 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Badge } from 'reactstrap';
 
-import { Header } from '../../components';
-
 import './styles.scss';
 
 export default ({ staticContext }) => {
@@ -14,7 +12,7 @@ export default ({ staticContext }) => {
   return (
     <div className="NotFound">
       <Helmet title="Pagina niet gevonden" />
-      <Header title="Pagina niet gevonden" back="Naar homepagina" />
+      <h1>Pagina niet gevonden</h1>
 
       <div className="container container-medium">
         <div className="card card-big">

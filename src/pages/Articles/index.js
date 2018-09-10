@@ -1,101 +1,94 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
-// import { toast } from 'react-toastify';
+import { Table } from 'reactstrap';
 
-// import { Header } from 'components';
 import { map } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltToBottom } from '@fortawesome/pro-solid-svg-icons';
-import {
-  Col,
-  Form,
-  FormGroup,
-  Input,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Row,
-  Table
-} from 'reactstrap';
 
 import { formatPrice } from '../../utils/formatting';
-import { SecondNav } from '../../components';
+import { Filter, PaginationComponent, Tabs } from '../../components';
 
 import './styles.scss';
+
+const ARTICLES = {
+  quantity: 348
+};
+const DATA = [
+  {
+    id: 1,
+    description: 'LOODVERVANGER UBIXFLEX ZWART 30 CM 12',
+    articleNumber: 467372,
+    supplier: 'Voskamp',
+    agreed: 3321.5,
+    lowest: 3321,
+    highest: 3321,
+    quantity: 20,
+    total: 66420,
+    pdf: 'https://translate.google.com/',
+    items: [
+      {
+        itemNumber: 1,
+        name: 'FC-VBT-0436400',
+        customer: 'Kilgore Trout',
+        date: '9/12/2017',
+        quantity: 10,
+        price: 71.5
+      },
+      {
+        itemNumber: 2,
+        name: 'FC-VBT-0436400',
+        customer: 'Kilgore Trout',
+        date: '9/12/2017',
+        quantity: 10,
+        price: 71.5
+      }
+    ]
+  },
+  {
+    id: 2,
+    description: 'LOODVERVANGER UBIXFLEX ZWART 30 CM 12',
+    articleNumber: 467372,
+    supplier: 'Voskamp',
+    agreed: 3321,
+    lowest: 3321,
+    highest: 3321,
+    quantity: 10,
+    total: 33210,
+    pdf: 'https://translate.google.com/',
+    items: [
+      {
+        itemNumber: 3,
+        name: 'FC-VBT-0436400',
+        customer: 'Kilgore Trout',
+        date: '9/12/2017',
+        quantity: 5,
+        price: 71.5
+      },
+      {
+        itemNumber: 4,
+        name: 'FC-VBT-0436400',
+        customer: 'Kilgore Trout',
+        date: '9/12/2017',
+        quantity: 5,
+        price: 71.5
+      }
+    ]
+  }
+];
+const TITLE = 'Articles';
 
 export default class Articles extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      activetablerow: '0',
-      data: [
-        {
-          id: 1,
-          description: 'LOODVERVANGER UBIXFLEX ZWART 30 CM 12',
-          articleNumber: 467372,
-          supplier: 'Voskamp',
-          agreed: 3321.5,
-          lowest: 3321,
-          highest: 3321,
-          quantity: 20,
-          total: 66420,
-          pdf: 'https://translate.google.com/',
-          items: [
-            {
-              itemNumber: 1,
-              name: 'FC-VBT-0436400',
-              customer: 'Kilgore Trout',
-              date: '9/12/2017',
-              quantity: 10,
-              price: 71.5
-            },
-            {
-              itemNumber: 2,
-              name: 'FC-VBT-0436400',
-              customer: 'Kilgore Trout',
-              date: '9/12/2017',
-              quantity: 10,
-              price: 71.5
-            }
-          ]
-        },
-        {
-          id: 2,
-          description: 'LOODVERVANGER UBIXFLEX ZWART 30 CM 12',
-          articleNumber: 467372,
-          supplier: 'Voskamp',
-          agreed: 3321,
-          lowest: 3321,
-          highest: 3321,
-          quantity: 10,
-          total: 33210,
-          pdf: 'https://translate.google.com/',
-          items: [
-            {
-              itemNumber: 3,
-              name: 'FC-VBT-0436400',
-              customer: 'Kilgore Trout',
-              date: '9/12/2017',
-              quantity: 5,
-              price: 71.5
-            },
-            {
-              itemNumber: 4,
-              name: 'FC-VBT-0436400',
-              customer: 'Kilgore Trout',
-              date: '9/12/2017',
-              quantity: 5,
-              price: 71.5
-            }
-          ]
-        }
-      ]
+      activetablerow: '0'
     };
   }
 
   invoiceTable = () => {
-    const table = map(this.state.data, this.renderTable);
+    const table = map(DATA, this.renderTable);
 
     return (
       <Table responsive>
@@ -118,11 +111,13 @@ export default class Articles extends PureComponent {
   };
 
   toggleCollapse = tableRow => {
-    if (this.state.activetablerow !== tableRow) {
+    const { activetablerow } = this.state;
+
+    if (activetablerow !== tableRow) {
       this.setState({
         activetablerow: tableRow
       });
-    } else if (this.state.activetablerow === tableRow) {
+    } else if (activetablerow === tableRow) {
       this.setState({
         activetablerow: '0'
       });
@@ -130,7 +125,9 @@ export default class Articles extends PureComponent {
   };
 
   renderTable = invoice => {
+    const { activetablerow } = this.state;
     const subtableItems = map(invoice.items, this.renderSubtableItems);
+
     return [
       <tr
         key={invoice.id}
@@ -158,7 +155,7 @@ export default class Articles extends PureComponent {
       </tr>,
       <tr
         key={invoice.articleNumber}
-        activetablerow={this.state.activetablerow}
+        activetablerow={activetablerow}
         className="table--inner"
         tablerowid={invoice.id}
       >
@@ -193,85 +190,17 @@ export default class Articles extends PureComponent {
   );
 
   render() {
-    const title = 'Articles';
-
     return (
       <div className="Articles">
-        <Helmet title={title} />
-        <SecondNav />
-        <div className="container">
-          <div>
-            <Row>
-              <Col md="6" sm="12">
-                <h1 className="h2">
-                  Artikelen
-                  <small> (348)</small>
-                </h1>
-              </Col>
-              <Col md="6" sm="12">
-                <Form>
-                  <FormGroup>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option value="" disabled>
-                        08/08/2016
-                      </option>
-                    </Input>
-                  </FormGroup>
-                  <FormGroup>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option value="" disabled>
-                        08/08/2016
-                      </option>
-                    </Input>
-                  </FormGroup>
-                  <FormGroup>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option value="" disabled>
-                        Leveranciers
-                      </option>
-                    </Input>
-                  </FormGroup>
-                  <FormGroup>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option defaultValue="">Afnemers</option>
-                    </Input>
-                  </FormGroup>
-                  <p>Reset filters</p>
-                </Form>
-              </Col>
-            </Row>
-          </div>
-          {this.invoiceTable()}
-          <Pagination aria-label="Page navigation">
-            <p>
-              Bekijk
-              <b> 1-20 </b>
-              van
-              <b> 348 </b>
-            </p>
-            <PaginationItem disabled>
-              <PaginationLink previous href="#" />
-            </PaginationItem>
-            <PaginationItem active>
-              <PaginationLink href="#">1</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">2</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">3</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">4</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">5</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink next href="#" />
-            </PaginationItem>
-          </Pagination>
-        </div>
+        <Helmet title={TITLE} />
+        <Tabs
+          tabs={false}
+          filter1={
+            <Filter removeText title={TITLE} quantity={ARTICLES.quantity} />
+          }
+          tableFunction1={this.invoiceTable()}
+          pagination1={<PaginationComponent pageCount={this.pagesCount} />}
+        />
       </div>
     );
   }

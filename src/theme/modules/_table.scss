@@ -95,7 +95,7 @@ table {
     &--active {
       background: rgba(0, 173, 228, 0.1);
 
-      td {
+      td, th {
         position: relative;
         border-bottom: none !important;
 
@@ -173,7 +173,7 @@ table {
       background: $green;
     }
   }
-} 
+}
 
 .Home table .table--inner > td td:last-child {
   color: $blue;

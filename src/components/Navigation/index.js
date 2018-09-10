@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
@@ -74,7 +75,7 @@ class Navigation extends Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/components/">
+                  <NavLink href="/reports/">
                     <FontAwesomeIcon icon={faFileAlt} />
                     Rapporten
                   </NavLink>
