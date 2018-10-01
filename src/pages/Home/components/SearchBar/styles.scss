@@ -1,1 +1,25 @@
 // bla
+.form {
+  display: flex;
+  margin-top: 100px;
+
+  &__input {
+    flex-basis: 80%;
+    border-radius: 28.3px;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.09);
+    background-color: #fff;
+    border: solid 0 #979797;
+    outline: none;
+  }
+
+  &__button {
+    border-radius: 23px;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    outline: none;
+    -webkit-box-shadow: 0 5px 30px rgba(0,0,0,0);
+    box-shadow: 0 5px 30px rgba(0,0,0,0);
+    background:black;
+  }
+
+}
