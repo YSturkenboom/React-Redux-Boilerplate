@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import { config as faConfig } from '@fortawesome/fontawesome-svg-core';
 
 import { Navigation } from '../components';
-import { EnsureLoggedIn, Login } from '../pages';
+import { Login } from '../pages';
 
 import config from '../config';
 
@@ -32,11 +32,9 @@ const App = ({ route }) => (
 
     <Route path="/login" component={Login} exact />
 
-    <EnsureLoggedIn>
-      <Navigation />
+    <Navigation />
 
-      {renderRoutes(route.routes)}
-    </EnsureLoggedIn>
+    {renderRoutes(route.routes)}
 
     <ToastContainer className="toast-container" />
   </div>
