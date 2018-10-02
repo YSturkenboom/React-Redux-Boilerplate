@@ -36,3 +36,12 @@
     margin-left: 7px;
   }
 }
+
+.button-primary {
+  border-radius: 23px;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  outline: none;
+  -webkit-box-shadow: 0 5px 30px rgba(0,0,0,0);
+  box-shadow: 0 5px 30px rgba(0,0,0,0);
+}

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 // import Helmet from 'react-helmet';
 
 import RankingTable from './components/RankingTable';
-import SearchBar from './components/SearchBar';
+import SearchBar from './components/SearchBar/index';
 
 import './styles.scss';
 
@@ -20,14 +20,8 @@ const DATASET = [
     category: 'Global rank'
   }
 ];
-// const TITLES = ['Facturen', 'Wachtlijst'];
 
 export default class Home extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     console.log('WTF');
     return (
