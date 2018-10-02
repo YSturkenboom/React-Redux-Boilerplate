@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 // import Helmet from 'react-helmet';
 import { Table } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/pro-light-svg-icons';
 
 import { map } from 'lodash';
 
@@ -13,7 +15,10 @@ export default class RankingTable extends PureComponent {
       <td>
         <div className="tablerow__date">{entry.date}</div>
         <div className="tablerow__site">{entry.site}</div>
-        <div className="tablerow__delete">Delete</div>
+        <div className="tablerow__delete">
+          <FontAwesomeIcon className="trashIcon" icon={faTrash} />
+          Delete
+        </div>
       </td>
       <td>
         <div className="tablerow__rank">#{entry.rank}</div>

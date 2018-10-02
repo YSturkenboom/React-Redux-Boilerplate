@@ -23,7 +23,6 @@ const DATASET = [
 
 export default class Home extends PureComponent {
   render() {
-    console.log('WTF');
     return (
       <div className="Home">
         <SearchBar />

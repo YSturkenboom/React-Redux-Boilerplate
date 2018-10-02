@@ -14,11 +14,9 @@ export default class SearchBar extends PureComponent {
       <div>
         <div className="form">
           <input className="form__input" placeholder="google.com" />
-          <Button className="button-primary">Analyze URL(&#39;s)</Button>
+          <Button className="button-primary">+ Analyze URL(&#39;s)</Button>
         </div>
-        <div className="search__tooltip">
-          You can add multiple URL&#39;s by separating them with comma&#39;s
-        </div>
+        Press spacebar to add multiple URL&#39;s
       </div>
     );
   }
