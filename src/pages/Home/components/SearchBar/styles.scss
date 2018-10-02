@@ -1,7 +1,9 @@
-// bla
+@import '../../../../theme/variables';
+
 .form {
   display: flex;
-  margin-top: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 
   &__input {
     flex-basis: 80%;
@@ -10,6 +12,8 @@
     background-color: #fff;
     border: solid 0 #979797;
     outline: none;
+    margin-right: 20px;
+    padding-left: 20px;
   }
 
   &__button {

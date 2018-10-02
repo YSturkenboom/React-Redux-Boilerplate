@@ -1,4 +1,6 @@
 @import '../theme/variables';
+@import '../theme/modules/_typography';
+@import '../theme/modules/_buttons';
 
 @font-face {
   font-family: 'Avenir';
@@ -35,7 +37,11 @@ body, html {
   height: 100%;
   position: relative;
 }
-// 
+
+body {
+  background-color: #fafafa;
+}
+//
 // input:focus {
 //   outline: none !important;
 //   box-shadow: none !important;

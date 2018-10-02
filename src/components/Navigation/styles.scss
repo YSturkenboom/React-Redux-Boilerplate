@@ -1,8 +1,11 @@
 @import '../../theme/variables';
 
 .nav {
+  margin-bottom: 40px;
+
   &bar {
-    background-color: $color-blue;
+    background-color: $color-white;
+    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.08);
 
     &-nav {
       justify-content: space-between;
@@ -25,6 +28,7 @@
   }
 
   &bar-brand {
+    color: $color-black;
     border-right: 1px solid rgba(255, 255, 255, 0.25);
     padding: 0 15px !important;
 
@@ -36,7 +40,7 @@
   }
 
   &-link {
-    color: $font-color-light;
+    color: $color-black;
     opacity: 0.65;
     transition: 0.15s opacity ease-in;
 
@@ -48,7 +52,7 @@
 
     &:hover {
       opacity: 1;
-      color: $font-color-light;
+      color: $color-black;
     }
   }
 

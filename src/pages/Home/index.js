@@ -27,6 +27,7 @@ export default class Home extends PureComponent {
     return (
       <div className="Home">
         <SearchBar />
+        <h2>Competitor ranking</h2>
         <RankingTable data={DATASET} />
       </div>
     );
