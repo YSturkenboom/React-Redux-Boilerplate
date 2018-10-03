@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 // import Helmet from 'react-helmet';
 
 import './styles.scss';
-import ListsOverview from './components/ListsOverview';
-import Button from './components/FloatingCircleButton';
+import ListsOverview from '../../components/ListsOverview';
+import Button from '../../components/FloatingCircleButton';
 
 const LISTS = [
   { date: '22/03/18', name: 'IT companies', amount: 37 },

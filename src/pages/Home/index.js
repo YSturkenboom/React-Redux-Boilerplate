@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 // import Helmet from 'react-helmet';
 
-import RankingTable from './components/RankingTable';
-import SearchBar from './components/SearchBar/index';
+import RankingTable from '../../components/RankingTable';
+import SearchBar from '../../components/SearchBar/index';
 
 import './styles.scss';
 
