@@ -24,6 +24,10 @@
     url('../fonts/ccd17c6b-e7ed-4b73-b0d2-76712a4ef46b.ttf') format('truetype');
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body, html {
   height: 100%;
   width: 100%;

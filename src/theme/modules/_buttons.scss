@@ -5,3 +5,12 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+
+.flaotingActionButton {
+  background-color: $color-black;
+  border-radius: 100px;
+  color: $color-white;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+}

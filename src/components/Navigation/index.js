@@ -51,12 +51,12 @@ class Navigation extends Component {
               <div>
                 <NavItem>
                   <NavLink exact to="/" tag={RouterNavLink}>
-                    Analyze website
+                    Analyze websites
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/articles/" tag={RouterNavLink}>
-                    Your analyses
+                  <NavLink to="/lists/" tag={RouterNavLink}>
+                    Your Lists
                   </NavLink>
                 </NavItem>
               </div>

@@ -13,9 +13,14 @@
   }
   &__delete {
     color: #18ecc0;
+    cursor: pointer;
   }
 }
 
 .trashIcon {
   margin-right: 8px;
+}
+
+.table td {
+  cursor: default;
 }

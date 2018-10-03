@@ -1,22 +1,43 @@
 import React, { PureComponent } from 'react';
 import { Button } from 'reactstrap';
-// import Helmet from 'react-helmet';
-// import { Dropdown } from 'semantic-ui-react';
 
-// import { map } from 'lodash';
+import TagsInput from 'react-tagsinput';
+
+// import 'react-tagsinput/react-tagsinput.css';
 
 import './styles.scss';
 // const TITLES = ['Facturen', 'Wachtlijst'];
 
 export default class SearchBar extends PureComponent {
+  constructor() {
+    super();
+    this.state = { tags: ['storyofams.com', 'google.com'] };
+    this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    console.log('input changed', this);
+  }
+
+  analyze() {
+    console.log('analyzing', this);
+  }
+
   render() {
     return (
       <div>
         <div className="form">
-          <input className="form__input" placeholder="google.com" />
-          <Button className="button-primary">+ Analyze URL(&#39;s)</Button>
+          <TagsInput
+            value={this.state.tags}
+            onChange={this.handleChange}
+            className="form__input"
+            placeholder="google.com"
+          />
+          <Button className="button-primary" onClick={this.analyze}>
+            + Analyze URL(&#39;s)
+          </Button>
         </div>
-        Press spacebar to add multiple URL&#39;s
+        <div className="toolTip">Press spacebar to add multiple URL&#39;s</div>
       </div>
     );
   }

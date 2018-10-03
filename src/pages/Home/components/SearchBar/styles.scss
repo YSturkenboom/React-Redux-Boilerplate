@@ -14,10 +14,11 @@
     border: solid 0 #979797;
     outline: none;
     margin-right: 20px;
-    padding-left: 20px;
+    padding-left: 15px;
   }
 
   &__button {
+    flex-basis: 20%;
     border-radius: 23px;
     -webkit-transform: translateY(0);
     transform: translateY(0);
@@ -27,4 +28,40 @@
     background:black;
   }
 
+}
+
+.react-tagsinput-tag {
+  background-color: #fafafa;
+  border-radius: 18px;
+  border: 1px solid #ccc;
+  color: #737373;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  margin-top: 8px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.react-tagsinput-input {
+  border: 0;
+  outline: none;
+  padding-left: 8px;
+}
+
+.react-tagsinput-remove {
+  cursor: pointer;
+}
+
+.react-tagsinput-tag a::before {
+  content: ' ×';
+}
+
+.toolTip {
+  color: #737373;
+  padding-left: 10px;
 }
