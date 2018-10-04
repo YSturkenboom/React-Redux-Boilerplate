@@ -10,19 +10,51 @@
     &-nav {
       justify-content: space-between;
       width: 100%;
+      color: rgb(102, 102, 102);
 
       > div {
-        width: 1000px;
         display: flex;
-        align-items: center;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 40px;
-      }
+        margin-bottom: 20px;
+        margin-top: 20px;
 
+        > li {
+          margin: auto;
+
+          &.nav-item .nav-link{
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+
+          > a {
+            position: relative;
+            transition: color 0.25s ease 0s;
+            font-family: 'Karla',sans-serif;
+            font-size: 21px;
+            padding-left: 10px;
+            padding-right: 10px;
+
+            &::after{
+              position: absolute;
+              content: '';
+              background-color: rgb(24, 236, 192);
+              transition: left .25s, right .25s;
+              left: 50%;
+              right: 50%;
+              bottom: 0;
+              height: 2px;
+            }
+            &:hover::after {
+              left: 0;
+              right: 0;
+            }
+          }
+        }
+      }
       .dropdown.nav-item {
         padding: 15px 1rem;
         border-left: 1px solid rgba(255, 255, 255, 0.25);
+        margin-top: auto;
+        margin-bottom: auto;
       }
     }
   }

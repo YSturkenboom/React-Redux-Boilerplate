@@ -33,7 +33,8 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
-        "PORT": 3000
+        "PORT": 8080
+        "DOMAIN": "localhost"
       }
     },
     "start": {
@@ -235,6 +236,7 @@
   "nodemonConfig": {
     "watch": [
       "src/server.js",
+      "src/utils/renderHtml.js"
       "src/utils/renderHtml.js",
       "assets/main.css"
     ]

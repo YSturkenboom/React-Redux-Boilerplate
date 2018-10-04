@@ -40,6 +40,8 @@ class Login extends PureComponent {
   onSubmitVerify = ev => {
     ev.preventDefault();
 
+    console.log('logging in');
+
     const { login } = this.props;
     const { email, password } = this.state;
 
@@ -67,7 +69,6 @@ class Login extends PureComponent {
 
         {!this.props.auth.checkingSession && (
           <div className="login-content">
-            <img alt="logo" src={require('../../images/logo.png')} />
             <Card body className="login-window">
               <h4 className="text-center">Login</h4>
               <span className="spacer" />
@@ -130,7 +131,7 @@ class Login extends PureComponent {
                 </Button>
               </Form>
               <span className="spacer" />
-              <a href className="text-center text-muted">
+              <a href="/forgotPassword" className="text-center text-muted">
                 <small>Forgot your password?</small>
               </a>
             </Card>
