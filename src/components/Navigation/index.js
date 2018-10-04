@@ -17,14 +17,7 @@ import {
 } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faChartBar,
-  faEye,
-  faFileAlt,
-  faFileInvoiceDollar,
-  faBoxAlt,
-  faUser
-} from '@fortawesome/pro-light-svg-icons';
+import { faUser } from '@fortawesome/pro-light-svg-icons';
 // import { faChartBar } from '@fortawesome/pro-regular-svg-icons';
 
 import './styles.scss';
@@ -50,7 +43,7 @@ class Navigation extends Component {
       <div>
         <Navbar className="nav" expand="md">
           <NavbarBrand exact to="/" tag={RouterNavLink}>
-            <img alt="logo" src={require('../../images/logo-white.png')} />
+            AMSalyze
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -58,32 +51,12 @@ class Navigation extends Component {
               <div>
                 <NavItem>
                   <NavLink exact to="/" tag={RouterNavLink}>
-                    <FontAwesomeIcon icon={faFileInvoiceDollar} />
-                    Facturen
+                    Analyze websites
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/articles/" tag={RouterNavLink}>
-                    <FontAwesomeIcon icon={faBoxAlt} />
-                    Artikelen
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/overview/" tag={RouterNavLink}>
-                    <FontAwesomeIcon icon={faEye} />
-                    Overzicht
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/reports/" tag={RouterNavLink}>
-                    <FontAwesomeIcon icon={faFileAlt} />
-                    Rapporten
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/components/" tag={RouterNavLink}>
-                    <FontAwesomeIcon icon={faChartBar} />
-                    Statistieken
+                  <NavLink to="/lists/" tag={RouterNavLink}>
+                    Your Lists
                   </NavLink>
                 </NavItem>
               </div>

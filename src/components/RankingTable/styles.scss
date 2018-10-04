@@ -1,0 +1,26 @@
+
+.tablerow {
+  &__rank {
+    font-size: 40px;
+    font-weight: 800;
+  }
+  &__site {
+    font-size: 20px;
+    font-weight: 800;
+  }
+  &__date {
+    color: #737373;
+  }
+  &__delete {
+    color: #18ecc0;
+    cursor: pointer;
+  }
+}
+
+.trashIcon {
+  margin-right: 8px;
+}
+
+.table td {
+  cursor: default;
+}
