@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 // import Helmet from 'react-helmet';
+import { Button } from 'reactstrap';
 
 import RankingTable from '../../components/RankingTable';
+import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar/index';
-
 import { siteRankActions } from '../../actions';
 
 import './styles.scss';
@@ -28,8 +29,14 @@ export default class Home extends PureComponent {
     return (
       <div className="Home">
         <SearchBar actionOnSubmit={siteRankActions.getBulkTraffic} />
-        <h2>Competitor ranking</h2>
+        <div className="Home__header">
+          <EditableField />
+          <Button className="button-primary">Update</Button>
+        </div>
         <RankingTable data={DATASET} />
+        <div className="Home__footer">
+          <Button className="button-primary"> Save</Button>
+        </div>
       </div>
     );
   }

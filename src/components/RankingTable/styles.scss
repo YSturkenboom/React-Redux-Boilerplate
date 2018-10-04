@@ -1,9 +1,16 @@
 
 .tablerow {
+
   &__rank {
     font-size: 40px;
     font-weight: 800;
+    text-align: center;
   }
+
+  &__category {
+    text-align: center;
+  }
+
   &__site {
     font-size: 20px;
     font-weight: 800;
@@ -15,6 +22,8 @@
     color: #18ecc0;
     cursor: pointer;
   }
+
+
 }
 
 .trashIcon {
@@ -23,4 +32,13 @@
 
 .table td {
   cursor: default;
+}
+
+.first_table {
+  width: 80%;
+}
+
+.second_table {
+  width: 20%;
+  border-left: 2px solid #e8e8e8;
 }

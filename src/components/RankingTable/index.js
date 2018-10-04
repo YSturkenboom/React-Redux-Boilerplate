@@ -12,7 +12,7 @@ import './styles.scss';
 export default class RankingTable extends PureComponent {
   renderRow = entry => [
     <tr key={entry.site}>
-      <td>
+      <td className="first_table">
         <div className="tablerow__date">{entry.date}</div>
         <div className="tablerow__site">{entry.site}</div>
         <div className="tablerow__delete">
@@ -20,7 +20,7 @@ export default class RankingTable extends PureComponent {
           Delete
         </div>
       </td>
-      <td>
+      <td className="second_table">
         <div className="tablerow__rank">#{entry.rank}</div>
         <div className="tablerow__category">{entry.category}</div>
       </td>
@@ -31,12 +31,6 @@ export default class RankingTable extends PureComponent {
     const table = map(this.props.data, this.renderRow);
     return (
       <Table responsive>
-        <thead>
-          <tr>
-            <th>Analyzed websites</th>
-            <th>Ranking</th>
-          </tr>
-        </thead>
         <tbody>{table}</tbody>
       </Table>
     );
