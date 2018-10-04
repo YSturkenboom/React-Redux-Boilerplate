@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/pro-regular-svg-icons';
+import { ToastContainer } from 'react-toastify';
 import RankingTable from '../../components/RankingTable';
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar/index';
@@ -28,13 +29,12 @@ const DATASET = [
 export default class Home extends PureComponent {
   constructor() {
     super();
-    this.state = {};
+    this.state = { show_error: false };
     this.clickRefresh = this.clickRefresh.bind(this);
   }
 
   clickRefresh() {
-    console.log(this);
-    alert('refresh website');
+    this.setState({ show_error: true });
   }
 
   render() {
@@ -50,6 +50,9 @@ export default class Home extends PureComponent {
           </Button>
         </div>
         <RankingTable data={DATASET} />
+        {this.state.show_error ? (
+          <ToastContainer className="toast-container" />
+        ) : null}
       </div>
     );
   }
