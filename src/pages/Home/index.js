@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSync } from '@fortawesome/pro-regular-svg-icons';
 import RankingTable from '../../components/RankingTable';
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar/index';
@@ -24,6 +26,17 @@ const DATASET = [
 ];
 
 export default class Home extends PureComponent {
+  constructor() {
+    super();
+    this.state = {};
+    this.clickRefresh = this.clickRefresh.bind(this);
+  }
+
+  clickRefresh() {
+    console.log(this);
+    alert('refresh website');
+  }
+
   render() {
     return (
       <div className="Home">
@@ -31,12 +44,12 @@ export default class Home extends PureComponent {
         <SearchBar actionOnSubmit={siteRankActions.getBulkTraffic} />
         <div className="Home__header">
           <EditableField />
-          <Button className="button-primary">Update</Button>
+          <Button className="button-outline" onClick={this.clickRefresh}>
+            Refresh websites
+            <FontAwesomeIcon icon={faSync} />
+          </Button>
         </div>
         <RankingTable data={DATASET} />
-        <div className="Home__footer">
-          <Button className="button-primary"> Save</Button>
-        </div>
       </div>
     );
   }

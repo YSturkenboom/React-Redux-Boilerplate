@@ -7,16 +7,37 @@ class EditableField extends PureComponent {
   constructor() {
     super();
     this.state = {
-      isEditable: false
+      isEditable: false,
+      title: 'List One'
     };
+    this.buttonSwitch = this.buttonSwitch.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  buttonSwitch() {
+    this.setState(prevState => ({
+      isEditable: !prevState.isEditable
+    }));
+  }
+
+  handleChange(event) {
+    this.setState({ title: event.target.value });
   }
 
   render() {
     return (
       <div>
-        <div>
-          {this.state.isEditable ? <input type="text" /> : <h2>Replace</h2>}
-          <FontAwesomeIcon icon={faPen} />
+        <div className="editableField">
+          {this.state.isEditable ? (
+            <input
+              value={this.state.title}
+              type="text"
+              onChange={this.handleChange}
+            />
+          ) : (
+            <h2>{this.state.title}</h2>
+          )}
+          <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
         </div>
       </div>
     );

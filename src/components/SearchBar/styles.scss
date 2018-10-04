@@ -29,6 +29,7 @@
     height: 50px;
     color: #fff;
     border: 0;
+    min-width: 200px;
 
     &:focus, &:active {
       outline: none;
@@ -73,6 +74,6 @@
 }
 
 .toolTip {
-  color: #737373;
-  padding-left: 10px;
+  color: black;
+  opacity: 0.3;
 }

@@ -1,10 +1,12 @@
-
 .tablerow {
-
   &__rank {
     font-size: 40px;
     font-weight: 800;
     text-align: center;
+
+    span {
+      color: #18ecc0;
+    }
   }
 
   &__category {
@@ -14,16 +16,23 @@
   &__site {
     font-size: 20px;
     font-weight: 800;
+    padding-bottom: 3px;
   }
   &__date {
     color: #737373;
+    padding-top: 5px;
+    margin-bottom: -7px;
   }
   &__delete {
-    color: #18ecc0;
+    color: black;
     cursor: pointer;
+    opacity: 0.6;
+    padding-top: 7px;
+
+    &:hover {
+      color: rgb(148, 0, 0);
+    }
   }
-
-
 }
 
 .trashIcon {
@@ -36,9 +45,14 @@
 
 .first_table {
   width: 80%;
+  padding: 5px 0;
 }
 
 .second_table {
   width: 20%;
   border-left: 2px solid #e8e8e8;
+}
+
+.RankTable {
+  box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.09);
 }

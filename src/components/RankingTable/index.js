@@ -21,7 +21,10 @@ export default class RankingTable extends PureComponent {
         </div>
       </td>
       <td className="second_table">
-        <div className="tablerow__rank">#{entry.rank}</div>
+        <div className="tablerow__rank">
+          <span>#</span>
+          {entry.rank}
+        </div>
         <div className="tablerow__category">{entry.category}</div>
       </td>
     </tr>
@@ -30,7 +33,7 @@ export default class RankingTable extends PureComponent {
   render() {
     const table = map(this.props.data, this.renderRow);
     return (
-      <Table responsive>
+      <Table responsive className="RankTable">
         <tbody>{table}</tbody>
       </Table>
     );
