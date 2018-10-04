@@ -11,16 +11,23 @@ import './styles.scss';
 export default class SearchBar extends PureComponent {
   constructor() {
     super();
-    this.state = { tags: ['storyofams.com', 'google.com'] };
-    this.handleChange.bind(this);
+    this.state = { tags: ['youtube.com'], tag: '' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeInput = this.handleChangeInput.bind(this);
+    this.analyze = this.analyze.bind(this);
   }
 
-  handleChange() {
-    console.log('input changed', this);
+  handleChange(tags) {
+    this.setState({ tags });
+  }
+
+  handleChangeInput(tag) {
+    this.setState({ tag });
   }
 
   analyze() {
     console.log('analyzing', this);
+    console.log('send data to API call', this.state.tags);
   }
 
   render() {
@@ -28,10 +35,12 @@ export default class SearchBar extends PureComponent {
       <div>
         <div className="form">
           <TagsInput
-            value={this.state.tags}
-            onChange={this.handleChange}
             className="form__input"
             placeholder="google.com"
+            value={this.state.tags}
+            onChange={this.handleChange}
+            inputValue={this.state.tag}
+            onChangeInput={this.handleChangeInput}
           />
           <Button className="button-primary" onClick={this.analyze}>
             + Analyze URL(&#39;s)
