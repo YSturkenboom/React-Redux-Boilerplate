@@ -17,6 +17,7 @@
   }
 
   &__button {
+    cursor: pointer;
     flex-basis: 20%;
     border-radius: 23px;
     -webkit-transform: translateY(0);
@@ -27,9 +28,14 @@
     background:black;
     height: 50px;
     color: #fff;
+    border: 0;
 
     &:focus, &:active {
       outline: none;
+    }
+
+    &:hover {
+      background:gray;
     }
   }
 

@@ -7,7 +7,12 @@ import './styles.scss';
 export default class ListsOverview extends PureComponent {
   renderSiteList = list => (
     <div>
-      <SitesList date={list.date} name={list.name} amount={list.amount} />
+      <SitesList
+        id={list.id}
+        date={list.date}
+        name={list.name}
+        amount={list.amount}
+      />
     </div>
   );
 

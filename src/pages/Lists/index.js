@@ -6,15 +6,60 @@ import ListsOverview from '../../components/ListsOverview';
 import Button from '../../components/FloatingCircleButton';
 
 const LISTS = [
-  { date: '22/03/18', name: 'IT companies', amount: 37 },
-  { date: '22/03/18', name: 'Real estate agencies', amount: 11 },
-  { date: '22/03/18', name: 'Hairdressers', amount: 4 },
-  { date: '22/03/18', name: 'IT companies', amount: 37 },
-  { date: '22/03/18', name: 'Real estate agencies', amount: 11 },
-  { date: '22/03/18', name: 'Hairdressers', amount: 4 },
-  { date: '22/03/18', name: 'IT companies', amount: 37 },
-  { date: '22/03/18', name: 'Real estate agencies', amount: 11 },
-  { date: '22/03/18', name: 'Hairdressers', amount: 4 },
+  {
+    id: '123456789dsfasdfewr32',
+    date: '22/03/18',
+    name: 'IT companies',
+    amount: 37
+  },
+  {
+    id: '123456789dsfasdfewr32',
+    date: '22/03/18',
+    name: 'Real estate agencies',
+    amount: 11
+  },
+  {
+    id: '123456789dsfasdfewr32',
+    date: '22/03/18',
+    name: 'Hairdressers',
+    amount: 4
+  },
+  {
+    id: '123456789dsfasdfewr32',
+    date: '22/03/18',
+    name: 'IT companies',
+    amount: 37
+  },
+  {
+    id: '123456789dsfasdfewr32',
+    date: '22/03/18',
+    name: 'Real estate agencies',
+    amount: 11
+  },
+  {
+    id: '123456789dsfasdfewr32',
+    date: '22/03/18',
+    name: 'Hairdressers',
+    amount: 4
+  },
+  {
+    id: '123456789dsfasdfewr32',
+    date: '22/03/18',
+    name: 'IT companies',
+    amount: 37
+  },
+  {
+    id: '123456789dsfasdfewr32',
+    date: '22/03/18',
+    name: 'Real estate agencies',
+    amount: 11
+  },
+  {
+    id: '123456789dsfasdfewr32',
+    date: '22/03/18',
+    name: 'Hairdressers',
+    amount: 4
+  },
   {
     date: '22/03/18',
     name:
