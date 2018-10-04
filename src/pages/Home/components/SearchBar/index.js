@@ -7,14 +7,25 @@ import { Dropdown } from 'semantic-ui-react';
 
 import './styles.scss';
 // const TITLES = ['Facturen', 'Wachtlijst'];
+const stateOptions = [
+  { key: 'AL', value: 'AL', text: 'Alabama' },
+  { key: 'BO', value: 'BO', text: 'Boston' }
+];
 
 export default class SearchBar extends PureComponent {
   render() {
     return (
       <div>
         <div className="form">
-          <Dropdown placeholder="google.com" fluid multiple search selection />
-          <input className="form__input" placeholder="google.com" />
+          <Dropdown
+            className="form__input"
+            placeholder="google.com"
+            fluid
+            multiple
+            search
+            selection
+            options={stateOptions}
+          />
           <Button className="button-primary">rank</Button>
         </div>
         <div className="search__tooltip">
