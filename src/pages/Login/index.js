@@ -40,6 +40,8 @@ class Login extends PureComponent {
   onSubmitVerify = ev => {
     ev.preventDefault();
 
+    console.log('logging in');
+
     const { login } = this.props;
     const { email, password } = this.state;
 
@@ -130,7 +132,7 @@ class Login extends PureComponent {
                 </Button>
               </Form>
               <span className="spacer" />
-              <a href className="text-center text-muted">
+              <a href="/forgotPassword" className="text-center text-muted">
                 <small>Forgot your password?</small>
               </a>
             </Card>

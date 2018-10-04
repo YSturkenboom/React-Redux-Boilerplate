@@ -16,7 +16,7 @@ export default class SitesList extends PureComponent {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={`/${this.props.id}`} />;
+      return <Redirect push to="/:id" />;
     }
     return (
       <button type="button" className="SitesList" onClick={this.handleOnClick}>
