@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-// import Helmet from 'react-helmet';
+import Helmet from 'react-helmet';
 
 import RankingTable from '../../components/RankingTable';
 import SearchBar from '../../components/SearchBar/index';
@@ -27,6 +27,7 @@ export default class Home extends PureComponent {
   render() {
     return (
       <div className="Home">
+        <Helmet title="Analyze" />
         <SearchBar actionOnSubmit={siteRankActions.getBulkTraffic} />
         <h2>Competitor ranking</h2>
         <RankingTable data={DATASET} />

@@ -4,13 +4,13 @@ module.exports = {
   apiUrl: process.env.API_URL || 'http://localhost:3001/api',
   app: {
     htmlAttributes: { lang: 'en' },
-    title: 'Sitename',
-    defaultTitle: 'Sitename',
-    titleTemplate: '%s - Sitename',
+    title: 'AMSalyzer',
+    defaultTitle: 'AMSalyzer',
+    titleTemplate: '%s - AMSalyzer',
     meta: [
       {
-        name: 'description',
-        content: 'Sitename'
+        name: 'Bulk traffic analyzer for websites',
+        content: 'AMSalyzer'
       }
     ]
   }

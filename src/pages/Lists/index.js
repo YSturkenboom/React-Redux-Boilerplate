@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-// import Helmet from 'react-helmet';
+import Helmet from 'react-helmet';
 
 import './styles.scss';
 import ListsOverview from '../../components/ListsOverview';
@@ -77,6 +77,7 @@ export default class Lists extends PureComponent {
   render() {
     return (
       <div className="Lists">
+        <Helmet title="Your Lists" />
         <ListsOverview data={LISTS} />
         <Button className="button-primary">+ Analyze URL(&#39;s)</Button>
       </div>
