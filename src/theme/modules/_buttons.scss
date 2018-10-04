@@ -6,11 +6,13 @@
   padding-right: 20px;
 }
 
-.flaotingActionButton {
+.floatingActionButton {
   background-color: $color-black;
-  border-radius: 100px;
   color: $color-white;
-  position: absolute;
+  position: fixed;
   right: 30px;
   bottom: 30px;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
 }

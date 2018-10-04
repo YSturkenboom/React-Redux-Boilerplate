@@ -1,17 +1,16 @@
 import React, { PureComponent } from 'react';
-import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/pro-regular-svg-icons';
 import './styles.scss';
+// const TITLES = ['Facturen', 'Wachtlijst'];
 
-export default class FloatingCircleButton extends PureComponent {
+export default class AddSiteButton extends PureComponent {
   render() {
     return (
-      <Button className="floatingActionButton " onClick={this.props.onClick}>
+      <button type="button" className="AddSite" onClick={this.props.onClick}>
         <FontAwesomeIcon icon={faPlus} />
-        <br />
-        New List
-      </Button>
+        <div className="list__name">Create first analysed website list</div>
+      </button>
     );
   }
 }
