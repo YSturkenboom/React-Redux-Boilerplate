@@ -67,7 +67,6 @@ class Login extends PureComponent {
 
         {!this.props.auth.checkingSession && (
           <div className="login-content">
-            <img alt="logo" src={require('../../images/logo.png')} />
             <Card body className="login-window">
               <h4 className="text-center">Login</h4>
               <span className="spacer" />

@@ -43,7 +43,10 @@ class Navigation extends Component {
       <div>
         <Navbar className="nav" expand="md">
           <NavbarBrand exact to="/" tag={RouterNavLink}>
-            AMSalyze
+            <img
+              src={require('../../images/amsalyze-logo.png')}
+              alt="amsalyze-logo"
+            />
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -61,13 +64,10 @@ class Navigation extends Component {
                 </NavItem>
               </div>
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
+                <DropdownToggle nav>
                   <FontAwesomeIcon icon={faUser} />
-                  Welcome
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Settings</DropdownItem>
-                  <DropdownItem divider />
                   <DropdownItem to="/logout" tag={RouterNavLink}>
                     Log out
                   </DropdownItem>
