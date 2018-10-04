@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Button } from 'reactstrap';
 import TagsInput from 'react-tagsinput';
 import { connect } from 'react-redux';
 
@@ -7,10 +6,19 @@ import { siteRankActions } from '../../actions';
 
 import './styles.scss';
 
+const DEFAULT_TAGS = [
+  'storyofams.com',
+  'youtube.com',
+  'google.com',
+  'facebook.com',
+  'craigslist.com',
+  'ebay.com'
+];
+
 class SearchBar extends PureComponent {
   constructor() {
     super();
-    this.state = { tags: ['youtube.com'], tag: '' };
+    this.state = { tags: DEFAULT_TAGS, tag: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeInput = this.handleChangeInput.bind(this);
     this.analyze = this.analyze.bind(this);
@@ -47,9 +55,9 @@ class SearchBar extends PureComponent {
             inputValue={this.state.tag}
             onChangeInput={this.handleChangeInput}
           />
-          <Button className="button-primary" onClick={this.analyze}>
+          <button type="submit" className="form__button" onClick={this.analyze}>
             + Analyze URL(&#39;s)
-          </Button>
+          </button>
         </div>
         <div className="toolTip">Press spacebar to add multiple URL&#39;s</div>
       </div>

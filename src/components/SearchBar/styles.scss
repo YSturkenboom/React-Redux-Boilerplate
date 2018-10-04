@@ -4,7 +4,6 @@
   display: flex;
   margin-top: 20px;
   margin-bottom: 20px;
-  height: 50px;
 
   &__input {
     flex-basis: 80%;
@@ -26,6 +25,12 @@
     -webkit-box-shadow: 0 5px 30px rgba(0,0,0,0);
     box-shadow: 0 5px 30px rgba(0,0,0,0);
     background:black;
+    height: 50px;
+    color: #fff;
+
+    &:focus, &:active {
+      outline: none;
+    }
   }
 
 }
@@ -50,7 +55,7 @@
 .react-tagsinput-input {
   border: 0;
   outline: none;
-  padding-left: 8px;
+  margin: 10px;
 }
 
 .react-tagsinput-remove {
