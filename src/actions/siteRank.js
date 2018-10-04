@@ -2,8 +2,6 @@ import axios from 'axios';
 
 import { apiUrl } from '../config';
 
-axios.defaults.withCredentials = true;
-
 export const getBulkTraffic = sites => async dispatch => {
   console.log('arrive at action');
   try {
