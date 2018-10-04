@@ -4,6 +4,7 @@ import RankingTable from './RankingTable';
 import SearchBar from './SearchBar';
 import SitesList from './SitesList';
 import Navigation from './Navigation';
+import EditableField from './EditableField';
 
 export {
   FloatingCircleButton,
@@ -11,5 +12,6 @@ export {
   RankingTable,
   SearchBar,
   SitesList,
-  Navigation
+  Navigation,
+  EditableField
 };

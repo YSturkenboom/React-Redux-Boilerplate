@@ -1,6 +1,5 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Badge } from 'reactstrap';
 
 import './styles.scss';
 
@@ -11,21 +10,9 @@ export default ({ staticContext }) => {
 
   return (
     <div className="NotFound">
-      <Helmet title="Pagina niet gevonden" />
-      <h1>Pagina niet gevonden</h1>
-
-      <div className="container container-medium">
-        <div className="card card-big">
-          <Badge className="badge-big" color="danger">
-            foutmelding
-          </Badge>
-
-          <h2>Oeps, pagina niet gevonden</h2>
-          <p className="text-default">
-            Het lijkt erop dat de pagina die je zoekt niet (meer) bestaat.
-          </p>
-        </div>
-      </div>
+      <Helmet title="Page not found" />
+      <h1>Uh oh, nothing here!</h1>
+      <p>The page you were looking for is not here (anymore)</p>
     </div>
   );
 };

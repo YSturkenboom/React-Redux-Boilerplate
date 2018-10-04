@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Redirect } from 'react-router';
-import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/pro-regular-svg-icons';
 import './styles.scss';
 
-export default class FloatingCircleButton extends PureComponent {
+export default class AddSiteButton extends PureComponent {
   constructor() {
     super();
     this.state = { redirect: false };
@@ -21,11 +20,10 @@ export default class FloatingCircleButton extends PureComponent {
       return <Redirect push to="/" />;
     }
     return (
-      <Button className="floatingActionButton " onClick={this.handleOnClick}>
+      <button type="button" className="AddSite" onClick={this.handleOnClick}>
         <FontAwesomeIcon icon={faPlus} />
-        <br />
-        New List
-      </Button>
+        <div className="list__name">Create first analysed website list</div>
+      </button>
     );
   }
 }

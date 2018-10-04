@@ -18,7 +18,6 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/pro-light-svg-icons';
-// import { faChartBar } from '@fortawesome/pro-regular-svg-icons';
 
 import './styles.scss';
 
