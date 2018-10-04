@@ -235,7 +235,8 @@
   "nodemonConfig": {
     "watch": [
       "src/server.js",
-      "src/utils/renderHtml.js"
+      "src/utils/renderHtml.js",
+      "assets/main.css"
     ]
   },
   "browserslist": [
@@ -282,6 +283,7 @@
     "react-helmet": "^5.2.0",
     "react-hot-loader": "^4.3.5",
     "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
     "react-router-bootstrap": "^0.24.4",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1",

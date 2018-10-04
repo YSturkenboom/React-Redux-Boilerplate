@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
-// import Helmet from 'react-helmet';
+import Helmet from 'react-helmet';
 import { Button } from 'reactstrap';
-
 import RankingTable from '../../components/RankingTable';
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar/index';
@@ -28,6 +27,7 @@ export default class Home extends PureComponent {
   render() {
     return (
       <div className="Home">
+        <Helmet title="Analyze" />
         <SearchBar actionOnSubmit={siteRankActions.getBulkTraffic} />
         <div className="Home__header">
           <EditableField />
