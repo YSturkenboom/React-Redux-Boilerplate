@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Route } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import Helmet from 'react-helmet';
@@ -15,6 +16,8 @@ import config from '../config';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../theme/bootstrap.scss';
 import './styles.scss';
+
+axios.defaults.withCredentials = true;
 
 faConfig.autoAddCss = false;
 
