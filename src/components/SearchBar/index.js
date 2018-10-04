@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
 import { Button } from 'reactstrap';
-
 import TagsInput from 'react-tagsinput';
+import { connect } from 'react-redux';
 
-// import 'react-tagsinput/react-tagsinput.css';
+import { siteRankActions } from '../../actions';
 
 import './styles.scss';
-// const TITLES = ['Facturen', 'Wachtlijst'];
 
-export default class SearchBar extends PureComponent {
+class SearchBar extends PureComponent {
   constructor() {
     super();
     this.state = { tags: ['youtube.com'], tag: '' };
@@ -28,6 +27,12 @@ export default class SearchBar extends PureComponent {
   analyze() {
     console.log('analyzing', this);
     console.log('send data to API call', this.state.tags);
+    console.log('action', this.props.actionOnSubmit);
+    this.props.getBulkTraffic(this.state.tags).then(res => {
+      if (res.type === 'REQUEST_FAIL') {
+        console.log(res.err);
+      }
+    });
   }
 
   render() {
@@ -51,3 +56,12 @@ export default class SearchBar extends PureComponent {
     );
   }
 }
+
+const connector = connect(
+  ({ siteRank }) => ({ siteRank }),
+  dispatch => ({
+    getBulkTraffic: sites => dispatch(siteRankActions.getBulkTraffic(sites))
+  })
+);
+
+export default connector(SearchBar);
