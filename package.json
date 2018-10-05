@@ -1,5 +1,5 @@
 {
-  "name": "dps-frontend",
+  "name": "amsalyzer",
   "version": "1.0.0",
   "main": "index.js",
   "engines": {
@@ -33,7 +33,7 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
-        "PORT": 8080
+        "PORT": 3000,
         "DOMAIN": "localhost"
       }
     },
@@ -237,8 +237,6 @@
     "watch": [
       "src/server.js",
       "src/utils/renderHtml.js"
-      "src/utils/renderHtml.js",
-      "assets/main.css"
     ]
   },
   "browserslist": [
