@@ -23,8 +23,10 @@ class Home extends PureComponent {
   }
 
   render() {
-    console.log('PROPS', this.props);
-    const { data } = this.props.siteRank;
+    console.log('goeie props 8934037432421943713048124902', this.props);
+    const { ranks } = this.props.siteRank;
+    console.log('ranks structure -----', ranks);
+
     return (
       <div className="Home">
         <Helmet title="Analyze" />
@@ -36,7 +38,7 @@ class Home extends PureComponent {
             <FontAwesomeIcon icon={faSync} />
           </Button>
         </div>
-        <RankingTable data={data} />
+        <RankingTable ranks={ranks} />
         {this.state.show_error ? (
           <ToastContainer className="toast-container" />
         ) : null}

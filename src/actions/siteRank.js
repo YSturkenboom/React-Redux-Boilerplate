@@ -8,9 +8,8 @@ export const getBulkTraffic = sites => async dispatch => {
     const result = await axios.post(`${apiUrl}/traffic/get-sites-bulk`, {
       sites
     });
-    console.log('ranks', result.data.ranks);
-    const { ranks } = result.data;
-    return dispatch({ type: 'REQUEST_SUCCESS', ranks });
+    console.log('result', result);
+    return dispatch({ type: 'REQUEST_SUCCESS', result });
   } catch (err) {
     return dispatch({
       type: 'REQUEST_FAIL',
