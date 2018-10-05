@@ -6,14 +6,7 @@ import { siteRankActions } from '../../actions';
 
 import './styles.scss';
 
-const DEFAULT_TAGS = [
-  'storyofams.com',
-  'youtube.com',
-  'google.com',
-  'facebook.com',
-  'craigslist.com',
-  'ebay.com'
-];
+const DEFAULT_TAGS = ['storyofams.com', 'youtube.com', 'google.com'];
 
 class SearchBar extends PureComponent {
   constructor() {

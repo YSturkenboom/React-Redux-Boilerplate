@@ -16,3 +16,30 @@
   width: 100px;
   height: 100px;
 }
+
+.button-outline {
+  background:transparent;
+  border: 1px solid black;
+  color: black;
+  border-radius: 23px;
+  min-width: 200px;
+
+
+  svg {
+    font-size: 14px;
+    color:black;
+    margin-left: 10px;
+  }
+
+  &:hover {
+    background: black;
+    color: white;
+
+    svg {
+      color: white;
+    }
+
+  }
+
+
+}
