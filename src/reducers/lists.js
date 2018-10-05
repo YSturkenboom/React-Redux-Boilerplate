@@ -61,14 +61,17 @@
 //   }
 // ];
 
-const initialState = { data: [] };
+const initialState = {
+  data: [],
+  isLoading: true
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'LISTS_LIST_REQUEST_SUCCESS': {
       console.log('halloo', action);
       const { data } = action.result;
-      return { data };
+      return { data, isLoading: false };
     }
     case 'LISTS_LIST_REQUEST_FAIL': {
       return {};

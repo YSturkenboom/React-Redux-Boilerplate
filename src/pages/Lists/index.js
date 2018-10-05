@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { listActions } from '../../actions';
 import './styles.scss';
 import ListsOverview from '../../components/ListsOverview';
-import Button from '../../components/FloatingCircleButton';
+import FloatingCircleButton from '../../components/FloatingCircleButton';
 
 class Lists extends PureComponent {
   componentWillMount() {
@@ -19,11 +19,13 @@ class Lists extends PureComponent {
   };
 
   render() {
+    const { isLoading, data } = this.props.lists;
+
     return (
       <div className="Lists">
         <Helmet title="Your Lists" />
-        <ListsOverview data={this.props.lists.data} />
-        <Button className="button-primary">+ Analyze URL(&#39;s)</Button>
+        {!isLoading && <ListsOverview data={data} />}
+        <FloatingCircleButton />
       </div>
     );
   }

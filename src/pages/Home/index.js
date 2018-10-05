@@ -25,9 +25,7 @@ class Home extends PureComponent {
   }
 
   render() {
-    console.log('goeie props 8934037432421943713048124902', this.props);
     const { ranks } = this.props.siteRank;
-    console.log('ranks structure -----', ranks);
     console.log(this.props.match.params.id);
 
     return (
