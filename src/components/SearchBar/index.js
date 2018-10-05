@@ -33,6 +33,9 @@ class SearchBar extends PureComponent {
       if (res.type === 'REQUEST_FAIL') {
         console.log(res.err);
       }
+      if (res.type === 'REQUEST_SUCCESS') {
+        console.log('yoyoyoyoy', res.ranks);
+      }
     });
   }
 

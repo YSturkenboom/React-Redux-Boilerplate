@@ -5,10 +5,11 @@ import { apiUrl } from '../config';
 export const getBulkTraffic = sites => async dispatch => {
   console.log('arrive at action');
   try {
-    await axios.post(`${apiUrl}/traffic/getSitesBulk`, {
+    const ranks = await axios.post(`${apiUrl}/traffic/get-sites-bulk`, {
       sites
     });
-    return dispatch({ type: 'REQUEST_SUCCESS' });
+    console.log('ranks', ranks);
+    return dispatch({ type: 'REQUEST_SUCCESS', ranks });
   } catch (err) {
     return dispatch({ type: 'REQUEST_FAIL', err: 'oh noooo' });
   }
