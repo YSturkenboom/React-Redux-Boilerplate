@@ -1,22 +1,20 @@
 const initialState = {
-  siteRanks: {
-    ranks: [
-      {
-        _id: 1,
-        url: 'google.com',
-        rank: 1,
-        date: '27/02/2018',
-        category: 'Global rank'
-      },
-      {
-        _id: 2,
-        url: 'storyofams.com',
-        rank: 2,
-        date: '27/02/2018',
-        category: 'Global rank'
-      }
-    ]
-  }
+  ranks: [
+    {
+      _id: 1,
+      url: 'google.com',
+      rank: 1,
+      date: '27/02/2018',
+      category: 'Global rank'
+    },
+    {
+      _id: 2,
+      url: 'storyofams.com',
+      rank: 2,
+      date: '27/02/2018',
+      category: 'Global rank'
+    }
+  ]
 };
 
 export default (state = initialState, action) => {
@@ -26,7 +24,7 @@ export default (state = initialState, action) => {
       console.log('-----------------action', action);
       const { ranks } = action.result.data;
       console.log('++++ranks', ranks);
-      return { ranks, msg };
+      return { ranks: [...state.ranks, ...ranks], msg };
     }
     case 'REQUEST_FAIL': {
       console.log('action fsil', action);
