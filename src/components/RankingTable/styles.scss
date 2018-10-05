@@ -2,7 +2,7 @@
   &__rank {
     font-size: 40px;
     font-weight: 800;
-    text-align: center;
+    text-align: right;
 
     span {
       color: #18ecc0;
@@ -10,7 +10,7 @@
   }
 
   &__category {
-    text-align: center;
+    text-align: right;
   }
 
   &__site {
@@ -44,12 +44,12 @@
 }
 
 .first_table {
-  width: 80%;
+  width: 70%;
   padding: 5px 0;
 }
 
 .second_table {
-  width: 20%;
+  width: 30%;
   border-left: 2px solid #e8e8e8;
 }
 

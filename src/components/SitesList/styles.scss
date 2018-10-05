@@ -9,6 +9,8 @@
   margin: 10px;
   cursor: pointer;
   border: 0;
+  transition: box-shadow 0.3s, transform 0.3s, -webkit-box-shadow 0.3s,
+    -webkit-transform 0.3s;
 
   .list {
     &__name {
@@ -22,6 +24,10 @@
       -webkit-box-orient: vertical;
       height: 3em;
       text-overflow: ellipsis;
+      -moz-transition: all 0.2s ease-in;
+      -o-transition: all 0.2s ease-in;
+      -webkit-transition: all 0.2s ease-in;
+      transition: all 0.2s ease-in;
     }
     &__date {
       font-size: 14px;
@@ -35,5 +41,15 @@
 
   &:focus {
     outline: none;
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+
+    .list {
+      &__name {
+        color: #18ecc0;
+      }
+    }
   }
 }

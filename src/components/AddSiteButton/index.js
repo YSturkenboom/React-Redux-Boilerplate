@@ -20,10 +20,12 @@ export default class AddSiteButton extends PureComponent {
       return <Redirect push to="/" />;
     }
     return (
-      <button type="button" className="AddSite" onClick={this.handleOnClick}>
-        <FontAwesomeIcon icon={faPlus} />
-        <div className="list__name">Create first analysed website list</div>
-      </button>
+      <div>
+        <button type="button" className="AddSite" onClick={this.handleOnClick}>
+          <FontAwesomeIcon icon={faPlus} />
+          <div className="list__name">Create first analysed website list</div>
+        </button>
+      </div>
     );
   }
 }
