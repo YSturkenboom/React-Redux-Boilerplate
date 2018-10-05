@@ -12,6 +12,16 @@ import { siteRankActions } from '../../actions';
 import './styles.scss';
 
 class Home extends PureComponent {
+  constructor() {
+    super();
+    this.state = { show_error: false };
+    this.clickRefresh = this.clickRefresh.bind(this);
+  }
+
+  clickRefresh() {
+    this.setState({ show_error: true });
+  }
+
   render() {
     console.log('PROPS', this.props);
     const { siteRank } = this.props;
