@@ -1,20 +1,5 @@
 const initialState = {
-  ranks: [
-    {
-      _id: 1,
-      url: 'google.com',
-      rank: 1,
-      date: '27/02/2018',
-      category: 'Global rank'
-    },
-    {
-      _id: 2,
-      url: 'storyofams.com',
-      rank: 2,
-      date: '27/02/2018',
-      category: 'Global rank'
-    }
-  ]
+  ranks: []
 };
 
 export default (state = initialState, action) => {

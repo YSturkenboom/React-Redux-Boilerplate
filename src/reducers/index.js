@@ -3,11 +3,13 @@ import { routerReducer as router } from 'react-router-redux';
 
 import auth from './auth';
 import siteRank from './siteRank';
+import lists from './lists';
 
 const reducers = {
   auth,
   router,
-  siteRank
+  siteRank,
+  lists
 };
 
 export default combineReducers(reducers);

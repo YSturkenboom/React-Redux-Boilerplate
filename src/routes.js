@@ -6,7 +6,7 @@ export default [
     component: App,
     routes: [
       {
-        path: '/',
+        path: '/list/:id',
         exact: true,
         component: Home
       },

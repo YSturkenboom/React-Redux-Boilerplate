@@ -1,86 +1,40 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
 
+import { listActions } from '../../actions';
 import './styles.scss';
 import ListsOverview from '../../components/ListsOverview';
 import Button from '../../components/FloatingCircleButton';
 
-const LISTS = [
-  {
-    id: '123456789dsfasdfewr32',
-    date: '22/03/18',
-    name: 'IT companies',
-    amount: 37
-  },
-  {
-    id: '123456789dsfasdfewr32',
-    date: '22/03/18',
-    name: 'Real estate agencies',
-    amount: 11
-  },
-  {
-    id: '123456789dsfasdfewr32',
-    date: '22/03/18',
-    name: 'Hairdressers',
-    amount: 4
-  },
-  {
-    id: '123456789dsfasdfewr32',
-    date: '22/03/18',
-    name: 'IT companies',
-    amount: 37
-  },
-  {
-    id: '123456789dsfasdfewr32',
-    date: '22/03/18',
-    name: 'Real estate agencies',
-    amount: 11
-  },
-  {
-    id: '123456789dsfasdfewr32',
-    date: '22/03/18',
-    name: 'Hairdressers',
-    amount: 4
-  },
-  {
-    id: '123456789dsfasdfewr32',
-    date: '22/03/18',
-    name: 'IT companies',
-    amount: 37
-  },
-  {
-    id: '123456789dsfasdfewr32',
-    date: '22/03/18',
-    name: 'Real estate agencies',
-    amount: 11
-  },
-  {
-    id: '123456789dsfasdfewr32',
-    date: '22/03/18',
-    name: 'Hairdressers',
-    amount: 4
-  },
-  {
-    date: '22/03/18',
-    name:
-      'List with a really long  really really really really really really really really really really really really',
-    amount: 4
+class Lists extends PureComponent {
+  componentWillMount() {
+    this.props.list();
   }
-];
 
-export default class Lists extends PureComponent {
   addNewList = () => {
     // do stuff
     console.log('clicked');
+    // this.props.create();
   };
 
   render() {
     return (
       <div className="Lists">
         <Helmet title="Your Lists" />
-        <ListsOverview data={LISTS} />
+        <ListsOverview data={this.props.lists.data} />
         <Button className="button-primary">+ Analyze URL(&#39;s)</Button>
       </div>
     );
   }
 }
+
+const connector = connect(
+  ({ lists }) => ({ lists }),
+  dispatch => ({
+    create: () => dispatch(listActions.createNewList()),
+    list: () => dispatch(listActions.getList())
+  })
+);
+
+export default connector(Lists);

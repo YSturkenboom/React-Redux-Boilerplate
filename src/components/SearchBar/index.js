@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import TagsInput from 'react-tagsinput';
-// import _ from 'lodash';
+import { map, remove, includes } from 'lodash';
 import { connect } from 'react-redux';
 
 import { siteRankActions } from '../../actions';
@@ -30,13 +30,12 @@ class SearchBar extends PureComponent {
   }
 
   analyze() {
-    // console.log(this.props.siteRank.ranks);
-    // const oldUrls = _.map(this.props.siteRank.ranks, 'url');
-    // console.log('oldurls', oldUrls);
-    // const difference = _.difference(oldUrls, this.state.tags);
-    // console.log('dfff', difference);
+    const oldUrls = map(this.props.siteRank.ranks, 'url');
+    console.log('oldurls', oldUrls);
+    const diff = remove(this.state.tags, item => includes(oldUrls, item));
+    console.log('dfff', diff);
     // if (difference.length > 0) {
-    this.props.getBulkTraffic(['hello.com']).then(res => {
+    this.props.getBulkTraffic(this.state.tags).then(res => {
       if (res.type === 'REQUEST_FAIL') {
         console.log(res.err);
       }
@@ -46,9 +45,6 @@ class SearchBar extends PureComponent {
       }
     });
   }
-  // });
-  //   }
-  // }
 
   render() {
     return (

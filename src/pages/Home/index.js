@@ -18,6 +18,8 @@ class Home extends PureComponent {
     this.clickRefresh = this.clickRefresh.bind(this);
   }
 
+  componentDidMount() {}
+
   clickRefresh() {
     this.setState({ show_error: true });
   }
@@ -26,6 +28,7 @@ class Home extends PureComponent {
     console.log('goeie props 8934037432421943713048124902', this.props);
     const { ranks } = this.props.siteRank;
     console.log('ranks structure -----', ranks);
+    console.log(this.props.match.params.id);
 
     return (
       <div className="Home">
