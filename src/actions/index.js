@@ -1,5 +1,5 @@
 import * as authActions from './auth';
 import * as siteRankActions from './siteRank';
-import * as listActions from './lists';
+import * as registerActions from './register';
 
-export { authActions, siteRankActions, listActions };
+export { authActions, siteRankActions, registerActions };

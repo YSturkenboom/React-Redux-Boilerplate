@@ -14,7 +14,11 @@ class EnsureLoggedIn extends PureComponent {
       return this.props.children;
     }
 
-    if (pathname !== '/login' && pathname !== '/admin') {
+    if (
+      pathname !== '/login' &&
+      pathname !== '/register' &&
+      pathname !== '/admin'
+    ) {
       return (
         <Redirect
           to={{
