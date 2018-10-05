@@ -1,32 +1,17 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { Button } from 'reactstrap';
+import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSync } from '@fortawesome/pro-regular-svg-icons';
+import { faSync } from '@fortawesome/pro-solid-svg-icons';
 import { ToastContainer } from 'react-toastify';
 import RankingTable from '../../components/RankingTable';
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar/index';
 import { siteRankActions } from '../../actions';
-
 import './styles.scss';
 
-const DATASET = [
-  {
-    site: 'google.com',
-    rank: 1,
-    date: '27/02/2018',
-    category: 'Global rank'
-  },
-  {
-    site: 'storyofams.com',
-    rank: 2,
-    date: '27/02/2018',
-    category: 'Global rank'
-  }
-];
-
-export default class Home extends PureComponent {
+class Home extends PureComponent {
   constructor() {
     super();
     this.state = { show_error: false };
@@ -38,6 +23,10 @@ export default class Home extends PureComponent {
   }
 
   render() {
+    console.log('goeie props 8934037432421943713048124902', this.props);
+    const { ranks } = this.props.siteRank;
+    console.log('ranks structure -----', ranks);
+
     return (
       <div className="Home">
         <Helmet title="Analyze" />
@@ -49,7 +38,7 @@ export default class Home extends PureComponent {
             <FontAwesomeIcon icon={faSync} />
           </Button>
         </div>
-        <RankingTable data={DATASET} />
+        <RankingTable ranks={ranks} />
         {this.state.show_error ? (
           <ToastContainer className="toast-container" />
         ) : null}
@@ -57,3 +46,12 @@ export default class Home extends PureComponent {
     );
   }
 }
+
+const connector = connect(
+  ({ siteRank }) => ({ siteRank }),
+  dispatch => ({
+    getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic())
+  })
+);
+
+export default connector(Home);
