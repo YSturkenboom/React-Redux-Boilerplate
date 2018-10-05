@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import TagsInput from 'react-tagsinput';
+// import _ from 'lodash';
 import { connect } from 'react-redux';
 
 import { siteRankActions } from '../../actions';
@@ -11,7 +12,10 @@ const DEFAULT_TAGS = ['storyofams.com', 'youtube.com', 'google.com'];
 class SearchBar extends PureComponent {
   constructor() {
     super();
-    this.state = { tags: DEFAULT_TAGS, tag: '' };
+    this.state = {
+      tags: DEFAULT_TAGS,
+      tag: ''
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeInput = this.handleChangeInput.bind(this);
     this.analyze = this.analyze.bind(this);
@@ -26,18 +30,25 @@ class SearchBar extends PureComponent {
   }
 
   analyze() {
-    console.log('analyzing', this);
-    console.log('send data to API call', this.state.tags);
-    console.log('action', this.props.actionOnSubmit);
-    this.props.getBulkTraffic(this.state.tags).then(res => {
+    // console.log(this.props.siteRank.ranks);
+    // const oldUrls = _.map(this.props.siteRank.ranks, 'url');
+    // console.log('oldurls', oldUrls);
+    // const difference = _.difference(oldUrls, this.state.tags);
+    // console.log('dfff', difference);
+    // if (difference.length > 0) {
+    this.props.getBulkTraffic(['hello.com']).then(res => {
       if (res.type === 'REQUEST_FAIL') {
         console.log(res.err);
       }
       if (res.type === 'REQUEST_SUCCESS') {
         console.log('yoyoyoyoy', res.ranks);
+        this.setState({ tags: [] });
       }
     });
   }
+  // });
+  //   }
+  // }
 
   render() {
     return (

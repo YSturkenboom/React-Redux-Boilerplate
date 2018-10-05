@@ -24,7 +24,7 @@ class Home extends PureComponent {
 
   render() {
     console.log('PROPS', this.props);
-    const { siteRank } = this.props;
+    const { data } = this.props.siteRank;
     return (
       <div className="Home">
         <Helmet title="Analyze" />
@@ -36,7 +36,7 @@ class Home extends PureComponent {
             <FontAwesomeIcon icon={faSync} />
           </Button>
         </div>
-        <RankingTable data={siteRank} />
+        <RankingTable data={data} />
         {this.state.show_error ? (
           <ToastContainer className="toast-container" />
         ) : null}

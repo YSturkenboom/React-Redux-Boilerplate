@@ -30,7 +30,8 @@ export default class RankingTable extends PureComponent {
   };
 
   render() {
-    const table = map(this.props.data.ranks, this.renderRow);
+    console.log('in the table', this.props);
+    const table = map(this.props.data, this.renderRow);
     return (
       <Table responsive className="RankTable">
         <tbody>{table}</tbody>
