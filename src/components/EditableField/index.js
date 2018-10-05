@@ -12,6 +12,7 @@ class EditableField extends PureComponent {
     };
     this.buttonSwitch = this.buttonSwitch.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   buttonSwitch() {
@@ -24,7 +25,18 @@ class EditableField extends PureComponent {
     this.setState({ title: event.target.value });
   }
 
+  handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      this.setState({ title: event.target.value, isEditable: false });
+    }
+  }
+
   render() {
+    const { title } = this.state;
+    const Title = () => (
+      <div>{title === '' ? <h2>Empty String</h2> : <h2>{title}</h2>}</div>
+    );
+
     return (
       <div>
         <div className="editableField">
@@ -33,9 +45,10 @@ class EditableField extends PureComponent {
               value={this.state.title}
               type="text"
               onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
             />
           ) : (
-            <h2>{this.state.title}</h2>
+            <Title />
           )}
           <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
         </div>

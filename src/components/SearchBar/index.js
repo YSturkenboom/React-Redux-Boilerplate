@@ -47,6 +47,7 @@ class SearchBar extends PureComponent {
             onChange={this.handleChange}
             inputValue={this.state.tag}
             onChangeInput={this.handleChangeInput}
+            addKeys={[9, 13, 32, 188]}
           />
           <button type="submit" className="form__button" onClick={this.analyze}>
             + Analyze URL(&#39;s)

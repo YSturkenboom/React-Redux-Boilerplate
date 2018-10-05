@@ -1,8 +1,16 @@
-.ListsOverview{
-  margin-top: 50px;
-  margin-bottom: 50px;
+.listContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.ListsOverview {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-content: flex-start;
+  margin: 50px auto;
+  max-width: 85%;
+
+  div {
+    padding: 0;
+  }
 }
