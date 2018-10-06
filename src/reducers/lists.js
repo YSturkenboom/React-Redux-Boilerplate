@@ -63,7 +63,8 @@
 
 const initialState = {
   data: [],
-  isLoading: true
+  isLoading: true,
+  currentListId: null
 };
 
 export default (state = initialState, action) => {
@@ -77,11 +78,12 @@ export default (state = initialState, action) => {
       return {};
     }
     case 'SINGLE_LIST_REQUEST_SUCCESS': {
-      return {};
+      const { data } = action.result;
+      return { data, isLoading: false };
     }
 
     case 'SINGLE_LIST_REQUEST_FAIL': {
-      return {};
+      return state;
     }
 
     default:

@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import RankingTable from '../../components/RankingTable';
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar/index';
-import { siteRankActions } from '../../actions';
+import { siteRankActions, listActions } from '../../actions';
 import './styles.scss';
 
 class Home extends PureComponent {
@@ -18,14 +18,17 @@ class Home extends PureComponent {
     this.clickRefresh = this.clickRefresh.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log('didmount', this.props.match.params.id);
+    this.props.getSingleList(this.props.match.params.id);
+  }
 
   clickRefresh() {
     this.setState({ show_error: true });
   }
 
   render() {
-    const { ranks } = this.props.siteRank;
+    const { websites } = this.props.lists.data;
     console.log(this.props.match.params.id);
 
     return (
@@ -39,7 +42,7 @@ class Home extends PureComponent {
             <FontAwesomeIcon icon={faSync} />
           </Button>
         </div>
-        <RankingTable ranks={ranks} />
+        <RankingTable ranks={websites} />
         {this.state.show_error ? (
           <ToastContainer className="toast-container" />
         ) : null}
@@ -49,9 +52,10 @@ class Home extends PureComponent {
 }
 
 const connector = connect(
-  ({ siteRank }) => ({ siteRank }),
+  ({ siteRank, lists }) => ({ siteRank, lists }),
   dispatch => ({
-    getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic())
+    getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic()),
+    getSingleList: id => dispatch(listActions.getSingleList(id))
   })
 );
 
