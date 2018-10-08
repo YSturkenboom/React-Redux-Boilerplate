@@ -18,6 +18,7 @@
 .SitesList {
   width: 260px;
   height: 260px;
+  position: relative;
   background-color: #fff;
   padding: 30px;
   text-align: center;
@@ -70,5 +71,22 @@
         color: #18ecc0;
       }
     }
+  }
+
+  .trashIcon {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    color: #ff6e72;
+    z-index: 1;
+    font-size: 24px;
+  }
+
+  .anchor {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
   }
 }

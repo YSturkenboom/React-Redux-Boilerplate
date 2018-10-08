@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import TagsInput from 'react-tagsinput';
 import { map, remove, includes } from 'lodash';
+
 import { connect } from 'react-redux';
 
 import { siteRankActions } from '../../actions';
@@ -58,6 +59,9 @@ class SearchBar extends PureComponent {
             inputValue={this.state.tag}
             onChangeInput={this.handleChangeInput}
             addKeys={[9, 13, 32, 188]}
+            inputProps={{
+              placeholder: 'Add a website'
+            }}
           />
           <button type="submit" className="form__button" onClick={this.analyze}>
             + Analyze URL(&#39;s)

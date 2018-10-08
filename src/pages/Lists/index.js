@@ -8,15 +8,25 @@ import ListsOverview from '../../components/ListsOverview';
 import FloatingCircleButton from '../../components/FloatingCircleButton';
 
 class Lists extends PureComponent {
+  constructor() {
+    super();
+
+    this.onDelete = this.onDelete.bind(this);
+    this.addNewList = this.addNewList.bind(this);
+  }
+
   componentWillMount() {
     this.props.list();
   }
 
-  addNewList = () => {
-    // do stuff
-    console.log('clicked');
-    // this.props.create();
-  };
+  onDelete() {
+    console.log(this);
+  }
+
+  addNewList() {
+    console.log(this);
+    alert('Connect redux to make new list');
+  }
 
   render() {
     const { isLoading, data } = this.props.lists;
@@ -24,8 +34,14 @@ class Lists extends PureComponent {
     return (
       <div className="Lists">
         <Helmet title="Your Lists" />
-        {!isLoading && <ListsOverview data={data} />}
-        <FloatingCircleButton />
+        {!isLoading && (
+          <ListsOverview
+            data={data}
+            onDelete={this.onDelete}
+            addNewList={this.addNewList}
+          />
+        )}
+        <FloatingCircleButton addNewList={this.addNewList} />
       </div>
     );
   }
