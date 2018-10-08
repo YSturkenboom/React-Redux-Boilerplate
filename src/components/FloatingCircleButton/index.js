@@ -11,9 +11,14 @@ export default class FloatingCircleButton extends PureComponent {
     this.state = { redirect: false };
   }
 
+  handleOnClick = () => {
+    this.setState({ redirect: true });
+    this.props.actionOnClick();
+  };
+
   render() {
     if (this.state.redirect) {
-      return <Redirect push to="/" />;
+      return <Redirect push to="/halloooo" />;
     }
     return (
       <Button className="floatingActionButton" onClick={this.props.addNewList}>

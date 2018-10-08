@@ -32,6 +32,10 @@ class Lists extends PureComponent {
     toast.success('Success Notification !', {
       position: toast.POSITION.RIGHT_CENTER
     });
+    this.props.create().then(res => {
+      console.log(res.newListId.data._id);
+      this.props.history.push(`/list/${res.newListId.data._id}`);
+    });
   }
 
   render() {

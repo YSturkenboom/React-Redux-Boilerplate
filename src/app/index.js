@@ -8,7 +8,6 @@ import { ToastContainer } from 'react-toastify';
 import { config as faConfig } from '@fortawesome/fontawesome-svg-core';
 
 import { Navigation } from '../components';
-import { Register, Login, EnsureLoggedIn } from '../pages';
 import config from '../config';
 
 // Import your global styles here
@@ -32,13 +31,9 @@ const App = ({ route }) => (
     <Helmet {...config.app} />
     <Route path="/" component={scrollToTop} />
 
-    <Route path="/login" component={Login} exact />
-    <Route path="/register" component={Register} exact />
+    <Navigation />
 
-    <EnsureLoggedIn>
-      <Navigation />
-      {renderRoutes(route.routes)}
-    </EnsureLoggedIn>
+    {renderRoutes(route.routes)}
 
     <ToastContainer className="toast-container" />
   </div>
