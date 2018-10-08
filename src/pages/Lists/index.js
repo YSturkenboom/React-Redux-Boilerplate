@@ -4,23 +4,27 @@ import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import { listActions } from '../../actions';
 import './styles.scss';
-import ListsOverview from '../../components/ListsOverview';
 import FloatingCircleButton from '../../components/FloatingCircleButton';
+import List from '../../components/List';
+import AddSiteButton from '../../components/AddSiteButton';
 
 class Lists extends PureComponent {
   constructor() {
     super();
 
-    this.onDelete = this.onDelete.bind(this);
     this.addNewList = this.addNewList.bind(this);
+    this.onDeleteWebsite = this.onDeleteWebsite.bind(this);
   }
 
   componentWillMount() {
     this.props.list();
   }
 
-  onDelete() {
+  onDeleteWebsite() {
     console.log(this);
+    toast.info('Delete list !', {
+      position: toast.POSITION.RIGHT_CENTER
+    });
   }
 
   addNewList() {
@@ -33,15 +37,18 @@ class Lists extends PureComponent {
   render() {
     const { isLoading, data } = this.props.lists;
 
+    const lists = data.map(list => (
+      <List list={list} onDeleteWebsite={this.onDeleteWebsite} />
+    ));
+
     return (
       <div className="Lists">
         <Helmet title="Your Lists" />
         {!isLoading && (
-          <ListsOverview
-            data={data}
-            onDelete={this.onDelete}
-            addNewList={this.addNewList}
-          />
+          <div className="ListsOverview">
+            <AddSiteButton addNewList={this.addNewList} />
+            {lists}
+          </div>
         )}
         <FloatingCircleButton addNewList={this.addNewList} />
       </div>

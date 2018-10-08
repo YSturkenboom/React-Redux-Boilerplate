@@ -7,6 +7,16 @@ import AddSiteButton from '../AddSiteButton';
 import './styles.scss';
 
 export default class ListsOverview extends PureComponent {
+  constructor() {
+    super();
+
+    this.onDelete = this.onDelete.bind(this);
+  }
+
+  onDelete() {
+    console.log(this);
+  }
+
   renderSiteList = list => (
     <div className="SitesList">
       <Link key={list._id} to={`/list/${list._id}`} className="anchor">
@@ -19,7 +29,7 @@ export default class ListsOverview extends PureComponent {
       <FontAwesomeIcon
         className="trashIcon"
         icon={faTrash}
-        onClick={this.props.OnDelete}
+        onClick={list.OnDelete}
       />
     </div>
   );
