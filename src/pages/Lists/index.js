@@ -20,11 +20,19 @@ class Lists extends PureComponent {
     this.props.list();
   }
 
-  onDeleteWebsite() {
+  componentDidMount() {
+    this.props.list();
+  }
+
+  onDeleteWebsite(id) {
     console.log(this);
-    toast.info('Delete list !', {
-      position: toast.POSITION.RIGHT_CENTER
+    this.props.delete(id).then(res => {
+      console.log(res);
     });
+    // console.log(id);
+    // toast.info('Delete list !', {
+    //   position: toast.POSITION.RIGHT_CENTER
+    // });
   }
 
   addNewList() {
@@ -42,7 +50,11 @@ class Lists extends PureComponent {
     const { isLoading, data } = this.props.lists;
 
     const lists = data.map(list => (
-      <List list={list} onDeleteWebsite={this.onDeleteWebsite} />
+      <List
+        key={list._id}
+        list={list}
+        onDeleteWebsite={() => this.onDeleteWebsite(list._id)}
+      />
     ));
 
     return (
@@ -64,7 +76,8 @@ const connector = connect(
   ({ lists }) => ({ lists }),
   dispatch => ({
     create: () => dispatch(listActions.createNewList()),
-    list: () => dispatch(listActions.getList())
+    list: () => dispatch(listActions.getList()),
+    delete: id => dispatch(listActions.deleteList(id))
   })
 );
 

@@ -34,9 +34,22 @@ export default (state = initialState, action) => {
       const { data } = action.result;
       return { data, isLoading: false };
     }
+
+    case 'LIST_DELETE_SUCCES': {
+      console.log('delete single req');
+      const { data } = action;
+      return data;
+    }
+    case 'LIST_DELETE_FAIL': {
+      console.log('delete singe fail', action);
+      const { data } = action.result;
+      return { data, isLoading: false };
+    }
+
     case 'UPDATE_MULTIPLE_WEBSITES_SUCCESS': {
       return state;
     }
+
     case 'UPDATE_MULTIPLE_WEBSITES_FAIL': {
       return state;
     }

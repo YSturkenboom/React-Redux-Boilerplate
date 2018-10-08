@@ -55,3 +55,16 @@ export const updateMultipleWebsites = rankingObjects => async dispatch => {
     });
   }
 };
+
+export const deleteList = id => async dispatch => {
+  try {
+    const result = await axios.delete(`${apiUrl}/lists/delete-list/${id}`, {});
+    return dispatch({ type: 'LIST_DELETE_SUCCES', result });
+  } catch (err) {
+    return dispatch({
+      type: 'LIST_DELETE_FAIL',
+      error: 'oh noooo',
+      realErr: err
+    });
+  }
+};

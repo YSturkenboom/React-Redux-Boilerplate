@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
       return state;
     }
     case 'GET_RANK_FOR_WEBSITE_FAIL': {
-      const error = action.err || 'Error retrieving ranks for sites in list.';
+      const error = action || 'Error retrieving ranks for sites in list.';
       return { ...state, error };
     }
     default:
