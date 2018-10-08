@@ -77,10 +77,13 @@ export default (state = initialState, action) => {
       return {};
     }
     case 'SINGLE_LIST_REQUEST_SUCCESS': {
-      return {};
+      console.log('singel req');
+      const { data } = action.result;
+      return { data };
     }
 
     case 'SINGLE_LIST_REQUEST_FAIL': {
+      console.log('singel fail');
       return {};
     }
 
