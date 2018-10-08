@@ -18,11 +18,11 @@ export const getBulkTraffic = sites => async dispatch => {
   }
 };
 
-export const getRanksForWebsitesInList = websiteIds => async dispatch => {
+export const getRanksForWebsitesInList = listId => async dispatch => {
   try {
-    console.log('websiteIds', websiteIds);
-    // const result = await axios.get(`${apiUrl}/lists/read/${id}`, {});
-    return dispatch({ type: 'GET_RANK_FOR_WEBSITE_SUCCESS' });
+    const result = await axios.get(`${apiUrl}/lists/read/${listId}`, {});
+    console.log('success bro', listId);
+    return dispatch({ type: 'GET_RANK_FOR_WEBSITE_SUCCESS', result });
   } catch (err) {
     console.log('errrr', err);
     return dispatch({
