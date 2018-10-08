@@ -22,8 +22,12 @@ class Home extends PureComponent {
 
   componentDidMount() {
     const { getSingleList, getRanksForWebsitesInList } = this.props;
+
+    // Load list into state
     getSingleList(this.props.match.params.id);
-    getRanksForWebsitesInList(this.props.lists.data.websites);
+    console.log('id =', this.props.match.params.id);
+    // Load ranks from list into state (separate for instantaneous UI updates)
+    getRanksForWebsitesInList(this.props.match.params.id);
   }
 
   onDelete() {
@@ -74,8 +78,8 @@ class Home extends PureComponent {
 const connector = connect(
   ({ siteRank, lists }) => ({ siteRank, lists }),
   dispatch => ({
-    getRanksForWebsitesInList: websiteIds =>
-      dispatch(siteRankActions.getRanksForWebsitesInList(websiteIds)),
+    getRanksForWebsitesInList: () =>
+      dispatch(siteRankActions.getRanksForWebsitesInList()),
     getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic()),
     getSingleList: id => dispatch(listActions.getSingleList(id))
   })

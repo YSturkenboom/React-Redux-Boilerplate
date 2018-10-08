@@ -33,21 +33,21 @@ export const getSingleList = id => async dispatch => {
     console.log('errrr', err);
     return dispatch({
       type: 'SINGLE_LIST_REQUEST_FAIL',
-      error: 'oh noooo',
-      realErr: err
+      err
     });
   }
 };
 
-export const getRanksForWebsitesInList = websiteIds => async dispatch => {
+export const updateMultipleWebsites = rankingObjects => async dispatch => {
   try {
-    console.log('websiteIds', websiteIds);
-    // const result = await axios.get(`${apiUrl}/lists/read/${id}`, {});
-    return dispatch({ type: 'SINGLE_LIST_REQUEST_SUCCESS' });
+    console.log('rankings in action', rankingObjects);
+    const result = await axios.put(`${apiUrl}/lists/update-multiple-websites`, {
+      rankingObjects
+    });
+    return dispatch({ type: 'UPDATE_MULTIPLE_WEBSITES_SUCCESS', result });
   } catch (err) {
-    console.log('errrr', err);
     return dispatch({
-      type: 'SINGLE_LIST_REQUEST_FAIL',
+      type: 'UPDATE_MULTIPLE_WEBSITES_FAIL',
       error: 'oh noooo',
       realErr: err
     });
