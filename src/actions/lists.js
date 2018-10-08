@@ -33,8 +33,7 @@ export const getSingleList = id => async dispatch => {
     console.log('errrr', err);
     return dispatch({
       type: 'SINGLE_LIST_REQUEST_FAIL',
-      error: 'oh noooo',
-      realErr: err
+      err
     });
   }
 };
