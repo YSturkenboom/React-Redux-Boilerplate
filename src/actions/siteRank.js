@@ -3,15 +3,20 @@ import axios from 'axios';
 
 import { apiUrl } from '../config';
 
-export const getBulkTraffic = sites => async dispatch => {
+export const getBulkTraffic = (sites, listId) => async dispatch => {
   try {
-    const result = await axios.post(`${apiUrl}/traffic/get-sites-bulk`, {
-      sites
+    console.log('listooo', listId);
+    const result = await axios.put(
+      `${apiUrl}/lists/update-websites/${listId}`,
+      { sites }
+    );
+    return dispatch({
+      type: 'GET_TRAFFIC_REQUEST_SUCCESS',
+      ranks: result.data.websites
     });
-    return dispatch({ type: 'REQUEST_SUCCESS', result });
   } catch (err) {
     return dispatch({
-      type: 'REQUEST_FAIL',
+      type: 'GET_TRAFFIC_REQUEST_FAIL',
       error: 'oh noooo',
       actualErr: err
     });

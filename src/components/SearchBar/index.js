@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import TagsInput from 'react-tagsinput';
-import { map, remove, includes } from 'lodash';
+import { map, filter, includes } from 'lodash';
 
 import { connect } from 'react-redux';
 
@@ -33,15 +33,14 @@ class SearchBar extends PureComponent {
   analyze() {
     const oldUrls = map(this.props.siteRank.ranks, 'url');
     console.log('oldurls', oldUrls);
-    const diff = remove(this.state.tags, item => includes(oldUrls, item));
+    console.log('newurls', this.state.tags);
+    const diff = filter(this.state.tags, item => !includes(oldUrls, item));
     console.log('dfff', diff);
-    // if (difference.length > 0) {
-    this.props.getBulkTraffic(this.state.tags).then(res => {
-      if (res.type === 'REQUEST_SUCCESS') {
-        console.log('yoyoyoyoy', res.ranks);
-        this.setState({ tags: [] });
-      }
-    });
+    console.log('curList', this.props.siteRank.newListId);
+    if (diff.length > 0) {
+      console.log(diff);
+      this.props.getBulkTraffic(diff, this.props.siteRank.newListId);
+    }
   }
 
   render() {
@@ -73,7 +72,8 @@ class SearchBar extends PureComponent {
 const connector = connect(
   ({ siteRank }) => ({ siteRank }),
   dispatch => ({
-    getBulkTraffic: sites => dispatch(siteRankActions.getBulkTraffic(sites))
+    getBulkTraffic: (sites, listId) =>
+      dispatch(siteRankActions.getBulkTraffic(sites, listId))
   })
 );
 

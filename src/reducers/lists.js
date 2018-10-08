@@ -1,3 +1,5 @@
+import { remove } from 'lodash';
+
 const initialState = {
   data: [],
   isLoading: true,
@@ -36,11 +38,12 @@ export default (state = initialState, action) => {
       const { data } = action.result;
       return { data, isLoading: false };
     }
-
     case 'LIST_DELETE_SUCCES': {
-      console.log('delete single req');
-      const { data } = action;
-      return data;
+      const data = remove(
+        state.data,
+        el => el._id !== action.result.data.siteListToDelete._id
+      );
+      return { data };
     }
     case 'LIST_DELETE_FAIL': {
       console.log('delete singe fail', action);
@@ -64,7 +67,6 @@ export default (state = initialState, action) => {
     case 'UPDATE_MULTIPLE_WEBSITES_SUCCESS': {
       return state;
     }
-
     case 'UPDATE_MULTIPLE_WEBSITES_FAIL': {
       return state;
     }

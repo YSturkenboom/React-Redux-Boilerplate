@@ -26,11 +26,11 @@ class Home extends PureComponent {
   }
 
   componentDidMount() {
-    const { getSingleList, getRanksForWebsitesInList } = this.props;
+    const { getRanksForWebsitesInList } = this.props;
 
     // Load list into state
-    getSingleList(this.props.match.params.id);
-    console.log('id =', this.props.match.params.id);
+    // getSingleList(this.props.match.params.id);
+    // console.log('id =', this.props.match.params.id);
     // Load ranks from list into state (separate for instantaneous UI updates)
     getRanksForWebsitesInList(this.props.match.params.id);
   }
