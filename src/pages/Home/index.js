@@ -20,8 +20,9 @@ class Home extends PureComponent {
   }
 
   componentDidMount() {
-    console.log('didmount', this.props.match.params.id);
-    this.props.getSingleList(this.props.match.params.id);
+    const { getSingleList, getRanksForWebsitesInList } = this.props;
+    getSingleList(this.props.match.params.id);
+    getRanksForWebsitesInList(this.props.lists.data.websites);
   }
 
   clickRefresh() {
@@ -29,7 +30,7 @@ class Home extends PureComponent {
   }
 
   render() {
-    const { websites } = this.props.lists.data;
+    const { ranks } = this.props.siteRank;
     console.log(this.props.match.params.id);
 
     return (
@@ -43,7 +44,7 @@ class Home extends PureComponent {
             <FontAwesomeIcon icon={faSync} />
           </Button>
         </div>
-        <RankingTable ranks={websites} />
+        <RankingTable ranks={ranks} />
         {this.state.show_error ? (
           <ToastContainer className="toast-container" />
         ) : null}
@@ -55,6 +56,8 @@ class Home extends PureComponent {
 const connector = connect(
   ({ siteRank, lists }) => ({ siteRank, lists }),
   dispatch => ({
+    getRanksForWebsitesInList: websiteIds =>
+      dispatch(siteRankActions.getRanksForWebsitesInList(websiteIds)),
     getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic()),
     getSingleList: id => dispatch(listActions.getSingleList(id))
   })
