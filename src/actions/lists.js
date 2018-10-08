@@ -68,3 +68,18 @@ export const deleteList = id => async dispatch => {
     });
   }
 };
+
+export const updateTitle = (id, title) => async dispatch => {
+  try {
+    const result = await axios.put(`${apiUrl}/lists/update-name/${id}`, {
+      title
+    });
+    return dispatch({ type: 'LIST_TITLE_UPDATE_SUCCESS', result });
+  } catch (err) {
+    return dispatch({
+      type: 'LIST_TITLE_UPDATE_FAIL',
+      error: 'oh noooo',
+      realErr: err
+    });
+  }
+};
