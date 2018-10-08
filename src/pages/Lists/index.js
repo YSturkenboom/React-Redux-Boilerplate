@@ -25,8 +25,8 @@ class Lists extends PureComponent {
   }
 
   onDeleteWebsite(id) {
-    console.log(this);
-    this.props.delete(id).then(res => {
+    console.log('id to delete', id);
+    this.props.deleteList(id).then(res => {
       console.log(res);
     });
     // console.log(id);
@@ -77,7 +77,7 @@ const connector = connect(
   dispatch => ({
     create: () => dispatch(listActions.createNewList()),
     list: () => dispatch(listActions.getList()),
-    delete: id => dispatch(listActions.deleteList(id))
+    deleteList: id => dispatch(listActions.deleteList(id))
   })
 );
 
