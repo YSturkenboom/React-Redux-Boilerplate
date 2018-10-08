@@ -26,7 +26,8 @@ class Register extends PureComponent {
     super(props);
 
     this.state = {
-      name: '',
+      firstName: '',
+      lastName: '',
       company: '',
       email: '',
       password: ''
@@ -42,12 +43,10 @@ class Register extends PureComponent {
   onSubmitVerify = ev => {
     ev.preventDefault();
 
-    console.log('logging in');
-
     const { register } = this.props;
-    const { name, company, email, password } = this.state;
+    const { firstName, lastName, company, email, password } = this.state;
 
-    register(name, company, email, password);
+    register(firstName, lastName, company, email, password);
   };
 
   handleInputChange = ev => {
@@ -59,7 +58,7 @@ class Register extends PureComponent {
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     const { isLoggedIn, error } = this.props.auth;
-    const { name, company, email, password } = this.state;
+    const { firstName, lastName, company, email, password } = this.state;
 
     if (isLoggedIn) {
       return <Redirect to={from} />;
@@ -77,8 +76,8 @@ class Register extends PureComponent {
               {error && <Alert color="danger">{error}</Alert>}
               <Form onSubmit={this.onSubmitVerify}>
                 <FormGroup>
-                  <Label hidden for="name">
-                    Name
+                  <Label hidden for="firstName">
+                    Firstname
                   </Label>
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
@@ -87,12 +86,34 @@ class Register extends PureComponent {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
-                      type="name"
-                      name="name"
-                      id="name"
-                      value={name}
+                      type="firstName"
+                      name="firstName"
+                      id="firstName"
+                      value={firstName}
                       onChange={this.handleInputChange}
-                      placeholder="Name"
+                      placeholder="Firstname"
+                      required
+                      bsSize="lg"
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <Label hidden for="LastName">
+                    Lastname
+                  </Label>
+                  <InputGroup>
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <FontAwesomeIcon icon={faEnvelope} />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      type="lastName"
+                      name="lastName"
+                      id="lastName"
+                      value={lastName}
+                      onChange={this.handleInputChange}
+                      placeholder="Lastname"
                       required
                       bsSize="lg"
                     />
@@ -186,8 +207,10 @@ const connector = connect(
   ({ register, auth }) => ({ register, auth }),
   dispatch => ({
     checkSession: () => dispatch(authActions.checkSession()),
-    register: (name, company, email, password) =>
-      dispatch(registerActions.register(name, company, email, password))
+    register: (firstName, lastName, company, email, password) =>
+      dispatch(
+        registerActions.register(firstName, lastName, company, email, password)
+      )
   })
 );
 

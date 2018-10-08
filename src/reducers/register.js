@@ -8,6 +8,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case 'AUTH_REGISTER': {
       if (action.account) {
+        console.log(action);
         return { isRegistered: true, account: action.account };
       }
 
