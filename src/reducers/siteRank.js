@@ -21,6 +21,11 @@ export default (state = initialState, action) => {
       const error = action || 'Error retrieving ranks for sites in list.';
       return { ...state, error };
     }
+    case 'GET_TRAFFIC_REQUEST_SUCCESS': {
+      console.log('actiones', action);
+      const newRanks = [...state.ranks, ...action.ranks];
+      return { ranks: newRanks };
+    }
     default:
       return state;
   }
