@@ -9,7 +9,7 @@ import RankingRow from '../../components/RankingRow';
 
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar/index';
-import { siteRankActions, listActions } from '../../actions';
+import { siteRankActions } from '../../actions';
 import './styles.scss';
 
 class Home extends PureComponent {
@@ -20,11 +20,11 @@ class Home extends PureComponent {
   }
 
   componentDidMount() {
-    const { getSingleList, getRanksForWebsitesInList } = this.props;
+    const { getRanksForWebsitesInList } = this.props;
 
     // Load list into state
-    getSingleList(this.props.match.params.id);
-    console.log('id =', this.props.match.params.id);
+    // getSingleList(this.props.match.params.id);
+    // console.log('id =', this.props.match.params.id);
     // Load ranks from list into state (separate for instantaneous UI updates)
     getRanksForWebsitesInList(this.props.match.params.id);
   }
@@ -79,8 +79,8 @@ const connector = connect(
   dispatch => ({
     getRanksForWebsitesInList: id =>
       dispatch(siteRankActions.getRanksForWebsitesInList(id)),
-    getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic()),
-    getSingleList: id => dispatch(listActions.getSingleList(id))
+    getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic())
+    // getSingleList: id => dispatch(listActions.getSingleList(id))
   })
 );
 

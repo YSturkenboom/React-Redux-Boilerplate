@@ -37,14 +37,10 @@ export default (state = initialState, action) => {
       return { data, isLoading: false };
     }
     case 'LIST_DELETE_SUCCES': {
-      console.log('delete single req');
-      console.log(action.result, 'result');
-      console.log('currentdata', state.data.length);
-      const data = remove(state.data, el => {
-        console.log(el._id, action.result.data.siteListToDelete._id);
-        return el._id !== action.result.data.siteListToDelete._id;
-      });
-      console.log('newdata', data.length);
+      const data = remove(
+        state.data,
+        el => el._id !== action.result.data.siteListToDelete._id
+      );
       return { data };
     }
     case 'LIST_DELETE_FAIL': {

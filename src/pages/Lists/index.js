@@ -48,14 +48,19 @@ class Lists extends PureComponent {
 
   render() {
     const { isLoading, data } = this.props.lists;
-
-    const lists = data.map(list => (
-      <List
-        key={list._id}
-        list={list}
-        onDeleteWebsite={() => this.onDeleteWebsite(list._id)}
-      />
-    ));
+    console.log('isdataloaderino', data);
+    let lists;
+    if (data) {
+      lists = data.map(list => (
+        <List
+          key={list._id}
+          list={list}
+          onDeleteWebsite={() => this.onDeleteWebsite(list._id)}
+        />
+      ));
+    } else {
+      lists = [];
+    }
 
     return (
       <div className="Lists">
