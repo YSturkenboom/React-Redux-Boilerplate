@@ -20,10 +20,9 @@ class Home extends PureComponent {
 
   componentDidMount() {
     const { getSingleList, getRanksForWebsitesInList } = this.props;
-
     // Load list into state
     getSingleList(this.props.match.params.id);
-    console.log('id =', this.props.match.params.id);
+
     // Load ranks from list into state (separate for instantaneous UI updates)
     getRanksForWebsitesInList(this.props.match.params.id);
   }
@@ -34,12 +33,11 @@ class Home extends PureComponent {
 
   render() {
     const { ranks } = this.props.siteRank;
-    console.log(this.props.match.params.id);
 
     return (
       <div className="Home">
         <Helmet title="Analyze" />
-        <SearchBar actionOnSubmit={siteRankActions.getBulkTraffic} />
+        <SearchBar />
         <div className="Home__header">
           <EditableField />
           <Button className="button-outline" onClick={this.clickRefresh}>
@@ -59,10 +57,10 @@ class Home extends PureComponent {
 const connector = connect(
   ({ siteRank, lists }) => ({ siteRank, lists }),
   dispatch => ({
-    getRanksForWebsitesInList: () =>
-      dispatch(siteRankActions.getRanksForWebsitesInList()),
+    getRanksForWebsitesInList: listId =>
+      dispatch(siteRankActions.getRanksForWebsitesInList(listId)),
     getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic()),
-    getSingleList: id => dispatch(listActions.getSingleList(id))
+    getSingleList: listId => dispatch(listActions.getSingleList(listId))
   })
 );
 

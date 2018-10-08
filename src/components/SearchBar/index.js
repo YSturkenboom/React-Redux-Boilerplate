@@ -36,9 +36,6 @@ class SearchBar extends PureComponent {
     console.log('dfff', diff);
     // if (difference.length > 0) {
     this.props.getBulkTraffic(this.state.tags).then(res => {
-      if (res.type === 'REQUEST_FAIL') {
-        console.log(res.err);
-      }
       if (res.type === 'REQUEST_SUCCESS') {
         console.log('yoyoyoyoy', res.ranks);
         this.setState({ tags: [] });

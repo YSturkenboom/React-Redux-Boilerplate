@@ -14,6 +14,7 @@ export default class FloatingCircleButton extends PureComponent {
 
   handleOnClick = () => {
     this.setState({ redirect: true });
+    this.props.onClick();
   };
 
   render() {

@@ -4,10 +4,11 @@ import { apiUrl } from '../config';
 
 export const createNewList = () => async dispatch => {
   try {
-    await axios.post(`${apiUrl}/lists/create`, {});
-    return dispatch({ type: 'REQUEST_SUCCESS' });
+    console.log('creating list');
+    const newListId = await axios.post(`${apiUrl}/lists/create`, {});
+    return dispatch({ type: 'REQUEST_SUCCESS', newListId });
   } catch (err) {
-    return dispatch({ type: 'REQUEST_FAIL', err: 'oh noooo' });
+    return dispatch({ type: 'REQUEST_FAIL', err });
   }
 };
 
