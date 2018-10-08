@@ -38,6 +38,12 @@ class Navigation extends Component {
   }
 
   render() {
+    const { auth } = this.props;
+
+    if (!auth.isLoggedIn) {
+      return null;
+    }
+
     return (
       <div>
         <Navbar className="nav" expand="md">

@@ -3,7 +3,7 @@ import webpack from 'webpack';
 import ManifestPlugin from 'webpack-manifest-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
-import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
+// import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
 import ImageminPlugin from 'imagemin-webpack-plugin';
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
@@ -41,13 +41,15 @@ const getPlugins = () => {
       __CLIENT__: true,
       __SERVER__: false,
       __DEV__: isDev
-    }),
-    new FriendlyErrorsWebpackPlugin()
+    })
   ];
 
   if (isDev) {
     // Development
-    plugins.push(new webpack.HotModuleReplacementPlugin());
+    plugins.push(
+      new webpack.HotModuleReplacementPlugin(),
+      new FriendlyErrorsWebpackPlugin()
+    );
   } else {
     plugins.push(
       // Production
@@ -63,7 +65,7 @@ const getPlugins = () => {
       // Minimizing style for production
       new OptimizeCssAssetsPlugin(),
       // Smaller modular Lodash build
-      new LodashModuleReplacementPlugin(),
+      // new LodashModuleReplacementPlugin(),
       // Plugin to compress images with imagemin
       // Check "https://github.com/Klathmon/imagemin-webpack-plugin" for more configurations
       new ImageminPlugin({
@@ -149,6 +151,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
+          'css-hot-loader',
           MiniCssExtractPlugin.loader,
           {
             loader: 'css',
@@ -166,6 +169,7 @@ module.exports = {
       {
         test: /\.(scss|sass)$/,
         use: [
+          'css-hot-loader',
           MiniCssExtractPlugin.loader,
           {
             loader: 'css',
