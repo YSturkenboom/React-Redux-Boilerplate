@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/pro-solid-svg-icons';
 import { toast } from 'react-toastify';
-import { withRouter } from 'react-router-dom';
 import { Table, Button } from 'reactstrap';
 import RankingRow from '../../components/RankingRow';
 
@@ -78,11 +77,11 @@ class Home extends PureComponent {
 const connector = connect(
   ({ siteRank, lists }) => ({ siteRank, lists }),
   dispatch => ({
-    getRanksForWebsitesInList: () =>
-      dispatch(siteRankActions.getRanksForWebsitesInList()),
+    getRanksForWebsitesInList: id =>
+      dispatch(siteRankActions.getRanksForWebsitesInList(id)),
     getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic()),
     getSingleList: id => dispatch(listActions.getSingleList(id))
   })
 );
 
-export default withRouter(connector(Home));
+export default connector(Home);
