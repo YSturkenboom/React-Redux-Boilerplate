@@ -9,7 +9,6 @@ export default class FloatingCircleButton extends PureComponent {
   constructor() {
     super();
     this.state = { redirect: false };
-    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
   handleOnClick = () => {
@@ -22,7 +21,7 @@ export default class FloatingCircleButton extends PureComponent {
       return <Redirect push to="/halloooo" />;
     }
     return (
-      <Button className="floatingActionButton " onClick={this.handleOnClick}>
+      <Button className="floatingActionButton" onClick={this.props.addNewList}>
         <FontAwesomeIcon icon={faPlus} />
         <br />
         New List

@@ -8,12 +8,7 @@ export default class AddSiteButton extends PureComponent {
   constructor() {
     super();
     this.state = { redirect: false };
-    this.handleOnClick = this.handleOnClick.bind(this);
   }
-
-  handleOnClick = () => {
-    this.setState({ redirect: true });
-  };
 
   render() {
     if (this.state.redirect) {
@@ -21,7 +16,11 @@ export default class AddSiteButton extends PureComponent {
     }
     return (
       <div>
-        <button type="button" className="AddSite" onClick={this.handleOnClick}>
+        <button
+          type="button"
+          className="AddSite"
+          onClick={this.props.addNewList}
+        >
           <FontAwesomeIcon icon={faPlus} />
           <div className="list__name">Create first analysed website list</div>
         </button>

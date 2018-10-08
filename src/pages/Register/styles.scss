@@ -24,25 +24,23 @@
     width: 100%;
     max-width: 30rem;
     margin: 0 auto;
+    text-align: center;
 
-    .login-window{
+    .login-window {
       box-shadow: 0 3px 10px -4px grey;
       border-radius: 45px;
 
-      h4{
-        font-family: 'Karla',sans-serif;
+      h4 {
+        font-family: 'Karla', sans-serif;
       }
 
-      form{
-
-        button{
+      form {
+        button {
           border-radius: 15.2px;
           background-color: #18ecc1;
           border-color: #18ecc1;
         }
-
       }
-
     }
   }
 

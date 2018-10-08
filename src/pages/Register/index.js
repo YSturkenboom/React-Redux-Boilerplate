@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import {
   Alert,
   Button,
@@ -16,7 +16,12 @@ import {
 } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock } from '@fortawesome/pro-solid-svg-icons';
+import {
+  faEnvelope,
+  faLock,
+  faUser,
+  faBuilding
+} from '@fortawesome/pro-solid-svg-icons';
 import { registerActions, authActions } from '../../actions';
 
 import './styles.scss';
@@ -77,12 +82,12 @@ class Register extends PureComponent {
               <Form onSubmit={this.onSubmitVerify}>
                 <FormGroup>
                   <Label hidden for="firstName">
-                    Firstname
+                    First name
                   </Label>
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <FontAwesomeIcon icon={faEnvelope} />
+                        <FontAwesomeIcon icon={faUser} />
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
@@ -99,12 +104,12 @@ class Register extends PureComponent {
                 </FormGroup>
                 <FormGroup>
                   <Label hidden for="LastName">
-                    Lastname
+                    Last name
                   </Label>
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <FontAwesomeIcon icon={faEnvelope} />
+                        <FontAwesomeIcon icon={faUser} />
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
@@ -126,7 +131,7 @@ class Register extends PureComponent {
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <FontAwesomeIcon icon={faEnvelope} />
+                        <FontAwesomeIcon icon={faBuilding} />
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
@@ -190,6 +195,10 @@ class Register extends PureComponent {
                 <Button block size="lg" color="primary">
                   Register
                 </Button>
+                <span className="spacer" />
+                <Link to="/login" className="text-center text-muted">
+                  <small>Login</small>
+                </Link>
               </Form>
             </Card>
           </div>

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import {
   Alert,
   Button,
@@ -134,6 +134,10 @@ class Login extends PureComponent {
               <a href="/forgotPassword" className="text-center text-muted">
                 <small>Forgot your password?</small>
               </a>
+
+              <Link to="/register" className="text-center text-muted">
+                <small>Register</small>
+              </Link>
             </Card>
           </div>
         )}

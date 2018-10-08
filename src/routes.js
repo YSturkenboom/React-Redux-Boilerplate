@@ -11,7 +11,7 @@ export default [
         component: Home
       },
       {
-        path: '/lists',
+        path: '/',
         exact: true,
         component: Lists
       },

@@ -25,11 +25,14 @@ export default (state = initialState, action) => {
       return {};
     }
     case 'SINGLE_LIST_REQUEST_SUCCESS': {
+      console.log('singel req');
       const { data } = action.result;
-      return { data, isLoading: false };
+      return { data };
     }
     case 'SINGLE_LIST_REQUEST_FAIL': {
-      return state;
+      console.log('singel fail');
+      const { data } = action.result;
+      return { data, isLoading: false };
     }
     case 'UPDATE_MULTIPLE_WEBSITES_SUCCESS': {
       return state;

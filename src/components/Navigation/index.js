@@ -57,7 +57,7 @@ class Navigation extends Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/lists/" tag={RouterNavLink}>
+                  <NavLink to="/" tag={RouterNavLink}>
                     Your Lists
                   </NavLink>
                 </NavItem>

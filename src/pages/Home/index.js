@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
-import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/pro-solid-svg-icons';
-import { ToastContainer } from 'react-toastify';
-import RankingTable from '../../components/RankingTable';
+import { toast } from 'react-toastify';
+import { withRouter } from 'react-router-dom';
+import { Table, Button } from 'reactstrap';
+import RankingRow from '../../components/RankingRow';
+
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar/index';
 import { siteRankActions, listActions } from '../../actions';
@@ -14,30 +16,50 @@ import './styles.scss';
 class Home extends PureComponent {
   constructor() {
     super();
-    this.state = { show_error: false };
     this.clickRefresh = this.clickRefresh.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
 
   componentDidMount() {
     const { getSingleList, getRanksForWebsitesInList } = this.props;
+
     // Load list into state
     getSingleList(this.props.match.params.id);
-
+    console.log('id =', this.props.match.params.id);
     // Load ranks from list into state (separate for instantaneous UI updates)
     getRanksForWebsitesInList(this.props.match.params.id);
   }
 
+  onDelete() {
+    console.log(this, 'hello button delete');
+    toast.info('Info Notification !', {
+      position: toast.POSITION.BOTTOM_CENTER
+    });
+  }
+
   clickRefresh() {
-    this.setState({ show_error: true });
+    console.log(this);
+    toast.success('Success Notification !', {
+      position: toast.POSITION.RIGHT_CENTER
+    });
+
+    toast.error('Error Notification !', {
+      position: toast.POSITION.TOP_LEFT
+    });
   }
 
   render() {
     const { ranks } = this.props.siteRank;
+    console.log(ranks);
+
+    const rows = ranks.map(rank => (
+      <RankingRow rank={rank} onDelete={this.onDelete} />
+    ));
 
     return (
       <div className="Home">
         <Helmet title="Analyze" />
-        <SearchBar />
+        <SearchBar actionOnSubmit={siteRankActions.getBulkTraffic} />
         <div className="Home__header">
           <EditableField />
           <Button className="button-outline" onClick={this.clickRefresh}>
@@ -45,10 +67,9 @@ class Home extends PureComponent {
             <FontAwesomeIcon icon={faSync} />
           </Button>
         </div>
-        <RankingTable ranks={ranks} />
-        {this.state.show_error ? (
-          <ToastContainer className="toast-container" />
-        ) : null}
+        <Table responsive className="RankTable">
+          <tbody>{rows}</tbody>
+        </Table>
       </div>
     );
   }
@@ -57,11 +78,11 @@ class Home extends PureComponent {
 const connector = connect(
   ({ siteRank, lists }) => ({ siteRank, lists }),
   dispatch => ({
-    getRanksForWebsitesInList: listId =>
-      dispatch(siteRankActions.getRanksForWebsitesInList(listId)),
+    getRanksForWebsitesInList: () =>
+      dispatch(siteRankActions.getRanksForWebsitesInList()),
     getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic()),
-    getSingleList: listId => dispatch(listActions.getSingleList(listId))
+    getSingleList: id => dispatch(listActions.getSingleList(id))
   })
 );
 
-export default connector(Home);
+export default withRouter(connector(Home));
