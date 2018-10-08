@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import { listActions } from '../../actions';
 import './styles.scss';
@@ -14,9 +13,10 @@ class Lists extends PureComponent {
   }
 
   addNewList = () => {
-    this.props.create();
-    console.log('clicked');
-    return <Redirect to="/hallo" />;
+    this.props.create().then(res => {
+      console.log(res.newListId.data._id);
+      this.props.history.push(`/list/${res.newListId.data._id}`);
+    });
   };
 
   render() {
@@ -26,7 +26,7 @@ class Lists extends PureComponent {
       <div className="Lists">
         <Helmet title="Your Lists" />
         {!isLoading && <ListsOverview data={data} />}
-        <FloatingCircleButton onClick={this.addNewList} />
+        <FloatingCircleButton actionOnClick={this.addNewList} />
       </div>
     );
   }

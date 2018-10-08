@@ -4,12 +4,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'REQUEST_SUCCESS': {
-      const msg = action.msg || 'Saving site list successful.';
-      const { ranks } = action.result.data;
-      return { ranks: [...state.ranks, ...ranks], msg };
+    case 'CREATE_LIST_REQUEST_SUCCESS': {
+      const newListId = action.newListId.data._id;
+      return { ...state, newListId };
     }
-    case 'REQUEST_FAIL': {
+    case 'CREATE_LIST_REQUEST_FAIL': {
       const error = action.err || 'Error retrieving site ranks.';
       return { ...state, error };
     }

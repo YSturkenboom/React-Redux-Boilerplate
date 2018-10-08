@@ -6,9 +6,10 @@ export const createNewList = () => async dispatch => {
   try {
     console.log('creating list');
     const newListId = await axios.post(`${apiUrl}/lists/create`, {});
-    return dispatch({ type: 'REQUEST_SUCCESS', newListId });
+    return dispatch({ type: 'CREATE_LIST_REQUEST_SUCCESS', newListId });
   } catch (err) {
-    return dispatch({ type: 'REQUEST_FAIL', err });
+    console.log(err);
+    return dispatch({ type: 'CREATE_LIST_REQUEST_FAIL', err });
   }
 };
 
