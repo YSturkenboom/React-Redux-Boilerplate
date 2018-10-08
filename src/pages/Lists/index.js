@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-
+import { toast } from 'react-toastify';
 import { listActions } from '../../actions';
 import './styles.scss';
 import ListsOverview from '../../components/ListsOverview';
@@ -25,7 +25,9 @@ class Lists extends PureComponent {
 
   addNewList() {
     console.log(this);
-    alert('Connect redux to make new list');
+    toast.success('Success Notification !', {
+      position: toast.POSITION.RIGHT_CENTER
+    });
   }
 
   render() {

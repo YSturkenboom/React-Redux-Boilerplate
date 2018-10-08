@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
-import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/pro-solid-svg-icons';
-import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { withRouter } from 'react-router-dom';
-import RankingTable from '../../components/RankingTable';
+import { Table, Button } from 'reactstrap';
+import RankingRow from '../../components/RankingRow';
+
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar/index';
 import { siteRankActions, listActions } from '../../actions';
@@ -15,8 +16,8 @@ import './styles.scss';
 class Home extends PureComponent {
   constructor() {
     super();
-    this.state = { show_error: false };
     this.clickRefresh = this.clickRefresh.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
 
   componentDidMount() {
@@ -25,13 +26,31 @@ class Home extends PureComponent {
     getRanksForWebsitesInList(this.props.lists.data.websites);
   }
 
+  onDelete() {
+    console.log(this, 'hello button delete');
+    toast.info('Info Notification !', {
+      position: toast.POSITION.BOTTOM_CENTER
+    });
+  }
+
   clickRefresh() {
-    this.setState({ show_error: true });
+    console.log(this);
+    toast.success('Success Notification !', {
+      position: toast.POSITION.RIGHT_CENTER
+    });
+
+    toast.error('Error Notification !', {
+      position: toast.POSITION.TOP_LEFT
+    });
   }
 
   render() {
     const { ranks } = this.props.siteRank;
-    console.log(this.props.match.params.id);
+    console.log(ranks);
+
+    const rows = ranks.map(rank => (
+      <RankingRow rank={rank} onDelete={this.onDelete} />
+    ));
 
     return (
       <div className="Home">
@@ -44,10 +63,9 @@ class Home extends PureComponent {
             <FontAwesomeIcon icon={faSync} />
           </Button>
         </div>
-        <RankingTable ranks={ranks} />
-        {this.state.show_error ? (
-          <ToastContainer className="toast-container" />
-        ) : null}
+        <Table responsive className="RankTable">
+          <tbody>{rows}</tbody>
+        </Table>
       </div>
     );
   }

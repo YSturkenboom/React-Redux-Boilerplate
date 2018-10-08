@@ -9,6 +9,11 @@ import { map } from 'lodash';
 import './styles.scss';
 
 export default class RankingTable extends PureComponent {
+  // deleteRow(id) {
+  //   console.log(this);
+  //   alert(id);
+  // }
+
   renderRow = entry => {
     console.log('entry', entry);
     return [
@@ -16,10 +21,14 @@ export default class RankingTable extends PureComponent {
         <td className="first_table">
           <div className="tablerow__date">{entry.date}</div>
           <div className="tablerow__site">{entry.url}</div>
-          <div className="tablerow__delete">
+          <button
+            className="tablerow__delete"
+            type="submit"
+            onClick="this.props.onDelete"
+          >
             <FontAwesomeIcon className="trashIcon" icon={faTrash} />
             Delete
-          </div>
+          </button>
         </td>
         <td className="second_table">
           <div className="tablerow__rank">#{entry.rank}</div>
