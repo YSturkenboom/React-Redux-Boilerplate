@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import {
   Alert,
   Button,
@@ -169,6 +169,10 @@ class Register extends PureComponent {
                 <Button block size="lg" color="primary">
                   Register
                 </Button>
+                <span className="spacer" />
+                <Link to="/login" className="text-center text-muted">
+                  <small>Login</small>
+                </Link>
               </Form>
             </Card>
           </div>

@@ -10,7 +10,6 @@ import RankingTable from '../../components/RankingTable';
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar/index';
 import { siteRankActions, listActions } from '../../actions';
-
 import './styles.scss';
 
 class Home extends PureComponent {
@@ -21,9 +20,8 @@ class Home extends PureComponent {
   }
 
   componentDidMount() {
-    console.log('we zijn er');
-    const test = this.props.getSingleList(this.props.match.params.id);
-    console.log(test);
+    console.log('didmount', this.props.match.params.id);
+    this.props.getSingleList(this.props.match.params.id);
   }
 
   clickRefresh() {
@@ -31,7 +29,8 @@ class Home extends PureComponent {
   }
 
   render() {
-    const { ranks } = this.props.siteRank;
+    const { websites } = this.props.lists.data;
+    console.log(this.props.match.params.id);
 
     return (
       <div className="Home">
@@ -44,7 +43,7 @@ class Home extends PureComponent {
             <FontAwesomeIcon icon={faSync} />
           </Button>
         </div>
-        <RankingTable ranks={ranks} />
+        <RankingTable ranks={websites} />
         {this.state.show_error ? (
           <ToastContainer className="toast-container" />
         ) : null}
@@ -57,7 +56,7 @@ const connector = connect(
   ({ siteRank, lists }) => ({ siteRank, lists }),
   dispatch => ({
     getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic()),
-    getSingleList: () => dispatch(listActions.getSingleList())
+    getSingleList: id => dispatch(listActions.getSingleList(id))
   })
 );
 

@@ -63,7 +63,8 @@
 
 const initialState = {
   data: [],
-  isLoading: true
+  isLoading: true,
+  currentListId: null
 };
 
 export default (state = initialState, action) => {
@@ -84,7 +85,8 @@ export default (state = initialState, action) => {
 
     case 'SINGLE_LIST_REQUEST_FAIL': {
       console.log('singel fail');
-      return {};
+      const { data } = action.result;
+      return { data, isLoading: false };
     }
 
     default:
