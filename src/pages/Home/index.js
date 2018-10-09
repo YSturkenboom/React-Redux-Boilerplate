@@ -59,14 +59,14 @@ class Home extends PureComponent {
     console.log(event.target.value);
   };
 
-  buttonSwitch() {
+  buttonSwitch = () => {
     this.setState(prevState => ({
       isEditable: !prevState.isEditable
     }));
-  }
+  };
 
   // refresh websites
-  clickRefresh() {
+  clickRefresh = () => {
     console.log(this);
     toast.success('Success Notification !', {
       position: toast.POSITION.RIGHT_CENTER
@@ -75,7 +75,24 @@ class Home extends PureComponent {
     toast.error('Error Notification !', {
       position: toast.POSITION.TOP_LEFT
     });
-  }
+  };
+
+  analyze = urlsToQuery => {
+    if (urlsToQuery.length > 0) {
+      console.log('urlstoquery', urlsToQuery);
+      const { getBulkTraffic } = this.props;
+      getBulkTraffic(urlsToQuery, this.props.siteRank.newListId).then(res => {
+        if (res.type === 'GET_TRAFFIC_REQUEST_SUCCESS') {
+          return true;
+        }
+        return false;
+      });
+    } else {
+      // if there are no new sites in the tags, remove the (useless) tags
+      return true;
+    }
+    return false;
+  };
 
   render() {
     const { ranks } = this.props.siteRank;
@@ -92,7 +109,7 @@ class Home extends PureComponent {
     return (
       <div className="Home">
         <Helmet title="Analyze" />
-        <SearchBar actionOnSubmit={siteRankActions.getBulkTraffic} />
+        <SearchBar actionOnSubmit={this.analyze} />
         <div className="Home__header">
           <div className="editableField">
             {this.state.isEditable ? (
@@ -127,7 +144,8 @@ const connector = connect(
   dispatch => ({
     getRanksForWebsitesInList: id =>
       dispatch(siteRankActions.getRanksForWebsitesInList(id)),
-    getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic()),
+    getBulkTraffic: (sites, listId) =>
+      dispatch(siteRankActions.getBulkTraffic(sites, listId)),
     getSingleList: id => dispatch(listActions.getSingleList(id)),
     update: (id, name) => dispatch(listActions.updateTitle(id, name))
   })
