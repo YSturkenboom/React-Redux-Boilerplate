@@ -25,9 +25,12 @@ export default (state = initialState, action) => {
       return { ...state, error };
     }
     case 'GET_TRAFFIC_REQUEST_SUCCESS': {
-      console.log('actiones', action);
       const newRanks = [...state.ranks, ...action.ranks];
       return { ...state, ranks: newRanks };
+    }
+
+    case 'GET_TRAFFIC_REQUEST_FAIL': {
+      return { ...state };
     }
     case 'SINGLE_LIST_REQUEST_SUCCESS': {
       const { _id } = action.result.data;

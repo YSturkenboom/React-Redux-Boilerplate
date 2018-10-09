@@ -33,10 +33,7 @@ export default (state = initialState, action) => {
       return { ...state, currentListName: name };
     }
     case 'LIST_TITLE_UPDATE_FAIL': {
-      console.log('title update fail', action);
-      const { data } = action;
-      const { name } = data;
-      return { ...state, currentListName: name };
+      return { ...state };
     }
     case 'SINGLE_LIST_REQUEST_FAIL': {
       console.log('singel fail');
@@ -51,9 +48,7 @@ export default (state = initialState, action) => {
       return { ...state, data };
     }
     case 'LIST_DELETE_FAIL': {
-      console.log('delete singe fail', action);
-      const { data } = action.result;
-      return { ...state, data, isLoading: false };
+      return { ...state, isLoading: false };
     }
     case 'UPDATE_MULTIPLE_WEBSITES_SUCCESS': {
       return state;

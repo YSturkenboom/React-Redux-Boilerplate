@@ -21,23 +21,31 @@ class Lists extends PureComponent {
   }
 
   onDeleteWebsite = id => {
-    console.log('id to delete', id);
     this.props.deleteList(id).then(res => {
-      console.log(res);
-      toast.info('Deleted list !', {
-        position: toast.POSITION.RIGHT_CENTER
-      });
+      if (res.type === 'LIST_DELETE_FAIL') {
+        toast.error(`Something went wrong deleting the list`, {
+          position: toast.POSITION.BOTTOM_CENTER
+        });
+      } else {
+        toast.info(`Succesfully deleted the list`, {
+          position: toast.POSITION.BOTTOM_CENTER
+        });
+      }
     });
   };
 
   addNewList() {
-    console.log(this);
-    toast.success('Succesfully added new list !', {
-      position: toast.POSITION.RIGHT_CENTER
-    });
     this.props.create().then(res => {
-      console.log(res.newListId.data._id);
-      this.props.history.push(`/list/${res.newListId.data._id}`);
+      if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
+        toast.error(`Something went adding a new list`, {
+          position: toast.POSITION.BOTTOM_CENTER
+        });
+      } else {
+        toast.success(`Succesfully added a new list`, {
+          position: toast.POSITION.BOTTOM_CENTER
+        });
+        this.props.history.push(`/list/${res.newListId.data._id}`);
+      }
     });
   }
 

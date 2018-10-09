@@ -40,22 +40,37 @@ class Home extends PureComponent {
 
   // deletes single website
   onDelete(websiteId) {
-    console.log(this, 'hello button delete', websiteId);
-    toast.info(`removing site ${websiteId}`, {
-      position: toast.POSITION.BOTTOM_CENTER
-    });
-    this.props.deleteSiteFromList(websiteId, this.props.match.params.id);
+    this.props
+      .deleteSiteFromList(websiteId, this.props.match.params.id)
+      .then(res => {
+        if (res.type === 'DELETE_SITE_FROM_LIST_FAIL') {
+          toast.error(`Something went deleting website`, {
+            position: toast.POSITION.BOTTOM_CENTER
+          });
+        } else {
+          toast.info(`Succesfully deleted websites from your list`, {
+            position: toast.POSITION.BOTTOM_CENTER
+          });
+        }
+      });
   }
 
   handleKeyPress = event => {
     if (event.key === 'Enter') {
       const siteID = this.props.match.params.id;
       const name = event.target.value;
-      this.props.update(siteID, name);
-      this.setState({ isEditable: false, currentEditValue: name });
-      toast.success('Updated title !', {
-        position: toast.POSITION.RIGHT_CENTER
+      this.props.update(siteID, name).then(res => {
+        if (res.type === 'LIST_TITLE_UPDATE_FAIL') {
+          toast.error(`Something went wrong deleting the list`, {
+            position: toast.POSITION.BOTTOM_CENTER
+          });
+        } else {
+          toast.success(`Succesfully updated list title`, {
+            position: toast.POSITION.BOTTOM_CENTER
+          });
+        }
       });
+      this.setState({ isEditable: false, currentEditValue: name });
     }
   };
 
@@ -77,9 +92,14 @@ class Home extends PureComponent {
       const { getBulkTraffic } = this.props;
       getBulkTraffic(urlsToQuery, this.props.siteRank.currentListId).then(
         res => {
-          console.log('res', res.type === 'GET_TRAFFIC_REQUEST_SUCCESS');
-          if (res.type === 'GET_TRAFFIC_REQUEST_SUCCESS') {
-            console.log('true');
+          if (res.type === 'GET_TRAFFIC_REQUEST_FAIL') {
+            toast.error(`Something went wrong adding websites`, {
+              position: toast.POSITION.BOTTOM_CENTER
+            });
+          } else {
+            toast.success(`Succesfully added websites to your list`, {
+              position: toast.POSITION.BOTTOM_CENTER
+            });
           }
           return false;
         }
@@ -97,7 +117,11 @@ class Home extends PureComponent {
     const { currentEditValue } = this.state;
 
     const rows = ranks.map(rank => (
-      <RankingRow rank={rank} onDelete={() => this.onDelete(rank._id)} />
+      <RankingRow
+        key={rank._id}
+        rank={rank}
+        onDelete={() => this.onDelete(rank._id)}
+      />
     ));
 
     return (
