@@ -32,14 +32,18 @@ class SearchBar extends PureComponent {
 
   analyze() {
     const oldUrls = map(this.props.siteRank.ranks, 'url');
-    console.log('oldurls', oldUrls);
-    console.log('newurls', this.state.tags);
     const diff = filter(this.state.tags, item => !includes(oldUrls, item));
-    console.log('dfff', diff);
-    console.log('curList', this.props.siteRank.newListId);
     if (diff.length > 0) {
-      console.log(diff);
-      this.props.getBulkTraffic(diff, this.props.siteRank.newListId);
+      this.props
+        .getBulkTraffic(diff, this.props.siteRank.newListId)
+        .then(res => {
+          if (res.type === 'GET_TRAFFIC_REQUEST_SUCCESS') {
+            this.setState({ tags: [] });
+          }
+        });
+    } else {
+      // if there are no new sites in the tags, remove the (useless) tags
+      this.setState({ tags: [] });
     }
   }
 
