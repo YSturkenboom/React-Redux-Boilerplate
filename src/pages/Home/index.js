@@ -79,7 +79,7 @@ class Home extends PureComponent {
 
   render() {
     const { ranks } = this.props.siteRank;
-    const { name } = this.props.lists.data;
+    const { name } = this.props.lists;
 
     const rows = ranks.map(rank => (
       <RankingRow rank={rank} onDelete={this.onDelete} />
