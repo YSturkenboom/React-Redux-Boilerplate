@@ -52,6 +52,7 @@ class ResetPassword extends PureComponent {
     }
 
     const token = get(match, 'params.token');
+    console.log(token, password);
     resetPassword(token, password);
     history.push('/login');
   };
@@ -144,7 +145,8 @@ const connector = connect(
   ({ auth }) => ({ auth }),
   dispatch => ({
     checkSession: () => dispatch(authActions.checkSession()),
-    resetPassword: password => dispatch(authActions.resetPassword(password))
+    resetPassword: (token, password) =>
+      dispatch(authActions.resetPassword(token, password))
   })
 );
 
