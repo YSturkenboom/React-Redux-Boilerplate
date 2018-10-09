@@ -16,18 +16,17 @@ import {
 } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock } from '@fortawesome/pro-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/pro-solid-svg-icons';
 import { authActions } from '../../actions';
 
 import './styles.scss';
 
-class Login extends PureComponent {
+class ForgotPassword extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: '',
-      password: ''
+      email: ''
     };
   }
 
@@ -42,10 +41,10 @@ class Login extends PureComponent {
 
     console.log('logging in');
 
-    const { login } = this.props;
-    const { email, password } = this.state;
+    const { forgotPassword } = this.props;
+    const { email } = this.state;
 
-    login(email, password);
+    forgotPassword(email);
   };
 
   handleInputChange = ev => {
@@ -57,20 +56,20 @@ class Login extends PureComponent {
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     const { isLoggedIn, error } = this.props.auth;
-    const { email, password } = this.state;
+    const { email } = this.state;
 
     if (isLoggedIn) {
       return <Redirect to={from} />;
     }
 
     return (
-      <div className="Login">
-        <Helmet title="Login" />
+      <div className="forgotpassword">
+        <Helmet title="ForgotPassword" />
 
         {!this.props.auth.checkingSession && (
-          <div className="login-content">
-            <Card body className="login-window">
-              <h4 className="text-center">Login</h4>
+          <div className="forgotpassword-content">
+            <Card body className="forgotpassword-window">
+              <h4 className="text-center">Password Reset</h4>
               <span className="spacer" />
               {error && <Alert color="danger">{error}</Alert>}
               <Form onSubmit={this.onSubmitVerify}>
@@ -96,45 +95,12 @@ class Login extends PureComponent {
                     />
                   </InputGroup>
                 </FormGroup>
-                <FormGroup>
-                  <Label hidden for="password">
-                    Password
-                  </Label>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <FontAwesomeIcon icon={faLock} />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="password"
-                      name="password"
-                      id="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={this.handleInputChange}
-                      required
-                      bsSize="lg"
-                    />
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup check>
-                  <Input type="checkbox" id="signedIn" />
-                  <Label className="text-muted" check for="signedIn">
-                    <small>Keep me signed in</small>
-                  </Label>
-                </FormGroup>
                 <span className="spacer" />
                 <span className="spacer" />
                 <Button block size="lg" color="primary">
-                  Login
+                  Reset Password
                 </Button>
               </Form>
-              <span className="spacer" />
-              <a href="/forgot-password" className="text-center text-muted">
-                <small>Forgot your password?</small>
-              </a>
-
               <Link to="/register" className="text-center text-muted">
                 <small>Register</small>
               </Link>
@@ -150,9 +116,8 @@ const connector = connect(
   ({ auth }) => ({ auth }),
   dispatch => ({
     checkSession: () => dispatch(authActions.checkSession()),
-    login: (username, password) =>
-      dispatch(authActions.login(username, password))
+    forgotPassword: email => dispatch(authActions.forgotPassword(email))
   })
 );
 
-export default connector(Login);
+export default connector(ForgotPassword);
