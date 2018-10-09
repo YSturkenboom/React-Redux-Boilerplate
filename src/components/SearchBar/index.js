@@ -2,10 +2,6 @@ import React, { PureComponent } from 'react';
 import TagsInput from 'react-tagsinput';
 import { map, filter, includes } from 'lodash';
 
-import { connect } from 'react-redux';
-
-import { siteRankActions } from '../../actions';
-
 import './styles.scss';
 
 const DEFAULT_TAGS = ['storyofams.com', 'youtube.com', 'google.com'];
@@ -49,7 +45,7 @@ class SearchBar extends PureComponent {
             type="submit"
             className="form__button"
             onClick={() => {
-              const oldUrls = map(this.props.siteRank.ranks, 'url');
+              const oldUrls = map(this.props.ranks, 'url');
               const diff = filter(
                 this.state.tags,
                 item => !includes(oldUrls, item)
@@ -69,12 +65,4 @@ class SearchBar extends PureComponent {
   }
 }
 
-const connector = connect(
-  ({ siteRank }) => ({ siteRank }),
-  dispatch => ({
-    getBulkTraffic: (sites, listId) =>
-      dispatch(siteRankActions.getBulkTraffic(sites, listId))
-  })
-);
-
-export default connector(SearchBar);
+export default SearchBar;
