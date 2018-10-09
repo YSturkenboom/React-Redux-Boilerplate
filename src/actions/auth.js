@@ -48,7 +48,8 @@ export const forgotPassword = email => async dispatch => {
     const res = await axios.post(`${apiUrl}/auth/forgot-password`, { email });
     dispatch({ type: 'FORGOT_PASSWORD_SENT' }, res.data);
   } catch (err) {
-    console.log(err);
-    dispatch({ type: 'FORGOT_PASSWORD_FAILED' });
+    const res = err.response;
+    console.log(res);
+    dispatch({ type: 'FORGOT_PASSWORD_FAILED', err: res.data.error });
   }
 };
