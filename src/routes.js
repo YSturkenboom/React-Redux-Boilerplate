@@ -1,7 +1,15 @@
 import { authActions } from './actions';
 import withAuth from './utils/withAuth';
 import App from './app';
-import { Home, Login, Logout, NotFound, Lists, Register } from './pages';
+import {
+  Home,
+  Login,
+  Logout,
+  NotFound,
+  Lists,
+  Register,
+  ForgotPassword
+} from './pages';
 
 const publicRoutes = [
   {
@@ -13,6 +21,11 @@ const publicRoutes = [
     path: '/register',
     exact: true,
     component: Register
+  },
+  {
+    path: '/forgot-password',
+    exact: true,
+    component: ForgotPassword
   }
 ];
 

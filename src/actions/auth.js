@@ -37,8 +37,18 @@ export const login = (email, password) => async dispatch => {
 export const logout = () => async dispatch => {
   try {
     await axios.get(`${apiUrl}/auth/logout`);
-    dispatch({ type: 'AUTH_LOGGED_OUT' });
+    dispatch({ type: 'AUTH_LOGGED_OUT_SUCCESS' });
   } catch (err) {
-    dispatch({ type: 'AUTH_LOGGED_OUT' });
+    dispatch({ type: 'AUTH_LOGGED_OUT_FAILED' });
+  }
+};
+
+export const forgotPassword = email => async dispatch => {
+  try {
+    await axios.post(`${apiUrl}/auth/forgot-password`, { email });
+    dispatch({ type: 'FORGOT_PASSWORD_SENT' });
+  } catch (err) {
+    console.log(err);
+    dispatch({ type: 'FORGOT_PASSWORD_FAILED' });
   }
 };
