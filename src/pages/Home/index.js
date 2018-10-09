@@ -46,9 +46,8 @@ class Home extends PureComponent {
   handleKeyPress = event => {
     if (event.key === 'Enter') {
       const siteID = this.props.match.params.id;
-      const title = event.target.value;
-
-      this.props.update(siteID, title);
+      const name = event.target.value;
+      this.props.update(siteID, name);
       this.setState({ isEditable: false });
       toast.success('Updated title !', {
         position: toast.POSITION.RIGHT_CENTER
@@ -130,7 +129,7 @@ const connector = connect(
       dispatch(siteRankActions.getRanksForWebsitesInList(id)),
     getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic()),
     getSingleList: id => dispatch(listActions.getSingleList(id)),
-    update: (id, title) => dispatch(listActions.updateTitle(id, title))
+    update: (id, name) => dispatch(listActions.updateTitle(id, name))
   })
 );
 

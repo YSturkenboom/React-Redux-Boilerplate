@@ -72,10 +72,10 @@ export const deleteList = id => async dispatch => {
   }
 };
 
-export const updateTitle = (id, title) => async dispatch => {
+export const updateTitle = (id, name) => async dispatch => {
   try {
     const result = await axios.put(`${apiUrl}/lists/update-name/${id}`, {
-      title
+      name
     });
     return dispatch({ type: 'LIST_TITLE_UPDATE_SUCCESS', result });
   } catch (err) {
