@@ -9,7 +9,7 @@ import RankingRow from '../../components/RankingRow';
 
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar/index';
-import { siteRankActions } from '../../actions';
+import { siteRankActions, listActions } from '../../actions';
 import './styles.scss';
 
 class Home extends PureComponent {
@@ -29,11 +29,11 @@ class Home extends PureComponent {
     getRanksForWebsitesInList(this.props.match.params.id);
   }
 
-  onDelete() {
-    console.log(this, 'hello button delete');
-    toast.info('Info Notification !', {
+  onDelete(siteId) {
+    toast.info(`deleted site ${siteId}`, {
       position: toast.POSITION.BOTTOM_CENTER
     });
+    this.props.deleteSiteFromList(siteId, this.props.match.params.id);
   }
 
   clickRefresh() {
@@ -52,7 +52,7 @@ class Home extends PureComponent {
     console.log(ranks);
 
     const rows = ranks.map(rank => (
-      <RankingRow rank={rank} onDelete={this.onDelete} />
+      <RankingRow rank={rank} onDelete={() => this.onDelete(rank._id)} />
     ));
 
     return (
@@ -79,7 +79,9 @@ const connector = connect(
   dispatch => ({
     getRanksForWebsitesInList: id =>
       dispatch(siteRankActions.getRanksForWebsitesInList(id)),
-    getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic())
+    getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic()),
+    deleteSiteFromList: (siteId, listId) =>
+      dispatch(listActions.deleteSiteFromList(siteId, listId))
     // getSingleList: id => dispatch(listActions.getSingleList(id))
   })
 );

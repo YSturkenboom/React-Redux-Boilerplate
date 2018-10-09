@@ -71,3 +71,18 @@ export const deleteList = id => async dispatch => {
     });
   }
 };
+
+export const deleteSiteFromList = (siteId, listId) => async dispatch => {
+  try {
+    const result = await axios.delete(
+      `${apiUrl}/lists/delete-website/${listId}/${siteId}`,
+      {}
+    );
+    return dispatch({ type: 'DELETE_SITE_SUCCESS', result });
+  } catch (err) {
+    return dispatch({
+      type: 'DELETE_SITE_FAIL',
+      err
+    });
+  }
+};
