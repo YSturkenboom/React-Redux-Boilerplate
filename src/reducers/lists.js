@@ -4,7 +4,8 @@ const initialState = {
   data: [],
   isLoading: true,
   currentListId: null,
-  newListId: null
+  newListId: null,
+  name: null
 };
 
 export default (state = initialState, action) => {
@@ -53,15 +54,14 @@ export default (state = initialState, action) => {
 
     case 'LIST_TITLE_UPDATE_SUCCESS': {
       console.log('title update succes', action.result);
-      const { data } = action.result;
-      const { name } = data;
-      return { data, name };
+      const { name } = action.result.data;
+      return { ...state, name };
     }
     case 'LIST_TITLE_UPDATE_FAIL': {
       console.log('title update fail', action);
       const { data } = action;
       const { name } = data;
-      return { data, name };
+      return { ...state, name };
     }
 
     case 'UPDATE_MULTIPLE_WEBSITES_SUCCESS': {
