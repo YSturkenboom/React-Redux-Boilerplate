@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Redirect, Link } from 'react-router-dom';
+// import { toast } from 'react-toastify';
 import {
   Alert,
   Button,
@@ -44,7 +45,12 @@ class ForgotPassword extends PureComponent {
     const { forgotPassword } = this.props;
     const { email } = this.state;
 
-    forgotPassword(email);
+    forgotPassword(email).then(res => {
+      console.log(res);
+      // toast.succes('Check your email to update your password !', {
+      //   position: toast.POSITION.BOTTOM_CENTER
+      // });
+    });
   };
 
   handleInputChange = ev => {

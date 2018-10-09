@@ -33,7 +33,8 @@ export default (state = initialState, action) => {
     }
 
     case 'FORGOT_PASSWORD_SENT': {
-      return { resetPasswordSent: true };
+      const { result } = action;
+      return { resetPasswordSent: true, result };
     }
 
     case 'FORGOT_PASSWORD_FAILED': {
