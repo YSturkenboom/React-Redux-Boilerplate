@@ -97,10 +97,10 @@ class Home extends PureComponent {
           <div className="editableField">
             {this.state.isEditable ? (
               <EditableField
-                value={name}
                 type="text"
                 editChange={this.handleChange}
                 editPress={this.handleKeyPress}
+                placeholder={name}
               />
             ) : (
               <Title />
