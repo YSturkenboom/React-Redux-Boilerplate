@@ -3,7 +3,8 @@ const initialState = {
   isLoggedIn: false,
   account: false,
   error: '',
-  resetPasswordSent: false
+  resetPasswordSent: false,
+  isPasswordReset: false
 };
 
 export default (state = initialState, action) => {
@@ -41,6 +42,14 @@ export default (state = initialState, action) => {
       const error = action.err;
       console.log(error);
       return { ...state, resetPasswordSent: false, error };
+    }
+
+    case 'RESET_PASSWORD_SUCCESS': {
+      return { isPasswordReset: true };
+    }
+
+    case 'RESET_PASSWORD_FAILED': {
+      return { ...initialState, isPasswordReset: false };
     }
 
     default:

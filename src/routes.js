@@ -8,7 +8,8 @@ import {
   NotFound,
   Lists,
   Register,
-  ForgotPassword
+  ForgotPassword,
+  ResetPassword
 } from './pages';
 
 const publicRoutes = [
@@ -26,6 +27,10 @@ const publicRoutes = [
     path: '/forgot-password',
     exact: true,
     component: ForgotPassword
+  },
+  {
+    path: '/set-password/:token',
+    component: ResetPassword
   }
 ];
 
