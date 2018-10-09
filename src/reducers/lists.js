@@ -28,15 +28,14 @@ export default (state = initialState, action) => {
     }
     case 'SINGLE_LIST_REQUEST_SUCCESS': {
       console.log('singel req');
-      const { data } = action.result;
-      const { name } = data;
-      return { data, name };
+      const { websites, name } = action.result.data;
+      console.log('singel ist', action.result);
+      return { data: websites, name };
     }
 
     case 'SINGLE_LIST_REQUEST_FAIL': {
       console.log('singel fail');
-      const { data } = action.result;
-      return { data, isLoading: false };
+      return { ...state, isLoading: false };
     }
 
     case 'LIST_DELETE_SUCCES': {
