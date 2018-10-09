@@ -26,13 +26,17 @@
     margin-bottom: -7px;
   }
   &__delete {
+    border: none;
+    background-color: inherit;
     color: black;
     cursor: pointer;
     opacity: 0.6;
     padding-top: 7px;
+    outline: none;
 
-    &:hover {
+    &:hover, &:focus {
       color: rgb(148, 0, 0);
+      outline: none;
     }
   }
 }

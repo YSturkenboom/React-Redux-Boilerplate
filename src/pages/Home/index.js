@@ -19,7 +19,6 @@ class Home extends PureComponent {
       isEditable: false,
       currentEditValue: ''
     };
-    this.clickRefresh = this.clickRefresh.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.buttonSwitch = this.buttonSwitch.bind(this);
     this.handleChange = this.handleChange.bind(this);
