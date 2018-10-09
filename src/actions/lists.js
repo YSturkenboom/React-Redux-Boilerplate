@@ -70,12 +70,9 @@ export const updateMultipleWebsites = rankingObjects => async dispatch => {
 
 export const deleteList = id => async dispatch => {
   try {
-    console.log('before yo yo yo ', id);
     const result = await axios.delete(`${apiUrl}/lists/delete-list/${id}`, {});
-    console.log('yo yo yo ', id);
     return dispatch({ type: 'LIST_DELETE_SUCCES', result });
   } catch (err) {
-    console.log('uh oh yo yo yo ');
     return dispatch({
       type: 'LIST_DELETE_FAIL',
       error: 'oh noooo',

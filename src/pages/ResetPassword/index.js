@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Redirect, Link } from 'react-router-dom';
-// import { toast } from 'react-toastify';
+import { Redirect } from 'react-router-dom';
 import {
   Alert,
   Button,
@@ -16,18 +15,21 @@ import {
   InputGroupText
 } from 'reactstrap';
 
+import { get } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/pro-solid-svg-icons';
 import { authActions } from '../../actions';
+// import { toastAlert } from '../../utils/helpers';
 
 import './styles.scss';
 
-class ForgotPassword extends PureComponent {
+class ResetPassword extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: ''
+      password: '',
+      password2: ''
     };
   }
 
@@ -42,15 +44,17 @@ class ForgotPassword extends PureComponent {
 
     console.log('logging in');
 
-    const { forgotPassword } = this.props;
-    const { email } = this.state;
+    const { match, resetPassword, history } = this.props;
+    const { password, password2 } = this.state;
 
-    forgotPassword(email).then(res => {
-      console.log(res);
-      // toast.succes('Check your email to update your password !', {
-      //   position: toast.POSITION.BOTTOM_CENTER
-      // });
-    });
+    if (password !== password2) {
+      console.log('Sorry the two passwords are differents');
+    }
+
+    const token = get(match, 'params.token');
+    console.log(token, password);
+    resetPassword(token, password);
+    history.push('/login');
   };
 
   handleInputChange = ev => {
@@ -62,26 +66,26 @@ class ForgotPassword extends PureComponent {
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     const { isLoggedIn, error } = this.props.auth;
-    const { email } = this.state;
+    const { password, password2 } = this.state;
 
     if (isLoggedIn) {
       return <Redirect to={from} />;
     }
 
     return (
-      <div className="forgotpassword">
-        <Helmet title="ForgotPassword" />
+      <div className="resetpassword">
+        <Helmet title="ResetPassword" />
 
         {!this.props.auth.checkingSession && (
-          <div className="forgotpassword-content">
-            <Card body className="forgotpassword-window">
+          <div className="resetpassword-content">
+            <Card body className="resetpassword-window">
               <h4 className="text-center">Password Reset</h4>
               <span className="spacer" />
               {error && <Alert color="danger">{error}</Alert>}
               <Form onSubmit={this.onSubmitVerify}>
                 <FormGroup>
-                  <Label hidden for="email">
-                    E-mail
+                  <Label hidden for="password">
+                    New Password
                   </Label>
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
@@ -90,12 +94,34 @@ class ForgotPassword extends PureComponent {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
-                      type="email"
-                      name="email"
-                      id="email"
-                      value={email}
+                      type="password"
+                      name="password"
+                      id="password"
+                      value={password}
                       onChange={this.handleInputChange}
-                      placeholder="E-mail"
+                      placeholder="New Password"
+                      required
+                      bsSize="lg"
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <Label hidden for="password2">
+                    New Password
+                  </Label>
+                  <InputGroup>
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <FontAwesomeIcon icon={faEnvelope} />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      type="password"
+                      name="password2"
+                      id="password2"
+                      value={password2}
+                      onChange={this.handleInputChange}
+                      placeholder="Confirm Password"
                       required
                       bsSize="lg"
                     />
@@ -107,9 +133,6 @@ class ForgotPassword extends PureComponent {
                   Reset Password
                 </Button>
               </Form>
-              <Link to="/register" className="text-center text-muted">
-                <small>Register</small>
-              </Link>
             </Card>
           </div>
         )}
@@ -122,8 +145,9 @@ const connector = connect(
   ({ auth }) => ({ auth }),
   dispatch => ({
     checkSession: () => dispatch(authActions.checkSession()),
-    forgotPassword: email => dispatch(authActions.forgotPassword(email))
+    resetPassword: (token, password) =>
+      dispatch(authActions.resetPassword(token, password))
   })
 );
 
-export default connector(ForgotPassword);
+export default connector(ResetPassword);
