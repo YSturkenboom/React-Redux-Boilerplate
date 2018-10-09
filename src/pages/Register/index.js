@@ -18,7 +18,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope,
-  faLock,
   faUser,
   faBuilding
 } from '@fortawesome/pro-solid-svg-icons';
@@ -34,8 +33,7 @@ class Register extends PureComponent {
       firstName: '',
       lastName: '',
       company: '',
-      email: '',
-      password: ''
+      email: ''
     };
   }
 
@@ -49,9 +47,9 @@ class Register extends PureComponent {
     ev.preventDefault();
 
     const { register } = this.props;
-    const { firstName, lastName, company, email, password } = this.state;
+    const { firstName, lastName, company, email } = this.state;
 
-    register(firstName, lastName, company, email, password);
+    register(firstName, lastName, company, email);
   };
 
   handleInputChange = ev => {
@@ -63,7 +61,7 @@ class Register extends PureComponent {
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     const { isLoggedIn, error } = this.props.auth;
-    const { firstName, lastName, company, email, password } = this.state;
+    const { firstName, lastName, company, email } = this.state;
 
     if (isLoggedIn) {
       return <Redirect to={from} />;
@@ -168,28 +166,6 @@ class Register extends PureComponent {
                     />
                   </InputGroup>
                 </FormGroup>
-                <FormGroup>
-                  <Label hidden for="password">
-                    Password
-                  </Label>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <FontAwesomeIcon icon={faLock} />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="password"
-                      name="password"
-                      id="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={this.handleInputChange}
-                      required
-                      bsSize="lg"
-                    />
-                  </InputGroup>
-                </FormGroup>
                 <span className="spacer" />
                 <span className="spacer" />
                 <Button block size="lg" color="primary">
@@ -212,10 +188,8 @@ const connector = connect(
   ({ register, auth }) => ({ register, auth }),
   dispatch => ({
     checkSession: () => dispatch(authActions.checkSession()),
-    register: (firstName, lastName, company, email, password) =>
-      dispatch(
-        registerActions.register(firstName, lastName, company, email, password)
-      )
+    register: (firstName, lastName, company, email) =>
+      dispatch(registerActions.register(firstName, lastName, company, email))
   })
 );
 
