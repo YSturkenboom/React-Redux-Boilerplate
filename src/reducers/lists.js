@@ -29,8 +29,10 @@ export default (state = initialState, action) => {
     case 'SINGLE_LIST_REQUEST_SUCCESS': {
       console.log('singel req');
       const { data } = action.result;
-      return { data };
+      const { name } = data;
+      return { data, name };
     }
+
     case 'SINGLE_LIST_REQUEST_FAIL': {
       console.log('singel fail');
       const { data } = action.result;
@@ -48,6 +50,20 @@ export default (state = initialState, action) => {
       const { data } = action.result;
       return { data, isLoading: false };
     }
+
+    case 'LIST_TITLE_UPDATE_SUCCESS': {
+      console.log('title update succes', action);
+      const { data } = action;
+      const { name } = data;
+      return { data, name };
+    }
+    case 'LIST_TITLE_UPDATE_FAIL': {
+      console.log('title update fail', action);
+      const { data } = action;
+      const { name } = data;
+      return { data, name };
+    }
+
     case 'UPDATE_MULTIPLE_WEBSITES_SUCCESS': {
       return state;
     }
