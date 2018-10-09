@@ -16,7 +16,8 @@ class Home extends PureComponent {
   constructor() {
     super();
     this.state = {
-      isEditable: false
+      isEditable: false,
+      currentEditValue: ''
     };
     this.clickRefresh = this.clickRefresh.bind(this);
     this.onDelete = this.onDelete.bind(this);
@@ -36,11 +37,12 @@ class Home extends PureComponent {
   }
 
   // deletes single website
-  onDelete() {
-    console.log(this, 'hello button delete');
-    toast.info('Info Notification !', {
+  onDelete(websiteId) {
+    console.log(this, 'hello button delete', websiteId);
+    toast.info(`removing site ${websiteId}`, {
       position: toast.POSITION.BOTTOM_CENTER
     });
+    this.props.deleteSiteFromList(websiteId, this.props.match.params.id);
   }
 
   handleKeyPress = event => {
@@ -57,16 +59,17 @@ class Home extends PureComponent {
 
   handleChange = event => {
     console.log(event.target.value);
+    this.setState({ currentEditValue: event.target.value });
   };
 
-  buttonSwitch() {
+  buttonSwitch = () => {
     this.setState(prevState => ({
       isEditable: !prevState.isEditable
     }));
-  }
+  };
 
   // refresh websites
-  clickRefresh() {
+  clickRefresh = () => {
     console.log(this);
     toast.success('Success Notification !', {
       position: toast.POSITION.RIGHT_CENTER
@@ -75,35 +78,55 @@ class Home extends PureComponent {
     toast.error('Error Notification !', {
       position: toast.POSITION.TOP_LEFT
     });
-  }
+  };
+
+  analyze = urlsToQuery => {
+    if (urlsToQuery.length > 0) {
+      console.log('urlstoquery', urlsToQuery);
+      const { getBulkTraffic } = this.props;
+      getBulkTraffic(urlsToQuery, this.props.siteRank.currentListId).then(
+        res => {
+          if (res.type === 'GET_TRAFFIC_REQUEST_SUCCESS') {
+            return true;
+          }
+          return false;
+        }
+      );
+    } else {
+      // if there are no new sites in the tags, remove the (useless) tags
+      return true;
+    }
+    return false;
+  };
 
   render() {
     const { ranks } = this.props.siteRank;
     const { name } = this.props.lists;
+    const { currentEditValue } = this.state;
 
     const rows = ranks.map(rank => (
-      <RankingRow rank={rank} onDelete={this.onDelete} />
+      <RankingRow rank={rank} onDelete={() => this.onDelete(rank._id)} />
     ));
-
-    const Title = () => (
-      <div>{name === '' ? <h2>Empty String</h2> : <h2>{name}</h2>}</div>
-    );
 
     return (
       <div className="Home">
         <Helmet title="Analyze" />
-        <SearchBar actionOnSubmit={siteRankActions.getBulkTraffic} />
+        <SearchBar
+          actionOnSubmit={this.analyze}
+          ranks={this.props.siteRank.ranks}
+        />
         <div className="Home__header">
           <div className="editableField">
             {this.state.isEditable ? (
               <EditableField
+                value={currentEditValue}
                 type="text"
                 editChange={this.handleChange}
                 editPress={this.handleKeyPress}
                 placeholder={name}
               />
             ) : (
-              <Title />
+              <h2>{name}</h2>
             )}
 
             <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
@@ -127,9 +150,12 @@ const connector = connect(
   dispatch => ({
     getRanksForWebsitesInList: id =>
       dispatch(siteRankActions.getRanksForWebsitesInList(id)),
-    getBulkTraffic: () => dispatch(siteRankActions.getBulkTraffic()),
+    getBulkTraffic: (sites, listId) =>
+      dispatch(siteRankActions.getBulkTraffic(sites, listId)),
     getSingleList: id => dispatch(listActions.getSingleList(id)),
-    update: (id, name) => dispatch(listActions.updateTitle(id, name))
+    update: (id, name) => dispatch(listActions.updateTitle(id, name)),
+    deleteSiteFromList: (siteId, listId) =>
+      dispatch(listActions.deleteSiteFromList(siteId, listId))
   })
 );
 

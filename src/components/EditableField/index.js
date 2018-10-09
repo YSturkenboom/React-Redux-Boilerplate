@@ -8,6 +8,7 @@ class EditableField extends PureComponent {
       <div>
         <input
           type="text"
+          value={this.props.value}
           onChange={this.props.editChange}
           onKeyPress={this.props.editPress}
         />
