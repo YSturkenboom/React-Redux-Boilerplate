@@ -38,6 +38,7 @@ export default (state = initialState, action) => {
       const { data } = action.result;
       return { data, isLoading: false };
     }
+
     case 'LIST_DELETE_SUCCES': {
       const data = remove(
         state.data,
