@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSync, faPen } from '@fortawesome/pro-solid-svg-icons';
+import { faPen } from '@fortawesome/pro-solid-svg-icons';
 import { toast } from 'react-toastify';
-import { Table, Button } from 'reactstrap';
+import { Table } from 'reactstrap';
 import RankingRow from '../../components/RankingRow';
 
 import EditableField from '../../components/EditableField';
@@ -72,18 +72,6 @@ class Home extends PureComponent {
     }));
   };
 
-  // refresh websites
-  clickRefresh = () => {
-    console.log(this);
-    toast.success('Success Notification !', {
-      position: toast.POSITION.RIGHT_CENTER
-    });
-
-    toast.error('Error Notification !', {
-      position: toast.POSITION.TOP_LEFT
-    });
-  };
-
   analyze = urlsToQuery => {
     if (urlsToQuery.length > 0) {
       console.log('urlstoquery', urlsToQuery);
@@ -136,11 +124,6 @@ class Home extends PureComponent {
 
             <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
           </div>
-
-          <Button className="button-outline" onClick={this.clickRefresh}>
-            Refresh websites
-            <FontAwesomeIcon icon={faSync} onClick={this.clickRefresh} />
-          </Button>
         </div>
         <Table responsive className="RankTable">
           <tbody>{rows}</tbody>
