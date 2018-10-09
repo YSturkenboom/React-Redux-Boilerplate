@@ -40,6 +40,7 @@ export default (state = initialState, action) => {
     }
 
     case 'LIST_DELETE_SUCCES': {
+      console.log('succes delete list', action);
       const data = remove(
         state.data,
         el => el._id !== action.result.data.siteListToDelete._id
