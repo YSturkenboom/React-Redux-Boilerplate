@@ -40,7 +40,7 @@
               transition: left 0.25s, right 0.25s;
               left: 50%;
               right: 50%;
-              bottom: 0;
+              bottom: -50%;
               height: 2px;
             }
             &:hover::after {

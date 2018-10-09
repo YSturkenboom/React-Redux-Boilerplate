@@ -51,7 +51,9 @@ class SearchBar extends PureComponent {
                 item => !includes(oldUrls, item)
               );
               const res = this.props.actionOnSubmit(diff);
+              console.log('hallooooooooooooooooooooooo', res);
               if (res) {
+                console.log('halloooo?', res);
                 this.setState({ tags: [] });
               }
             }}
