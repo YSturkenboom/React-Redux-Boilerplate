@@ -18,7 +18,9 @@ export default class ListsOverview extends PureComponent {
 
         <div className="list__date">{this.props.list.date}</div>
         <div className="list__name">{this.props.list.name}</div>
-        <div className="list__amount">{this.props.list.amount} websites</div>
+        <div className="list__amount">
+          {this.props.list.websites.length} websites
+        </div>
         <FontAwesomeIcon
           className="trashIcon"
           icon={faTrash}

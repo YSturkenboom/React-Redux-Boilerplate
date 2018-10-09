@@ -47,7 +47,7 @@ class Navigation extends Component {
     return (
       <div>
         <Navbar className="nav" expand="md">
-          <NavbarBrand exact to="/" tag={RouterNavLink}>
+          <NavbarBrand to="/" tag={RouterNavLink}>
             <img
               src={require('../../images/amsalyze-logo.png')}
               alt="amsalyze-logo"

@@ -4,7 +4,8 @@ const initialState = {
   data: [],
   isLoading: true,
   currentListId: null,
-  newListId: null
+  newListId: null,
+  name: null
 };
 
 export default (state = initialState, action) => {
@@ -28,18 +29,18 @@ export default (state = initialState, action) => {
     }
     case 'SINGLE_LIST_REQUEST_SUCCESS': {
       console.log('singel req');
-      const { data } = action.result;
-      const { name } = data;
-      return { data, name };
+      const { websites, name } = action.result.data;
+      console.log('singel ist', action.result);
+      return { data: websites, name };
     }
 
     case 'SINGLE_LIST_REQUEST_FAIL': {
       console.log('singel fail');
-      const { data } = action.result;
-      return { data, isLoading: false };
+      return { ...state, isLoading: false };
     }
 
     case 'LIST_DELETE_SUCCES': {
+      console.log('succes delete list', action);
       const data = remove(
         state.data,
         el => el._id !== action.result.data.siteListToDelete._id
@@ -54,15 +55,14 @@ export default (state = initialState, action) => {
 
     case 'LIST_TITLE_UPDATE_SUCCESS': {
       console.log('title update succes', action.result);
-      const { data } = action.result;
-      const { name } = data;
-      return { data, name };
+      const { name } = action.result.data;
+      return { ...state, name };
     }
     case 'LIST_TITLE_UPDATE_FAIL': {
       console.log('title update fail', action);
       const { data } = action;
       const { name } = data;
-      return { data, name };
+      return { ...state, name };
     }
 
     case 'UPDATE_MULTIPLE_WEBSITES_SUCCESS': {
