@@ -30,7 +30,10 @@ class Home extends PureComponent {
     const { getSingleList, getRanksForWebsitesInList } = this.props;
 
     // Load list into state
-    getSingleList(this.props.match.params.id);
+    getSingleList(this.props.match.params.id).then(() =>
+      this.setState({ currentEditValue: this.props.lists.name })
+    );
+
     // console.log('id =', this.props.match.params.id);
     // Load ranks from list into state (separate for instantaneous UI updates)
     getRanksForWebsitesInList(this.props.match.params.id);
@@ -50,7 +53,7 @@ class Home extends PureComponent {
       const siteID = this.props.match.params.id;
       const name = event.target.value;
       this.props.update(siteID, name);
-      this.setState({ isEditable: false });
+      this.setState({ isEditable: false, currentEditValue: name });
       toast.success('Updated title !', {
         position: toast.POSITION.RIGHT_CENTER
       });
@@ -63,6 +66,7 @@ class Home extends PureComponent {
   };
 
   buttonSwitch = () => {
+    console.log(this.state.currentEditValue);
     this.setState(prevState => ({
       isEditable: !prevState.isEditable
     }));
@@ -86,8 +90,9 @@ class Home extends PureComponent {
       const { getBulkTraffic } = this.props;
       getBulkTraffic(urlsToQuery, this.props.siteRank.currentListId).then(
         res => {
+          console.log('res', res.type === 'GET_TRAFFIC_REQUEST_SUCCESS');
           if (res.type === 'GET_TRAFFIC_REQUEST_SUCCESS') {
-            return true;
+            console.log('true');
           }
           return false;
         }
@@ -96,7 +101,7 @@ class Home extends PureComponent {
       // if there are no new sites in the tags, remove the (useless) tags
       return true;
     }
-    return false;
+    return true;
   };
 
   render() {
@@ -126,7 +131,7 @@ class Home extends PureComponent {
                 placeholder={name}
               />
             ) : (
-              <h2>{name}</h2>
+              <h2>{currentEditValue}</h2>
             )}
 
             <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />

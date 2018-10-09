@@ -1,3 +1,5 @@
+import { filter } from 'lodash';
+
 const initialState = {
   ranks: [],
   currentListId: null,
@@ -34,6 +36,16 @@ export default (state = initialState, action) => {
     case 'SINGLE_LIST_REQUEST_FAIL': {
       console.log('singel fail');
       return { ...state, isLoading: false };
+    }
+    case 'DELETE_SITE_FROM_LIST_SUCCESS': {
+      console.log('action delete', action);
+      const websiteId = action.deletedList.data;
+      console.log('before', state.ranks, websiteId);
+      const ranks = filter(state.ranks, item => item._id !== websiteId);
+      return { ...state, ranks };
+    }
+    case 'DELETE_SITE_FROM_LIST_FAIL': {
+      return { ...state };
     }
     default:
       return state;

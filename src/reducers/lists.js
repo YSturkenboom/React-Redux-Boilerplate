@@ -1,4 +1,4 @@
-import { filter, remove } from 'lodash';
+import { remove } from 'lodash';
 
 const initialState = {
   data: [],
@@ -60,14 +60,6 @@ export default (state = initialState, action) => {
     }
     case 'UPDATE_MULTIPLE_WEBSITES_FAIL': {
       return state;
-    }
-    case 'DELETE_SITE_FROM_LIST_SUCCESS': {
-      const { deletedList } = action.result.data;
-      const newData = filter(state.data, item => item._id !== deletedList);
-      return { ...state, data: newData };
-    }
-    case 'DELETE_SITE_FROM_LIST_FAIL': {
-      return { ...state, err: action.result.err };
     }
     default:
       return state;
