@@ -21,7 +21,10 @@ export default class RankingRow extends PureComponent {
           </button>
         </td>
         <td className="second_table">
-          <div className="tablerow__rank">#{this.props.rank.rank}</div>
+          <div className="tablerow__rank">
+            <span className="number_accent">#</span>
+            {this.props.rank.rank}
+          </div>
           <div className="tablerow__category">{this.props.rank.category}</div>
         </td>
       </tr>
