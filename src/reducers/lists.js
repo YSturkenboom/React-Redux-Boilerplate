@@ -53,8 +53,8 @@ export default (state = initialState, action) => {
     }
 
     case 'LIST_TITLE_UPDATE_SUCCESS': {
-      console.log('title update succes', action);
-      const { data } = action;
+      console.log('title update succes', action.result);
+      const { data } = action.result;
       const { name } = data;
       return { data, name };
     }
