@@ -75,12 +75,17 @@ class Navigation extends Component {
             <Nav navbar>
               <div>
                 <NavItem>
-                  <NavLink exact to="/" tag={RouterNavLink}>
+                  <NavLink
+                    exact
+                    to="/list/"
+                    active={/list\/.*/.test(window.location)}
+                    tag={RouterNavLink}
+                  >
                     Analyze websites
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/" tag={RouterNavLink}>
+                  <NavLink exact to="/" active={false} tag={RouterNavLink}>
                     Your Lists
                   </NavLink>
                 </NavItem>
