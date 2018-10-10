@@ -124,6 +124,8 @@ class Home extends PureComponent {
       />
     ));
 
+    console.log(ranks);
+
     return (
       <div className="Home">
         <Helmet title="Analyze" />
@@ -148,9 +150,13 @@ class Home extends PureComponent {
             <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
           </div>
         </div>
-        <Table responsive className="RankTable">
-          <tbody>{rows}</tbody>
-        </Table>
+        {ranks.length === 0 ? (
+          'Get started by entering some websites into the search bar and pressing the Analyze button!'
+        ) : (
+          <Table responsive className="RankTable">
+            <tbody>{rows}</tbody>
+          </Table>
+        )}
       </div>
     );
   }
