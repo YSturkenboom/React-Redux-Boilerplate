@@ -51,7 +51,7 @@ class ResetPassword extends PureComponent {
 
     if (password !== password2) {
       toast.error('Sorry, the passwords are differents');
-    } else if (password.length() < 8 && password.length()) {
+    } else if (password.length < 8 && password.length) {
       toast.error('Sorry, the password must have at least 8 characters');
     } else {
       const token = get(match, 'params.token');

@@ -61,11 +61,11 @@ class Home extends PureComponent {
       .then(res => {
         if (res.type === 'DELETE_SITE_FROM_LIST_FAIL') {
           toast.error(`Something went deleting website`, {
-            position: toast.POSITION.BOTTOM_CENTER
+            position: toast.POSITION.TOP_RIGHT
           });
         } else {
           toast.info(`Succesfully deleted websites from your list`, {
-            position: toast.POSITION.BOTTOM_CENTER
+            position: toast.POSITION.TOP_RIGHT
           });
         }
       });
@@ -78,11 +78,11 @@ class Home extends PureComponent {
       this.props.update(siteID, name).then(res => {
         if (res.type === 'LIST_TITLE_UPDATE_FAIL') {
           toast.error(`Something went wrong deleting the list`, {
-            position: toast.POSITION.BOTTOM_CENTER
+            position: toast.POSITION.TOP_RIGHT
           });
         } else {
           toast.success(`Succesfully updated list title`, {
-            position: toast.POSITION.BOTTOM_CENTER
+            position: toast.POSITION.TOP_RIGHT
           });
         }
       });
