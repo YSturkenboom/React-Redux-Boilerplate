@@ -2,6 +2,18 @@ import axios from 'axios';
 
 import { apiUrl } from '../config';
 
+export const deleteSiteFromList = (websiteId, listId) => async dispatch => {
+  try {
+    const deletedList = await axios.delete(
+      `${apiUrl}/lists/delete-website/${listId}/${websiteId}`,
+      {}
+    );
+    return dispatch({ type: 'DELETE_SITE_FROM_LIST_SUCCESS', deletedList });
+  } catch (err) {
+    return dispatch({ type: 'DELETE_SITE_FROM_LIST_FAIL', err });
+  }
+};
+
 export const createNewList = () => async dispatch => {
   try {
     console.log('creating list');

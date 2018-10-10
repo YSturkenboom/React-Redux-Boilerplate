@@ -39,7 +39,9 @@ export default (state = initialState, action) => {
     }
 
     case 'FORGOT_PASSWORD_FAILED': {
-      return { ...initialState, resetPasswordSent: false };
+      const error = action.err;
+      console.log(error);
+      return { ...state, resetPasswordSent: false, error };
     }
 
     case 'RESET_PASSWORD_SUCCESS': {

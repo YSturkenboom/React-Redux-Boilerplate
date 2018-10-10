@@ -10,9 +10,10 @@ export const getBulkTraffic = (sites, listId) => async dispatch => {
       `${apiUrl}/lists/update-websites/${listId}`,
       { sites }
     );
+    console.log('result in action', result);
     return dispatch({
       type: 'GET_TRAFFIC_REQUEST_SUCCESS',
-      ranks: result.data.websites
+      ranks: result.data
     });
   } catch (err) {
     return dispatch({

@@ -84,7 +84,7 @@ class ResetPassword extends PureComponent {
 
     return (
       <div className="resetpassword">
-        <Helmet title="ResetPassword" />
+        <Helmet title="Reset password" />
 
         {!this.props.auth.checkingSession && (
           <div className="resetpassword-content">

@@ -20,11 +20,6 @@
         > li {
           margin: auto;
 
-          &.nav-item .nav-link {
-            padding-left: 10px;
-            padding-right: 10px;
-          }
-
           > a {
             position: relative;
             transition: color 0.25s ease 0s;
@@ -33,6 +28,18 @@
             padding-left: 10px;
             padding-right: 10px;
 
+            &.active {
+              &::after {
+                position: absolute;
+                content: '';
+                background-color: rgb(24, 236, 192);
+                transition: left 0.25s, right 0.25s;
+                left: 0;
+                right: 0;
+                bottom: -50%;
+                height: 2px;
+              }
+            }
             &::after {
               position: absolute;
               content: '';
@@ -40,7 +47,7 @@
               transition: left 0.25s, right 0.25s;
               left: 50%;
               right: 50%;
-              bottom: 0;
+              bottom: -50%;
               height: 2px;
             }
             &:hover::after {

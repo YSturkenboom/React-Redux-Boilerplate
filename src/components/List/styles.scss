@@ -19,7 +19,7 @@
       font-size: 22px;
       font-weight: 800;
       margin-top: 20px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -34,6 +34,7 @@
     &__date {
       font-size: 14px;
       color: #737373;
+      margin-top: 60px;
     }
     &__amount {
       font-size: 20px;
@@ -62,7 +63,7 @@
     bottom: 20px;
     color: #ff6e72;
     z-index: 1;
-    font-size: 24px;
+    font-size: 16px;
   }
 
   .anchor {
