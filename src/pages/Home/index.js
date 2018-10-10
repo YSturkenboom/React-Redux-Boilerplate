@@ -132,6 +132,8 @@ class Home extends PureComponent {
     const { name } = this.props.lists;
     const { currentEditValue } = this.state;
 
+    console.log('ranks', ranks);
+
     const rows = ranks.map(rank => (
       <RankingRow
         key={rank._id}

@@ -1,17 +1,18 @@
 import React, { PureComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/pro-light-svg-icons';
+import { UncontrolledTooltip } from 'reactstrap';
 
 import './styles.scss';
 
 export default class RankingRow extends PureComponent {
   render() {
-    const { rank } = this.props.rank;
+    const { _id, rank, date, url, category } = this.props.rank;
     return (
-      <tr key={this.props._id}>
+      <tr key={_id}>
         <td className="first_table">
-          <div className="tablerow__date">{this.props.rank.date}</div>
-          <div className="tablerow__site">{this.props.rank.url}</div>
+          <div className="tablerow__date">{date}</div>
+          <div className="tablerow__site">{url}</div>
           <button
             type="submit"
             className="tablerow__delete"
@@ -28,9 +29,23 @@ export default class RankingRow extends PureComponent {
               {rank}
             </div>
           ) : (
-            <h2>No ranking</h2>
+            <h2>
+              No ranking
+              <div className="tooltip" id={`ToolTipRanks${_id}`}>
+                ?
+              </div>
+              <UncontrolledTooltip
+                placement="right"
+                target={`ToolTipRanks${_id}`}
+              >
+                No ranking means that the site you are trying to analyze is
+                currently too unknown to receive a ranking. Is this your site?
+                Contact us at hello@storyofams.com, and we&#39;ll get you out
+                this spot in no time!
+              </UncontrolledTooltip>
+            </h2>
           )}
-          <div className="tablerow__category">{this.props.rank.category}</div>
+          <div className="tablerow__category">{category}</div>
         </td>
       </tr>
     );

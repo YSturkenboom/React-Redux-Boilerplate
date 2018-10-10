@@ -28,7 +28,6 @@ export default (state = initialState, action) => {
       const newRanks = sortBy([...state.ranks, ...action.ranks], 'rank');
       return { ...state, ranks: newRanks };
     }
-
     case 'GET_TRAFFIC_REQUEST_FAIL': {
       return { ...state };
     }
@@ -41,9 +40,7 @@ export default (state = initialState, action) => {
       return { ...state, isLoading: false };
     }
     case 'DELETE_SITE_FROM_LIST_SUCCESS': {
-      console.log('action delete', action);
       const websiteId = action.deletedList.data;
-      console.log('before', state.ranks, websiteId);
       const ranks = filter(state.ranks, item => item._id !== websiteId);
       return { ...state, ranks };
     }
