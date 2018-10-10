@@ -1,3 +1,4 @@
+import Moment from 'react-moment';
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,6 +7,7 @@ import './styles.scss';
 
 export default class ListsOverview extends PureComponent {
   render() {
+    const { createdAt } = this.props.list;
     return (
       <div className="SitesList">
         <Link
@@ -16,7 +18,9 @@ export default class ListsOverview extends PureComponent {
           {' '}
         </Link>
 
-        <div className="list__date">ENTER DATE</div>
+        <div className="list__date">
+          <Moment format="YYYY/MM/DD" date={createdAt} />
+        </div>
         <div className="list__name">{this.props.list.name}</div>
         <div className="list__amount">
           {this.props.list.websites

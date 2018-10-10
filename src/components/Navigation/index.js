@@ -17,7 +17,9 @@ import {
 } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toast } from 'react-toastify';
 import { faUser } from '@fortawesome/pro-light-svg-icons';
+import { listActions } from '../../actions';
 
 import './styles.scss';
 
@@ -35,6 +37,21 @@ class Navigation extends Component {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen
     }));
+  }
+
+  addNewList() {
+    this.props.create().then(res => {
+      if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
+        toast.error(`Something went adding a new list`, {
+          position: toast.POSITION.BOTTOM_CENTER
+        });
+      } else {
+        toast.success(`Succesfully added a new list`, {
+          position: toast.POSITION.BOTTOM_CENTER
+        });
+        this.props.history.push(`/list/${res.newListId.data._id}`);
+      }
+    });
   }
 
   render() {
@@ -86,6 +103,11 @@ class Navigation extends Component {
   }
 }
 
-const connector = connect(({ auth }) => ({ auth }));
+const connector = connect(
+  ({ auth, lists }) => ({ auth, lists }),
+  dispatch => ({
+    create: () => dispatch(listActions.createNewList())
+  })
+);
 
 export default withRouter(connector(Navigation));
