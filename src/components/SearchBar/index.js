@@ -41,7 +41,7 @@ class SearchBar extends PureComponent {
             onChangeInput={this.handleChangeInput}
             addKeys={[9, 13, 32, 188]}
             inputProps={{
-              placeholder: 'Add a website'
+              placeholder: 'Add a website, such as www.google.com'
             }}
           />
           <button

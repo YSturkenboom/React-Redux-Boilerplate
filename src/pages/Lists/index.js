@@ -24,11 +24,11 @@ class Lists extends PureComponent {
     this.props.deleteList(id).then(res => {
       if (res.type === 'LIST_DELETE_FAIL') {
         toast.error(`Something went wrong deleting the list`, {
-          position: toast.POSITION.BOTTOM_CENTER
+          position: toast.POSITION.TOP_RIGHT
         });
       } else {
         toast.info(`Succesfully deleted the list`, {
-          position: toast.POSITION.BOTTOM_CENTER
+          position: toast.POSITION.TOP_RIGHT
         });
       }
     });
@@ -37,12 +37,12 @@ class Lists extends PureComponent {
   addNewList() {
     this.props.create().then(res => {
       if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
-        toast.error(`Something went adding a new list`, {
-          position: toast.POSITION.BOTTOM_CENTER
+        toast.error(`Something went wrong adding a new list`, {
+          position: toast.POSITION.TOP_RIGHT
         });
       } else {
         toast.success(`Succesfully added a new list`, {
-          position: toast.POSITION.BOTTOM_CENTER
+          position: toast.POSITION.TOP_RIGHT
         });
         this.props.history.push(`/list/${res.newListId.data._id}`);
       }

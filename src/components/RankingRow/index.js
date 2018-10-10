@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/pro-light-svg-icons';
 import { UncontrolledTooltip } from 'reactstrap';
+import { formatNumber } from '../../utils/helpers';
 
 import './styles.scss';
 
@@ -26,13 +27,13 @@ export default class RankingRow extends PureComponent {
           {rank ? (
             <div className="tablerow__rank">
               <span className="number_accent">#</span>
-              {rank}
+              {formatNumber(rank)}
             </div>
           ) : (
             <h2>
               No ranking
-              <div className="tooltip" id={`ToolTipRanks${_id}`}>
-                ?
+              <div className="relContainer">
+                <div id={`ToolTipRanks${_id}`}>?</div>
               </div>
               <UncontrolledTooltip
                 placement="right"
