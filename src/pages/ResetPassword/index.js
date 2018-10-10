@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import {
   Alert,
   Button,
@@ -48,13 +50,21 @@ class ResetPassword extends PureComponent {
     const { password, password2 } = this.state;
 
     if (password !== password2) {
-      console.log('Sorry the two passwords are differents');
+      toast.error('Sorry, the passwords are differents');
+    } else if (password.length() < 8 && password.length()) {
+      toast.error('Sorry, the password must have at least 8 characters');
+    } else {
+      const token = get(match, 'params.token');
+      resetPassword(token, password).then(res => {
+        if (res.type === 'RESET_PASSWORD_FAILED') {
+          console.log(res.error);
+          toast.error('Sorry, the password could not be reset');
+        } else {
+          history.push('/login');
+          toast.success('Password successfully reset !');
+        }
+      });
     }
-
-    const token = get(match, 'params.token');
-    console.log(token, password);
-    resetPassword(token, password);
-    history.push('/login');
   };
 
   handleInputChange = ev => {

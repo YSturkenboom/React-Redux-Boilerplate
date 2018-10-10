@@ -27,19 +27,19 @@ export const login = (email, password) => async dispatch => {
       password
     });
 
-    dispatch({ type: 'AUTH_LOGGED_IN', account: res.data.account });
+    return dispatch({ type: 'AUTH_LOGGED_IN', account: res.data.account });
   } catch (err) {
     const res = err.response;
-    dispatch({ type: 'AUTH_FAILED', err: res.data.error });
+    return dispatch({ type: 'AUTH_FAILED', err: res.data.error });
   }
 };
 
 export const logout = () => async dispatch => {
   try {
     await axios.get(`${apiUrl}/auth/logout`);
-    dispatch({ type: 'AUTH_LOGGED_OUT_SUCCESS' });
+    return dispatch({ type: 'AUTH_LOGGED_OUT_SUCCESS' });
   } catch (err) {
-    dispatch({ type: 'AUTH_LOGGED_OUT_FAILED' });
+    return dispatch({ type: 'AUTH_LOGGED_OUT_FAILED' });
   }
 };
 
@@ -57,9 +57,9 @@ export const forgotPassword = email => async dispatch => {
 export const resetPassword = (token, password) => async dispatch => {
   try {
     await axios.put(`${apiUrl}/accounts/set-password`, { token, password });
-    dispatch({ type: 'RESET_PASSWORD_SUCCESS' });
+    return dispatch({ type: 'RESET_PASSWORD_SUCCESS' });
   } catch (err) {
     console.log(err);
-    dispatch({ type: 'RESET_PASSWORD_FAILED' });
+    return dispatch({ type: 'RESET_PASSWORD_FAILED', error: err });
   }
 };

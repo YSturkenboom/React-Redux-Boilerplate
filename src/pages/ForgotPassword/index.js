@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Redirect, Link } from 'react-router-dom';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import {
   Alert,
   Button,
@@ -40,10 +40,15 @@ class ForgotPassword extends PureComponent {
   onSubmitVerify = ev => {
     ev.preventDefault();
 
-    const { forgotPassword } = this.props;
+    console.log('logging in');
+
+    const { forgotPassword, history } = this.props;
     const { email } = this.state;
 
-    forgotPassword(email);
+    forgotPassword(email).then(() => {
+      history.push('/login');
+      toast.success('If this account exists you should have received an email');
+    });
   };
 
   handleInputChange = ev => {
