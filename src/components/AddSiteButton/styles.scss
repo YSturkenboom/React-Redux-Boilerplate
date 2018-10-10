@@ -1,8 +1,9 @@
 .AddSite {
   width: 260px;
   height: 260px;
+  position: relative;
   background-color: #fff;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   box-shadow: 0 14px 15px 0 rgba(0, 0, 0, 0.04);
   flex-shrink: 0;
@@ -13,16 +14,16 @@
   border-image-slice: 2;
   border-image-repeat: round;
   border-image: url('https://i.imgur.com/kNVhrOh.png') 2 round;
-  font-size: 40px;
   transition: box-shadow 0.3s, transform 0.3s, -webkit-box-shadow 0.3s,
     -webkit-transform 0.3s;
+  color: black;
 
   .list {
     &__name {
       font-size: 22px;
       font-weight: 800;
       margin-top: 20px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -33,16 +34,15 @@
       -o-transition: all 0.2s ease-in;
       -webkit-transition: all 0.2s ease-in;
       transition: all 0.2s ease-in;
-      color: black;
     }
     &__date {
       font-size: 14px;
       color: #737373;
+      margin-top: 60px;
     }
     &__amount {
       font-size: 20px;
       color: #737373;
-      font-family: 'Karla', sans-serif;
     }
   }
 
@@ -52,10 +52,29 @@
 
   &:hover {
     transform: translateY(-10px);
+    text-decoration: none;
+
     .list {
       &__name {
         color: #18ecc0;
       }
     }
+  }
+
+  .trashIcon {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    color: #ff6e72;
+    z-index: 1;
+    font-size: 16px;
+  }
+
+  .anchor {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
   }
 }
