@@ -1,4 +1,4 @@
-import { filter } from 'lodash';
+import { filter, sortBy } from 'lodash';
 
 const initialState = {
   ranks: [],
@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
       return { ...state, error };
     }
     case 'GET_TRAFFIC_REQUEST_SUCCESS': {
-      const newRanks = [...state.ranks, ...action.ranks];
+      const newRanks = sortBy([...state.ranks, ...action.ranks], 'rank');
       return { ...state, ranks: newRanks };
     }
 
