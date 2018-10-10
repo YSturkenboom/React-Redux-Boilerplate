@@ -77,7 +77,7 @@ class Navigation extends Component {
                 <NavItem>
                   <NavLink
                     exact
-                    to="/list/"
+                    to="/list/new"
                     active={/list\/.*/.test(window.location)}
                     tag={RouterNavLink}
                   >

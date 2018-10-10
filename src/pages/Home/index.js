@@ -28,6 +28,22 @@ class Home extends PureComponent {
   componentDidMount() {
     const { getSingleList, getRanksForWebsitesInList } = this.props;
 
+    // the tab was clicked to create a new list, immediately make the list and Redirect
+    if (this.props.match.params.id === 'new') {
+      this.props.create().then(res => {
+        if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
+          toast.error(`Something went adding a new list`, {
+            position: toast.POSITION.TOP_RIGHT
+          });
+        } else {
+          toast.success(`Succesfully added a new list`, {
+            position: toast.POSITION.TOP_RIGHT
+          });
+          this.props.history.push(`/list/${res.newListId.data._id}`);
+        }
+      });
+    }
+
     // Load list into state
     getSingleList(this.props.match.params.id).then(() =>
       this.setState({ currentEditValue: this.props.lists.name })
@@ -172,7 +188,8 @@ const connector = connect(
     getSingleList: id => dispatch(listActions.getSingleList(id)),
     update: (id, name) => dispatch(listActions.updateTitle(id, name)),
     deleteSiteFromList: (siteId, listId) =>
-      dispatch(listActions.deleteSiteFromList(siteId, listId))
+      dispatch(listActions.deleteSiteFromList(siteId, listId)),
+    create: () => dispatch(listActions.createNewList())
   })
 );
 
