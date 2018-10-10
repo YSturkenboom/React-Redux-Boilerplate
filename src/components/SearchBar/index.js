@@ -62,7 +62,7 @@ class SearchBar extends PureComponent {
             + Analyze URL(&#39;s)
           </button>
         </div>
-        <div className="toolTip">Press tab to add multiple URL&#39;s</div>
+        <div className="toolTip">Press space to add multiple URL&#39;s</div>
       </div>
     );
   }
