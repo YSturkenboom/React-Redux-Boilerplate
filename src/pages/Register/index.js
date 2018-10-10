@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Redirect, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   Alert,
   Button,
@@ -46,10 +47,17 @@ class Register extends PureComponent {
   onSubmitVerify = ev => {
     ev.preventDefault();
 
-    const { register } = this.props;
+    const { register, history } = this.props;
     const { firstName, lastName, company, email } = this.state;
 
-    register(firstName, lastName, company, email);
+    register(firstName, lastName, company, email).then(res => {
+      if (res.type === 'REGISTER_FAILED') {
+        toast.error('Sorry could not create an account');
+      } else {
+        history.push('/login');
+        toast.success('Account successfully created !');
+      }
+    });
   };
 
   handleInputChange = ev => {

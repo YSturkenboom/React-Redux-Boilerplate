@@ -19,11 +19,11 @@ export const register = (
     });
     console.log(firstName, lastName, company, email);
     console.log(res);
-    dispatch({ type: 'AUTH_REGISTER', account: res.data.account });
+    return dispatch({ type: 'AUTH_REGISTER', account: res.data.account });
   } catch (err) {
     const res = err.response;
     console.log(res);
     console.log(firstName, lastName, company, email);
-    dispatch({ type: 'REGISTER_FAILED', err: res.data.error });
+    return dispatch({ type: 'REGISTER_FAILED', err: res.data.error });
   }
 };
