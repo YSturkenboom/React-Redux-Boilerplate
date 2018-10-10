@@ -270,6 +270,7 @@
     "history": "^4.7.2",
     "hpp": "^0.2.2",
     "html-minifier": "^3.5.20",
+    "is-url": "^1.2.4",
     "loadable-components": "^2.2.3",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",

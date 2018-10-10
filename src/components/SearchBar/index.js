@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import TagsInput from 'react-tagsinput';
 import { map, filter, includes } from 'lodash';
+import { isUrl } from 'is-url';
 
 import './styles.scss';
 
@@ -30,7 +31,9 @@ class SearchBar extends PureComponent {
       <div>
         <div className="form">
           <TagsInput
+            addOnBlur
             className="form__input"
+            validate={input => isUrl(input)}
             placeholder="google.com"
             value={this.state.tags}
             onChange={this.handleChange}
@@ -51,9 +54,7 @@ class SearchBar extends PureComponent {
                 item => !includes(oldUrls, item)
               );
               const res = this.props.actionOnSubmit(diff);
-              console.log('hallooooooooooooooooooooooo', res);
               if (res) {
-                console.log('halloooo?', res);
                 this.setState({ tags: [] });
               }
             }}
