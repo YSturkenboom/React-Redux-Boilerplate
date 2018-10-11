@@ -49,8 +49,12 @@ class SearchBar extends PureComponent {
             className="form__button"
             onClick={() => {
               const oldUrls = map(this.props.ranks, 'url');
+              const cleanedNewUrls = this.state.tags.map(
+                url =>
+                  url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[0]
+              );
               const diff = filter(
-                this.state.tags,
+                cleanedNewUrls,
                 item => !includes(oldUrls, item)
               );
               const res = this.props.actionOnSubmit(diff);

@@ -36,7 +36,6 @@ export default (state = initialState, action) => {
       return { ...state, currentListId: _id };
     }
     case 'SINGLE_LIST_REQUEST_FAIL': {
-      console.log('singel fail');
       return { ...state, isLoading: false };
     }
     case 'DELETE_SITE_FROM_LIST_SUCCESS': {

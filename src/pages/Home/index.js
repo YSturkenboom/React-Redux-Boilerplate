@@ -32,7 +32,7 @@ class Home extends PureComponent {
     if (this.props.match.params.id === 'new') {
       this.props.create().then(res => {
         if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
-          toast.error(`Something went adding a new list`, {
+          toast.error(`Something went wrong adding a new list`, {
             position: toast.POSITION.TOP_RIGHT
           });
         } else {
@@ -109,12 +109,15 @@ class Home extends PureComponent {
       getBulkTraffic(urlsToQuery, this.props.siteRank.currentListId).then(
         res => {
           if (res.type === 'GET_TRAFFIC_REQUEST_FAIL') {
-            toast.error(`Something went wrong adding websites`, {
-              position: toast.POSITION.BOTTOM_CENTER
-            });
+            toast.error(
+              `One or more of the URL's entered are invalid. (Please mind typo's)`,
+              {
+                position: toast.POSITION.TOP_RIGHT
+              }
+            );
           } else {
             toast.success(`Succesfully added websites to your list`, {
-              position: toast.POSITION.BOTTOM_CENTER
+              position: toast.POSITION.TOP_RIGHT
             });
           }
           return false;
