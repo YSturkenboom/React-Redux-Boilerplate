@@ -89,7 +89,7 @@ class SearchBar extends PureComponent {
           />
           <button
             type="submit"
-            className="form__button"
+            className="btn btn-primary"
             onClick={() => {
               const oldUrls = map(this.props.ranks, 'url');
               const diff = filter(

@@ -95,3 +95,16 @@ export const updateTitle = (id, name) => async dispatch => {
     });
   }
 };
+
+export const refreshList = listId => async dispatch => {
+  try {
+    const result = await axios.put(
+      `${apiUrl}/lists/refresh-websites/${listId}`,
+      {}
+    );
+    console.log('refrersh', result);
+    return dispatch({ type: 'LIST_REFRESH_SUCCESS', result });
+  } catch (error) {
+    return dispatch({ type: 'LIST_REFRESH_FAIL', error });
+  }
+};

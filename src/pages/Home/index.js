@@ -131,6 +131,10 @@ class Home extends PureComponent {
     return true;
   };
 
+  refreshList = async () => {
+    await this.props.refreshList(this.props.match.params.id);
+  };
+
   render() {
     const { ranks } = this.props.siteRank;
     const { name } = this.props.lists;
@@ -197,6 +201,7 @@ const connector = connect(
     deleteSiteFromList: (siteId, listId) =>
       dispatch(listActions.deleteSiteFromList(siteId, listId)),
     create: () => dispatch(listActions.createNewList())
+    // refreshList: listId => dispatch(listActions.refreshList(listId))
   })
 );
 

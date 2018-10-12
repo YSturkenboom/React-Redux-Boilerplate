@@ -24,8 +24,9 @@ export const getBulkTraffic = (sites, listId) => async dispatch => {
 
 export const getRanksForWebsitesInList = listId => async dispatch => {
   try {
-    const result = await axios.get(`${apiUrl}/lists/read/${listId}`, {});
-    return dispatch({ type: 'GET_RANK_FOR_WEBSITE_SUCCESS', result });
+    const { ranks } = await axios.get(`${apiUrl}/lists/read/${listId}`, {})
+      .data;
+    return dispatch({ type: 'GET_RANK_FOR_WEBSITE_SUCCESS', ranks });
   } catch (err) {
     return dispatch({
       type: 'GET_RANK_FOR_WEBSITE_FAIL',

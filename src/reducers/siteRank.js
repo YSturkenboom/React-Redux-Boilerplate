@@ -34,8 +34,9 @@ export default (state = initialState, action) => {
       return { ...state, invalidUrls };
     }
     case 'SINGLE_LIST_REQUEST_SUCCESS': {
-      const { _id } = action.result.data;
-      return { ...state, currentListId: _id };
+      const { _id, websites } = action.result.data;
+      console.log('fuck', action);
+      return { ...state, ranks: websites, currentListId: _id };
     }
     case 'SINGLE_LIST_REQUEST_FAIL': {
       return { ...state, isLoading: false };
@@ -47,6 +48,10 @@ export default (state = initialState, action) => {
     }
     case 'DELETE_SITE_FROM_LIST_FAIL': {
       return { ...state };
+    }
+    case 'LIST_REFRESH_SUCCESS': {
+      const { ranks } = action.result.data;
+      return { ...state, isLoading: false, ranks };
     }
     default:
       return state;
