@@ -27,7 +27,8 @@ class ForgotPassword extends PureComponent {
     super(props);
 
     this.state = {
-      email: ''
+      email: '',
+      completed: false
     };
   }
 
@@ -73,7 +74,14 @@ class ForgotPassword extends PureComponent {
         {!this.props.auth.checkingSession && (
           <div className="forgotpassword-content">
             <Card body className="forgotpassword-window">
-              <h4 className="text-center">Password Reset</h4>
+              {this.state.completed ? (
+                <h4>
+                  Thank you for registering! A link to reset your password has
+                  been sent to {this.state.email}
+                </h4>
+              ) : (
+                <h4 className="text-center">Password Reset</h4>
+              )}
               <span className="spacer" />
               {error && <Alert color="danger">{error}</Alert>}
               <Form onSubmit={this.onSubmitVerify}>
@@ -95,6 +103,7 @@ class ForgotPassword extends PureComponent {
                       onChange={this.handleInputChange}
                       placeholder="E-mail"
                       required
+                      disabled={this.state.completed}
                       bsSize="lg"
                     />
                   </InputGroup>

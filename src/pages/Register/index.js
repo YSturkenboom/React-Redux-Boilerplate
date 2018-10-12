@@ -34,7 +34,8 @@ class Register extends PureComponent {
       firstName: '',
       lastName: '',
       company: '',
-      email: ''
+      email: '',
+      completed: false
     };
   }
 
@@ -47,14 +48,14 @@ class Register extends PureComponent {
   onSubmitVerify = ev => {
     ev.preventDefault();
 
-    const { register, history } = this.props;
+    const { register } = this.props;
     const { firstName, lastName, company, email } = this.state;
 
     register(firstName, lastName, company, email).then(res => {
       if (res.type === 'REGISTER_FAILED') {
         toast.error('Sorry could not create an account');
       } else {
-        history.push('/login');
+        this.setState({ completed: true });
         toast.success('Account successfully created !');
       }
     });
@@ -78,11 +79,17 @@ class Register extends PureComponent {
     return (
       <div className="Register">
         <Helmet title="Register" />
-
         {!this.props.auth.checkingSession && (
           <div className="login-content">
             <Card body className="login-window">
-              <h4 className="text-center">Register</h4>
+              {this.state.completed ? (
+                <h4>
+                  Thank you for registering! A verification email has been sent
+                  to {this.state.email}
+                </h4>
+              ) : (
+                <h4 className="text-center">Register</h4>
+              )}
               <span className="spacer" />
               {error && <Alert color="danger">{error}</Alert>}
               <Form onSubmit={this.onSubmitVerify}>
@@ -104,6 +111,7 @@ class Register extends PureComponent {
                       onChange={this.handleInputChange}
                       placeholder="Firstname"
                       required
+                      disabled={this.state.completed}
                       bsSize="lg"
                     />
                   </InputGroup>
@@ -126,6 +134,7 @@ class Register extends PureComponent {
                       onChange={this.handleInputChange}
                       placeholder="Lastname"
                       required
+                      disabled={this.state.completed}
                       bsSize="lg"
                     />
                   </InputGroup>
@@ -148,6 +157,7 @@ class Register extends PureComponent {
                       onChange={this.handleInputChange}
                       placeholder="Company"
                       required
+                      disabled={this.state.completed}
                       bsSize="lg"
                     />
                   </InputGroup>
@@ -170,6 +180,7 @@ class Register extends PureComponent {
                       onChange={this.handleInputChange}
                       placeholder="E-mail"
                       required
+                      disabled={this.state.completed}
                       bsSize="lg"
                     />
                   </InputGroup>
