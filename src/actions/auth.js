@@ -1,22 +1,22 @@
 import axios from 'axios';
+import { get } from 'lodash';
 
 import { apiUrl } from '../config';
-
-axios.defaults.withCredentials = true;
 
 export const checkSession = () => async dispatch => {
   try {
     const res = await axios.get(`${apiUrl}/auth/session`);
 
     if (res.data.account) {
-      dispatch({ type: 'AUTH_LOGGED_IN', account: res.data.account });
-    } else {
-      dispatch({ type: 'AUTH_NOT_LOGGED_IN' });
+      return dispatch({ type: 'AUTH_LOGGED_IN', account: res.data.account });
     }
+
+    return dispatch({ type: 'AUTH_NOT_LOGGED_IN' });
   } catch (err) {
     const res = err.response;
+
     dispatch({ type: 'AUTH_NOT_LOGGED_IN' });
-    dispatch({ type: 'AUTH_FAILED', err: res.data.error });
+    return dispatch({ type: 'AUTH_FAILED', err: get(res, 'data.error') });
   }
 };
 
