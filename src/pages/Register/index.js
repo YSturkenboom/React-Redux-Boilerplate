@@ -82,13 +82,12 @@ class Register extends PureComponent {
         {!this.props.auth.checkingSession && (
           <div className="login-content">
             <Card body className="login-window">
-              {this.state.completed ? (
-                <h4>
+              <h4 className="text-center">Register</h4>
+              {this.state.completed && (
+                <Alert color="success">
                   Thank you for registering! A verification email has been sent
                   to {this.state.email}
-                </h4>
-              ) : (
-                <h4 className="text-center">Register</h4>
+                </Alert>
               )}
               <span className="spacer" />
               {error && <Alert color="danger">{error}</Alert>}

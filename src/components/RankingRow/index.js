@@ -26,13 +26,13 @@ export default class RankingRow extends PureComponent {
         <td className="second_table">
           {rank ? (
             <div className="tablerow__rank">
-              <span className="number_accent">#</span>
+              <span className="number_accent"># </span>
               {formatNumber(rank)}
             </div>
           ) : (
             <h2>
               No ranking
-              <div className="relContainer">
+              <div className="position-relative">
                 <div id={`ToolTipRanks${_id}`}>?</div>
               </div>
               <UncontrolledTooltip
@@ -46,7 +46,7 @@ export default class RankingRow extends PureComponent {
               </UncontrolledTooltip>
             </h2>
           )}
-          <div className="tablerow__category">{category}</div>
+          <div className="text-right">{category}</div>
         </td>
       </tr>
     );

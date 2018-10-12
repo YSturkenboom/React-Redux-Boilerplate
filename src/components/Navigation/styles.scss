@@ -4,8 +4,10 @@
   margin-bottom: 40px;
 
   &bar {
-    background-color: $color-white;
-    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.08);
+    &--wrapper {
+      background-color: $color-white;
+      box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.08);
+    }
 
     &-nav {
       justify-content: space-between;

@@ -4,4 +4,8 @@
 .Lists {
   max-width: 1000px;
   margin: auto;
+
+  &__overview {
+    max-width: 85%;
+  }
 }

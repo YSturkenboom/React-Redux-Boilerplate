@@ -1,6 +1,6 @@
 .btn {
   font-size: 21px;
-  font-family: $font-btns;
+  font-family: $font-primary;
   padding: 10px 40px;
   border-radius: 26px;
   transform: translateY(0);
@@ -39,6 +39,7 @@
     background-color: $color-black;
     color: $color-white;
     position: fixed;
+    padding: 0;
     right: 30px;
     bottom: 30px;
     border-radius: 50%;
