@@ -14,10 +14,10 @@ export const getBulkTraffic = (sites, listId) => async dispatch => {
       ranks: result.data
     });
   } catch (err) {
+    const { invalidUrls } = err.response.data.error.data;
     return dispatch({
       type: 'GET_TRAFFIC_REQUEST_FAIL',
-      error: 'oh noooo',
-      actualErr: err
+      invalidUrls
     });
   }
 };

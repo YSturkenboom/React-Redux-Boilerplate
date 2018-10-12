@@ -102,34 +102,33 @@ class Home extends PureComponent {
     }));
   };
 
-  analyze = urlsToQuery => {
+  analyze = async urlsToQuery => {
     if (urlsToQuery.length > 0) {
       console.log('urlstoquery', urlsToQuery);
       const { getBulkTraffic } = this.props;
-      getBulkTraffic(urlsToQuery, this.props.siteRank.currentListId).then(
-        res => {
-          if (res.type === 'GET_TRAFFIC_REQUEST_FAIL') {
-            toast.error(
-              `One or more of the URL's entered are invalid. (Please mind typo's)`,
-              {
-                position: toast.POSITION.BOTTOM_LEFT
-              }
-            );
-            console.log('huh?');
-            return false;
-          }
-          toast.success(`Succesfully added websites to your list`, {
-            position: toast.POSITION.BOTTOM_LEFT
-          });
-          return true;
-        }
+      const res = await getBulkTraffic(
+        urlsToQuery,
+        this.props.siteRank.currentListId
       );
-    } else {
-      console.log('how do you get here');
-      // if there are no new sites in the tags, remove the (useless) tags
+      if (res.type === 'GET_TRAFFIC_REQUEST_FAIL') {
+        toast.error(
+          `One or more of the URL's entered are invalid. (Please mind typo's)`,
+          {
+            position: toast.POSITION.BOTTOM_LEFT
+          }
+        );
+        console.log('huh?');
+        return false;
+      }
+
+      toast.success(`Succesfully added websites to your list`, {
+        position: toast.POSITION.BOTTOM_LEFT
+      });
+      console.log('hey suceesjes');
       return true;
     }
-    return false;
+    // if there are no new sites in the tags, remove the (useless) tags
+    return true;
   };
 
   render() {
@@ -155,6 +154,7 @@ class Home extends PureComponent {
         <SearchBar
           actionOnSubmit={this.analyze}
           ranks={this.props.siteRank.ranks}
+          invalidUrls={this.props.siteRank.invalidUrls}
         />
         <div className="Home__header">
           <div className="editableField">

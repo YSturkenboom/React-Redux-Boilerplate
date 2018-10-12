@@ -57,6 +57,10 @@
   padding: 5px;
   padding-left: 10px;
   padding-right: 10px;
+
+  &-invalid {
+    background-color: green;
+  }
 }
 
 .react-tagsinput-input {

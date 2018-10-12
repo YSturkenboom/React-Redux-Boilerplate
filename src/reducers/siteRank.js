@@ -3,7 +3,8 @@ import { filter, sortBy } from 'lodash';
 const initialState = {
   ranks: [],
   currentListId: null,
-  currentListName: null
+  currentListName: null,
+  invalidUrls: []
 };
 
 export default (state = initialState, action) => {
@@ -29,7 +30,8 @@ export default (state = initialState, action) => {
       return { ...state, ranks: newRanks };
     }
     case 'GET_TRAFFIC_REQUEST_FAIL': {
-      return { ...state };
+      const { invalidUrls } = action;
+      return { ...state, invalidUrls };
     }
     case 'SINGLE_LIST_REQUEST_SUCCESS': {
       const { _id } = action.result.data;
