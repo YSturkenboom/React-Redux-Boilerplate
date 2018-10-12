@@ -68,7 +68,7 @@ class Lists extends PureComponent {
       <div className="Lists">
         <Helmet title="Your Lists" />
         {!isLoading && (
-          <div className="ListsOverview">
+          <div className="d-flex mx-auto my-5">
             <AddSiteButton addNewList={this.addNewList} />
             {lists}
           </div>

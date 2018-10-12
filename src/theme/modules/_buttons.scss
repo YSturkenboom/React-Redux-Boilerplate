@@ -1,44 +1,36 @@
 .btn {
   font-size: 21px;
-  font-family: 'Karla', sans-serif;
+  font-family: $font-btns;
   padding: 10px 40px;
   border-radius: 26px;
-  -webkit-transform: translateY(0);
   transform: translateY(0);
-  -webkit-transition: background .3s, border .3s, color .3s, -webkit-box-shadow .3s, -webkit-transform .3s;
-  transition: background .3s, border .3s, color .3s, -webkit-box-shadow .3s, -webkit-transform .3s;
   transition: background .3s, border .3s, color .3s, box-shadow .3s, transform .3s;
-  transition: background .3s, border .3s, color .3s, box-shadow .3s, transform .3s, -webkit-box-shadow .3s, -webkit-transform .3s;
   outline: none;
 
   &-primary {
-    background-color: #000;
-    border-color: #000;
-    color: #fff;
-    -webkit-box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+    background-color: $color-black;
+    border-color: $color-black;
+    color: $color-white;
     box-shadow: 0 5px 30px rgba(0,0,0,0.3);
 
     &:hover {
-      color: #fff;
+      color: $color-white;
       background-color: #18ECC0;
       border-color: #18ECC0;
-      -webkit-box-shadow: 0 10px 35px rgba(24,236,192,0.48);
       box-shadow: 0 10px 35px rgba(24,236,192,0.48);
     }
   }
 
   &-secondary {
-    background-color: #fff;
-    border-color: #fff;
-    color: #000;
-    -webkit-box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+    background-color: $color-white;
+    border-color: $color-white;
+    color: $color-black;
     box-shadow: 0 5px 30px rgba(0,0,0,0.1);
 
     &:hover {
-      color: #fff;
+      color: $color-white;
       background-color: #18ECC0;
       border-color: #18ECC0;
-      -webkit-box-shadow: 0 10px 35px rgba(24,236,192,0.48);
       box-shadow: 0 10px 35px rgba(24,236,192,0.48);
     }
   }
@@ -52,28 +44,5 @@
     border-radius: 50%;
     width: 100px;
     height: 100px;
-  }
-}
-
-.button-outline {
-  background-color:transparent;
-  border: 1px solid black;
-  color: black;
-  border-radius: 23px;
-  min-width: 200px;
-
-  svg {
-    font-size: 14px;
-    color:black;
-    margin-left: 10px;
-  }
-
-  &:hover {
-    background-color: black;
-    color: white;
-
-    svg {
-      color: white;
-    }
   }
 }
