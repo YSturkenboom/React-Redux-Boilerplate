@@ -9,7 +9,7 @@ export default class ListsOverview extends PureComponent {
   render() {
     const { createdAt } = this.props.list;
     return (
-      <div className="SitesList">
+      <div className="SitesList p-0">
         <Link
           key={this.props.list._id}
           to={`/list/${this.props.list._id}`}

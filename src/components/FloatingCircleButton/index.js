@@ -21,7 +21,7 @@ export default class FloatingCircleButton extends PureComponent {
       return <Redirect push to="/halloooo" />;
     }
     return (
-      <Button className="floatingActionButton" onClick={this.props.addNewList}>
+      <Button className="btn__floating-action" onClick={this.props.addNewList}>
         <FontAwesomeIcon icon={faPlus} />
         <br />
         New List
