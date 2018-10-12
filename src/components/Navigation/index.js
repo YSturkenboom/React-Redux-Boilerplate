@@ -42,11 +42,11 @@ class Navigation extends Component {
   addNewList() {
     this.props.create().then(res => {
       if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
-        toast.error(`Something went adding a new list`, {
+        toast.error(`Something went wrong adding a new list`, {
           position: toast.POSITION.BOTTOM_CENTER
         });
       } else {
-        toast.success(`Succesfully added a new list`, {
+        toast.success(`Successfully added a new list`, {
           position: toast.POSITION.BOTTOM_CENTER
         });
         this.props.history.push(`/list/${res.newListId.data._id}`);

@@ -27,7 +27,7 @@ class Lists extends PureComponent {
           position: toast.POSITION.BOTTOM_LEFT
         });
       } else {
-        toast.info(`Succesfully deleted the list`, {
+        toast.info(`Successfully deleted the list`, {
           position: toast.POSITION.BOTTOM_LEFT
         });
       }
@@ -41,7 +41,7 @@ class Lists extends PureComponent {
           position: toast.POSITION.BOTTOM_LEFT
         });
       } else {
-        toast.success(`Succesfully added a new list`, {
+        toast.success(`Successfully added a new list`, {
           position: toast.POSITION.BOTTOM_LEFT
         });
         this.props.history.push(`/list/${res.newListId.data._id}`);

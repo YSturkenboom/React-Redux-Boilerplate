@@ -36,7 +36,7 @@ class Home extends PureComponent {
             position: toast.POSITION.BOTTOM_LEFT
           });
         } else {
-          toast.success(`Succesfully added a new list`, {
+          toast.success(`Successfully added a new list`, {
             position: toast.POSITION.BOTTOM_LEFT
           });
           this.props.history.push(`/list/${res.newListId.data._id}`);
@@ -60,11 +60,11 @@ class Home extends PureComponent {
       .deleteSiteFromList(websiteId, this.props.match.params.id)
       .then(res => {
         if (res.type === 'DELETE_SITE_FROM_LIST_FAIL') {
-          toast.error(`Something went deleting website`, {
+          toast.error(`Something went wrong deleting website`, {
             position: toast.POSITION.BOTTOM_LEFT
           });
         } else {
-          toast.info(`Succesfully deleted websites from your list`, {
+          toast.info(`Successfully deleted websites from your list`, {
             position: toast.POSITION.BOTTOM_LEFT
           });
         }
@@ -81,7 +81,7 @@ class Home extends PureComponent {
             position: toast.POSITION.BOTTOM_LEFT
           });
         } else {
-          toast.success(`Succesfully updated list title`, {
+          toast.success(`Successfully updated list title`, {
             position: toast.POSITION.BOTTOM_LEFT
           });
         }
@@ -121,7 +121,7 @@ class Home extends PureComponent {
         return false;
       }
 
-      toast.success(`Succesfully added websites to your list`, {
+      toast.success(`Successfully added websites to your list`, {
         position: toast.POSITION.BOTTOM_LEFT
       });
       console.log('hey suceesjes');
