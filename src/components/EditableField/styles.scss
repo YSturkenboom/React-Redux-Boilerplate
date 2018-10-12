@@ -1,9 +1,14 @@
+@import '../../theme/variables';
+
 .editableField {
+  cursor: pointer;
 
   input {
     border:none;
     border-bottom: 1px solid black;
     background:transparent;
     outline:none;
+    font-size: 2rem;
+    font-family: $font-secondary, serif;
   }
 }

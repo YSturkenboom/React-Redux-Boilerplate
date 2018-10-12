@@ -18,7 +18,7 @@ export default class ListsOverview extends PureComponent {
   }
 
   renderSiteList = list => (
-    <div className="SitesList">
+    <div className="SitesList p-0">
       <Link key={list._id} to={`/list/${list._id}`} className="anchor">
         {' '}
       </Link>
