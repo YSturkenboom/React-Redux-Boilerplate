@@ -19,7 +19,6 @@
       font-size: 22px;
       font-weight: 800;
       margin-top: 20px;
-      margin-bottom: 20px;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -59,11 +58,30 @@
 
   .trashIcon {
     position: absolute;
-    right: 20px;
-    bottom: 20px;
+    right: 12px;
+    bottom: 13px;
     color: #ff6e72;
     z-index: 1;
     font-size: 16px;
+    display: block;
+    border: 0;
+    margin: -3px;
+    padding: 10px;
+    width: 35px !important;
+    height: 35px;
+    border-radius: 20px;
+
+    &:hover {
+      border: solid 1px #ff6e72;
+      -moz-transition: all 0.1s ease-in;
+      -o-transition: all 0.1s ease-in;
+      -webkit-transition: all 0.1s ease-in;
+      transition: all 0.1s ease-in;
+      box-shadow: -2px 2px 10px 0 rgba(0, 0, 0, 0.19);
+      width: 40px !important;
+      height: 40px;
+      margin: -6px;
+    }
   }
 
   .anchor {

@@ -22,7 +22,7 @@ export default class AddSiteButton extends PureComponent {
           onClick={this.props.addNewList}
         >
           <FontAwesomeIcon icon={faPlus} />
-          <div className="list__name">Create new analyzed website list</div>
+          <div className="list__name">Create new list to analyze websites</div>
         </button>
       </div>
     );

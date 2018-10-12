@@ -5,7 +5,7 @@ import { isUrl } from 'is-url';
 
 import './styles.scss';
 
-const DEFAULT_TAGS = ['storyofams.com', 'youtube.com', 'google.com'];
+const DEFAULT_TAGS = [];
 
 class SearchBar extends PureComponent {
   constructor() {
@@ -57,8 +57,9 @@ class SearchBar extends PureComponent {
                 cleanedNewUrls,
                 item => !includes(oldUrls, item)
               );
-              const res = this.props.actionOnSubmit(diff);
-              if (res) {
+              const removeTags = this.props.actionOnSubmit(diff);
+              console.log('only remove', removeTags);
+              if (removeTags) {
                 this.setState({ tags: [] });
               }
             }}

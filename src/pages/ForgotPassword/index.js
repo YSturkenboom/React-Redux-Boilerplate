@@ -114,6 +114,7 @@ class ForgotPassword extends PureComponent {
                   Reset Password
                 </Button>
               </Form>
+              <span className="spacer" />
               <Link to="/register" className="text-center text-muted">
                 <small>Register</small>
               </Link>

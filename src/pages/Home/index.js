@@ -33,11 +33,11 @@ class Home extends PureComponent {
       this.props.create().then(res => {
         if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
           toast.error(`Something went wrong adding a new list`, {
-            position: toast.POSITION.TOP_RIGHT
+            position: toast.POSITION.BOTTOM_LEFT
           });
         } else {
           toast.success(`Succesfully added a new list`, {
-            position: toast.POSITION.TOP_RIGHT
+            position: toast.POSITION.BOTTOM_LEFT
           });
           this.props.history.push(`/list/${res.newListId.data._id}`);
         }
@@ -61,11 +61,11 @@ class Home extends PureComponent {
       .then(res => {
         if (res.type === 'DELETE_SITE_FROM_LIST_FAIL') {
           toast.error(`Something went deleting website`, {
-            position: toast.POSITION.TOP_RIGHT
+            position: toast.POSITION.BOTTOM_LEFT
           });
         } else {
           toast.info(`Succesfully deleted websites from your list`, {
-            position: toast.POSITION.TOP_RIGHT
+            position: toast.POSITION.BOTTOM_LEFT
           });
         }
       });
@@ -78,11 +78,11 @@ class Home extends PureComponent {
       this.props.update(siteID, name).then(res => {
         if (res.type === 'LIST_TITLE_UPDATE_FAIL') {
           toast.error(`Something went wrong deleting the list`, {
-            position: toast.POSITION.TOP_RIGHT
+            position: toast.POSITION.BOTTOM_LEFT
           });
         } else {
           toast.success(`Succesfully updated list title`, {
-            position: toast.POSITION.TOP_RIGHT
+            position: toast.POSITION.BOTTOM_LEFT
           });
         }
       });
@@ -112,22 +112,24 @@ class Home extends PureComponent {
             toast.error(
               `One or more of the URL's entered are invalid. (Please mind typo's)`,
               {
-                position: toast.POSITION.TOP_RIGHT
+                position: toast.POSITION.BOTTOM_LEFT
               }
             );
-          } else {
-            toast.success(`Succesfully added websites to your list`, {
-              position: toast.POSITION.TOP_RIGHT
-            });
+            console.log('huh?');
+            return false;
           }
-          return false;
+          toast.success(`Succesfully added websites to your list`, {
+            position: toast.POSITION.BOTTOM_LEFT
+          });
+          return true;
         }
       );
     } else {
+      console.log('how do you get here');
       // if there are no new sites in the tags, remove the (useless) tags
       return true;
     }
-    return true;
+    return false;
   };
 
   render() {

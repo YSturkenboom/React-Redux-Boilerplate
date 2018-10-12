@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import {
   Alert,
   Button,
@@ -130,14 +130,25 @@ class Login extends PureComponent {
                   Login
                 </Button>
               </Form>
+
               <span className="spacer" />
+              <small className="text-center"> or </small>
+              <span className="spacer" />
+
+              <Button
+                onClick={() => this.props.history.push('/register')}
+                block
+                size="lg"
+                color="primary"
+              >
+                <small>Create a new account</small>
+              </Button>
+
+              <span className="spacer" />
+
               <a href="/forgot-password" className="text-center text-muted">
                 <small>Forgot your password?</small>
               </a>
-
-              <Link to="/register" className="text-center text-muted">
-                <small>Register</small>
-              </Link>
             </Card>
           </div>
         )}

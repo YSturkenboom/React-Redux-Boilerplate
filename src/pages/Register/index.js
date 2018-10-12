@@ -192,7 +192,7 @@ class Register extends PureComponent {
                 </Button>
                 <span className="spacer" />
                 <Link to="/login" className="text-center text-muted">
-                  <small>Login</small>
+                  <small>Already have an account?</small>
                 </Link>
               </Form>
             </Card>

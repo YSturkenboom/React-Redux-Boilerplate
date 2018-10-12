@@ -19,7 +19,7 @@ import {
 
 import { get } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/pro-solid-svg-icons';
+import { faLock, faRepeat } from '@fortawesome/pro-solid-svg-icons';
 import { authActions } from '../../actions';
 // import { toastAlert } from '../../utils/helpers';
 
@@ -100,7 +100,7 @@ class ResetPassword extends PureComponent {
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <FontAwesomeIcon icon={faEnvelope} />
+                        <FontAwesomeIcon icon={faLock} />
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
@@ -122,7 +122,7 @@ class ResetPassword extends PureComponent {
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <FontAwesomeIcon icon={faEnvelope} />
+                        <FontAwesomeIcon icon={faRepeat} />
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
