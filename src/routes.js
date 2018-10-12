@@ -1,3 +1,6 @@
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+
 import { authActions } from './actions';
 import withAuth from './utils/withAuth';
 import App from './app';
@@ -13,6 +16,11 @@ import {
 } from './pages';
 
 const publicRoutes = [
+  {
+    path: '/',
+    exact: true,
+    component: () => <Redirect to="/lists" />
+  },
   {
     path: '/login',
     exact: true,
@@ -41,7 +49,7 @@ const privateRoutes = [
     component: Home
   },
   {
-    path: '/',
+    path: '/lists',
     exact: true,
     component: Lists
   },
