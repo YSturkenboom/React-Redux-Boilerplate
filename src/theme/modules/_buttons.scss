@@ -1,17 +1,47 @@
+.btn {
+  font-size: 21px;
+  font-family: 'Karla', sans-serif;
+  padding: 10px 40px;
+  border-radius: 26px;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  -webkit-transition: background .3s, border .3s, color .3s, -webkit-box-shadow .3s, -webkit-transform .3s;
+  transition: background .3s, border .3s, color .3s, -webkit-box-shadow .3s, -webkit-transform .3s;
+  transition: background .3s, border .3s, color .3s, box-shadow .3s, transform .3s;
+  transition: background .3s, border .3s, color .3s, box-shadow .3s, transform .3s, -webkit-box-shadow .3s, -webkit-transform .3s;
+  outline: none;
+}
+
 .btn-primary {
-  background-color: $color-black;
-  border-radius: 30px;
-  color: $color-white;
-  padding-left: 20px;
-  padding-right: 20px;
+  background-color: #000;
+  border-color: #000;
+  color: #fff;
+  -webkit-box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+
+  &:hover {
+    color: #fff;
+    background-color: #18ECC0;
+    border-color: #18ECC0;
+    -webkit-box-shadow: 0 10px 35px rgba(24,236,192,0.48);
+    box-shadow: 0 10px 35px rgba(24,236,192,0.48);
+  }
 }
 
 .btn-secondary {
-  background-color: $color-black;
-  border-radius: 30px;
-  color: $color-white;
-  padding-left: 20px;
-  padding-right: 20px;
+  background-color: #fff;
+  border-color: #fff;
+  color: #000;
+  -webkit-box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+
+  &:hover {
+    color: #fff;
+    background-color: #18ECC0;
+    border-color: #18ECC0;
+    -webkit-box-shadow: 0 10px 35px rgba(24,236,192,0.48);
+    box-shadow: 0 10px 35px rgba(24,236,192,0.48);
+  }
 }
 
 .floatingActionButton {

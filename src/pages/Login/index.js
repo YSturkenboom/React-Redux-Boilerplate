@@ -126,7 +126,7 @@ class Login extends PureComponent {
                 </FormGroup>
                 <span className="spacer" />
                 <span className="spacer" />
-                <Button block size="lg" color="primary">
+                <Button block size="lg" color="secondary">
                   Login
                 </Button>
               </Form>
