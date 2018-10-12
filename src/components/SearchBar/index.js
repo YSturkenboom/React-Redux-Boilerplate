@@ -7,6 +7,12 @@ import './styles.scss';
 
 const DEFAULT_TAGS = [];
 
+// helper function to help compare URL's
+const cleanUrls = urls =>
+  urls.map(
+    url => url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[0]
+  );
+
 class SearchBar extends PureComponent {
   constructor() {
     super();
@@ -86,13 +92,9 @@ class SearchBar extends PureComponent {
             className="form__button"
             onClick={() => {
               const oldUrls = map(this.props.ranks, 'url');
-              const cleanedNewUrls = this.state.tags.map(
-                url =>
-                  url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[0]
-              );
               const diff = filter(
-                cleanedNewUrls,
-                item => !includes(oldUrls, item)
+                cleanUrls(this.state.tags),
+                item => !includes(cleanUrls(oldUrls), item)
               );
               this.props.actionOnSubmit(diff).then(shouldRemove => {
                 console.log('only remove', shouldRemove);
