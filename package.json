@@ -267,6 +267,7 @@
     "compression": "^1.7.3",
     "cross-spawn": "^6.0.5",
     "css-modules-require-hook": "^4.2.3",
+    "date-fns": "^1.29.0",
     "express": "^4.16.3",
     "helmet": "^3.13.0",
     "history": "^4.7.2",
@@ -275,7 +276,6 @@
     "is-url": "^1.2.4",
     "loadable-components": "^2.2.3",
     "lodash": "^4.17.10",
-    "moment": "^2.22.2",
     "morgan": "^1.9.0",
     "node-sass": "^4.9.3",
     "normalize.css": "^8.0.0",
@@ -286,7 +286,6 @@
     "react-dom": "16.4.2",
     "react-helmet": "^5.2.0",
     "react-hot-loader": "^4.3.5",
-    "react-moment": "^0.8.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-bootstrap": "^0.24.4",
@@ -367,6 +366,7 @@
     "webpack-manifest-plugin": "^2.0.3"
   },
   "resolutions": {
-    "webpack-sources": "^1.2.0"
+    "webpack-sources": "^1.2.0",
+    "uglify-es": "npm:terser"
   }
 }
