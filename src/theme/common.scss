@@ -36,3 +36,46 @@
     font-size: 30px;
   }
 }
+
+.toast-container {
+  width: auto;
+  left: 30px;
+  bottom: 30px;
+
+  > div {
+    padding: 12px 15px 12px 25px;
+    font-size: 16px;
+    border-radius: 2.2px;
+    box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.17);
+    font-weight: normal;
+    color: #fff;
+    margin-bottom: 0;
+
+    svg {
+     margin-left: 15px;
+    }
+
+    > div {
+     flex: none;
+    }
+
+    &.toast-success {
+     background-color: #0CCE6B;
+     border-color: #0CCE6B;
+    }
+
+    &.toast-error {
+     background-color: #E84855;
+     border-color: #E84855;
+    }
+  }
+
+  @include max-sm {
+    left: 15px;
+    bottom: 15px;
+  }
+}
+
+*:focus {
+  outline: none;
+}

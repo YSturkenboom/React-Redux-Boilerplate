@@ -1,69 +1,29 @@
 @import '../../theme/variables';
 
-.AddSite {
-  width: 260px;
-  height: 260px;
-  position: relative;
-  background-color: $color-white;
-  padding: 10px;
-  text-align: center;
-  box-shadow: 0 14px 15px 0 rgba(0, 0, 0, 0.04);
-  flex-shrink: 0;
-  margin: 10px;
-  cursor: pointer;
+.list--add {
   border: dashed 4px #e8e8e8;
   border-image-source: url('https://i.imgur.com/kNVhrOh.png');
   border-image-slice: 2;
   border-image-repeat: round;
   border-image: url('https://i.imgur.com/kNVhrOh.png') 2 round;
-  transition: box-shadow 0.3s, transform 0.3s;
-  color: $color-black;;
+  padding: 45px 15px !important;
 
-  .list {
-    &__name {
-      font-size: 22px;
-      font-weight: 800;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      overflow: hidden;
-      -webkit-line-clamp: 2;
-      height: 3em;
-      text-overflow: ellipsis;
-      transition: all 0.2s ease-in;
-    }
-
-    &__date {
-      font-size: 14px;
-      color: #737373;
-      margin-top: 60px;
-    }
-
-    &__amount {
-      font-size: 20px;
-      color: #737373;
-    }
+  .list__caption {
+    font-size: 20px;
+    margin-top: 20px;
+    transition: all 0.2s ease-in;
   }
 
-  &:focus {
-    outline: none;
+  .fa-plus {
+    font-size: 30px;
+    transition: all 0.2s ease-in;
   }
 
   &:hover {
-    transform: translateY(-10px);
-    text-decoration: none;
+    outline: none;
 
-    .list {
-      &__name {
-        color: #18ecc0;
-      }
+    .list__caption, .fa-plus {
+      color: #18ecc0;
     }
-  }
-
-  .anchor {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
   }
 }

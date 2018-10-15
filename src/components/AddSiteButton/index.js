@@ -15,14 +15,16 @@ export default class AddSiteButton extends PureComponent {
       return <Redirect push to="/" />;
     }
     return (
-      <div>
+      <div className="SitesList col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <button
           type="button"
-          className="AddSite"
+          className="list__item list--add"
           onClick={this.props.addNewList}
         >
           <FontAwesomeIcon icon={faPlus} />
-          <div className="list__name">Create new list to analyze websites</div>
+          <div className="list__caption">
+            Create new list to analyze websites
+          </div>
         </button>
       </div>
     );

@@ -24,8 +24,7 @@
 
           > a {
             position: relative;
-            transition: color 0.25s ease 0s;
-            font-family: 'Karla', sans-serif;
+            transition: all 0.2s ease;
             font-size: 16px;
             padding-left: 10px;
             padding-right: 10px;
@@ -34,7 +33,7 @@
               &::after {
                 position: absolute;
                 content: '';
-                background-color: rgb(24, 236, 192);
+                background-color: $color-accent;
                 transition: left 0.25s, right 0.25s;
                 left: 0;
                 right: 0;
@@ -45,7 +44,7 @@
             &::after {
               position: absolute;
               content: '';
-              background-color: rgb(24, 236, 192);
+              background-color: $color-accent;
               transition: left 0.25s, right 0.25s;
               left: 50%;
               right: 50%;
@@ -59,6 +58,7 @@
           }
         }
       }
+
       .dropdown.nav-item {
         padding: 15px 1rem;
         border-left: 1px solid rgba(255, 255, 255, 0.25);
@@ -76,11 +76,16 @@
     color: $color-black;
     border-right: 1px solid rgba(255, 255, 255, 0.25);
     padding: 0 15px !important;
+    transition: opacity 0.2s;
 
     img {
       width: 170px;
       height: auto;
       padding: 22px 1rem;
+    }
+
+    &:hover {
+      opacity: 0.8
     }
   }
 
@@ -121,6 +126,25 @@
         &:hover {
           border-color: $transparent !important;
         }
+      }
+    }
+  }
+
+  .dropdown-menu {
+    border: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    top: calc(100% + 2px);
+    padding: 0;
+    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.08);
+
+    .dropdown-item {
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      &:active {
+        color: $color-accent !important;
+        background-color: $color-white;
       }
     }
   }

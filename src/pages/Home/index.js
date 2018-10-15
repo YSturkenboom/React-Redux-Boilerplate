@@ -3,13 +3,13 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/pro-solid-svg-icons';
-import { toast } from 'react-toastify';
 import { Table } from 'reactstrap';
 import RankingRow from '../../components/RankingRow';
 
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar/index';
 import { siteRankActions, listActions } from '../../actions';
+import { toastAlert } from '../../utils/helpers';
 import './styles.scss';
 
 class Home extends PureComponent {
@@ -32,13 +32,9 @@ class Home extends PureComponent {
     if (this.props.match.params.id === 'new') {
       this.props.create().then(res => {
         if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
-          toast.error(`Something went wrong adding a new list`, {
-            position: toast.POSITION.BOTTOM_LEFT
-          });
+          toastAlert('error', `Something went wrong adding a new list`);
         } else {
-          toast.success(`Successfully added a new list`, {
-            position: toast.POSITION.BOTTOM_LEFT
-          });
+          toastAlert('success', `Successfully added a new list`);
           this.props.history.push(`/list/${res.newListId.data._id}`);
         }
       });
@@ -49,7 +45,6 @@ class Home extends PureComponent {
       this.setState({ currentEditValue: this.props.lists.name })
     );
 
-    // console.log('id =', this.props.match.params.id);
     // Load ranks from list into state (separate for instantaneous UI updates)
     getRanksForWebsitesInList(this.props.match.params.id);
   }
@@ -60,13 +55,9 @@ class Home extends PureComponent {
       .deleteSiteFromList(websiteId, this.props.match.params.id)
       .then(res => {
         if (res.type === 'DELETE_SITE_FROM_LIST_FAIL') {
-          toast.error(`Something went wrong deleting website`, {
-            position: toast.POSITION.BOTTOM_LEFT
-          });
+          toastAlert('error', `Something went wrong deleting website`);
         } else {
-          toast.info(`Successfully deleted websites from your list`, {
-            position: toast.POSITION.BOTTOM_LEFT
-          });
+          toastAlert('info', `Successfully deleted websites from your list`);
         }
       });
   }
@@ -77,13 +68,9 @@ class Home extends PureComponent {
       const name = event.target.value;
       this.props.update(siteID, name).then(res => {
         if (res.type === 'LIST_TITLE_UPDATE_FAIL') {
-          toast.error(`Something went wrong deleting the list`, {
-            position: toast.POSITION.BOTTOM_LEFT
-          });
+          toastAlert('error', `Something went wrong deleting the list`);
         } else {
-          toast.success(`Successfully updated list title`, {
-            position: toast.POSITION.BOTTOM_LEFT
-          });
+          toastAlert('success', `Successfully updated list title`);
         }
       });
       this.setState({ isEditable: false, currentEditValue: name });
@@ -91,7 +78,6 @@ class Home extends PureComponent {
   };
 
   handleChange = event => {
-    console.log(event.target.value);
     this.setState({ currentEditValue: event.target.value });
   };
 
@@ -111,20 +97,14 @@ class Home extends PureComponent {
         this.props.siteRank.currentListId
       );
       if (res.type === 'GET_TRAFFIC_REQUEST_FAIL') {
-        toast.error(
-          `One or more of the URL's entered are invalid. (Please mind typo's)`,
-          {
-            position: toast.POSITION.BOTTOM_LEFT
-          }
+        toastAlert(
+          'error',
+          `One or more of the URL's entered are invalid. (Please mind typo's)`
         );
-        console.log('huh?');
         return false;
       }
 
-      toast.success(`Successfully added websites to your list`, {
-        position: toast.POSITION.BOTTOM_LEFT
-      });
-      console.log('hey suceesjes');
+      toastAlert('success', `Successfully added websites to your list`);
       return true;
     }
     // if there are no new sites in the tags, remove the (useless) tags
@@ -140,8 +120,6 @@ class Home extends PureComponent {
     const { name } = this.props.lists;
     const { currentEditValue } = this.state;
 
-    console.log('ranks', ranks);
-
     const rows = ranks.map(rank => (
       <RankingRow
         key={rank._id}
@@ -149,8 +127,6 @@ class Home extends PureComponent {
         onDelete={() => this.onDelete(rank._id)}
       />
     ));
-
-    console.log(ranks);
 
     return (
       <div className="Home">
