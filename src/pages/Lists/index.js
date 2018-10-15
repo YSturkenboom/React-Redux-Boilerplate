@@ -57,7 +57,7 @@ class Lists extends PureComponent {
     }
 
     return (
-      <div className="Lists">
+      <div className="Lists body">
         <Helmet title="Your Lists" />
         {!isLoading && (
           <div className="Lists__overview row">

@@ -26,7 +26,7 @@ const CloseToastButton = ({ closeToast }) => (
 
 const toastOptions = {
   position: 'bottom-left',
-  autoClose: false,
+  autoClose: true,
   hideProgressBar: true,
   closeOnClick: true,
   pauseOnHover: true,

@@ -3,6 +3,13 @@
 @import 'modules/table';
 @import 'modules/typography';
 
+.body {
+  max-width: 900px;
+  margin: auto;
+  padding: 30px 15px;
+  min-height: calc(100vh - 95px);
+}
+
 .pagination {
   justify-content: flex-end;
   align-items: center;
@@ -49,6 +56,7 @@
     box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.17);
     font-weight: normal;
     color: #fff;
+    margin-top: 20px;
     margin-bottom: 0;
 
     svg {
@@ -77,5 +85,11 @@
 }
 
 *:focus {
-  outline: none;
+  outline: none !important;
+}
+
+.spacer {
+  display: block;
+  width: 100%;
+  height: 1rem;
 }

@@ -20,8 +20,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/pro-solid-svg-icons';
 import { authActions } from '../../actions';
 
-import './styles.scss';
-
 class ForgotPassword extends PureComponent {
   constructor(props) {
     super(props);
@@ -68,12 +66,13 @@ class ForgotPassword extends PureComponent {
     }
 
     return (
-      <div className="forgotpassword">
+      <div className="authentication">
         <Helmet title="ForgotPassword" />
 
         {!this.props.auth.checkingSession && (
-          <div className="forgotpassword-content">
-            <Card body className="forgotpassword-window">
+          <div className="authentication__content">
+            <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
+            <Card body className="authentication__window">
               {this.state.completed ? (
                 <h4>
                   Thank you for registering! A link to reset your password has

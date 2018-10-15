@@ -129,7 +129,7 @@ class Home extends PureComponent {
     ));
 
     return (
-      <div className="Home">
+      <div className="Home body">
         <Helmet title="Analyze" />
         <SearchBar
           actionOnSubmit={this.analyze}

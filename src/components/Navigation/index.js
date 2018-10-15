@@ -52,6 +52,7 @@ class Navigation extends Component {
 
   render() {
     const { auth } = this.props;
+    const { isOpen } = this.state;
 
     if (!auth.isLoggedIn) {
       return null;
@@ -66,8 +67,15 @@ class Navigation extends Component {
               alt="amsalyze-logo"
             />
           </NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <NavbarToggler
+            onClick={this.toggle}
+            className={!isOpen && 'collapsed'}
+          >
+            <span className="icon-bar" />
+            <span className="icon-bar" />
+            <span className="icon-bar" />
+          </NavbarToggler>
+          <Collapse isOpen={isOpen} navbar>
             <Nav navbar>
               <div>
                 <NavItem>
@@ -76,7 +84,7 @@ class Navigation extends Component {
                     tag={RouterNavLink}
                     activeClassName="active"
                   >
-                    Your Lists
+                    <span>Your Lists</span>
                   </NavLink>
                 </NavItem>
               </div>
