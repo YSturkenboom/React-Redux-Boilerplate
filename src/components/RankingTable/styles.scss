@@ -1,9 +1,15 @@
+@import '../../theme/modules/_breakpoints';
+
 .tablerow {
-  &__rank {
-    font-size: 40px;
-    font-weight: 800;
+  &__data {
+
+    @include max-sm {
+      font-size: 24px;
+    }
+
+    font-size: 28px;
+    font-weight: 400;
     text-align: right;
-    font-family: Filson-Black, serif;
 
     .number_accent {
       color: #18ecc0;
@@ -39,6 +45,13 @@
       outline: none;
     }
   }
+  &__subtext {
+    opacity: 0.6;
+    font-size: 12px;
+    text-align: right;
+    text-transform: uppercase;
+    margin-top: -10px;
+  }
 }
 
 .trashIcon {
@@ -50,13 +63,13 @@
 }
 
 .first_table {
-  width: 70%;
+  width: 24%;
   padding: 5px 0;
 }
 
-.second_table {
-  width: 30%;
-  border-left: 2px solid #e8e8e8;
+.second_table, .third_table, .fourth_table, .fifth_table {
+  width: 19%;
+  border-left: 1px solid #e8e8e8;
 }
 
 .RankTable {

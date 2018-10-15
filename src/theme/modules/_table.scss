@@ -2,11 +2,11 @@
 
 table {
   margin: 0 0 1rem;
-  background-color: white !important;
+  // background-color: white !important;
   min-width: 900px;
 
   th {
-    opacity: 0.5;
+    opacity: 0.7;
     font-size: 14px;
     font-weight: normal;
     font-style: normal;
@@ -17,13 +17,16 @@ table {
     border-top: none !important;
     border-bottom-width: 1px !important;
     border-color: rgba(198, 203, 212, 0.3) !important;
+    text-transform: uppercase;
+    text-align: right;
 
     &:first-child {
-      padding-left: 30px;
+      padding-left: 0;
+      text-align: left;
     }
 
-    &:last-child {
-      opacity: 0;
+    svg {
+      margin-right: 10px;
     }
   }
 
@@ -40,6 +43,7 @@ table {
     cursor: pointer;
     word-wrap: break-word;
     max-width: 300px;
+    background-color: white;
 
     &:first-child {
       padding-left: 30px;
@@ -80,67 +84,6 @@ table {
     }
   }
 
-  .table--inner {
-    display: none;
-
-    table {
-      margin: 0;
-      border-bottom: 8px solid $body-bg;
-    }
-
-    tr th {
-      text-align: left;
-    }
-
-    &--active {
-      background: rgba(0, 173, 228, 0.1);
-
-      td, th {
-        position: relative;
-        border-bottom: none !important;
-
-        &:first-child::before {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 4px;
-          background: $color-light-blue;
-          content: '';
-        }
-      }
-
-      & + .table--inner {
-        display: table-row;
-      }
-
-      .toggle-collapse {
-        &::before {
-          transform: rotate(-45deg);
-        }
-
-        &::after {
-          transform: rotate(45deg);
-        }
-      }
-    }
-
-    > td {
-      padding: 0;
-      border-bottom: none !important;
-
-      td {
-        text-align: left;
-        border-bottom: none !important;
-      }
-    }
-
-    .fa-arrow-alt-to-bottom {
-      color: $font-color-dark;
-      opacity: 0.8;
-    }
-  }
-
   tr:last-child td {
     border-bottom: none !important;
   }
@@ -150,27 +93,6 @@ table {
 
     svg {
       margin-left: 10px;
-    }
-  }
-
-  .status {
-    height: 8px;
-    width: 8px;
-    display: inline-block;
-    border-radius: 50%;
-    margin: 0 5px 1px 0;
-
-    &--rejected {
-      background: $red;
-
-      &__quantity {
-        color: $red;
-        margin-left: 20px;
-      }
-    }
-
-    &--accepted {
-      background: $green;
     }
   }
 }

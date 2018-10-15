@@ -34,6 +34,10 @@ export default class RankingTable extends PureComponent {
           <div className="tablerow__rank">#{entry.rank}</div>
           <div className="tablerow__category">{entry.category}</div>
         </td>
+        <td className="third_table">
+          <div className="tablerow__rank">#{entry.rank}</div>
+          <div className="tablerow__category">{entry.category}</div>
+        </td>
       </tr>
     ];
   };

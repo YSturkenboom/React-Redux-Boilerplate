@@ -15,7 +15,7 @@ export default class AddSiteButton extends PureComponent {
       return <Redirect push to="/" />;
     }
     return (
-      <div className="SitesList col-lg-4 col-md-4 col-sm-6 col-xs-12">
+      <div className="SitesList col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <button
           type="button"
           className="list__item list--add"

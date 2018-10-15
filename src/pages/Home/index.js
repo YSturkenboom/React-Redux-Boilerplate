@@ -2,7 +2,13 @@ import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen } from '@fortawesome/pro-solid-svg-icons';
+import {
+  faPen,
+  faEye,
+  faUserFriends,
+  faGlobe,
+  faStar
+} from '@fortawesome/pro-solid-svg-icons';
 import { Table } from 'reactstrap';
 import RankingRow from '../../components/RankingRow';
 
@@ -157,6 +163,25 @@ class Home extends PureComponent {
           'Get started by entering some websites into the search bar and pressing the Analyze button!'
         ) : (
           <Table responsive className="RankTable">
+            <thead>
+              <th>Website</th>
+              <th>
+                <FontAwesomeIcon icon={faEye} />
+                Pageviews
+              </th>
+              <th>
+                <FontAwesomeIcon icon={faUserFriends} />
+                Unique visitors
+              </th>
+              <th>
+                <FontAwesomeIcon icon={faGlobe} />
+                Global rank
+              </th>
+              <th>
+                <FontAwesomeIcon icon={faStar} />
+                Top country
+              </th>
+            </thead>
             <tbody>{rows}</tbody>
           </Table>
         )}

@@ -8,7 +8,7 @@ import './styles.scss';
 
 export default class RankingRow extends PureComponent {
   render() {
-    const { _id, rank, date, url, category } = this.props.rank;
+    const { _id, rank, date, url } = this.props.rank;
     return (
       <tr key={_id}>
         <td className="first_table">
@@ -24,13 +24,21 @@ export default class RankingRow extends PureComponent {
           </button>
         </td>
         <td className="second_table">
+          <div className="tablerow__data">{formatNumber(1234567)}</div>
+          <div className="tablerow__subtext">All time</div>
+        </td>
+        <td className="third_table">
+          <div className="tablerow__data">{formatNumber(12345678)}</div>
+          <div className="tablerow__subtext">All time</div>
+        </td>
+        <td className="fourth_table">
           {rank ? (
-            <div className="tablerow__rank">
+            <div className="tablerow__data">
               <span className="number_accent"># </span>
               {formatNumber(rank)}
             </div>
           ) : (
-            <h2>
+            <div className="tablerow__data">
               No ranking
               <div className="position-relative">
                 <div id={`ToolTipRanks${_id}`}>?</div>
@@ -44,9 +52,16 @@ export default class RankingRow extends PureComponent {
                 Contact us at hello@storyofams.com, and we&#39;ll get you out
                 this spot in no time!
               </UncontrolledTooltip>
-            </h2>
+            </div>
           )}
-          <div className="text-right">{category}</div>
+          <div className="tablerow__subtext">Worldwide</div>
+        </td>
+        <td className="fifth_table">
+          <div className="tablerow__data">
+            <span className="number_accent"># </span>
+            {formatNumber(123456789)}
+          </div>
+          <div className="tablerow__subtext">Netherlands</div>
         </td>
       </tr>
     );
