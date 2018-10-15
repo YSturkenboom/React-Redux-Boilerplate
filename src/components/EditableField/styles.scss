@@ -3,7 +3,7 @@
 .editableField {
   transition: all 0.3s ease;
 
-  h2 {
+  h4 {
     line-height: 50px;
   }
 
@@ -12,9 +12,13 @@
     border-bottom: 1px solid black;
     background:transparent;
     outline:none;
-    font-size: 2rem;
+    font-size: 25px;
     font-family: $font-secondary, serif;
     height: 50px;
+
+    @media #{$max-xs} {
+      font-size: 22px;
+    }
   }
 
   svg {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/pro-light-svg-icons';
+import { faTrashAlt } from '@fortawesome/pro-light-svg-icons';
 import { UncontrolledTooltip } from 'reactstrap';
 import { formatNumber } from '../../utils/helpers';
 
@@ -19,34 +19,36 @@ export default class RankingRow extends PureComponent {
             className="tablerow__delete"
             onClick={this.props.onDelete}
           >
-            <FontAwesomeIcon className="trashIcon" icon={faTrash} />
+            <FontAwesomeIcon className="trashIcon" icon={faTrashAlt} />
             Delete
           </button>
         </td>
         <td className="second_table">
-          {rank ? (
-            <div className="tablerow__rank">
-              <span className="number_accent"># </span>
-              {formatNumber(rank)}
-            </div>
-          ) : (
-            <h2>
-              No ranking
-              <div className="position-relative">
-                <div id={`ToolTipRanks${_id}`}>?</div>
+          <div>
+            {rank ? (
+              <div className="tablerow__rank">
+                <span className="number_accent"># </span>
+                {formatNumber(rank)}
               </div>
-              <UncontrolledTooltip
-                placement="right"
-                target={`ToolTipRanks${_id}`}
-              >
-                No ranking means that the site you are trying to analyze is
-                currently too unknown to receive a ranking. Is this your site?
-                Contact us at hello@storyofams.com, and we&#39;ll get you out
-                this spot in no time!
-              </UncontrolledTooltip>
-            </h2>
-          )}
-          <div className="text-right">{category}</div>
+            ) : (
+              <h2>
+                No ranking
+                <div className="position-relative">
+                  <div id={`ToolTipRanks${_id}`}>?</div>
+                </div>
+                <UncontrolledTooltip
+                  placement="right"
+                  target={`ToolTipRanks${_id}`}
+                >
+                  No ranking means that the site you are trying to analyze is
+                  currently too unknown to receive a ranking. Is this your site?
+                  Contact us at hello@storyofams.com, and we&#39;ll get you out
+                  this spot in no time!
+                </UncontrolledTooltip>
+              </h2>
+            )}
+            <div className="text-right">{category}</div>
+          </div>
         </td>
       </tr>
     );

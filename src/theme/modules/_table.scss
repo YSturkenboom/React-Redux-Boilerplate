@@ -3,26 +3,18 @@
 table {
   margin: 0 0 1rem;
   background-color: white !important;
-  
-  th {
-    opacity: 0.5;
-    font-size: 14px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.71;
-    letter-spacing: normal;
-    color: $font-color-dark;
-    border-top: none !important;
-    border-bottom-width: 1px !important;
-    border-color: rgba(198, 203, 212, 0.3) !important;
 
-    &:first-child {
-      padding-left: 30px;
-    }
+  tr {
+    td:last-child {
+      border: none;
 
-    &:last-child {
-      opacity: 0;
+      > div {
+        border-left: 1px solid rgba(198, 203, 212, 0.3) !important;
+      }
+
+      * {
+        text-align: center;
+      }
     }
   }
 
@@ -39,141 +31,6 @@ table {
     cursor: pointer;
     word-wrap: break-word;
     max-width: 300px;
-
-    &:first-child {
-      padding-left: 30px;
-    }
-
-    &:last-child {
-      text-align: right;
-      padding-right: 30px;
-    }
+    padding: 20px !important;
   }
-
-  .toggle-collapse {
-    margin-left: 40px;
-    position: relative;
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-
-    &::before, &::after {
-      position: absolute;
-      top: 0;
-      content: '';
-      width: 2px;
-      height: 8px;
-      background-color: #333;
-      transition: transform 0.1s ease-in;
-      border-radius: 1px;
-    }
-
-    &::before {
-      right: 0;
-      transform: rotate(-135deg);
-    }
-
-    &::after {
-      left: 0;
-      transform: rotate(135deg);
-    }
-  }
-
-  .table--inner {
-    display: none;
-
-    table {
-      margin: 0;
-      border-bottom: 8px solid $body-bg;
-    }
-
-    tr th {
-      text-align: left;
-    }
-
-    &--active {
-      background: rgba(0, 173, 228, 0.1);
-
-      td, th {
-        position: relative;
-        border-bottom: none !important;
-
-        &:first-child::before {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 4px;
-          background: $color-light-blue;
-          content: '';
-        }
-      }
-
-      & + .table--inner {
-        display: table-row;
-      }
-
-      .toggle-collapse {
-        &::before {
-          transform: rotate(-45deg);
-        }
-
-        &::after {
-          transform: rotate(45deg);
-        }
-      }
-    }
-
-    > td {
-      padding: 0;
-      border-bottom: none !important;
-
-      td {
-        text-align: left;
-        border-bottom: none !important;
-      }
-    }
-
-    .fa-arrow-alt-to-bottom {
-      color: $font-color-dark;
-      opacity: 0.8;
-    }
-  }
-
-  tr:last-child td {
-    border-bottom: none !important;
-  }
-
-  .table--inner > td td:last-child {
-    text-align: right;
-
-    svg {
-      margin-left: 10px;
-    }
-  }
-
-  .status {
-    height: 8px;
-    width: 8px;
-    display: inline-block;
-    border-radius: 50%;
-    margin: 0 5px 1px 0;
-
-    &--rejected {
-      background: $red;
-
-      &__quantity {
-        color: $red;
-        margin-left: 20px;
-      }
-    }
-
-    &--accepted {
-      background: $green;
-    }
-  }
-}
-
-.Home table .table--inner > td td:last-child {
-  color: $blue;
 }

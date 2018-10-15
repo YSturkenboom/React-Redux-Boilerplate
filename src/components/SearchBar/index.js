@@ -2,8 +2,6 @@ import React, { PureComponent, Fragment } from 'react';
 import TagsInput from 'react-tagsinput';
 import { map, filter, includes } from 'lodash';
 import { isUrl } from 'is-url';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faSearch } from '@fortawesome/pro-light-svg-icons';
 
 import './styles.scss';
 
@@ -72,47 +70,50 @@ class SearchBar extends PureComponent {
   render() {
     return (
       <div>
-        <div className="d-flex flex-column flex-sm-row">
-          <TagsInput
-            addOnBlur
-            className="form__input px-2"
-            validate={input => isUrl(input)}
-            placeholder="google.com"
-            // labelField="sites"
-            value={this.state.tags}
-            onChange={this.handleChange}
-            inputValue={this.state.tag}
-            onChangeInput={this.handleChangeInput}
-            addKeys={[9, 13, 32, 188]}
-            onlyUnique
-            renderTag={this.customRenderTag}
-            inputProps={{
-              placeholder: 'Add a website, such as www.google.com'
-            }}
-          />
-          <button
-            type="submit"
-            className="btn btn-primary form__button py-3"
-            onClick={() => {
-              const oldUrls = map(this.props.ranks, 'url');
-              const diff = filter(
-                cleanUrls(this.state.tags),
-                item => !includes(cleanUrls(oldUrls), item)
-              );
-              this.props.actionOnSubmit(diff).then(shouldRemove => {
-                console.log('only remove', shouldRemove);
-                if (shouldRemove) {
-                  this.setState({ tags: [] });
-                }
-              });
-            }}
-          >
-            {/* <FontAwesomeIcon icon={faSearch} onClick={this.buttonSwitch} /> */}
-            {/* + Analyze URL(&#39;s) */}
-            Amsalyze
-          </button>
+        <div className="d-flex flex-column">
+          <div className="d-flex search-bar">
+            <TagsInput
+              addOnBlur
+              className="form__input px-2"
+              validate={input => isUrl(input)}
+              placeholder="google.com"
+              // labelField="sites"
+              value={this.state.tags}
+              onChange={this.handleChange}
+              inputValue={this.state.tag}
+              onChangeInput={this.handleChangeInput}
+              addKeys={[9, 13, 32, 188]}
+              onlyUnique
+              renderTag={this.customRenderTag}
+              inputProps={{
+                placeholder: 'Add a website (e.g. www.google.com)'
+              }}
+            />
+            <div>
+              <button
+                type="submit"
+                className="btn btn-primary form__button py-3"
+                onClick={() => {
+                  const oldUrls = map(this.props.ranks, 'url');
+                  const diff = filter(
+                    cleanUrls(this.state.tags),
+                    item => !includes(cleanUrls(oldUrls), item)
+                  );
+                  this.props.actionOnSubmit(diff).then(shouldRemove => {
+                    if (shouldRemove) {
+                      this.setState({ tags: [] });
+                    }
+                  });
+                }}
+              >
+                Analyze
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="toolTip">Press space to add multiple URL&#39;s</div>
+        <div className="toolTip mt-3">
+          Press space to add multiple URL&#39;s
+        </div>
       </div>
     );
   }

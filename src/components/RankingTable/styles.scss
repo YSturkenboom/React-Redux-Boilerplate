@@ -2,10 +2,10 @@
 
 .tablerow {
   &__rank {
-    font-size: 40px;
+    font-size: 34px;
     font-weight: 800;
     text-align: right;
-    font-family: $font-secondary;
+    font-family: $font-primary;
 
     @include max-xs {
       font-size: 24px;
@@ -28,7 +28,6 @@
     font-size: 20px;
     font-weight: 800;
     padding-bottom: 3px;
-    font-family: $font-primary;
 
     @include max-xs {
       font-size: 18px;
@@ -44,11 +43,16 @@
   &__delete {
     border: none;
     background-color: inherit;
-    color: black;
+    color: $color-accent;
     cursor: pointer;
     opacity: 0.6;
     padding-top: 7px;
     outline: none;
+    line-height: 13px;
+    font-size: 14px;
+    padding-bottom: 0;
+    padding-left: 5px;
+    transition: all 0.2s ease-in-out;
 
     &:hover, &:focus {
       color: rgb(148, 0, 0);

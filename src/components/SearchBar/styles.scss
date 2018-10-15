@@ -8,87 +8,100 @@ body .form {
 
   &__input {
     flex: 1;
-    min-height: 50px;
-    border-bottom-left-radius: 28.3px;
-    border-top-left-radius: 28.3px;
+    border-radius: 28.3px;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.09);
     background-color: #fff;
     border: solid 0 #979797;
     outline: none;
-    // margin-right: 20px;
-    // padding-left: 15px;
+    margin-right: 20px;
+    padding-left: 15px;
 
-    @include max-xs {
-      border-bottom-left-radius: 0;
-      border-top-right-radius: 26px;
+    > span {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      height: 100%;
+      padding: 4px;
+      margin-left: -5px;
     }
   }
 
   &__button {
     cursor: pointer;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    line-height: 100%;
-    outline: none;
-    box-shadow: 0 5px 30px rgba(0,0,0,0);
+    border-radius: 28.3px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0);
     background-color: $color-black;
     padding: 0;
     color: #fff;
     border: 0;
-    min-width: 200px;
+    min-width: 160px;
+    font-size: 17px !important;
 
     &:focus, &:active {
       outline: none;
     }
 
-    &:hover {
-      background: gray;
-    }
-
     @include max-xs {
-      border-bottom-left-radius: 26px;
-      border-top-right-radius: 0;
+      border-radius: 26px;
       padding: 8px;
     }
   }
-
 }
 
-.react-tagsinput-tag {
-  background-color: #fafafa;
-  border-radius: 18px;
-  border: 1px solid #ccc;
-  color: #737373;
-  display: inline-block;
-  font-family: sans-serif;
-  font-size: 15px;
-  font-weight: 400;
-  margin-bottom: 5px;
-  margin-right: 5px;
-  margin-top: 8px;
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
+.search-bar {
+  flex-flow: row nowrap;
 
-  &-invalid {
-    background-color: green;
+  @include max-xs {
+    flex-flow: column nowrap;
+
+    .form {
+      &__input {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+
+      &__button {
+        width: 100%;
+        padding: 11px !important;
+      }
+    }
   }
 }
 
-.react-tagsinput-input {
-  border: 0;
-  outline: none;
-  margin: 10px;
-  margin-top: 12px;
-  width: 350px;
-}
+.react-tagsinput {
+  &-tag {
+    background-color: #fafafa;
+    border-radius: 18px;
+    border: 1px solid #eaeaea;
+    color: #a2a2a2;
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 
-.react-tagsinput-remove {
-  cursor: pointer;
-}
+    &-invalid {
+      background-color: green;
+    }
 
-.react-tagsinput-tag a::before {
-  content: ' ×';
+    a::before {
+      content: ' ×';
+    }
+  }
+
+  &-input {
+    border: 0;
+    outline: none;
+    margin: 5px 5px 5px 10px;
+    width: 350px;
+  }
+
+  &-remove {
+    cursor: pointer;
+  }
 }
 
 .toolTip {

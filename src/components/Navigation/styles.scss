@@ -35,7 +35,7 @@
                 transition: left 0.25s, right 0.25s;
                 left: 50%;
                 right: 50%;
-                bottom: -50%;
+                bottom: 0;
                 height: 2px;
               }
             }
@@ -44,7 +44,7 @@
               span::after {
                 left: 0;
                 right: 0;
-                bottom: -2px;
+                bottom: 0;
                 height: 2px;
               }
             }
@@ -172,7 +172,7 @@
     border: none;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    top: calc(100% - 1px);
+    top: calc(100% - 2px);
     padding: 0;
     box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.08);
 

@@ -129,48 +129,46 @@ class Home extends PureComponent {
     ));
 
     return (
-      <div className="container">
-        <div className="Home body">
-          <Helmet title="Analyze" />
-          <div className="row">
-            <div className="col">
-              <SearchBar
-                actionOnSubmit={this.analyze}
-                ranks={this.props.siteRank.ranks}
-                invalidUrls={this.props.siteRank.invalidUrls}
-              />
-            </div>
+      <div className="Home body">
+        <Helmet title="Analyze" />
+        <div className="row">
+          <div className="col">
+            <SearchBar
+              actionOnSubmit={this.analyze}
+              ranks={this.props.siteRank.ranks}
+              invalidUrls={this.props.siteRank.invalidUrls}
+            />
           </div>
-          <div className="row">
-            <div className="col">
-              <div className="Home__header">
-                <div className="editableField">
-                  {this.state.isEditable ? (
-                    <EditableField
-                      value={currentEditValue}
-                      className="EditableField__placeholder"
-                      type="text"
-                      editChange={this.handleChange}
-                      editPress={this.handleKeyPress}
-                      placeholder={name}
-                    />
-                  ) : (
-                    <h2>{currentEditValue}</h2>
-                  )}
+        </div>
+        <div className="row">
+          <div className="col">
+            <div className="Home__header">
+              <div className="editableField">
+                {this.state.isEditable ? (
+                  <EditableField
+                    value={currentEditValue}
+                    className="EditableField__placeholder"
+                    type="text"
+                    editChange={this.handleChange}
+                    editPress={this.handleKeyPress}
+                    placeholder={name}
+                  />
+                ) : (
+                  <h4>{currentEditValue}</h4>
+                )}
 
-                  <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
-                </div>
+                <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
               </div>
             </div>
           </div>
-          {ranks.length === 0 ? (
-            'Get started by entering some websites into the search bar and pressing the Analyze button!'
-          ) : (
-            <Table responsive className="RankTable">
-              <tbody>{rows}</tbody>
-            </Table>
-          )}
         </div>
+        {ranks.length === 0 ? (
+          'Get started by entering some websites into the search bar and pressing the Analyze button!'
+        ) : (
+          <Table responsive className="RankTable">
+            <tbody>{rows}</tbody>
+          </Table>
+        )}
       </div>
     );
   }

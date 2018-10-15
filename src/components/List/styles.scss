@@ -93,6 +93,10 @@
     padding-top: 33.33%;
   }
 
+  @include min-lg  {
+    padding-top: 25%;
+  }
+
   @include max-sm {
     padding-top: 50%;
 
