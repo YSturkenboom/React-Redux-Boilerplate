@@ -18,19 +18,21 @@ export default class ListsOverview extends PureComponent {
   }
 
   renderSiteList = list => (
-    <div className="SitesList p-0">
-      <Link key={list._id} to={`/list/${list._id}`} className="anchor">
-        {' '}
-      </Link>
+    <div className="SitesList col-lg-4 col-md-6 col-sm-6 col-xs-12">
+      <div className="list__item">
+        <Link key={list._id} to={`/list/${list._id}`} className="anchor">
+          {' '}
+        </Link>
 
-      <div className="list__date">{list.date}</div>
-      <div className="list__name">{list.name}</div>
-      <div className="list__amount">{list.amount} websites</div>
-      <FontAwesomeIcon
-        className="trashIcon"
-        icon={faTrash}
-        onClick={list.OnDelete}
-      />
+        <div className="list__date">{list.date}</div>
+        <div className="list__name">{list.name}</div>
+        <div className="list__amount">{list.amount} websites</div>
+        <FontAwesomeIcon
+          className="trashIcon"
+          icon={faTrash}
+          onClick={list.OnDelete}
+        />
+      </div>
     </div>
   );
 

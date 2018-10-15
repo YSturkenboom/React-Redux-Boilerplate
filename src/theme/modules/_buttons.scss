@@ -17,7 +17,11 @@
       color: $color-white;
       background-color: #18ECC0;
       border-color: #18ECC0;
-      box-shadow: 0 10px 35px rgba(24,236,192,0.48);
+      box-shadow: 0 0 30px rgba(24,236,192,0.48);
+    }
+
+    &:focus {
+      box-shadow: 0 0 30px rgba(24,236,192,0.48);
     }
   }
 
@@ -31,7 +35,11 @@
       color: $color-white;
       background-color: #18ECC0;
       border-color: #18ECC0;
-      box-shadow: 0 10px 35px rgba(24,236,192,0.48);
+      box-shadow: 0 0 30px rgba(24,236,192,0.48);
+    }
+
+    &:focus {
+      box-shadow: 0 0 30px rgba(24,236,192,0.48);
     }
   }
 
@@ -43,7 +51,20 @@
     right: 30px;
     bottom: 30px;
     border-radius: 50%;
+    border: none;
     width: 100px;
     height: 100px;
+    box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+
+    @include max-sm {
+      right: 15px;
+      bottom: 15px;
+      width: 80px;
+      height: 80px;
+    }
+
+    &:focus {
+      box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+    }
   }
 }

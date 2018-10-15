@@ -17,8 +17,8 @@ import {
 } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { toast } from 'react-toastify';
 import { faUser } from '@fortawesome/pro-light-svg-icons';
+import { toastAlert } from '../../utils/helpers';
 import { listActions } from '../../actions';
 
 import './styles.scss';
@@ -42,13 +42,9 @@ class Navigation extends Component {
   addNewList() {
     this.props.create().then(res => {
       if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
-        toast.error(`Something went wrong adding a new list`, {
-          position: toast.POSITION.BOTTOM_CENTER
-        });
+        toastAlert('error', `Something went wrong adding a new list`);
       } else {
-        toast.success(`Successfully added a new list`, {
-          position: toast.POSITION.BOTTOM_CENTER
-        });
+        toastAlert('success', `Successfully added a new list`);
         this.props.history.push(`/list/${res.newListId.data._id}`);
       }
     });
@@ -56,13 +52,14 @@ class Navigation extends Component {
 
   render() {
     const { auth } = this.props;
+    const { isOpen } = this.state;
 
     if (!auth.isLoggedIn) {
       return null;
     }
 
     return (
-      <div className="mb-4 navbar--wrapper">
+      <div className="navbar--wrapper">
         <Navbar className="nav container" expand="md">
           <NavbarBrand to="/" tag={RouterNavLink}>
             <img
@@ -70,13 +67,24 @@ class Navigation extends Component {
               alt="amsalyze-logo"
             />
           </NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <NavbarToggler
+            onClick={this.toggle}
+            className={!isOpen && 'collapsed'}
+          >
+            <span className="icon-bar" />
+            <span className="icon-bar" />
+            <span className="icon-bar" />
+          </NavbarToggler>
+          <Collapse isOpen={isOpen} navbar>
             <Nav navbar>
               <div>
                 <NavItem>
-                  <NavLink exact to="/" active={false} tag={RouterNavLink}>
-                    Your Lists
+                  <NavLink
+                    to="/lists"
+                    tag={RouterNavLink}
+                    activeClassName="active"
+                  >
+                    <span>Your Lists</span>
                   </NavLink>
                 </NavItem>
               </div>

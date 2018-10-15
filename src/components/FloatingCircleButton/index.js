@@ -24,7 +24,7 @@ export default class FloatingCircleButton extends PureComponent {
       <Button className="btn__floating-action" onClick={this.props.addNewList}>
         <FontAwesomeIcon icon={faPlus} />
         <br />
-        New List
+        <span className="d-none d-md-block">New List</span>
       </Button>
     );
   }

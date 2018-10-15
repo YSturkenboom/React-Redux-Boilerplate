@@ -12,7 +12,7 @@
     }
 
     .number_accent {
-      color: $color-ams;
+      color: $color-accent;
 
       @include max-xs {
         font-size: 21px;
@@ -20,7 +20,7 @@
     }
 
     span {
-      color: $color-ams;
+      color: $color-accent;
     }
   }
 

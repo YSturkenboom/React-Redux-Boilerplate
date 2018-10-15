@@ -24,8 +24,6 @@ import {
 } from '@fortawesome/pro-solid-svg-icons';
 import { registerActions, authActions } from '../../actions';
 
-import './styles.scss';
-
 class Register extends PureComponent {
   constructor(props) {
     super(props);
@@ -77,11 +75,12 @@ class Register extends PureComponent {
     }
 
     return (
-      <div className="Register">
+      <div className="authentication">
         <Helmet title="Register" />
         {!this.props.auth.checkingSession && (
-          <div className="login-content">
-            <Card body className="login-window">
+          <div className="authentication__content">
+            <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
+            <Card body className="authentication__window">
               <h4 className="text-center">Register</h4>
               {this.state.completed && (
                 <Alert color="success">
@@ -184,7 +183,6 @@ class Register extends PureComponent {
                     />
                   </InputGroup>
                 </FormGroup>
-                <span className="spacer" />
                 <span className="spacer" />
                 <Button block size="lg" color="primary">
                   Register

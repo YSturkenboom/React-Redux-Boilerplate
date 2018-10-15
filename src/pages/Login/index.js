@@ -64,12 +64,13 @@ class Login extends PureComponent {
     }
 
     return (
-      <div className="Login">
+      <div className="authentication">
         <Helmet title="Login" />
 
         {!this.props.auth.checkingSession && (
-          <div className="login-content">
-            <Card body className="login-window">
+          <div className="authentication__content">
+            <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
+            <Card body className="authentication__window">
               <h4 className="text-center">Login</h4>
               <span className="spacer" />
               {error && <Alert color="danger">{error}</Alert>}
@@ -130,20 +131,17 @@ class Login extends PureComponent {
                   Login
                 </Button>
               </Form>
-
               <span className="spacer" />
               <small className="text-center"> or </small>
               <span className="spacer" />
-
               <Button
                 onClick={() => this.props.history.push('/register')}
                 block
                 size="lg"
                 color="primary"
               >
-                <small>Create a new account</small>
+                Create a new account
               </Button>
-
               <span className="spacer" />
 
               <a href="/forgot-password" className="text-center text-muted">

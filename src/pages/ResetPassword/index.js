@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import {
@@ -22,8 +22,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faRepeat } from '@fortawesome/pro-solid-svg-icons';
 import { authActions } from '../../actions';
 // import { toastAlert } from '../../utils/helpers';
-
-import './styles.scss';
 
 class ResetPassword extends PureComponent {
   constructor(props) {
@@ -83,12 +81,13 @@ class ResetPassword extends PureComponent {
     }
 
     return (
-      <div className="resetpassword">
+      <div className="authentication">
         <Helmet title="Reset password" />
 
         {!this.props.auth.checkingSession && (
-          <div className="resetpassword-content">
-            <Card body className="resetpassword-window">
+          <div className="authentication__content">
+            <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
+            <Card body className="authentication__window">
               <h4 className="text-center">Password Reset</h4>
               <span className="spacer" />
               {error && <Alert color="danger">{error}</Alert>}
@@ -138,10 +137,13 @@ class ResetPassword extends PureComponent {
                   </InputGroup>
                 </FormGroup>
                 <span className="spacer" />
-                <span className="spacer" />
                 <Button block size="lg" color="primary">
                   Reset Password
                 </Button>
+                <span className="spacer" />
+                <Link to="/login" className="text-center text-muted">
+                  <small>Login</small>
+                </Link>
               </Form>
             </Card>
           </div>

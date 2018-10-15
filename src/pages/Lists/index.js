@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import { toast } from 'react-toastify';
+import { toastAlert } from '../../utils/helpers';
 import { listActions } from '../../actions';
 import './styles.scss';
 import FloatingCircleButton from '../../components/FloatingCircleButton';
@@ -23,13 +23,9 @@ class Lists extends PureComponent {
   onDeleteWebsite = id => {
     this.props.deleteList(id).then(res => {
       if (res.type === 'LIST_DELETE_FAIL') {
-        toast.error(`Something went wrong deleting the list`, {
-          position: toast.POSITION.BOTTOM_LEFT
-        });
+        toastAlert('error', `Something went wrong deleting the list`);
       } else {
-        toast.info(`Successfully deleted the list`, {
-          position: toast.POSITION.BOTTOM_LEFT
-        });
+        toastAlert('info', `Successfully deleted the list`);
       }
     });
   };
@@ -37,13 +33,9 @@ class Lists extends PureComponent {
   addNewList() {
     this.props.create().then(res => {
       if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
-        toast.error(`Something went wrong adding a new list`, {
-          position: toast.POSITION.BOTTOM_LEFT
-        });
+        toastAlert('error', `Something went wrong adding a new list`);
       } else {
-        toast.success(`Successfully added a new list`, {
-          position: toast.POSITION.BOTTOM_LEFT
-        });
+        toastAlert('success', `Successfully added a new list`);
         this.props.history.push(`/list/${res.newListId.data._id}`);
       }
     });
@@ -65,10 +57,10 @@ class Lists extends PureComponent {
     }
 
     return (
-      <div className="Lists">
+      <div className="Lists body">
         <Helmet title="Your Lists" />
         {!isLoading && (
-          <div className="Lists__overview d-flex flex-wrap justify-content-start mx-auto my-5">
+          <div className="Lists__overview row">
             <AddSiteButton addNewList={this.addNewList} />
             {lists}
           </div>
