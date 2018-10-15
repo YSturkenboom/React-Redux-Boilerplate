@@ -153,37 +153,48 @@ class Home extends PureComponent {
     console.log(ranks);
 
     return (
-      <div className="Home">
-        <Helmet title="Analyze" />
-        <SearchBar
-          actionOnSubmit={this.analyze}
-          ranks={this.props.siteRank.ranks}
-          invalidUrls={this.props.siteRank.invalidUrls}
-        />
-        <div className="Home__header">
-          <div className="editableField">
-            {this.state.isEditable ? (
-              <EditableField
-                value={currentEditValue}
-                type="text"
-                editChange={this.handleChange}
-                editPress={this.handleKeyPress}
-                placeholder={name}
+      <div className="container">
+        <div className="Home">
+          <Helmet title="Analyze" />
+          <div className="row">
+            <div className="col">
+              <SearchBar
+                actionOnSubmit={this.analyze}
+                ranks={this.props.siteRank.ranks}
+                invalidUrls={this.props.siteRank.invalidUrls}
               />
-            ) : (
-              <h2>{currentEditValue}</h2>
-            )}
-
-            <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
+            </div>
           </div>
+          <div className="row">
+            <div className="col">
+              <div className="Home__header">
+                <div className="editableField">
+                  {this.state.isEditable ? (
+                    <EditableField
+                      value={currentEditValue}
+                      className="EditableField__placeholder"
+                      type="text"
+                      editChange={this.handleChange}
+                      editPress={this.handleKeyPress}
+                      placeholder={name}
+                    />
+                  ) : (
+                    <h2>{currentEditValue}</h2>
+                  )}
+
+                  <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
+                </div>
+              </div>
+            </div>
+          </div>
+          {ranks.length === 0 ? (
+            'Get started by entering some websites into the search bar and pressing the Analyze button!'
+          ) : (
+            <Table responsive className="RankTable">
+              <tbody>{rows}</tbody>
+            </Table>
+          )}
         </div>
-        {ranks.length === 0 ? (
-          'Get started by entering some websites into the search bar and pressing the Analyze button!'
-        ) : (
-          <Table responsive className="RankTable">
-            <tbody>{rows}</tbody>
-          </Table>
-        )}
       </div>
     );
   }

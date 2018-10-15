@@ -2,6 +2,8 @@ import React, { PureComponent, Fragment } from 'react';
 import TagsInput from 'react-tagsinput';
 import { map, filter, includes } from 'lodash';
 import { isUrl } from 'is-url';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faSearch } from '@fortawesome/pro-light-svg-icons';
 
 import './styles.scss';
 
@@ -70,12 +72,13 @@ class SearchBar extends PureComponent {
   render() {
     return (
       <div>
-        <div className="form">
+        <div className="d-flex flex-column flex-sm-row">
           <TagsInput
             addOnBlur
-            className="form__input"
+            className="form__input px-2"
             validate={input => isUrl(input)}
             placeholder="google.com"
+            // labelField="sites"
             value={this.state.tags}
             onChange={this.handleChange}
             inputValue={this.state.tag}
@@ -89,7 +92,7 @@ class SearchBar extends PureComponent {
           />
           <button
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-primary form__button"
             onClick={() => {
               const oldUrls = map(this.props.ranks, 'url');
               const diff = filter(
@@ -104,7 +107,9 @@ class SearchBar extends PureComponent {
               });
             }}
           >
-            + Analyze URL(&#39;s)
+            {/* <FontAwesomeIcon icon={faSearch} onClick={this.buttonSwitch} /> */}
+            {/* + Analyze URL(&#39;s) */}
+            Amsalyze
           </button>
         </div>
         <div className="toolTip">Press space to add multiple URL&#39;s</div>

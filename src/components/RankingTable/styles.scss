@@ -1,16 +1,26 @@
+@import '../../theme/common.scss';
+
 .tablerow {
   &__rank {
     font-size: 40px;
     font-weight: 800;
     text-align: right;
-    font-family: Filson-Black, serif;
+    font-family: $font-secondary;
+
+    @include max-xs {
+      font-size: 24px;
+    }
 
     .number_accent {
-      color: #18ecc0;
+      color: $color-ams;
+
+      @include max-xs {
+        font-size: 21px;
+      }
     }
 
     span {
-      color: #18ecc0;
+      color: $color-ams;
     }
   }
 
@@ -18,13 +28,19 @@
     font-size: 20px;
     font-weight: 800;
     padding-bottom: 3px;
-    font-family: 'Karla', sans-serif;
+    font-family: $font-primary;
+
+    @include max-xs {
+      font-size: 18px;
+    }
   }
+
   &__date {
     color: #737373;
     padding-top: 5px;
     margin-bottom: -7px;
   }
+
   &__delete {
     border: none;
     background-color: inherit;
@@ -37,6 +53,10 @@
     &:hover, &:focus {
       color: rgb(148, 0, 0);
       outline: none;
+    }
+
+    @include max-xs {
+      font-size: 12px;
     }
   }
 }

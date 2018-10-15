@@ -1,32 +1,38 @@
 @import '../../theme/variables';
+@import '../../theme/modules/breakpoints';
 
-.form {
-  display: flex;
+body .form {
+  // display: flex;
   margin-top: 60px;
   margin-bottom: 20px;
 
   &__input {
-    flex-basis: 80%;
-    border-radius: 28.3px;
+    flex: 1;
+    min-height: 50px;
+    border-bottom-left-radius: 28.3px;
+    border-top-left-radius: 28.3px;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.09);
     background-color: #fff;
     border: solid 0 #979797;
     outline: none;
-    margin-right: 20px;
-    padding-left: 15px;
+    // margin-right: 20px;
+    // padding-left: 15px;
+
+    @include max-xs {
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 26px;
+    }
   }
 
   &__button {
     cursor: pointer;
-    flex-basis: 20%;
-    border-radius: 23px;
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    line-height: 100%;
     outline: none;
-    -webkit-box-shadow: 0 5px 30px rgba(0,0,0,0);
     box-shadow: 0 5px 30px rgba(0,0,0,0);
-    background:black;
-    height: 50px;
+    background-color: $color-black;
+    padding: 0;
     color: #fff;
     border: 0;
     min-width: 200px;
@@ -36,7 +42,13 @@
     }
 
     &:hover {
-      background:gray;
+      background: gray;
+    }
+
+    @include max-xs {
+      border-bottom-left-radius: 26px;
+      border-top-right-radius: 0;
+      padding: 8px;
     }
   }
 
