@@ -1,20 +1,36 @@
 @import '../../theme/variables';
 
 table {
-  margin: 0 0 1rem;
-  background-color: white !important;
+  width: calc(100% - 2px);
+  min-width: 700px;
 
   tr {
-    td:last-child {
-      border: none;
+    background-color: white !important;
+    border: solid 1px rgba(232, 232, 232, 0.49);
+  }
 
-      > div {
-        border-left: 1px solid rgba(198, 203, 212, 0.3) !important;
-      }
+  th {
+    opacity: 0.7;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: $font-color-dark;
+    border-top: none !important;
+    border-bottom-width: 1px !important;
+    border-color: rgba(198, 203, 212, 0.3) !important;
+    text-transform: uppercase;
+    text-align: right;
 
-      * {
-        text-align: center;
-      }
+    &:first-child {
+      padding-left: 0;
+      text-align: left;
+    }
+
+    svg {
+      margin-right: 10px;
     }
   }
 
@@ -28,7 +44,6 @@ table {
     color: $font-color-dark;
     border-top: none !important;
     border-bottom: 1px solid rgba(198, 203, 212, 0.3) !important;
-    cursor: pointer;
     word-wrap: break-word;
     max-width: 300px;
     padding: 20px !important;

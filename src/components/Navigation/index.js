@@ -17,7 +17,7 @@ import {
 } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/pro-light-svg-icons';
+import { faUser } from '@fortawesome/pro-solid-svg-icons';
 import { toastAlert } from '../../utils/helpers';
 import { listActions } from '../../actions';
 
@@ -90,7 +90,9 @@ class Navigation extends Component {
               </div>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav>
-                  <FontAwesomeIcon icon={faUser} />
+                  <span>
+                    <FontAwesomeIcon icon={faUser} />
+                  </span>
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem to="/logout" tag={RouterNavLink}>
