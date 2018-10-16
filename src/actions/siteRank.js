@@ -1,10 +1,9 @@
 import axios from 'axios';
-// import { difference } from 'lodash';
-
 import { apiUrl } from '../config';
 
 export const getBulkTraffic = (sites, listId) => async dispatch => {
   try {
+    dispatch({ type: 'GET_TRAFFIC_REQUEST_PENDING' });
     const result = await axios.put(
       `${apiUrl}/lists/update-websites/${listId}`,
       { sites }

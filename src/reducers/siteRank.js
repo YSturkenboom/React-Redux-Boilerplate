@@ -4,7 +4,8 @@ const initialState = {
   ranks: [],
   currentListId: null,
   currentListName: null,
-  invalidUrls: []
+  invalidUrls: [],
+  isLoading: true
 };
 
 export default (state = initialState, action) => {
@@ -19,24 +20,32 @@ export default (state = initialState, action) => {
     }
     case 'GET_RANK_FOR_WEBSITE_SUCCESS': {
       const { websites } = action.result.data;
-      return { ...state, ranks: websites };
+      return { ...state, ranks: websites, isLoading: false };
     }
     case 'GET_RANK_FOR_WEBSITE_FAIL': {
       const error = action || 'Error retrieving ranks for sites in list.';
-      return { ...state, error };
+      return { ...state, error, isLoading: false };
     }
     case 'GET_TRAFFIC_REQUEST_SUCCESS': {
       const newRanks = sortBy([...state.ranks, ...action.ranks], 'rank');
-      return { ...state, ranks: newRanks };
+      return { ...state, ranks: newRanks, isLoading: false };
     }
     case 'GET_TRAFFIC_REQUEST_FAIL': {
       const { invalidUrls } = action;
-      return { ...state, invalidUrls };
+      return { ...state, invalidUrls, isLoading: false };
+    }
+    case 'GET_TRAFFIC_REQUEST_PENDING': {
+      return { ...state, isLoading: true };
     }
     case 'SINGLE_LIST_REQUEST_SUCCESS': {
       const { _id, websites } = action.result.data;
       console.log('fuck', action);
-      return { ...state, ranks: websites, currentListId: _id };
+      return {
+        ...state,
+        ranks: websites,
+        currentListId: _id,
+        isLoading: false
+      };
     }
     case 'SINGLE_LIST_REQUEST_FAIL': {
       return { ...state, isLoading: false };

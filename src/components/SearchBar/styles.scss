@@ -1,9 +1,14 @@
 @import '../../theme/variables';
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css');
 
 .form {
   display: flex;
   margin-top: 60px;
   margin-bottom: 20px;
+
+  button {
+    width: 250px;
+  }
 
   &__input {
     flex-basis: 80%;
@@ -15,31 +20,6 @@
     margin-right: 20px;
     padding-left: 15px;
   }
-
-  &__button {
-    cursor: pointer;
-    flex-basis: 20%;
-    border-radius: 23px;
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    outline: none;
-    -webkit-box-shadow: 0 5px 30px rgba(0,0,0,0);
-    box-shadow: 0 5px 30px rgba(0,0,0,0);
-    background:black;
-    height: 50px;
-    color: #fff;
-    border: 0;
-    min-width: 200px;
-
-    &:focus, &:active {
-      outline: none;
-    }
-
-    &:hover {
-      background:gray;
-    }
-  }
-
 }
 
 .react-tagsinput-tag {

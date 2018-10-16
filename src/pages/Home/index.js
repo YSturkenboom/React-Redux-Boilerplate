@@ -122,7 +122,7 @@ class Home extends PureComponent {
   };
 
   render() {
-    const { ranks } = this.props.siteRank;
+    const { ranks, invalidUrls, isLoading } = this.props.siteRank;
     const { name } = this.props.lists;
     const { currentEditValue } = this.state;
 
@@ -139,8 +139,9 @@ class Home extends PureComponent {
         <Helmet title="Analyze" />
         <SearchBar
           actionOnSubmit={this.analyze}
-          ranks={this.props.siteRank.ranks}
-          invalidUrls={this.props.siteRank.invalidUrls}
+          ranks={ranks}
+          invalidUrls={invalidUrls}
+          isLoading={isLoading}
         />
         <div className="Home__header">
           <div className="editableField">

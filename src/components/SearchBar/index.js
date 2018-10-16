@@ -1,7 +1,9 @@
 import React, { PureComponent, Fragment } from 'react';
 import TagsInput from 'react-tagsinput';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { map, filter, includes } from 'lodash';
 import { isUrl } from 'is-url';
+import { faSpinner } from '@fortawesome/pro-solid-svg-icons';
 
 import './styles.scss';
 
@@ -104,7 +106,14 @@ class SearchBar extends PureComponent {
               });
             }}
           >
-            + Analyze URL(&#39;s)
+            {this.props.isLoading ? (
+              <FontAwesomeIcon
+                icon={faSpinner}
+                className="fas fa-circle-notch fa-spin"
+              />
+            ) : (
+              <div>+ Analyze URL(&#39;s)</div>
+            )}
           </button>
         </div>
         <div className="toolTip">Press space to add multiple URL&#39;s</div>
