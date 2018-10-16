@@ -17,7 +17,7 @@ import {
 } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/pro-solid-svg-icons';
+import { faEnvelope, faHeart } from '@fortawesome/pro-solid-svg-icons';
 import { authActions } from '../../actions';
 
 class ForgotPassword extends PureComponent {
@@ -70,54 +70,67 @@ class ForgotPassword extends PureComponent {
         <Helmet title="ForgotPassword" />
 
         {!this.props.auth.checkingSession && (
-          <div className="authentication__content">
-            <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
-            <Card body className="authentication__window">
-              {this.state.completed ? (
-                <h4>
-                  Thank you for registering! A link to reset your password has
-                  been sent to {this.state.email}
-                </h4>
-              ) : (
-                <h4 className="text-center">Password Reset</h4>
-              )}
-              <span className="spacer" />
-              {error && <Alert color="danger">{error}</Alert>}
-              <Form onSubmit={this.onSubmitVerify}>
-                <FormGroup>
-                  <Label hidden for="email">
-                    E-mail
-                  </Label>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <FontAwesomeIcon icon={faEnvelope} />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="email"
-                      name="email"
-                      id="email"
-                      value={email}
-                      onChange={this.handleInputChange}
-                      placeholder="E-mail"
-                      required
-                      disabled={this.state.completed}
-                      bsSize="lg"
-                    />
-                  </InputGroup>
-                </FormGroup>
+          <div className="container">
+            <div className="authentication__content">
+              <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
+              <Card body className="authentication__window">
+                {this.state.completed ? (
+                  <h4>
+                    Thank you for registering! A link to reset your password has
+                    been sent to {this.state.email}
+                  </h4>
+                ) : (
+                  <h4 className="text-center">Password Reset</h4>
+                )}
                 <span className="spacer" />
+                {error && <Alert color="danger">{error}</Alert>}
+                <Form onSubmit={this.onSubmitVerify}>
+                  <FormGroup>
+                    <Label hidden for="email">
+                      E-mail
+                    </Label>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <FontAwesomeIcon icon={faEnvelope} />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        type="email"
+                        name="email"
+                        id="email"
+                        value={email}
+                        onChange={this.handleInputChange}
+                        placeholder="E-mail"
+                        required
+                        disabled={this.state.completed}
+                        bsSize="lg"
+                      />
+                    </InputGroup>
+                  </FormGroup>
+                  <span className="spacer" />
+                  <span className="spacer" />
+                  <Button block size="lg" color="primary">
+                    Reset Password
+                  </Button>
+                </Form>
                 <span className="spacer" />
-                <Button block size="lg" color="primary">
-                  Reset Password
-                </Button>
-              </Form>
-              <span className="spacer" />
-              <Link to="/register" className="text-center text-muted">
-                <small>Register</small>
-              </Link>
-            </Card>
+                <Link to="/register" className="text-center text-muted">
+                  <small>Register</small>
+                </Link>
+              </Card>
+              <a
+                className="storyofams__link"
+                href="https://storyofams.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Made with <FontAwesomeIcon icon={faHeart} /> by
+                <span>
+                  Story of <span>AMS</span>
+                </span>
+              </a>
+            </div>
           </div>
         )}
       </div>

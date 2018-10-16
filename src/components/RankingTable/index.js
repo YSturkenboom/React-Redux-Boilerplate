@@ -18,11 +18,11 @@ export default class RankingTable extends PureComponent {
     console.log('entry', entry);
     return [
       <tr key={entry._id}>
-        <td className="first_table">
-          <div className="tablerow__date">{entry.date}</div>
-          <div className="tablerow__site">{entry.url}</div>
+        <td className="table__column">
+          <div className="table__row__date">{entry.date}</div>
+          <div className="table__row__site">{entry.url}</div>
           <button
-            className="tablerow__delete"
+            className="table__row__delete"
             type="submit"
             onClick="this.props.onDelete"
           >
@@ -30,13 +30,13 @@ export default class RankingTable extends PureComponent {
             Delete
           </button>
         </td>
-        <td className="second_table">
-          <div className="tablerow__rank">#{entry.rank}</div>
-          <div className="tablerow__category">{entry.category}</div>
+        <td className="table__column">
+          <div className="table__row__rank">#{entry.rank}</div>
+          <div className="table__row__category">{entry.category}</div>
         </td>
-        <td className="third_table">
-          <div className="tablerow__rank">#{entry.rank}</div>
-          <div className="tablerow__category">{entry.category}</div>
+        <td className="table__column">
+          <div className="table__row__rank">#{entry.rank}</div>
+          <div className="table__row__category">{entry.category}</div>
         </td>
       </tr>
     ];

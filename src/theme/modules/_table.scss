@@ -1,9 +1,13 @@
 @import '../../theme/variables';
 
 table {
-  margin: 0 0 1rem;
-  // background-color: white !important;
-  min-width: 900px;
+  width: calc(100% - 2px);
+  min-width: 700px;
+
+  tr {
+    background-color: white !important;
+    border: solid 1px rgba(232, 232, 232, 0.49);
+  }
 
   th {
     opacity: 0.7;
@@ -40,63 +44,14 @@ table {
     color: $font-color-dark;
     border-top: none !important;
     border-bottom: 1px solid rgba(198, 203, 212, 0.3) !important;
-    cursor: pointer;
     word-wrap: break-word;
     max-width: 300px;
-    background-color: white;
-
-    &:first-child {
-      padding-left: 30px;
-    }
-
-    &:last-child {
-      text-align: right;
-      padding-right: 30px;
-    }
+    padding: 20px !important;
   }
 
-  .toggle-collapse {
-    margin-left: 40px;
-    position: relative;
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-
-    &::before, &::after {
-      position: absolute;
-      top: 0;
-      content: '';
-      width: 2px;
-      height: 8px;
-      background-color: #333;
-      transition: transform 0.1s ease-in;
-      border-radius: 1px;
-    }
-
-    &::before {
-      right: 0;
-      transform: rotate(-135deg);
-    }
-
-    &::after {
-      left: 0;
-      transform: rotate(135deg);
+  @include max-sm {
+    td {
+      padding: 20px 10px !important;
     }
   }
-
-  tr:last-child td {
-    border-bottom: none !important;
-  }
-
-  .table--inner > td td:last-child {
-    text-align: right;
-
-    svg {
-      margin-left: 10px;
-    }
-  }
-}
-
-.Home table .table--inner > td td:last-child {
-  color: $blue;
 }

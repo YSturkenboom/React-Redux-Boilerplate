@@ -13,7 +13,7 @@ import { Table } from 'reactstrap';
 import RankingRow from '../../components/RankingRow';
 
 import EditableField from '../../components/EditableField';
-import SearchBar from '../../components/SearchBar/index';
+import SearchBar from '../../components/SearchBar';
 import { siteRankActions, listActions } from '../../actions';
 import { toastAlert } from '../../utils/helpers';
 import './styles.scss';
@@ -137,27 +137,36 @@ class Home extends PureComponent {
     return (
       <div className="Home body">
         <Helmet title="Analyze" />
-        <SearchBar
-          actionOnSubmit={this.analyze}
-          ranks={ranks}
-          invalidUrls={invalidUrls}
-          isLoading={isLoading}
-        />
-        <div className="Home__header">
-          <div className="editableField">
-            {this.state.isEditable ? (
-              <EditableField
-                value={currentEditValue}
-                type="text"
-                editChange={this.handleChange}
-                editPress={this.handleKeyPress}
-                placeholder={name}
-              />
-            ) : (
-              <h2>{currentEditValue}</h2>
-            )}
+        <div className="row">
+          <div className="col">
+            <SearchBar
+              actionOnSubmit={this.analyze}
+              ranks={ranks}
+              invalidUrls={invalidUrls}
+              isLoading={isLoading}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <div className="Home__header">
+              <div className="editableField">
+                {this.state.isEditable ? (
+                  <EditableField
+                    value={currentEditValue}
+                    className="EditableField__placeholder"
+                    type="text"
+                    editChange={this.handleChange}
+                    editPress={this.handleKeyPress}
+                    placeholder={name}
+                  />
+                ) : (
+                  <h4>{currentEditValue}</h4>
+                )}
 
-            <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
+                <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
+              </div>
+            </div>
           </div>
         </div>
         {ranks.length === 0 ? (

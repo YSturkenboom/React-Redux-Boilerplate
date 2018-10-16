@@ -1,77 +1,97 @@
 @import '../../theme/modules/_breakpoints';
+@import '../../theme/variables.scss';
 
-.tablerow {
-  &__data {
+.table {
+  &__column {
+    width: 19%;
+    border-right: 1px solid #e8e8e8;
 
-    @include max-sm {
-      font-size: 24px;
-    }
-
-    font-size: 28px;
-    font-weight: 400;
-    text-align: right;
-
-    .number_accent {
-      color: #18ecc0;
-    }
-
-    span {
-      color: #18ecc0;
+    &:first-child {
+      width: 24%;
+      padding: 5px 0;
     }
   }
 
-  &__site {
-    font-size: 20px;
-    font-weight: 800;
-    padding-bottom: 3px;
-    font-family: 'Karla', sans-serif;
-  }
-  &__date {
-    color: #737373;
-    padding-top: 5px;
-    margin-bottom: -7px;
-  }
-  &__delete {
-    border: none;
-    background-color: inherit;
-    color: black;
-    cursor: pointer;
-    opacity: 0.6;
-    padding-top: 7px;
-    outline: none;
+  &__row {
+    &__data {
+      font-family: $font-primary;
+      font-size: 28px;
+      font-weight: 400;
+      text-align: right;
+      line-height: 1.2;
 
-    &:hover, &:focus {
-      color: rgb(148, 0, 0);
+      @include max-sm {
+        font-size: 22px;
+      }
+
+      .number_accent {
+        color: $color-accent;
+
+        @include max-xs {
+          font-size: 21px;
+        }
+      }
+
+      span {
+        color: $color-accent;
+      }
+    }
+
+    &__site {
+      font-size: 20px;
+      font-weight: 800;
+      padding-bottom: 3px;
+
+      @include max-xs {
+        font-size: 18px;
+      }
+    }
+
+    &__date {
+      color: #737373;
+      padding-top: 5px;
+      margin-bottom: -7px;
+    }
+
+    &__delete {
+      border: none;
+      background-color: inherit;
+      color: $color-accent;
+      cursor: pointer;
+      opacity: 0.6;
+      padding-top: 7px;
       outline: none;
+      line-height: 13px;
+      font-size: 14px;
+      padding-bottom: 0;
+      padding-left: 5px;
+      transition: all 0.2s ease-in-out;
+
+      &:hover, &:focus {
+        color: rgb(148, 0, 0);
+        outline: none;
+      }
+
+      @include max-xs {
+        font-size: 12px;
+      }
+    }
+
+    &__subtext {
+      opacity: 0.6;
+      font-size: 12px;
+      text-align: right;
+      text-transform: uppercase;
     }
   }
-  &__subtext {
-    opacity: 0.6;
-    font-size: 12px;
-    text-align: right;
-    text-transform: uppercase;
-    margin-top: -10px;
+
+  @include max-sm {
+    &__column {
+      width: auto !important;
+    }
   }
 }
 
 .trashIcon {
   margin-right: 8px;
-}
-
-.table td {
-  cursor: default;
-}
-
-.first_table {
-  width: 24%;
-  padding: 5px 0;
-}
-
-.second_table, .third_table, .fourth_table, .fifth_table {
-  width: 19%;
-  border-left: 1px solid #e8e8e8;
-}
-
-.RankTable {
-  box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.09);
 }

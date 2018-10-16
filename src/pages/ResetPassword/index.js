@@ -19,7 +19,7 @@ import {
 
 import { get } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLock, faRepeat } from '@fortawesome/pro-solid-svg-icons';
+import { faLock, faRepeat, faHeart } from '@fortawesome/pro-solid-svg-icons';
 import { authActions } from '../../actions';
 // import { toastAlert } from '../../utils/helpers';
 
@@ -85,67 +85,80 @@ class ResetPassword extends PureComponent {
         <Helmet title="Reset password" />
 
         {!this.props.auth.checkingSession && (
-          <div className="authentication__content">
-            <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
-            <Card body className="authentication__window">
-              <h4 className="text-center">Password Reset</h4>
-              <span className="spacer" />
-              {error && <Alert color="danger">{error}</Alert>}
-              <Form onSubmit={this.onSubmitVerify}>
-                <FormGroup>
-                  <Label hidden for="password">
-                    New Password
-                  </Label>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <FontAwesomeIcon icon={faLock} />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="password"
-                      name="password"
-                      id="password"
-                      value={password}
-                      onChange={this.handleInputChange}
-                      placeholder="New Password"
-                      required
-                      bsSize="lg"
-                    />
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup>
-                  <Label hidden for="password2">
-                    New Password
-                  </Label>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <FontAwesomeIcon icon={faRepeat} />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="password"
-                      name="password2"
-                      id="password2"
-                      value={password2}
-                      onChange={this.handleInputChange}
-                      placeholder="Confirm Password"
-                      required
-                      bsSize="lg"
-                    />
-                  </InputGroup>
-                </FormGroup>
+          <div className="container">
+            <div className="authentication__content">
+              <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
+              <Card body className="authentication__window">
+                <h4 className="text-center">Password Reset</h4>
                 <span className="spacer" />
-                <Button block size="lg" color="primary">
-                  Reset Password
-                </Button>
-                <span className="spacer" />
-                <Link to="/login" className="text-center text-muted">
-                  <small>Login</small>
-                </Link>
-              </Form>
-            </Card>
+                {error && <Alert color="danger">{error}</Alert>}
+                <Form onSubmit={this.onSubmitVerify}>
+                  <FormGroup>
+                    <Label hidden for="password">
+                      New Password
+                    </Label>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <FontAwesomeIcon icon={faLock} />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        type="password"
+                        name="password"
+                        id="password"
+                        value={password}
+                        onChange={this.handleInputChange}
+                        placeholder="New Password"
+                        required
+                        bsSize="lg"
+                      />
+                    </InputGroup>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label hidden for="password2">
+                      New Password
+                    </Label>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <FontAwesomeIcon icon={faRepeat} />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        type="password"
+                        name="password2"
+                        id="password2"
+                        value={password2}
+                        onChange={this.handleInputChange}
+                        placeholder="Confirm Password"
+                        required
+                        bsSize="lg"
+                      />
+                    </InputGroup>
+                  </FormGroup>
+                  <span className="spacer" />
+                  <Button block size="lg" color="primary">
+                    Reset Password
+                  </Button>
+                  <span className="spacer" />
+                  <Link to="/login" className="text-center text-muted">
+                    <small>Login</small>
+                  </Link>
+                </Form>
+              </Card>
+              <a
+                className="storyofams__link"
+                href="https://storyofams.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Made with <FontAwesomeIcon icon={faHeart} /> by
+                <span>
+                  Story of <span>AMS</span>
+                </span>
+              </a>
+            </div>
           </div>
         )}
       </div>
