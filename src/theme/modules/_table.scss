@@ -48,4 +48,10 @@ table {
     max-width: 300px;
     padding: 20px !important;
   }
+
+  @include max-sm {
+    td {
+      padding: 20px 10px !important;
+    }
+  }
 }

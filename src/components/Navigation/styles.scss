@@ -5,7 +5,10 @@
   margin-bottom: 40px;
 
   &bar {
+    position: static !important;
+
     &--wrapper {
+      position: relative;
       background-color: $color-white;
       box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.08);
     }
@@ -65,8 +68,13 @@
 
         a {
           padding: 10px 15px;
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+          justify-content: center;
+          font-size: 16px;
 
-          span {
+          span:first-child {
             border: solid 1px #e8e8e8;
             border-radius: 50%;
             width: 40px;
@@ -79,6 +87,10 @@
               color: $color-accent;
               font-size: 14px;
             }
+          }
+
+          span:last-child {
+            display: none;
           }
         }
       }
@@ -203,7 +215,27 @@
   }
 
   @include max-sm {
-    &bar-nav  > div > li {
+    .dropdown.nav-item {
+      span {
+        margin: 0 5px;
+        display: flex !important;
+      }
+    }
+
+    &bar > div {
+      position: absolute;
+      width: 100%;
+      top: 100%;
+      left: 0;
+      background: white;
+      z-index: 10;
+    }
+
+    a.dropdown-item {
+      padding-top: 0 !important;
+    }
+
+    &bar-nav > div > li {
       width: 100%;
 
       > a {
@@ -211,6 +243,7 @@
         width: 100%;
         text-align: center;
         padding-top: 0;
+        padding-bottom: 0;
 
         span {
           position: relative;

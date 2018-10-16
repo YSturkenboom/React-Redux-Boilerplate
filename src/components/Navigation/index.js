@@ -93,6 +93,7 @@ class Navigation extends Component {
                   <span>
                     <FontAwesomeIcon icon={faUser} />
                   </span>
+                  <span>Profile</span>
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem to="/logout" tag={RouterNavLink}>

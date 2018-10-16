@@ -86,7 +86,9 @@
   }
 
   @include max-sm {
-    font-size: 0.9;
+    &__column {
+      width: auto !important;
+    }
   }
 }
 
