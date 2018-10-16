@@ -20,7 +20,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope,
   faUser,
-  faBuilding
+  faBuilding,
+  faHeart
 } from '@fortawesome/pro-solid-svg-icons';
 import { registerActions, authActions } from '../../actions';
 
@@ -78,121 +79,134 @@ class Register extends PureComponent {
       <div className="authentication">
         <Helmet title="Register" />
         {!this.props.auth.checkingSession && (
-          <div className="authentication__content">
-            <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
-            <Card body className="authentication__window">
-              <h4 className="text-center">Register</h4>
-              {this.state.completed && (
-                <Alert color="success">
-                  Thank you for registering! A verification email has been sent
-                  to {this.state.email}
-                </Alert>
-              )}
-              <span className="spacer" />
-              {error && <Alert color="danger">{error}</Alert>}
-              <Form onSubmit={this.onSubmitVerify}>
-                <FormGroup>
-                  <Label hidden for="firstName">
-                    First name
-                  </Label>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <FontAwesomeIcon icon={faUser} />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="firstName"
-                      name="firstName"
-                      id="firstName"
-                      value={firstName}
-                      onChange={this.handleInputChange}
-                      placeholder="Firstname"
-                      required
-                      disabled={this.state.completed}
-                      bsSize="lg"
-                    />
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup>
-                  <Label hidden for="LastName">
-                    Last name
-                  </Label>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <FontAwesomeIcon icon={faUser} />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="lastName"
-                      name="lastName"
-                      id="lastName"
-                      value={lastName}
-                      onChange={this.handleInputChange}
-                      placeholder="Lastname"
-                      required
-                      disabled={this.state.completed}
-                      bsSize="lg"
-                    />
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup>
-                  <Label hidden for="company">
-                    Company
-                  </Label>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <FontAwesomeIcon icon={faBuilding} />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="company"
-                      name="company"
-                      id="company"
-                      value={company}
-                      onChange={this.handleInputChange}
-                      placeholder="Company"
-                      required
-                      disabled={this.state.completed}
-                      bsSize="lg"
-                    />
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup>
-                  <Label hidden for="email">
-                    E-mail
-                  </Label>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <FontAwesomeIcon icon={faEnvelope} />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="email"
-                      name="email"
-                      id="email"
-                      value={email}
-                      onChange={this.handleInputChange}
-                      placeholder="E-mail"
-                      required
-                      disabled={this.state.completed}
-                      bsSize="lg"
-                    />
-                  </InputGroup>
-                </FormGroup>
+          <div className="container">
+            <div className="authentication__content">
+              <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
+              <Card body className="authentication__window">
+                <h4 className="text-center">Register</h4>
+                {this.state.completed && (
+                  <Alert color="success">
+                    Thank you for registering! A verification email has been
+                    sent to {this.state.email}
+                  </Alert>
+                )}
                 <span className="spacer" />
-                <Button block size="lg" color="primary">
-                  Register
-                </Button>
-                <span className="spacer" />
-                <Link to="/login" className="text-center text-muted">
-                  <small>Already have an account?</small>
-                </Link>
-              </Form>
-            </Card>
+                {error && <Alert color="danger">{error}</Alert>}
+                <Form onSubmit={this.onSubmitVerify}>
+                  <FormGroup>
+                    <Label hidden for="firstName">
+                      First name
+                    </Label>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <FontAwesomeIcon icon={faUser} />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        type="firstName"
+                        name="firstName"
+                        id="firstName"
+                        value={firstName}
+                        onChange={this.handleInputChange}
+                        placeholder="Firstname"
+                        required
+                        disabled={this.state.completed}
+                        bsSize="lg"
+                      />
+                    </InputGroup>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label hidden for="LastName">
+                      Last name
+                    </Label>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <FontAwesomeIcon icon={faUser} />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        type="lastName"
+                        name="lastName"
+                        id="lastName"
+                        value={lastName}
+                        onChange={this.handleInputChange}
+                        placeholder="Lastname"
+                        required
+                        disabled={this.state.completed}
+                        bsSize="lg"
+                      />
+                    </InputGroup>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label hidden for="company">
+                      Company
+                    </Label>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <FontAwesomeIcon icon={faBuilding} />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        type="company"
+                        name="company"
+                        id="company"
+                        value={company}
+                        onChange={this.handleInputChange}
+                        placeholder="Company"
+                        required
+                        disabled={this.state.completed}
+                        bsSize="lg"
+                      />
+                    </InputGroup>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label hidden for="email">
+                      E-mail
+                    </Label>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <FontAwesomeIcon icon={faEnvelope} />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        type="email"
+                        name="email"
+                        id="email"
+                        value={email}
+                        onChange={this.handleInputChange}
+                        placeholder="E-mail"
+                        required
+                        disabled={this.state.completed}
+                        bsSize="lg"
+                      />
+                    </InputGroup>
+                  </FormGroup>
+                  <span className="spacer" />
+                  <Button block size="lg" color="primary">
+                    Register
+                  </Button>
+                  <span className="spacer" />
+                  <Link to="/login" className="text-center text-muted">
+                    <small>Already have an account?</small>
+                  </Link>
+                </Form>
+              </Card>
+              <a
+                className="storyofams__link"
+                href="https://storyofams.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Made with <FontAwesomeIcon icon={faHeart} /> by
+                <span>
+                  Story of <span>AMS</span>
+                </span>
+              </a>
+            </div>
           </div>
         )}
       </div>

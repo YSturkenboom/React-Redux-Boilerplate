@@ -16,7 +16,7 @@ import {
 } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock } from '@fortawesome/pro-solid-svg-icons';
+import { faEnvelope, faLock, faHeart } from '@fortawesome/pro-solid-svg-icons';
 import { authActions } from '../../actions';
 
 import './styles.scss';
@@ -149,6 +149,17 @@ class Login extends PureComponent {
                   <small>Forgot your password?</small>
                 </a>
               </Card>
+              <a
+                className="storyofams__link"
+                href="https://storyofams.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Made with <FontAwesomeIcon icon={faHeart} /> by
+                <span>
+                  Story of <span>AMS</span>
+                </span>
+              </a>
             </div>
           </div>
         )}

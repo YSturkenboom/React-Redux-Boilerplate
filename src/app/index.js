@@ -7,7 +7,7 @@ import { hot } from 'react-hot-loader';
 import { ToastContainer } from 'react-toastify';
 import { config as faConfig } from '@fortawesome/fontawesome-svg-core';
 
-import { Footer, Navigation } from '../components';
+import { Navigation } from '../components';
 import config from '../config';
 
 // Import your global styles here
@@ -36,7 +36,6 @@ const App = ({ route }) => (
     {renderRoutes(route.routes)}
 
     <ToastContainer className="toast-container" />
-    <Footer />
   </div>
 );
 

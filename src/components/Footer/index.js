@@ -13,6 +13,7 @@ export default class Footer extends PureComponent {
           <div className="row">
             <div className="col-sm-12 text-center">
               <a
+                className="storyofams__link"
                 href="https://storyofams.com/"
                 rel="noopener noreferrer"
                 target="_blank"

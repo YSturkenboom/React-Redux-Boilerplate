@@ -6,28 +6,4 @@
   left: 0;
   right: 0;
   padding-bottom: 2px;
-
-  .fa-heart {
-    color: $color-accent;
-  }
-
-  a {
-    font-size: 14px;
-    color: $color-black;
-
-    > span {
-      margin-left: 4px;
-      color: $color-black;
-
-      span {
-        font-size: 13px;
-        font-family: Filson-Black, serif;
-      }
-    }
-
-    &:hover {
-      color: $color-black;
-      text-decoration: none;
-    }
-  }
 }
