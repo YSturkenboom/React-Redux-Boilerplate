@@ -60,8 +60,12 @@ export default (state = initialState, action) => {
       return { ...state };
     }
     case 'LIST_REFRESH_SUCCESS': {
-      const { stats } = action.result.data;
+      console.log(action);
+      const stats = action.result.data;
       return { ...state, isLoading: false, stats };
+    }
+    case 'LIST_REFRESH_FAIL': {
+      return { ...state, isLoading: false };
     }
     default:
       return state;

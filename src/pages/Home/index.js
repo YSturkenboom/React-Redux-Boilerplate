@@ -10,7 +10,8 @@ import {
   faGlobe,
   faStar,
   faCaretUp,
-  faCaretDown
+  faCaretDown,
+  faSyncAlt
 } from '@fortawesome/pro-solid-svg-icons';
 import { Table } from 'reactstrap';
 import RankingRow from '../../components/RankingRow';
@@ -209,6 +210,14 @@ class Home extends PureComponent {
 
                 <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
               </div>
+              <button
+                className="btn btn-primary"
+                onClick={this.refreshList}
+                type="submit"
+              >
+                Refresh
+                <FontAwesomeIcon icon={faSyncAlt} />
+              </button>
             </div>
           </div>
         </div>
@@ -260,8 +269,8 @@ const connector = connect(
     update: (id, name) => dispatch(listActions.updateTitle(id, name)),
     deleteSiteFromList: (siteId, listId) =>
       dispatch(listActions.deleteSiteFromList(siteId, listId)),
-    create: () => dispatch(listActions.createNewList())
-    // refreshList: listId => dispatch(listActions.refreshList(listId))
+    create: () => dispatch(listActions.createNewList()),
+    refreshList: listId => dispatch(listActions.refreshList(listId))
   })
 );
 
