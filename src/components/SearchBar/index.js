@@ -3,7 +3,7 @@ import TagsInput from 'react-tagsinput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { map, filter, includes } from 'lodash';
 import { isUrl } from 'is-url';
-import { faSpinner } from '@fortawesome/pro-solid-svg-icons';
+import { faSpinnerThird } from '@fortawesome/pro-solid-svg-icons';
 
 import './styles.scss';
 
@@ -61,12 +61,32 @@ class SearchBar extends PureComponent {
     );
   };
 
-  handleChange(tags) {
-    this.setState({ tags });
-  }
+  handleKeyUp = e => {
+    if (e.key === 'Enter') {
+      this.handleSubmit(e);
+    }
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const oldUrls = map(this.props.ranks, 'url');
+    const diff = filter(
+      cleanUrls(this.state.tags),
+      item => !includes(cleanUrls(oldUrls), item)
+    );
+    this.props.actionOnSubmit(diff).then(shouldRemove => {
+      if (shouldRemove) {
+        this.setState({ tags: [] });
+      }
+    });
+  };
 
   handleChangeInput(tag) {
     this.setState({ tag });
+  }
+
+  handleChange(tags) {
+    this.setState({ tags });
   }
 
   render() {
@@ -88,6 +108,7 @@ class SearchBar extends PureComponent {
               onlyUnique
               renderTag={this.customRenderTag}
               inputProps={{
+                onKeyUp: this.handleKeyUp,
                 placeholder: 'Add a website (e.g. www.google.com)'
               }}
             />
@@ -95,22 +116,11 @@ class SearchBar extends PureComponent {
               <button
                 type="submit"
                 className="btn btn-primary form__button py-3"
-                onClick={() => {
-                  const oldUrls = map(this.props.ranks, 'url');
-                  const diff = filter(
-                    cleanUrls(this.state.tags),
-                    item => !includes(cleanUrls(oldUrls), item)
-                  );
-                  this.props.actionOnSubmit(diff).then(shouldRemove => {
-                    if (shouldRemove) {
-                      this.setState({ tags: [] });
-                    }
-                  });
-                }}
+                onClick={this.handleSubmit}
               >
                 {this.props.isLoading ? (
                   <FontAwesomeIcon
-                    icon={faSpinner}
+                    icon={faSpinnerThird}
                     className="fas fa-circle-notch fa-spin"
                   />
                 ) : (
