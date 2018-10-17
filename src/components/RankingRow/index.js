@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faExternalLink } from '@fortawesome/pro-light-svg-icons';
 import { UncontrolledTooltip } from 'reactstrap';
@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import { formatNumber } from '../../utils/helpers';
 
 import './styles.scss';
+import '../../../node_modules/flag-icon-css/css/flag-icon.min.css';
 
 const COUNTRY_CODES = [
   { Code: 'AF', Name: 'Afghanistan' },
@@ -273,6 +274,11 @@ export default class RankingRow extends PureComponent {
     return 'unknown';
   };
 
+  renderCountryImage = mostVisitingCountry => {
+    const classes = `flag-icon flag-icon-${mostVisitingCountry.toLowerCase()} flag-icon-squared`;
+    return <span className={classes} />;
+  };
+
   render() {
     const {
       _id,
@@ -292,8 +298,8 @@ export default class RankingRow extends PureComponent {
           </div>
           <a
             href={`http://${url}/?ref=amsalyze.storyofams.com`}
-            rel="noopener"
-            target="blank"
+            rel="noopener noreferrer"
+            target="_blank"
             className="table__row__site"
           >
             {url}
@@ -358,9 +364,14 @@ export default class RankingRow extends PureComponent {
               : 'n/a'}
           </div>
           <div className="table__row__subtext">
-            {mostVisitingCountry
-              ? this.renderCountry(mostVisitingCountry)
-              : 'n/a'}
+            {mostVisitingCountry ? (
+              <Fragment>
+                {this.renderCountry(mostVisitingCountry)}
+                {this.renderCountryImage(mostVisitingCountry)}
+              </Fragment>
+            ) : (
+              <Fragment>n/a</Fragment>
+            )}
           </div>
         </td>
       </tr>
