@@ -284,7 +284,7 @@ export default class RankingRow extends PureComponent {
       _id,
       globalRank,
       globalPageviews,
-      globalPageviewsPerUser,
+      uniquePageViews,
       mostVisitingCountry,
       rankInMostVisitedCountry,
       updatedAt,
@@ -325,9 +325,7 @@ export default class RankingRow extends PureComponent {
         </td>
         <td className="table__column">
           <div className="table__row__data">
-            {globalPageviewsPerUser
-              ? formatNumber(globalPageviewsPerUser)
-              : 'n/a'}
+            {uniquePageViews ? formatNumber(uniquePageViews) : 'n/a'}
           </div>
           <div className="table__row__subtext">All time</div>
         </td>
