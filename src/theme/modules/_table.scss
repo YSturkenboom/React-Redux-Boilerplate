@@ -1,6 +1,6 @@
 @import '../../theme/variables';
 
-table {
+.table {
   width: calc(100% - 2px);
   min-width: 700px;
 
@@ -48,7 +48,7 @@ table {
     border-bottom: 1px solid rgba(198, 203, 212, 0.3) !important;
     word-wrap: break-word;
     max-width: 300px;
-    padding: 20px !important;
+    padding: 10px !important;
   }
 
   @include max-sm {

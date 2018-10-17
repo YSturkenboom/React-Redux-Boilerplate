@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/pro-light-svg-icons';
+import { faTrashAlt, faExternalLink } from '@fortawesome/pro-light-svg-icons';
 import { UncontrolledTooltip } from 'reactstrap';
 import { filter } from 'lodash';
+import { format } from 'date-fns';
 import { formatNumber } from '../../utils/helpers';
 
 import './styles.scss';
@@ -280,15 +281,21 @@ export default class RankingRow extends PureComponent {
       globalPageviewsPerUser,
       mostVisitingCountry,
       rankInMostVisitedCountry,
-      date,
+      updatedAt,
       url
     } = this.props.stats;
     return (
       <tr key={_id}>
         <td className="table__column">
-          <div className="table__row__date">{date}</div>
+          <div className="table__row__date">
+            {format(updatedAt, 'DD/MM/YYYY') || 'Date unknown'}
+          </div>
           <a href={`http://${url}`} className="table__row__site">
             {url}
+            <FontAwesomeIcon
+              className="table__row__link"
+              icon={faExternalLink}
+            />
           </a>
           <button
             type="submit"

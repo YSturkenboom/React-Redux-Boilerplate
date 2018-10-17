@@ -15,10 +15,12 @@
   &__row {
     &__data {
       font-family: $font-primary;
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 400;
       text-align: right;
       line-height: 1.2;
+      margin-top: 10px;
+      margin-right: 10px;
 
       @include max-sm {
         font-size: 22px;
@@ -40,10 +42,11 @@
     &__site {
       font-size: 20px;
       font-weight: 800;
-      padding-bottom: 3px;
+      padding-bottom: 2px;
       display: block;
       color: $font-color-dark;
       transition: background .3s, border .3s, color .3s, box-shadow .3s, transform .3s;
+      margin-left: 15px;
 
       &:hover {
         color: #18ECC0;
@@ -56,11 +59,20 @@
 
     &__date {
       color: #737373;
-      padding-top: 5px;
-      margin-bottom: -7px;
+      margin-left: 15px;
+
+    }
+
+    &__link {
+      margin-left: 10px;
+      margin-top: -5px;
+      vertical-align: 0 !important;
+      font-size: 12px !important;
     }
 
     &__delete {
+      margin-left: 15px;
+      margin-top: -5px;
       border: none;
       background-color: inherit;
       color: $color-accent;
@@ -89,6 +101,7 @@
       font-size: 12px;
       text-align: right;
       text-transform: uppercase;
+      margin-right: 10px;
     }
   }
 
