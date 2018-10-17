@@ -287,7 +287,9 @@ export default class RankingRow extends PureComponent {
       <tr key={_id}>
         <td className="table__column">
           <div className="table__row__date">{date}</div>
-          <div className="table__row__site">{url}</div>
+          <a href={`http://${url}`} className="table__row__site">
+            {url}
+          </a>
           <button
             type="submit"
             className="table__row__delete"

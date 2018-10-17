@@ -41,6 +41,13 @@
       font-size: 20px;
       font-weight: 800;
       padding-bottom: 3px;
+      display: block;
+      color: $font-color-dark;
+      transition: background .3s, border .3s, color .3s, box-shadow .3s, transform .3s;
+
+      &:hover {
+        color: #18ECC0;
+      }
 
       @include max-xs {
         font-size: 18px;
