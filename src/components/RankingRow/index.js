@@ -301,13 +301,15 @@ export default class RankingRow extends PureComponent {
         </td>
         <td className="table__column">
           <div className="table__row__data">
-            {formatNumber(globalPageviews)}
+            {globalPageviews ? formatNumber(globalPageviews) : 'n/a'}
           </div>
           <div className="table__row__subtext">All time</div>
         </td>
         <td className="table__column">
           <div className="table__row__data">
-            {formatNumber(globalPageviewsPerUser)}
+            {globalPageviewsPerUser
+              ? formatNumber(globalPageviewsPerUser)
+              : 'n/a'}
           </div>
           <div className="table__row__subtext">All time</div>
         </td>
@@ -319,7 +321,7 @@ export default class RankingRow extends PureComponent {
             </div>
           ) : (
             <div className="table__row__data">
-              No ranking
+              n/a
               <div className="position-relative">
                 <div id={`ToolTipRanks${_id}`}>?</div>
               </div>
@@ -339,10 +341,14 @@ export default class RankingRow extends PureComponent {
         <td className="table__column">
           <div className="table__row__data">
             <span className="number_accent"># </span>
-            {formatNumber(rankInMostVisitedCountry)}
+            {rankInMostVisitedCountry
+              ? formatNumber(rankInMostVisitedCountry)
+              : 'n/a'}
           </div>
           <div className="table__row__subtext">
-            {this.renderCountry(mostVisitingCountry)}
+            {mostVisitingCountry
+              ? this.renderCountry(mostVisitingCountry)
+              : 'n/a'}
           </div>
         </td>
       </tr>
