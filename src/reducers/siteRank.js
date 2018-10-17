@@ -43,7 +43,6 @@ export default (state = initialState, action) => {
     }
     case 'SINGLE_LIST_REQUEST_SUCCESS': {
       const { _id, websites } = action.result.data;
-      console.log('fuck', action);
       return {
         ...state,
         stats: websites,
@@ -55,16 +54,15 @@ export default (state = initialState, action) => {
       return { ...state, isLoading: false };
     }
     case 'DELETE_SITE_FROM_LIST_SUCCESS': {
-      const websiteId = action.deletedList.data;
-      const ranks = filter(state.ranks, item => item._id !== websiteId);
-      return { ...state, ranks };
+      const stats = filter(state.stats, item => item._id !== action.siteId);
+      return { ...state, stats };
     }
     case 'DELETE_SITE_FROM_LIST_FAIL': {
       return { ...state };
     }
     case 'LIST_REFRESH_SUCCESS': {
-      const { ranks } = action.result.data;
-      return { ...state, isLoading: false, ranks };
+      const { stats } = action.result.data;
+      return { ...state, isLoading: false, stats };
     }
     default:
       return state;

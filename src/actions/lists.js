@@ -2,13 +2,13 @@ import axios from 'axios';
 
 import { apiUrl } from '../config';
 
-export const deleteSiteFromList = (websiteId, listId) => async dispatch => {
+export const deleteSiteFromList = (siteId, listId) => async dispatch => {
   try {
-    const deletedList = await axios.delete(
-      `${apiUrl}/lists/delete-website/${listId}/${websiteId}`,
+    await axios.delete(
+      `${apiUrl}/lists/delete-website/${listId}/${siteId}`,
       {}
     );
-    return dispatch({ type: 'DELETE_SITE_FROM_LIST_SUCCESS', deletedList });
+    return dispatch({ type: 'DELETE_SITE_FROM_LIST_SUCCESS', siteId });
   } catch (err) {
     return dispatch({ type: 'DELETE_SITE_FROM_LIST_FAIL', err });
   }
@@ -70,8 +70,8 @@ export const updateMultipleWebsites = rankingObjects => async dispatch => {
 
 export const deleteList = id => async dispatch => {
   try {
-    const result = await axios.delete(`${apiUrl}/lists/delete-list/${id}`, {});
-    return dispatch({ type: 'LIST_DELETE_SUCCES', result });
+    await axios.delete(`${apiUrl}/lists/delete-list/${id}`, {});
+    return dispatch({ type: 'LIST_DELETE_SUCCESS', id });
   } catch (err) {
     return dispatch({
       type: 'LIST_DELETE_FAIL',

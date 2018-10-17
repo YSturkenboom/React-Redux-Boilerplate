@@ -39,12 +39,9 @@ export default (state = initialState, action) => {
       console.log('singel fail');
       return { ...state, isLoading: false };
     }
-    case 'LIST_DELETE_SUCCES': {
+    case 'LIST_DELETE_SUCCESS': {
       console.log('succes delete list', action);
-      const data = remove(
-        state.data,
-        el => el._id !== action.result.data.siteListToDelete._id
-      );
+      const data = remove(state.data, el => el._id !== action.id);
       return { ...state, data };
     }
     case 'LIST_DELETE_FAIL': {
