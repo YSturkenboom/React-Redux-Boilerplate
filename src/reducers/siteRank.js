@@ -1,7 +1,7 @@
 import { filter, sortBy } from 'lodash';
 
 const initialState = {
-  ranks: [],
+  stats: [],
   currentListId: null,
   currentListName: null,
   invalidUrls: [],
@@ -27,8 +27,12 @@ export default (state = initialState, action) => {
       return { ...state, error, isLoading: false };
     }
     case 'GET_TRAFFIC_REQUEST_SUCCESS': {
-      const newRanks = sortBy([...state.ranks, ...action.ranks], 'rank');
-      return { ...state, ranks: newRanks, isLoading: false };
+      console.log('heuj we got sum stats', action.payload);
+      const newStats = sortBy(
+        [...state.stats, ...action.payload],
+        'globalRank'
+      );
+      return { ...state, stats: newStats, isLoading: false };
     }
     case 'GET_TRAFFIC_REQUEST_FAIL': {
       const { invalidUrls } = action;
@@ -42,7 +46,7 @@ export default (state = initialState, action) => {
       console.log('fuck', action);
       return {
         ...state,
-        ranks: websites,
+        stats: websites,
         currentListId: _id,
         isLoading: false
       };

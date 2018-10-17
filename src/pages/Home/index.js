@@ -122,15 +122,15 @@ class Home extends PureComponent {
   };
 
   render() {
-    const { ranks, invalidUrls, isLoading } = this.props.siteRank;
+    const { stats, invalidUrls, isLoading } = this.props.siteRank;
     const { name } = this.props.lists;
     const { currentEditValue } = this.state;
 
-    const rows = ranks.map(rank => (
+    const rows = stats.map(stat => (
       <RankingRow
-        key={rank._id}
-        rank={rank}
-        onDelete={() => this.onDelete(rank._id)}
+        key={stat._id}
+        stats={stat}
+        onDelete={() => this.onDelete(stat._id)}
       />
     ));
 
@@ -141,7 +141,7 @@ class Home extends PureComponent {
           <div className="col">
             <SearchBar
               actionOnSubmit={this.analyze}
-              ranks={ranks}
+              ranks={stats}
               invalidUrls={invalidUrls}
               isLoading={isLoading}
             />
@@ -169,7 +169,7 @@ class Home extends PureComponent {
             </div>
           </div>
         </div>
-        {ranks.length === 0 ? (
+        {stats.length === 0 ? (
           'Get started by entering some websites into the search bar and pressing the Analyze button!'
         ) : (
           <Table responsive className="RankTable">

@@ -8,7 +8,16 @@ import './styles.scss';
 
 export default class RankingRow extends PureComponent {
   render() {
-    const { _id, rank, date, url } = this.props.rank;
+    const {
+      _id,
+      globalRank,
+      globalPageviews,
+      globalPageviewsPerUser,
+      mostVisitingCountry,
+      rankInMostVisitedCountry,
+      date,
+      url
+    } = this.props.stats;
     return (
       <tr key={_id}>
         <td className="table__column">
@@ -24,18 +33,22 @@ export default class RankingRow extends PureComponent {
           </button>
         </td>
         <td className="table__column">
-          <div className="table__row__data">{formatNumber(1234567)}</div>
+          <div className="table__row__data">
+            {formatNumber(globalPageviews)}
+          </div>
           <div className="table__row__subtext">All time</div>
         </td>
         <td className="table__column">
-          <div className="table__row__data">{formatNumber(12345678)}</div>
+          <div className="table__row__data">
+            {formatNumber(globalPageviewsPerUser)}
+          </div>
           <div className="table__row__subtext">All time</div>
         </td>
         <td className="table__column">
-          {rank ? (
+          {globalRank ? (
             <div className="table__row__data">
               <span className="number_accent"># </span>
-              {formatNumber(rank)}
+              {formatNumber(globalRank)}
             </div>
           ) : (
             <div className="table__row__data">
@@ -59,9 +72,9 @@ export default class RankingRow extends PureComponent {
         <td className="table__column">
           <div className="table__row__data">
             <span className="number_accent"># </span>
-            {formatNumber(123456789)}
+            {formatNumber(rankInMostVisitedCountry)}
           </div>
-          <div className="table__row__subtext">Netherlands</div>
+          <div className="table__row__subtext">{mostVisitingCountry}</div>
         </td>
       </tr>
     );

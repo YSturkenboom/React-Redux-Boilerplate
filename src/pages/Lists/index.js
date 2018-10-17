@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import { orderBy } from 'lodash';
 import { toastAlert } from '../../utils/helpers';
 import { listActions } from '../../actions';
 import './styles.scss';
@@ -45,7 +46,7 @@ class Lists extends PureComponent {
     const { isLoading, data } = this.props.lists;
     let lists;
     if (data) {
-      lists = data.map(list => (
+      lists = orderBy(data, ['createdAt'], ['desc']).map(list => (
         <List
           key={list._id}
           list={list}
