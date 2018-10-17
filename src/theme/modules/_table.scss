@@ -23,6 +23,7 @@ table {
     border-color: rgba(198, 203, 212, 0.3) !important;
     text-transform: uppercase;
     text-align: right;
+    cursor: pointer;
 
     &:first-child {
       padding-left: 0;
@@ -31,6 +32,7 @@ table {
 
     svg {
       margin-right: 10px;
+      margin-left: 10px;
     }
   }
 

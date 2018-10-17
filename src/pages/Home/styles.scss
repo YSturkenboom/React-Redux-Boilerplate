@@ -34,3 +34,20 @@
     justify-content: flex-end;
   }
 }
+
+.sortCaret {
+  cursor: pointer;
+  transform: translateY(0);
+  transition: background .3s, border .3s, color .3s, box-shadow .3s, transform .3s;
+  outline: none;
+
+  &:hover {
+    color: #18ECC0;
+    box-shadow: 0 0 30px rgba(24,236,192,0.48);
+  }
+
+  &--active {
+    color: #18ECC0;
+    box-shadow: 0 0 30px rgba(24,236,192,0.48);
+  }
+}

@@ -1,17 +1,19 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import { orderBy } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPen,
   faEye,
   faUserFriends,
   faGlobe,
-  faStar
+  faStar,
+  faCaretUp,
+  faCaretDown
 } from '@fortawesome/pro-solid-svg-icons';
 import { Table } from 'reactstrap';
 import RankingRow from '../../components/RankingRow';
-
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar';
 import { siteRankActions, listActions } from '../../actions';
@@ -23,7 +25,9 @@ class Home extends PureComponent {
     super();
     this.state = {
       isEditable: false,
-      currentEditValue: ''
+      currentEditValue: '',
+      currentSortType: 'globalRank',
+      currentSortDirection: 'asc'
     };
     this.onDelete = this.onDelete.bind(this);
     this.buttonSwitch = this.buttonSwitch.bind(this);
@@ -121,12 +125,51 @@ class Home extends PureComponent {
     await this.props.refreshList(this.props.match.params.id);
   };
 
+  sortStats = sortType => {
+    console.log(sortType, this.state.currentSortType);
+    if (sortType === this.state.currentSortType) {
+      if (this.state.currentSortDirection === 'asc') {
+        this.setState({ currentSortDirection: 'desc' });
+      } else {
+        this.setState({ currentSortDirection: 'asc' });
+      }
+    } else {
+      this.setState({ currentSortType: sortType });
+    }
+  };
+
+  renderCaret = sortType => {
+    if (this.state.currentSortType === sortType) {
+      if (this.state.currentSortDirection === 'asc') {
+        return (
+          <FontAwesomeIcon
+            icon={faCaretUp}
+            className="sortCaret sortCaret--active"
+          />
+        );
+      }
+      return (
+        <FontAwesomeIcon
+          icon={faCaretDown}
+          className="sortCaret sortCaret--active"
+        />
+      );
+    }
+    return <FontAwesomeIcon icon={faCaretUp} className="sortCaret" />;
+  };
+
   render() {
     const { stats, invalidUrls, isLoading } = this.props.siteRank;
     const { name } = this.props.lists;
     const { currentEditValue } = this.state;
 
-    const rows = stats.map(stat => (
+    const sortedStats = orderBy(
+      stats,
+      [this.state.currentSortType],
+      [this.state.currentSortDirection]
+    );
+
+    const rows = sortedStats.map(stat => (
       <RankingRow
         key={stat._id}
         stats={stat}
@@ -175,21 +218,25 @@ class Home extends PureComponent {
           <Table responsive className="RankTable">
             <thead>
               <th>Website</th>
-              <th>
+              <th onClick={() => this.sortStats('globalPageviews')}>
                 <FontAwesomeIcon icon={faEye} />
                 Pageviews
+                {this.renderCaret('globalPageviews')}
               </th>
-              <th>
+              <th onClick={() => this.sortStats('globalPageviewsPerUser')}>
                 <FontAwesomeIcon icon={faUserFriends} />
                 Unique visitors
+                {this.renderCaret('globalPageviewsPerUser')}
               </th>
-              <th>
+              <th onClick={() => this.sortStats('globalRank')}>
                 <FontAwesomeIcon icon={faGlobe} />
                 Global rank
+                {this.renderCaret('globalRank')}
               </th>
-              <th>
+              <th onClick={() => this.sortStats('rankInMostVisitedCountry')}>
                 <FontAwesomeIcon icon={faStar} />
                 Top country
+                {this.renderCaret('rankInMostVisitedCountry')}
               </th>
             </thead>
             <tbody>{rows}</tbody>
