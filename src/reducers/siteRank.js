@@ -27,7 +27,6 @@ export default (state = initialState, action) => {
       return { ...state, error, isLoading: false };
     }
     case 'GET_TRAFFIC_REQUEST_SUCCESS': {
-      console.log('heuj we got sum stats', action.payload);
       const newStats = sortBy(
         [...state.stats, ...action.payload],
         'globalRank'

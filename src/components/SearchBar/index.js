@@ -119,10 +119,13 @@ class SearchBar extends PureComponent {
                 onClick={this.handleSubmit}
               >
                 {this.props.isLoading ? (
-                  <FontAwesomeIcon
-                    icon={faSpinnerThird}
-                    className="fas fa-circle-notch fa-spin"
-                  />
+                  <div>
+                    Analyzing...
+                    <FontAwesomeIcon
+                      icon={faSpinnerThird}
+                      className="fas fa-circle-notch fa-spin"
+                    />
+                  </div>
                 ) : (
                   <div>+ Analyze URL(&#39;s)</div>
                 )}

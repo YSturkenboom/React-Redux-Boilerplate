@@ -290,7 +290,12 @@ export default class RankingRow extends PureComponent {
           <div className="table__row__date">
             {format(updatedAt, 'DD/MM/YYYY') || 'Date unknown'}
           </div>
-          <a href={`http://${url}`} className="table__row__site">
+          <a
+            href={`http://${url}/?ref=amsalyze.storyofams.com`}
+            rel="noopener"
+            target="blank"
+            className="table__row__site"
+          >
             {url}
             <FontAwesomeIcon
               className="table__row__link"
