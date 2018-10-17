@@ -21,7 +21,8 @@ import {
   faEnvelope,
   faUser,
   faBuilding,
-  faHeart
+  faHeart,
+  faSpinnerThird
 } from '@fortawesome/pro-solid-svg-icons';
 import { registerActions, authActions } from '../../actions';
 
@@ -34,7 +35,8 @@ class Register extends PureComponent {
       lastName: '',
       company: '',
       email: '',
-      completed: false
+      completed: false,
+      loading: false
     };
   }
 
@@ -50,11 +52,15 @@ class Register extends PureComponent {
     const { register } = this.props;
     const { firstName, lastName, company, email } = this.state;
 
+    this.setState({ loading: true });
+
     register(firstName, lastName, company, email).then(res => {
       if (res.type === 'REGISTER_FAILED') {
         toast.error('Sorry could not create an account');
+        this.setState({ loading: false });
       } else {
         this.setState({ completed: true });
+        this.setState({ loading: false });
         toast.success('Account successfully created !');
       }
     });
@@ -187,7 +193,17 @@ class Register extends PureComponent {
                   </FormGroup>
                   <span className="spacer" />
                   <Button block size="lg" color="primary">
-                    Register
+                    {this.state.loading ? (
+                      <div>
+                        Processing...
+                        <FontAwesomeIcon
+                          icon={faSpinnerThird}
+                          className="fas fa-circle-notch fa-spin"
+                        />
+                      </div>
+                    ) : (
+                      <div> Register </div>
+                    )}
                   </Button>
                   <span className="spacer" />
                   <Link to="/login" className="text-center text-muted">
