@@ -217,7 +217,10 @@ class Home extends PureComponent {
         ) : (
           <Table responsive className="RankTable">
             <thead>
-              <th>Website</th>
+              <th onClick={() => this.sortStats('url')}>
+                Website
+                {this.renderCaret('url')}
+              </th>
               <th onClick={() => this.sortStats('globalPageviews')}>
                 <FontAwesomeIcon icon={faEye} />
                 Pageviews
