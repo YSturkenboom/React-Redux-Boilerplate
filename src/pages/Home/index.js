@@ -134,7 +134,7 @@ class Home extends PureComponent {
         this.setState({ currentSortDirection: 'asc' });
       }
     } else {
-      this.setState({ currentSortType: sortType });
+      this.setState({ currentSortType: sortType, currentSortDirection: 'asc' });
     }
   };
 
@@ -233,10 +233,9 @@ class Home extends PureComponent {
                 Global rank
                 {this.renderCaret('globalRank')}
               </th>
-              <th onClick={() => this.sortStats('rankInMostVisitedCountry')}>
+              <th>
                 <FontAwesomeIcon icon={faStar} />
                 Top country
-                {this.renderCaret('rankInMostVisitedCountry')}
               </th>
             </thead>
             <tbody>{rows}</tbody>
