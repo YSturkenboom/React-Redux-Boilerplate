@@ -12,6 +12,7 @@ class EditableField extends PureComponent {
           value={this.props.value}
           onChange={this.props.editChange}
           onKeyPress={this.props.editPress}
+          onBlur={this.props.onBlur}
           autoFocus
         />
       </div>

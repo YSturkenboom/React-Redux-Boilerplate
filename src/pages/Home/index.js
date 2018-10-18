@@ -203,9 +203,18 @@ class Home extends PureComponent {
                     editChange={this.handleChange}
                     editPress={this.handleKeyPress}
                     placeholder={name}
+                    onBlur={() => {
+                      this.buttonSwitch();
+                      this.handleKeyPress({
+                        key: 'Enter',
+                        target: { value: currentEditValue }
+                      });
+                    }}
                   />
                 ) : (
-                  <h4>{currentEditValue}</h4>
+                  <h4 onClick={this.buttonSwitch} role="presentation">
+                    {currentEditValue}
+                  </h4>
                 )}
 
                 <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
