@@ -98,6 +98,7 @@ export const updateTitle = (id, name) => async dispatch => {
 
 export const refreshList = listId => async dispatch => {
   try {
+    dispatch({ type: 'LIST_REFRESH_PENDING' });
     const result = await axios.put(
       `${apiUrl}/lists/refresh-websites/${listId}`,
       {}

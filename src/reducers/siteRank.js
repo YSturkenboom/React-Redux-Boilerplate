@@ -67,6 +67,9 @@ export default (state = initialState, action) => {
     case 'LIST_REFRESH_FAIL': {
       return { ...state, isLoading: false };
     }
+    case 'LIST_REFRESH_PENDING': {
+      return { ...state, isLoading: true };
+    }
     default:
       return state;
   }

@@ -1,0 +1,16 @@
+.invoice--cell {
+  span:not(.status) {
+    display: inline-block;
+    width: calc(100% - 13px);
+  }
+
+  .status {
+    background-color: #eee;
+  }
+}
+
+.skeleton-load {
+  span {
+    line-height: 1.5;
+  }
+}

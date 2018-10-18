@@ -18,6 +18,7 @@ import { Table } from 'reactstrap';
 import RankingRow from '../../components/RankingRow';
 import EditableField from '../../components/EditableField';
 import SearchBar from '../../components/SearchBar';
+import Skeleton from '../../components/Skeleton';
 import { siteRankActions, listActions } from '../../actions';
 import { toastAlert } from '../../utils/helpers';
 import './styles.scss';
@@ -29,7 +30,8 @@ class Home extends PureComponent {
       isEditable: false,
       currentEditValue: '',
       currentSortType: 'globalRank',
-      currentSortDirection: 'asc'
+      currentSortDirection: 'asc',
+      amountOfRowsToBeLoaded: 1
     };
     this.onDelete = this.onDelete.bind(this);
     this.buttonSwitch = this.buttonSwitch.bind(this);
@@ -61,6 +63,10 @@ class Home extends PureComponent {
       this.setState({ currentEditValue: this.props.lists.name })
     );
 
+    this.setState(() => ({
+      amountOfRowsToBeLoaded: this.props.siteRank.stats.length
+    }));
+
     // Load ranks from list into state (separate for instantaneous UI updates)
     getRanksForWebsitesInList(this.props.match.params.id);
   }
@@ -78,6 +84,9 @@ class Home extends PureComponent {
           });
         } else {
           toastAlert('info', `Successfully deleted websites from your list`);
+          this.setState(prevState => ({
+            amountOfRowsToBeLoaded: prevState.amountOfRowsToBeLoaded - 1
+          }));
           ReactGA.event({
             category: 'Lists',
             action: 'Removed website from list'
@@ -116,6 +125,10 @@ class Home extends PureComponent {
     if (urlsToQuery.length > 0) {
       console.log('urlstoquery', urlsToQuery);
       const { getBulkTraffic } = this.props;
+      this.setState(prevState => ({
+        amountOfRowsToBeLoaded:
+          prevState.amountOfRowsToBeLoaded + urlsToQuery.length
+      }));
       const res = await getBulkTraffic(
         urlsToQuery,
         this.props.siteRank.currentListId
@@ -160,6 +173,55 @@ class Home extends PureComponent {
     }
   };
 
+  renderTable = (isLoading, sortedStats) => {
+    if (isLoading) {
+      return <Skeleton rows={this.state.amountOfRowsToBeLoaded} columns={5} />;
+    }
+
+    const rows = sortedStats.map(stat => (
+      <RankingRow
+        key={stat._id}
+        stats={stat}
+        onDelete={() => this.onDelete(stat._id)}
+      />
+    ));
+
+    return (
+      <Table responsive className="RankTable">
+        <thead>
+          <th onClick={() => this.sortStats('url')}>
+            Website
+            {this.renderCaret('url')}
+            <div className="smallText">sort</div>
+          </th>
+          <th onClick={() => this.sortStats('globalPageviews')}>
+            <FontAwesomeIcon icon={faEye} />
+            Pageviews
+            {this.renderCaret('globalPageviews')}
+            <div className="smallText">sort</div>
+          </th>
+          <th onClick={() => this.sortStats('globalPageviewsPerUser')}>
+            <FontAwesomeIcon icon={faUserFriends} />
+            Unique visitors
+            {this.renderCaret('globalPageviewsPerUser')}
+            <div className="smallText">sort</div>
+          </th>
+          <th onClick={() => this.sortStats('globalRank')}>
+            <FontAwesomeIcon icon={faGlobe} />
+            Global rank
+            {this.renderCaret('globalRank')}
+            <div className="smallText">sort</div>
+          </th>
+          <th>
+            <FontAwesomeIcon icon={faStar} />
+            Top country
+          </th>
+        </thead>
+        <tbody>{rows}</tbody>
+      </Table>
+    );
+  };
+
   renderCaret = sortType => {
     if (this.state.currentSortType === sortType) {
       if (this.state.currentSortDirection === 'asc') {
@@ -190,14 +252,6 @@ class Home extends PureComponent {
       [this.state.currentSortType],
       [this.state.currentSortDirection]
     );
-
-    const rows = sortedStats.map(stat => (
-      <RankingRow
-        key={stat._id}
-        stats={stat}
-        onDelete={() => this.onDelete(stat._id)}
-      />
-    ));
 
     return (
       <div className="Home body">
@@ -251,42 +305,9 @@ class Home extends PureComponent {
             </div>
           </div>
         </div>
-        {stats.length === 0 ? (
-          'Get started by entering some websites into the search bar and pressing the Analyze button!'
-        ) : (
-          <Table responsive className="RankTable">
-            <thead>
-              <th onClick={() => this.sortStats('url')}>
-                Website
-                {this.renderCaret('url')}
-                <div className="smallText">sort</div>
-              </th>
-              <th onClick={() => this.sortStats('globalPageviews')}>
-                <FontAwesomeIcon icon={faEye} />
-                Pageviews
-                {this.renderCaret('globalPageviews')}
-                <div className="smallText">sort</div>
-              </th>
-              <th onClick={() => this.sortStats('globalPageviewsPerUser')}>
-                <FontAwesomeIcon icon={faUserFriends} />
-                Unique visitors
-                {this.renderCaret('globalPageviewsPerUser')}
-                <div className="smallText">sort</div>
-              </th>
-              <th onClick={() => this.sortStats('globalRank')}>
-                <FontAwesomeIcon icon={faGlobe} />
-                Global rank
-                {this.renderCaret('globalRank')}
-                <div className="smallText">sort</div>
-              </th>
-              <th>
-                <FontAwesomeIcon icon={faStar} />
-                Top country
-              </th>
-            </thead>
-            <tbody>{rows}</tbody>
-          </Table>
-        )}
+        {stats.length === 0
+          ? 'Get started by entering some websites into the search bar and pressing the Analyze button!'
+          : this.renderTable(isLoading, sortedStats)}
       </div>
     );
   }
