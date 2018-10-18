@@ -198,10 +198,10 @@ class Home extends PureComponent {
             Pageviews
             {this.renderCaret('globalPageviews')}
           </th>
-          <th onClick={() => this.sortStats('globalPageviewsPerUser')}>
+          <th onClick={() => this.sortStats('uniquePageViews')}>
             <FontAwesomeIcon icon={faUserFriends} />
             Unique visitors
-            {this.renderCaret('globalPageviewsPerUser')}
+            {this.renderCaret('uniquePageViews')}
           </th>
           <th onClick={() => this.sortStats('globalRank')}>
             <FontAwesomeIcon icon={faGlobe} />
