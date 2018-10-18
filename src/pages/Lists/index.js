@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
+import ReactGA from 'react-ga';
 import confirm from 'reactstrap-confirm';
 import { connect } from 'react-redux';
 import { orderBy } from 'lodash';
@@ -18,6 +19,8 @@ class Lists extends PureComponent {
   }
 
   componentDidMount() {
+    ReactGA.initialize('UA-92045603-2');
+    ReactGA.pageview('/lists');
     this.props.list();
   }
 
@@ -33,8 +36,16 @@ class Lists extends PureComponent {
       this.props.deleteList(id).then(res => {
         if (res.type === 'LIST_DELETE_FAIL') {
           toastAlert('error', `Something went wrong deleting the list`);
+          ReactGA.event({
+            category: 'Lists',
+            action: 'List deletion failed'
+          });
         } else {
           toastAlert('info', `Successfully deleted the list`);
+          ReactGA.event({
+            category: 'Lists',
+            action: 'Deleted list'
+          });
         }
       });
     }
@@ -44,7 +55,15 @@ class Lists extends PureComponent {
     this.props.create().then(res => {
       if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
         toastAlert('error', `Something went wrong adding a new list`);
+        ReactGA.event({
+          category: 'Lists',
+          action: 'New list creation failed'
+        });
       } else {
+        ReactGA.event({
+          category: 'Lists',
+          action: 'Created new list'
+        });
         toastAlert('success', `Successfully added a new list`);
         this.props.history.push(`/list/${res.newListId.data._id}`);
       }

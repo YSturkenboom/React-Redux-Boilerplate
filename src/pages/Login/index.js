@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga';
 import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 import {
@@ -33,6 +34,9 @@ class Login extends PureComponent {
 
   componentDidMount() {
     const { checkSession } = this.props;
+
+    ReactGA.initialize('UA-92045603-2');
+    ReactGA.pageview('/login');
 
     checkSession();
   }

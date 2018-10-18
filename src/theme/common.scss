@@ -48,9 +48,11 @@
 .btn {
   font-size: 14px !important;
 
-  svg {
-    font-size: 18px;
-    margin-left: 10px;
+  &-icon {
+    svg {
+      font-size: 18px;
+      margin-left: 10px;
+    }
   }
 }
 

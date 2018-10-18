@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import ReactGA from 'react-ga';
 import { Redirect, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
@@ -43,6 +44,9 @@ class Register extends PureComponent {
   componentDidMount() {
     const { checkSession } = this.props;
 
+    ReactGA.initialize('UA-92045603-2');
+    ReactGA.pageview('/register');
+
     checkSession();
   }
 
@@ -56,12 +60,20 @@ class Register extends PureComponent {
 
     register(firstName, lastName, company, email).then(res => {
       if (res.type === 'REGISTER_FAILED') {
+        ReactGA.event({
+          category: 'Accounts',
+          action: 'Account creation failed'
+        });
         toast.error('Sorry could not create an account');
         this.setState({ loading: false });
       } else {
         this.setState({ completed: true });
         this.setState({ loading: false });
         toast.success('Account successfully created !');
+        ReactGA.event({
+          category: 'Accounts',
+          action: 'Account created'
+        });
       }
     });
   };

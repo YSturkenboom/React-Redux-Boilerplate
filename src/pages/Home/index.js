@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
+import ReactGA from 'react-ga';
 import { connect } from 'react-redux';
 import { orderBy } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -39,6 +40,10 @@ class Home extends PureComponent {
   componentDidMount() {
     const { getSingleList, getRanksForWebsitesInList } = this.props;
 
+    // Google Analytics
+    ReactGA.initialize('UA-92045603-2');
+    ReactGA.pageview('/list');
+
     // the tab was clicked to create a new list, immediately make the list and Redirect
     if (this.props.match.params.id === 'new') {
       this.props.create().then(res => {
@@ -67,8 +72,16 @@ class Home extends PureComponent {
       .then(res => {
         if (res.type === 'DELETE_SITE_FROM_LIST_FAIL') {
           toastAlert('error', `Something went wrong deleting website`);
+          ReactGA.event({
+            category: 'Lists',
+            action: 'Removing website from list failed'
+          });
         } else {
           toastAlert('info', `Successfully deleted websites from your list`);
+          ReactGA.event({
+            category: 'Lists',
+            action: 'Removed website from list'
+          });
         }
       });
   }
@@ -108,13 +121,21 @@ class Home extends PureComponent {
         this.props.siteRank.currentListId
       );
       if (res.type === 'GET_TRAFFIC_REQUEST_FAIL') {
+        ReactGA.event({
+          category: 'Lists',
+          action: 'Adding websites to list failed'
+        });
         toastAlert(
           'error',
           `One or more of the URL's entered are invalid. (Please mind typo's)`
         );
         return false;
       }
-
+      ReactGA.event({
+        category: 'Lists',
+        action: 'Added websites to list',
+        value: urlsToQuery.length
+      });
       toastAlert('success', `Successfully added websites to your list`);
       return true;
     }
@@ -220,7 +241,7 @@ class Home extends PureComponent {
                 <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
               </div>
               <button
-                className="btn btn-primary"
+                className="btn btn-primary btn-icon"
                 onClick={this.refreshList}
                 type="submit"
               >
@@ -238,21 +259,25 @@ class Home extends PureComponent {
               <th onClick={() => this.sortStats('url')}>
                 Website
                 {this.renderCaret('url')}
+                <div className="smallText">sort</div>
               </th>
               <th onClick={() => this.sortStats('globalPageviews')}>
                 <FontAwesomeIcon icon={faEye} />
                 Pageviews
                 {this.renderCaret('globalPageviews')}
+                <div className="smallText">sort</div>
               </th>
               <th onClick={() => this.sortStats('globalPageviewsPerUser')}>
                 <FontAwesomeIcon icon={faUserFriends} />
                 Unique visitors
                 {this.renderCaret('globalPageviewsPerUser')}
+                <div className="smallText">sort</div>
               </th>
               <th onClick={() => this.sortStats('globalRank')}>
                 <FontAwesomeIcon icon={faGlobe} />
                 Global rank
                 {this.renderCaret('globalRank')}
+                <div className="smallText">sort</div>
               </th>
               <th>
                 <FontAwesomeIcon icon={faStar} />

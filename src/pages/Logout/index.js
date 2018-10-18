@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import ReactGA from 'react-ga';
 import { authActions } from '../../actions';
 
 class Logout extends PureComponent {
   componentDidMount() {
     const { logout } = this.props;
+
+    ReactGA.initialize('UA-92045603-2');
+    ReactGA.pageview('/logout');
 
     logout();
   }

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga';
 import Helmet from 'react-helmet';
 import { Redirect, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -33,6 +34,10 @@ class ForgotPassword extends PureComponent {
   componentDidMount() {
     const { checkSession } = this.props;
 
+    // Google Analytics
+    ReactGA.initialize('UA-92045603-2');
+    ReactGA.pageview('/forgot-password');
+
     checkSession();
   }
 
@@ -45,6 +50,10 @@ class ForgotPassword extends PureComponent {
     const { email } = this.state;
 
     forgotPassword(email).then(() => {
+      ReactGA.event({
+        category: 'Accounts',
+        action: 'Requested reset password link'
+      });
       history.push('/login');
       toast.success('If this account exists you should have received an email');
     });

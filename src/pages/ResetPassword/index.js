@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import ReactGA from 'react-ga';
 import { Redirect, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -36,6 +37,9 @@ class ResetPassword extends PureComponent {
   componentDidMount() {
     const { checkSession } = this.props;
 
+    ReactGA.initialize('UA-92045603-2');
+    ReactGA.pageview('/set-password');
+
     checkSession();
   }
 
@@ -55,9 +59,17 @@ class ResetPassword extends PureComponent {
       const token = get(match, 'params.token');
       resetPassword(token, password).then(res => {
         if (res.type === 'RESET_PASSWORD_FAILED') {
+          ReactGA.event({
+            category: 'Accounts',
+            action: 'Account activation failed / Password set failed'
+          });
           console.log(res.error);
           toast.error('Sorry, the password could not be reset');
         } else {
+          ReactGA.event({
+            category: 'Accounts',
+            action: 'Account successfully activated / Password successfully set'
+          });
           history.push('/login');
           toast.success('Password successfully reset !');
         }

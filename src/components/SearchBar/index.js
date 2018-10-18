@@ -115,7 +115,7 @@ class SearchBar extends PureComponent {
             <div>
               <button
                 type="submit"
-                className="btn btn-primary form__button py-3"
+                className="btn btn-primary form__button py-3 btn-icon"
                 onClick={this.handleSubmit}
               >
                 {this.props.isLoading ? (
