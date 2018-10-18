@@ -49,7 +49,6 @@ export const forgotPassword = email => async dispatch => {
     dispatch({ type: 'FORGOT_PASSWORD_SENT' }, res.data);
   } catch (err) {
     const res = err.response;
-    console.log(res);
     dispatch({ type: 'FORGOT_PASSWORD_FAILED', err: res.data.error });
   }
 };
@@ -59,7 +58,6 @@ export const resetPassword = (token, password) => async dispatch => {
     await axios.put(`${apiUrl}/accounts/set-password`, { token, password });
     return dispatch({ type: 'RESET_PASSWORD_SUCCESS' });
   } catch (err) {
-    console.log(err);
     return dispatch({ type: 'RESET_PASSWORD_FAILED', error: err });
   }
 };
