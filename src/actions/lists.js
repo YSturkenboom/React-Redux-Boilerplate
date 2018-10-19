@@ -30,8 +30,7 @@ export const getList = () => async dispatch => {
   } catch (err) {
     return dispatch({
       type: 'LISTS_LIST_FAIL',
-      error: 'oh noooo',
-      realErr: err
+      err
     });
   }
 };
