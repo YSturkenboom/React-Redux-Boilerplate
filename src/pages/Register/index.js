@@ -53,27 +53,29 @@ class Register extends PureComponent {
     ev.preventDefault();
 
     const { register } = this.props;
-    const { firstName, lastName, company, email } = this.state;
+    const { firstName, lastName, company, email, loading } = this.state;
 
-    this.setState({ loading: true });
+    if (!loading) {
+      this.setState({ loading: true });
 
-    register(firstName, lastName, company, email).then(res => {
-      if (res.type === 'REGISTER_FAILED') {
-        ReactGA.event({
-          category: 'Accounts',
-          action: 'Account creation failed'
-        });
-        toast.error('Sorry could not create an account');
-        this.setState({ loading: false });
-      } else {
-        this.setState({ completed: true, loading: false });
-        toast.success('Account successfully created !');
-        ReactGA.event({
-          category: 'Accounts',
-          action: 'Account created'
-        });
-      }
-    });
+      register(firstName, lastName, company, email).then(res => {
+        if (res.type === 'REGISTER_FAILED') {
+          ReactGA.event({
+            category: 'Accounts',
+            action: 'Account creation failed'
+          });
+          toast.error('Sorry could not create an account');
+          this.setState({ loading: false });
+        } else {
+          this.setState({ completed: true, loading: false });
+          toast.success('Account successfully created !');
+          ReactGA.event({
+            category: 'Accounts',
+            action: 'Account created'
+          });
+        }
+      });
+    }
   };
 
   handleInputChange = ev => {
@@ -116,12 +118,14 @@ class Register extends PureComponent {
                     <Label hidden for="firstName">
                       First name
                     </Label>
+
                     <InputGroup>
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <FontAwesomeIcon icon={faUser} />
                         </InputGroupText>
                       </InputGroupAddon>
+
                       <Input
                         type="firstName"
                         name="firstName"
@@ -135,6 +139,7 @@ class Register extends PureComponent {
                       />
                     </InputGroup>
                   </FormGroup>
+
                   <FormGroup>
                     <Label hidden for="LastName">
                       Last name
@@ -158,6 +163,7 @@ class Register extends PureComponent {
                       />
                     </InputGroup>
                   </FormGroup>
+
                   <FormGroup>
                     <Label hidden for="company">
                       Company
@@ -181,6 +187,7 @@ class Register extends PureComponent {
                       />
                     </InputGroup>
                   </FormGroup>
+
                   <FormGroup>
                     <Label hidden for="email">
                       E-mail

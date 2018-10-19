@@ -29,7 +29,8 @@ class ResetPassword extends PureComponent {
 
     this.state = {
       password: '',
-      password2: ''
+      password2: '',
+      busy: false
     };
   }
 
@@ -45,30 +46,37 @@ class ResetPassword extends PureComponent {
     ev.preventDefault();
 
     const { match, resetPassword, history } = this.props;
-    const { password, password2 } = this.state;
+    const { password, password2, busy } = this.state;
 
-    if (password !== password2) {
-      toast.error('Sorry, the passwords are differents');
-    } else if (password.length < 8 && password.length) {
-      toast.error('Sorry, the password must have at least 8 characters');
-    } else {
-      const token = get(match, 'params.token');
-      resetPassword(token, password).then(res => {
-        if (res.type === 'RESET_PASSWORD_FAILED') {
-          ReactGA.event({
-            category: 'Accounts',
-            action: 'Account activation failed / Password set failed'
-          });
-          toast.error('Sorry, the password could not be reset');
-        } else {
-          ReactGA.event({
-            category: 'Accounts',
-            action: 'Account successfully activated / Password successfully set'
-          });
-          history.push('/login');
-          toast.success('Password successfully reset !');
-        }
-      });
+    if (!busy) {
+      this.setState({ busy: true });
+      if (password !== password2) {
+        toast.error('Sorry, the passwords are differents');
+      } else if (password.length < 8 && password.length) {
+        toast.error('Sorry, the password must have at least 8 characters');
+      } else {
+        const token = get(match, 'params.token');
+        resetPassword(token, password).then(res => {
+          if (res.type === 'RESET_PASSWORD_FAILED') {
+            this.setState({ busy: false });
+            ReactGA.event({
+              category: 'Accounts',
+              action: 'Account activation failed / Password set failed'
+            });
+            toast.error('Sorry, the password could not be reset');
+          } else {
+            this.setState({ busy: false });
+            ReactGA.event({
+              category: 'Accounts',
+              action:
+                'Account successfully activated / Password successfully set'
+            });
+            history.push('/login');
+            toast.success('Password successfully reset !');
+          }
+        });
+      }
+      this.setState({ busy: false });
     }
   };
 

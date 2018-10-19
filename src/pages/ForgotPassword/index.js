@@ -27,7 +27,8 @@ class ForgotPassword extends PureComponent {
 
     this.state = {
       email: '',
-      completed: false
+      completed: false,
+      busy: false
     };
   }
 
@@ -44,16 +45,22 @@ class ForgotPassword extends PureComponent {
     ev.preventDefault();
 
     const { forgotPassword, history } = this.props;
-    const { email } = this.state;
+    const { email, busy } = this.state;
 
-    forgotPassword(email).then(() => {
-      ReactGA.event({
-        category: 'Accounts',
-        action: 'Requested reset password link'
+    if (!busy) {
+      this.setState({ busy: true });
+      forgotPassword(email).then(() => {
+        this.setState({ busy: false });
+        ReactGA.event({
+          category: 'Accounts',
+          action: 'Requested reset password link'
+        });
+        history.push('/login');
+        toast.success(
+          'If this account exists you should have received an email'
+        );
       });
-      history.push('/login');
-      toast.success('If this account exists you should have received an email');
-    });
+    }
   };
 
   handleInputChange = ev => {

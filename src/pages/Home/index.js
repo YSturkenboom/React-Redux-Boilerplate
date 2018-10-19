@@ -33,7 +33,8 @@ class Home extends PureComponent {
       currentEditValue: '',
       currentSortType: 'globalRank',
       currentSortDirection: 'asc',
-      amountOfRowsToBeLoaded: 1
+      amountOfRowsToBeLoaded: 1,
+      busy: false
     };
     this.onDelete = this.onDelete.bind(this);
     this.buttonSwitch = this.buttonSwitch.bind(this);
@@ -83,39 +84,52 @@ class Home extends PureComponent {
   // deletes single website
   onDelete(websiteId) {
     const { deleteSiteFromList, match } = this.props;
-    deleteSiteFromList(websiteId, match.params.id).then(res => {
-      if (res.type === 'DELETE_SITE_FROM_LIST_FAIL') {
-        toastAlert('error', `Something went wrong deleting website`);
-        ReactGA.event({
-          category: 'Lists',
-          action: 'Removing website from list failed'
-        });
-      } else {
-        toastAlert('info', `Successfully deleted websites from your list`);
-        this.setState(prevState => ({
-          amountOfRowsToBeLoaded: prevState.amountOfRowsToBeLoaded - 1
-        }));
-        ReactGA.event({
-          category: 'Lists',
-          action: 'Removed website from list'
-        });
-      }
-    });
+    const { busy } = this.state;
+    if (!busy) {
+      this.setState({ busy: true });
+      deleteSiteFromList(websiteId, match.params.id).then(res => {
+        if (res.type === 'DELETE_SITE_FROM_LIST_FAIL') {
+          this.setState({ busy: false });
+          toastAlert('error', `Something went wrong deleting website`);
+          ReactGA.event({
+            category: 'Lists',
+            action: 'Removing website from list failed'
+          });
+        } else {
+          this.setState({ busy: false });
+          toastAlert('info', `Successfully deleted websites from your list`);
+          this.setState(prevState => ({
+            amountOfRowsToBeLoaded: prevState.amountOfRowsToBeLoaded - 1
+          }));
+          ReactGA.event({
+            category: 'Lists',
+            action: 'Removed website from list'
+          });
+        }
+      });
+      this.setState({ busy: false });
+    }
   }
 
   handleKeyPress = event => {
     const { match, update } = this.props;
-    if (event.key === 'Enter') {
-      const siteID = match.params.id;
-      const name = event.target.value;
-      update(siteID, name).then(res => {
-        if (res.type === 'LIST_TITLE_UPDATE_FAIL') {
-          toastAlert('error', `Something went wrong deleting the list`);
-        } else {
-          toastAlert('success', `Successfully updated list title`);
-        }
-      });
-      this.setState({ isEditable: false, currentEditValue: name });
+    const { busy } = this.state;
+    if (!busy) {
+      this.setState({ busy: true });
+      if (event.key === 'Enter') {
+        const siteID = match.params.id;
+        const name = event.target.value;
+        update(siteID, name).then(res => {
+          if (res.type === 'LIST_TITLE_UPDATE_FAIL') {
+            toastAlert('error', `Something went wrong deleting the list`);
+            this.setState({ busy: false });
+          } else {
+            toastAlert('success', `Successfully updated list title`);
+            this.setState({ busy: false });
+          }
+        });
+        this.setState({ isEditable: false, currentEditValue: name });
+      }
     }
   };
 
@@ -131,33 +145,41 @@ class Home extends PureComponent {
 
   analyze = async urlsToQuery => {
     const { siteRank } = this.props;
-    if (urlsToQuery.length > 0) {
-      const { getBulkTraffic } = this.props;
-      this.setState(prevState => ({
-        amountOfRowsToBeLoaded:
-          prevState.amountOfRowsToBeLoaded + urlsToQuery.length
-      }));
-      const res = await getBulkTraffic(urlsToQuery, siteRank.currentListId);
-      if (res.type === 'GET_TRAFFIC_REQUEST_FAIL') {
+    const { busy } = this.state;
+
+    if (!busy) {
+      this.setState({ busy: true });
+      if (urlsToQuery.length > 0) {
+        const { getBulkTraffic } = this.props;
+        this.setState(prevState => ({
+          amountOfRowsToBeLoaded:
+            prevState.amountOfRowsToBeLoaded + urlsToQuery.length
+        }));
+        const res = await getBulkTraffic(urlsToQuery, siteRank.currentListId);
+        if (res.type === 'GET_TRAFFIC_REQUEST_FAIL') {
+          ReactGA.event({
+            category: 'Lists',
+            action: 'Adding websites to list failed'
+          });
+          this.setState({ busy: false });
+          toastAlert(
+            'error',
+            `One or more of the URL's entered are invalid. (Please mind typo's)`
+          );
+          return false;
+        }
         ReactGA.event({
           category: 'Lists',
-          action: 'Adding websites to list failed'
+          action: 'Added websites to list',
+          value: urlsToQuery.length
         });
-        toastAlert(
-          'error',
-          `One or more of the URL's entered are invalid. (Please mind typo's)`
-        );
-        return false;
+        this.setState({ busy: false });
+        toastAlert('success', `Successfully added websites to your list`);
+        return true;
       }
-      ReactGA.event({
-        category: 'Lists',
-        action: 'Added websites to list',
-        value: urlsToQuery.length
-      });
-      toastAlert('success', `Successfully added websites to your list`);
-      return true;
     }
     // if there are no new sites in the tags, remove the (useless) tags
+    this.setState({ busy: false });
     return true;
   };
 
