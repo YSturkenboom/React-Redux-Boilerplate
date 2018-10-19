@@ -17,13 +17,9 @@ export const register = (
       company,
       email
     });
-    console.log(firstName, lastName, company, email);
-    console.log(res);
     return dispatch({ type: 'AUTH_REGISTER', account: res.data.account });
   } catch (err) {
     const res = err.response;
-    console.log(res);
-    console.log(firstName, lastName, company, email);
     return dispatch({ type: 'REGISTER_FAILED', err: res.data.error });
   }
 };

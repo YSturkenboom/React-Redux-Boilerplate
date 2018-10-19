@@ -46,8 +46,6 @@ class ResetPassword extends PureComponent {
   onSubmitVerify = ev => {
     ev.preventDefault();
 
-    console.log('logging in');
-
     const { match, resetPassword, history } = this.props;
     const { password, password2 } = this.state;
 
@@ -63,7 +61,6 @@ class ResetPassword extends PureComponent {
             category: 'Accounts',
             action: 'Account activation failed / Password set failed'
           });
-          console.log(res.error);
           toast.error('Sorry, the password could not be reset');
         } else {
           ReactGA.event({

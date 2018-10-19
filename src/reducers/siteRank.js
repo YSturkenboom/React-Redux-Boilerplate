@@ -60,7 +60,6 @@ export default (state = initialState, action) => {
       return { ...state };
     }
     case 'LIST_REFRESH_SUCCESS': {
-      console.log(action);
       const stats = action.result.data;
       return { ...state, isLoading: false, stats };
     }

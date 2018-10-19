@@ -115,7 +115,6 @@ class Home extends PureComponent {
   };
 
   buttonSwitch = () => {
-    console.log(this.state.currentEditValue);
     this.setState(prevState => ({
       isEditable: !prevState.isEditable
     }));
@@ -123,7 +122,6 @@ class Home extends PureComponent {
 
   analyze = async urlsToQuery => {
     if (urlsToQuery.length > 0) {
-      console.log('urlstoquery', urlsToQuery);
       const { getBulkTraffic } = this.props;
       this.setState(prevState => ({
         amountOfRowsToBeLoaded:
@@ -161,7 +159,6 @@ class Home extends PureComponent {
   };
 
   sortStats = sortType => {
-    console.log(sortType, this.state.currentSortType);
     if (sortType === this.state.currentSortType) {
       if (this.state.currentSortDirection === 'asc') {
         this.setState({ currentSortDirection: 'desc' });

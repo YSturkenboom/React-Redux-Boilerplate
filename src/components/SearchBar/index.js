@@ -65,7 +65,7 @@ class SearchBar extends PureComponent {
     if (e.key === 'Enter') {
       this.handleSubmit(e);
     } else if (e.key === ' ') {
-      console.log('check');
+      //
     }
   };
 

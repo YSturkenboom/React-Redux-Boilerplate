@@ -44,8 +44,6 @@ class Login extends PureComponent {
   onSubmitVerify = ev => {
     ev.preventDefault();
 
-    console.log('logging in');
-
     const { login } = this.props;
     const { email, password } = this.state;
 

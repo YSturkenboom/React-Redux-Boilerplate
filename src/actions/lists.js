@@ -16,11 +16,9 @@ export const deleteSiteFromList = (siteId, listId) => async dispatch => {
 
 export const createNewList = () => async dispatch => {
   try {
-    console.log('creating list');
     const newListId = await axios.post(`${apiUrl}/lists/create`, {});
     return dispatch({ type: 'CREATE_LIST_REQUEST_SUCCESS', newListId });
   } catch (err) {
-    console.log(err);
     return dispatch({ type: 'CREATE_LIST_REQUEST_FAIL', err });
   }
 };
@@ -40,11 +38,9 @@ export const getList = () => async dispatch => {
 
 export const getSingleList = id => async dispatch => {
   try {
-    console.log('id in action', id);
     const result = await axios.get(`${apiUrl}/lists/read/${id}`, {});
     return dispatch({ type: 'SINGLE_LIST_REQUEST_SUCCESS', result });
   } catch (err) {
-    console.log('errrr', err);
     return dispatch({
       type: 'SINGLE_LIST_REQUEST_FAIL',
       err
@@ -54,7 +50,6 @@ export const getSingleList = id => async dispatch => {
 
 export const updateMultipleWebsites = rankingObjects => async dispatch => {
   try {
-    console.log('rankings in action', rankingObjects);
     const result = await axios.put(`${apiUrl}/lists/update-multiple-websites`, {
       rankingObjects
     });
@@ -103,7 +98,6 @@ export const refreshList = listId => async dispatch => {
       `${apiUrl}/lists/refresh-websites/${listId}`,
       {}
     );
-    console.log('refrersh', result);
     return dispatch({ type: 'LIST_REFRESH_SUCCESS', result });
   } catch (error) {
     return dispatch({ type: 'LIST_REFRESH_FAIL', error });

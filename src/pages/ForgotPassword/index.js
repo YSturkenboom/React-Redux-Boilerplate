@@ -44,8 +44,6 @@ class ForgotPassword extends PureComponent {
   onSubmitVerify = ev => {
     ev.preventDefault();
 
-    console.log('logging in');
-
     const { forgotPassword, history } = this.props;
     const { email } = this.state;
 

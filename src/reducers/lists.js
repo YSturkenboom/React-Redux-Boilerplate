@@ -15,9 +15,7 @@ export default (state = initialState, action) => {
       return { ...state, error, isLoading: false };
     }
     case 'LISTS_LIST_REQUEST_SUCCESS': {
-      console.log('halloo', action);
       const { data } = action.result;
-      console.log('action', action);
       return { ...state, data, isLoading: false };
     }
     case 'LISTS_LIST_REQUEST_FAIL': {
@@ -28,7 +26,6 @@ export default (state = initialState, action) => {
       return { ...state, name };
     }
     case 'LIST_TITLE_UPDATE_SUCCESS': {
-      console.log('title update succes', action.result);
       const { name } = action.result.data;
       return { ...state, currentListName: name };
     }
@@ -36,11 +33,9 @@ export default (state = initialState, action) => {
       return { ...state };
     }
     case 'SINGLE_LIST_REQUEST_FAIL': {
-      console.log('singel fail');
       return { ...state, isLoading: false };
     }
     case 'LIST_DELETE_SUCCESS': {
-      console.log('succes delete list', action);
       const data = remove(state.data, el => el._id !== action.id);
       return { ...state, data };
     }

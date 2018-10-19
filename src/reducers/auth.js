@@ -40,7 +40,6 @@ export default (state = initialState, action) => {
 
     case 'FORGOT_PASSWORD_FAILED': {
       const error = action.err;
-      console.log(error);
       return { ...state, resetPasswordSent: false, error };
     }
 

@@ -13,10 +13,6 @@ export default class ListsOverview extends PureComponent {
     this.onDelete = this.onDelete.bind(this);
   }
 
-  onDelete() {
-    console.log(this);
-  }
-
   renderSiteList = list => (
     <div className="SitesList col-lg-3 col-md-6 col-sm-6 col-xs-12">
       <div className="list__item">
