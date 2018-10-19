@@ -107,24 +107,24 @@ class Home extends PureComponent {
     }
   }
 
-  handleKeyPress = event => {
+  handleKeyPress = async event => {
     const { match, update } = this.props;
     const { busy } = this.state;
     if (!busy) {
-      this.setState({ busy: true });
       if (event.key === 'Enter') {
+        await this.setState({ busy: true });
         const siteID = match.params.id;
         const name = event.target.value;
-        update(siteID, name).then(res => {
+        update(siteID, name).then(async res => {
           if (res.type === 'LIST_TITLE_UPDATE_FAIL') {
             toastAlert('error', `Something went wrong deleting the list`);
-            this.setState({ busy: false });
+            await this.setState({ busy: false });
           } else {
             toastAlert('success', `Successfully updated list title`);
-            this.setState({ busy: false });
+            await this.setState({ busy: false });
           }
         });
-        this.setState({ isEditable: false, currentEditValue: name });
+        await this.setState({ isEditable: false, currentEditValue: name });
       }
     }
   };
