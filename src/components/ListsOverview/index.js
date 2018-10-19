@@ -3,7 +3,7 @@ import { map } from 'lodash';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faSpinnerThird } from '@fortawesome/pro-light-svg-icons';
-import AddSiteButton from '../AddSiteButton';
+import { AddSiteButton } from '..';
 import './styles.scss';
 
 export default class ListsOverview extends PureComponent {

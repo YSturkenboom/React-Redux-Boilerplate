@@ -7,9 +7,7 @@ import { orderBy } from 'lodash';
 import { toastAlert } from '../../utils/helpers';
 import { listActions } from '../../actions';
 import './styles.scss';
-import FloatingCircleButton from '../../components/FloatingCircleButton';
-import List from '../../components/List';
-import AddSiteButton from '../../components/AddSiteButton';
+import { FloatingCircleButton, List, AddSiteButton } from '../../components';
 
 class Lists extends PureComponent {
   constructor() {

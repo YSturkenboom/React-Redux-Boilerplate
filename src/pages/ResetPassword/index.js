@@ -22,7 +22,6 @@ import { get } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faRepeat, faHeart } from '@fortawesome/pro-solid-svg-icons';
 import { authActions } from '../../actions';
-// import { toastAlert } from '../../utils/helpers';
 
 class ResetPassword extends PureComponent {
   constructor(props) {

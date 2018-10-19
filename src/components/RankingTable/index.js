@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-// import Helmet from 'react-helmet';
 import { Table } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/pro-light-svg-icons';

@@ -15,10 +15,12 @@ import {
   faSyncAlt
 } from '@fortawesome/pro-solid-svg-icons';
 import { Table } from 'reactstrap';
-import RankingRow from '../../components/RankingRow';
-import EditableField from '../../components/EditableField';
-import SearchBar from '../../components/SearchBar';
-import Skeleton from '../../components/Skeleton';
+import {
+  RankingRow,
+  EditableField,
+  SearchBar,
+  Skeleton
+} from '../../components';
 import { siteRankActions, listActions } from '../../actions';
 import { toastAlert } from '../../utils/helpers';
 import './styles.scss';
