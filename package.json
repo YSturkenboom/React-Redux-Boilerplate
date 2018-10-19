@@ -143,7 +143,7 @@
       "es6": true
     },
     "rules": {
-      "react/destructuring-assignment": "off",
+      "react/destructuring-assignment": "warn",
       "react/prop-types": "off",
       "react/forbid-prop-types": "off",
       "react/prefer-stateless-function": "off",
@@ -169,7 +169,7 @@
         "never"
       ],
       "global-require": "off",
-      "no-console": "off",
+      "no-console": "warn",
       "no-underscore-dangle": "off",
       "no-use-before-define": "off",
       "function-paren-newline": "off",
