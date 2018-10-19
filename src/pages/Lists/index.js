@@ -103,9 +103,7 @@ class Lists extends PureComponent {
         <List
           key={list._id}
           list={list}
-          onDelistArrleteWebsite={() =>
-            this.onDeleteWebsite(list._id, list.name)
-          }
+          onDeleteWebsite={() => this.onDeleteWebsite(list._id, list.name)}
         />
       ));
     } else {

@@ -4,6 +4,7 @@
 .SitesList {
   position: relative;
   padding-top: 33.33%;
+  width: 100%;
 
   .list {
     &__item {
@@ -33,26 +34,10 @@
       }
 
       .fa-trash {
-        position: absolute;
-        right: 11px;
-        bottom: 13px;
         color: $red;
         font-size: 16px;
         display: block;
-        margin: 0;
-        padding: 10px;
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        border: solid 1px $color-white;
-        transition: all 0.2s ease-in;
-
-        &:hover {
-          border: solid 1px $red;
-          transform: scale(1.1);
-          box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
-          font-size: 17px;
-        }
+        margin: 10px;
       }
     }
 
@@ -119,5 +104,22 @@
       padding: 30px 15px;
       width: 100%;
     }
+  }
+}
+
+.trashCircle {
+  border-radius: 50%;
+  border: solid 1px $color-white;
+  transition: all 0.2s ease-in;
+  position: absolute;
+  right: 11px;
+  top: 11px;
+
+  &:hover {
+    border: solid 1px $red;
+    transform: scale(1.1);
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+    font-size: 17px;
+    color: $red;
   }
 }

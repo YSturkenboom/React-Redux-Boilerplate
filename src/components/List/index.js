@@ -25,11 +25,13 @@ export default class ListsOverview extends PureComponent {
             {list.websites ? `${list.websites.length} websites` : ''}
           </div>
 
-          <FontAwesomeIcon
-            className="trashIcon"
-            icon={faTrash}
+          <div
+            role="presentation"
+            className="trashCircle"
             onClick={onDeleteWebsite}
-          />
+          >
+            <FontAwesomeIcon className="trashIcon" icon={faTrash} />
+          </div>
         </div>
       </div>
     );
