@@ -283,7 +283,7 @@ export default class RankingRow extends PureComponent {
     const {
       _id,
       globalRank,
-      globalPageviews,
+      globalPageviewsOverall,
       uniquePageViews,
       mostVisitingCountry,
       rankInMostVisitedCountry,
@@ -319,15 +319,17 @@ export default class RankingRow extends PureComponent {
         </td>
         <td className="table__column">
           <div className="table__row__data">
-            {globalPageviews ? formatNumber(globalPageviews) : 'n/a'}
+            {globalPageviewsOverall
+              ? formatNumber(globalPageviewsOverall)
+              : 'n/a'}
           </div>
-          <div className="table__row__subtext">All time</div>
+          <div className="table__row__subtext">This month</div>
         </td>
         <td className="table__column">
           <div className="table__row__data">
             {uniquePageViews ? formatNumber(uniquePageViews) : 'n/a'}
           </div>
-          <div className="table__row__subtext">All time</div>
+          <div className="table__row__subtext">This month</div>
         </td>
         <td className="table__column">
           {globalRank ? (

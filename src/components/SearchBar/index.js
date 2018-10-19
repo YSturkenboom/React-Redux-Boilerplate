@@ -96,7 +96,6 @@ class SearchBar extends PureComponent {
           <div className="d-flex search-bar">
             <TagsInput
               addOnBlur
-              className="form__input px-2"
               validate={input => isUrl(input)}
               placeholder="google.com"
               // labelField="sites"
@@ -106,6 +105,12 @@ class SearchBar extends PureComponent {
               onChangeInput={this.handleChangeInput}
               addKeys={[9, 13, 32, 188]}
               onlyUnique
+              renderLayout={(tagComponents, inputComponent) => (
+                <span>
+                  <div className="form__input px-2">{inputComponent}</div>
+                  {tagComponents}
+                </span>
+              )}
               renderTag={this.customRenderTag}
               inputProps={{
                 onKeyUp: this.handleKeyUp,
@@ -127,7 +132,7 @@ class SearchBar extends PureComponent {
                     />
                   </div>
                 ) : (
-                  <div>+ Analyze URL(&#39;s)</div>
+                  <div>Analyze</div>
                 )}
               </button>
             </div>

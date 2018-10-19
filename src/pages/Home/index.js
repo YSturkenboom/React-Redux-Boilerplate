@@ -63,12 +63,12 @@ class Home extends PureComponent {
       this.setState({ currentEditValue: this.props.lists.name })
     );
 
-    this.setState(() => ({
-      amountOfRowsToBeLoaded: this.props.siteRank.stats.length
-    }));
-
     // Load ranks from list into state (separate for instantaneous UI updates)
-    getRanksForWebsitesInList(this.props.match.params.id);
+    getRanksForWebsitesInList(this.props.match.params.id).then(() => {
+      this.setState(() => ({
+        amountOfRowsToBeLoaded: this.props.siteRank.stats.length
+      }));
+    });
   }
 
   // deletes single website
@@ -192,25 +192,21 @@ class Home extends PureComponent {
           <th onClick={() => this.sortStats('url')}>
             Website
             {this.renderCaret('url')}
-            <div className="smallText">sort</div>
           </th>
           <th onClick={() => this.sortStats('globalPageviews')}>
             <FontAwesomeIcon icon={faEye} />
             Pageviews
             {this.renderCaret('globalPageviews')}
-            <div className="smallText">sort</div>
           </th>
-          <th onClick={() => this.sortStats('globalPageviewsPerUser')}>
+          <th onClick={() => this.sortStats('uniquePageViews')}>
             <FontAwesomeIcon icon={faUserFriends} />
             Unique visitors
-            {this.renderCaret('globalPageviewsPerUser')}
-            <div className="smallText">sort</div>
+            {this.renderCaret('uniquePageViews')}
           </th>
           <th onClick={() => this.sortStats('globalRank')}>
             <FontAwesomeIcon icon={faGlobe} />
             Global rank
             {this.renderCaret('globalRank')}
-            <div className="smallText">sort</div>
           </th>
           <th>
             <FontAwesomeIcon icon={faStar} />
