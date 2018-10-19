@@ -64,9 +64,10 @@ class ForgotPassword extends PureComponent {
   };
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-    const { isLoggedIn, error } = this.props.auth;
-    const { email } = this.state;
+    const { auth, location } = this.props;
+    const { from } = location.state || { from: { pathname: '/' } };
+    const { isLoggedIn, error } = auth;
+    const { email, completed } = this.state;
 
     if (isLoggedIn) {
       return <Redirect to={from} />;
@@ -76,15 +77,15 @@ class ForgotPassword extends PureComponent {
       <div className="authentication">
         <Helmet title="ForgotPassword" />
 
-        {!this.props.auth.checkingSession && (
+        {!auth.checkingSession && (
           <div className="container">
             <div className="authentication__content">
               <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
               <Card body className="authentication__window">
-                {this.state.completed ? (
+                {completed ? (
                   <h4>
                     Thank you for registering! A link to reset your password has
-                    been sent to {this.state.email}
+                    been sent to {email}
                   </h4>
                 ) : (
                   <h4 className="text-center">Password Reset</h4>
@@ -110,7 +111,7 @@ class ForgotPassword extends PureComponent {
                         onChange={this.handleInputChange}
                         placeholder="E-mail"
                         required
-                        disabled={this.state.completed}
+                        disabled={completed}
                         bsSize="lg"
                       />
                     </InputGroup>

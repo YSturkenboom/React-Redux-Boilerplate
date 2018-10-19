@@ -280,6 +280,7 @@ export default class RankingRow extends PureComponent {
   };
 
   render() {
+    const { stats, onDelete } = this.props;
     const {
       _id,
       globalRank,
@@ -289,7 +290,7 @@ export default class RankingRow extends PureComponent {
       rankInMostVisitedCountry,
       updatedAt,
       url
-    } = this.props.stats;
+    } = stats;
     return (
       <tr key={_id}>
         <td className="table__column">
@@ -311,7 +312,7 @@ export default class RankingRow extends PureComponent {
           <button
             type="submit"
             className="table__row__delete"
-            onClick={this.props.onDelete}
+            onClick={onDelete}
           >
             <FontAwesomeIcon className="trashIcon" icon={faTrashAlt} />
             Delete

@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 
 export default Component => {
   const AuthComponent = props => {
-    const { pathname } = props.location;
-    const { isLoggedIn } = props.auth;
+    const { location, auth } = props;
+    const { pathname } = location;
+    const { isLoggedIn } = auth;
 
     const currentURL = pathname !== '/logout' ? pathname : '/';
 

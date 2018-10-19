@@ -41,6 +41,7 @@ if (module.hot) {
 
       render(nextRoutes);
     } catch (error) {
+      // eslint-disable-next-line
       console.error(`==> 😭  Routes hot reloading error ${error}`);
     }
   });

@@ -30,6 +30,7 @@ export default (history, initialState = {}) => {
 
         store.replaceReducer(nextReducer);
       } catch (error) {
+        // eslint-disable-next-line
         console.error(`Reducer hot reloading error ${error}`);
       }
     });

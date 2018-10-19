@@ -57,8 +57,9 @@ class Login extends PureComponent {
   };
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-    const { isLoggedIn, error } = this.props.auth;
+    const { location, auth, history } = this.props;
+    const { from } = location.state || { from: { pathname: '/' } };
+    const { isLoggedIn, error } = auth;
     const { email, password } = this.state;
 
     if (isLoggedIn) {
@@ -69,7 +70,7 @@ class Login extends PureComponent {
       <div className="authentication">
         <Helmet title="Login" />
 
-        {!this.props.auth.checkingSession && (
+        {!auth.checkingSession && (
           <div className="container">
             <div className="authentication__content">
               <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
@@ -138,7 +139,7 @@ class Login extends PureComponent {
                 <small className="text-center"> or </small>
                 <span className="spacer" />
                 <Button
-                  onClick={() => this.props.history.push('/register')}
+                  onClick={() => history.push('/register')}
                   block
                   size="lg"
                   color="primary"

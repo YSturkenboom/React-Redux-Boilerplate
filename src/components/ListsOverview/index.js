@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { map } from 'lodash';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faSpin } from '@fortawesome/pro-light-svg-icons';
+import { faTrash, faSpinnerThird } from '@fortawesome/pro-light-svg-icons';
 import AddSiteButton from '../AddSiteButton';
 import './styles.scss';
 
@@ -27,17 +27,18 @@ export default class ListsOverview extends PureComponent {
           className="trashIcon"
           icon={faTrash}
           onClick={list.OnDelete}
-          spinner={faSpin}
+          spinner={faSpinnerThird}
         />
       </div>
     </div>
   );
 
   render() {
-    const lists = map(this.props.data, this.renderSiteList);
+    const { data, addNewList } = this.props;
+    const lists = map(data, this.renderSiteList);
     return (
       <div className="ListsOverview">
-        <AddSiteButton addNewList={this.props.addNewList} />
+        <AddSiteButton addNewList={addNewList} />
         {lists}
       </div>
     );

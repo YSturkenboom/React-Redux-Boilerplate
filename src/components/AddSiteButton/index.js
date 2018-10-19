@@ -11,7 +11,9 @@ export default class AddSiteButton extends PureComponent {
   }
 
   render() {
-    if (this.state.redirect) {
+    const { addNewList } = this.props;
+    const { redirect } = this.state;
+    if (redirect) {
       return <Redirect push to="/" />;
     }
     return (
@@ -19,7 +21,7 @@ export default class AddSiteButton extends PureComponent {
         <button
           type="button"
           className="list__item list--add"
-          onClick={this.props.addNewList}
+          onClick={addNewList}
         >
           <FontAwesomeIcon icon={faPlus} />
           <div className="list__caption">

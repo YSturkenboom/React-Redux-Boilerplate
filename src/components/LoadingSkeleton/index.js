@@ -42,7 +42,8 @@ export default class LoadingSkeleton extends PureComponent {
       );
     }
 
-    const Wrapper = this.props.wrapper;
+    const { wrapper } = this.props;
+    const Wrapper = wrapper;
     return (
       <span>
         {Wrapper

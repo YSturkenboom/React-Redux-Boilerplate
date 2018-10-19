@@ -71,12 +71,14 @@ class SearchBar extends PureComponent {
 
   handleSubmit = event => {
     event.preventDefault();
-    const oldUrls = map(this.props.ranks, 'url');
+    const { ranks, actionOnSubmit } = this.props;
+    const { tags } = this.state;
+    const oldUrls = map(ranks, 'url');
     const diff = filter(
-      cleanUrls(this.state.tags),
+      cleanUrls(tags),
       item => !includes(cleanUrls(oldUrls), item)
     );
-    this.props.actionOnSubmit(diff).then(shouldRemove => {
+    actionOnSubmit(diff).then(shouldRemove => {
       if (shouldRemove) {
         this.setState({ tags: [] });
       }
@@ -92,6 +94,8 @@ class SearchBar extends PureComponent {
   }
 
   render() {
+    const { tags, tag } = this.state;
+    const { isLoading } = this.props;
     return (
       <div>
         <div className="d-flex flex-column">
@@ -101,9 +105,9 @@ class SearchBar extends PureComponent {
               validate={input => isUrl(input) && input.includes('.')}
               placeholder="google.com"
               // labelField="sites"
-              value={this.state.tags}
+              value={tags}
               onChange={this.handleChange}
-              inputValue={this.state.tag}
+              inputValue={tag}
               onChangeInput={this.handleChangeInput}
               addKeys={[9, 13, 188]}
               onlyUnique
@@ -125,7 +129,7 @@ class SearchBar extends PureComponent {
                 className="btn btn-primary form__button py-3 btn-icon"
                 onClick={this.handleSubmit}
               >
-                {this.props.isLoading ? (
+                {isLoading ? (
                   <div>
                     Analyzing...
                     <FontAwesomeIcon

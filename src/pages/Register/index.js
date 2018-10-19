@@ -85,9 +85,12 @@ class Register extends PureComponent {
   };
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-    const { isLoggedIn, error } = this.props.auth;
     const { firstName, lastName, company, email } = this.state;
+
+    const { location, auth } = this.props;
+    const { from } = location.state || { from: { pathname: '/' } };
+    const { isLoggedIn, error } = auth;
+    const { completed, loading } = this.state;
 
     if (isLoggedIn) {
       return <Redirect to={from} />;
@@ -96,16 +99,16 @@ class Register extends PureComponent {
     return (
       <div className="authentication">
         <Helmet title="Register" />
-        {!this.props.auth.checkingSession && (
+        {!auth.checkingSession && (
           <div className="container">
             <div className="authentication__content">
               <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
               <Card body className="authentication__window">
                 <h4 className="text-center">Register</h4>
-                {this.state.completed && (
+                {completed && (
                   <Alert color="success">
                     Thank you for registering! A verification email has been
-                    sent to {this.state.email}
+                    sent to {email}
                   </Alert>
                 )}
                 <span className="spacer" />
@@ -129,7 +132,7 @@ class Register extends PureComponent {
                         onChange={this.handleInputChange}
                         placeholder="Firstname"
                         required
-                        disabled={this.state.completed}
+                        disabled={completed}
                         bsSize="lg"
                       />
                     </InputGroup>
@@ -152,7 +155,7 @@ class Register extends PureComponent {
                         onChange={this.handleInputChange}
                         placeholder="Lastname"
                         required
-                        disabled={this.state.completed}
+                        disabled={completed}
                         bsSize="lg"
                       />
                     </InputGroup>
@@ -175,7 +178,7 @@ class Register extends PureComponent {
                         onChange={this.handleInputChange}
                         placeholder="Company"
                         required
-                        disabled={this.state.completed}
+                        disabled={completed}
                         bsSize="lg"
                       />
                     </InputGroup>
@@ -198,14 +201,14 @@ class Register extends PureComponent {
                         onChange={this.handleInputChange}
                         placeholder="E-mail"
                         required
-                        disabled={this.state.completed}
+                        disabled={completed}
                         bsSize="lg"
                       />
                     </InputGroup>
                   </FormGroup>
                   <span className="spacer" />
                   <Button block size="lg" color="primary">
-                    {this.state.loading ? (
+                    {loading ? (
                       <div>
                         Processing...
                         <FontAwesomeIcon

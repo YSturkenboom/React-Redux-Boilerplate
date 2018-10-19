@@ -15,9 +15,9 @@ class Logout extends PureComponent {
   }
 
   render() {
-    const { isLoggedIn } = this.props.auth;
+    const { auth } = this.props;
 
-    if (!isLoggedIn) {
+    if (!auth.isLoggedIn) {
       return (
         <Redirect
           to={{

@@ -81,8 +81,9 @@ class ResetPassword extends PureComponent {
   };
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-    const { isLoggedIn, error } = this.props.auth;
+    const { location, auth } = this.props;
+    const { from } = location.state || { from: { pathname: '/' } };
+    const { isLoggedIn, error } = auth;
     const { password, password2 } = this.state;
 
     if (isLoggedIn) {
@@ -93,7 +94,7 @@ class ResetPassword extends PureComponent {
       <div className="authentication">
         <Helmet title="Reset password" />
 
-        {!this.props.auth.checkingSession && (
+        {!auth.checkingSession && (
           <div className="container">
             <div className="authentication__content">
               <img alt="logo" src={require('../../images/amsalyze-logo.png')} />

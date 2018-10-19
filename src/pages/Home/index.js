@@ -46,60 +46,62 @@ class Home extends PureComponent {
     ReactGA.initialize('UA-92045603-2');
     ReactGA.pageview('/list');
 
+    const { match, create, history, lists, siteRank } = this.props;
+
     // the tab was clicked to create a new list, immediately make the list and Redirect
-    if (this.props.match.params.id === 'new') {
-      this.props.create().then(res => {
+    if (match.params.id === 'new') {
+      create().then(res => {
         if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
           toastAlert('error', `Something went wrong adding a new list`);
         } else {
           toastAlert('success', `Successfully added a new list`);
-          this.props.history.push(`/list/${res.newListId.data._id}`);
+          history.push(`/list/${res.newListId.data._id}`);
         }
       });
     }
 
     // Load list into state
-    getSingleList(this.props.match.params.id).then(() =>
-      this.setState({ currentEditValue: this.props.lists.name })
+    getSingleList(match.params.id).then(() =>
+      this.setState({ currentEditValue: lists.name })
     );
 
     // Load ranks from list into state (separate for instantaneous UI updates)
-    getRanksForWebsitesInList(this.props.match.params.id).then(() => {
+    getRanksForWebsitesInList(match.params.id).then(() => {
       this.setState(() => ({
-        amountOfRowsToBeLoaded: this.props.siteRank.stats.length
+        amountOfRowsToBeLoaded: siteRank.stats.length
       }));
     });
   }
 
   // deletes single website
   onDelete(websiteId) {
-    this.props
-      .deleteSiteFromList(websiteId, this.props.match.params.id)
-      .then(res => {
-        if (res.type === 'DELETE_SITE_FROM_LIST_FAIL') {
-          toastAlert('error', `Something went wrong deleting website`);
-          ReactGA.event({
-            category: 'Lists',
-            action: 'Removing website from list failed'
-          });
-        } else {
-          toastAlert('info', `Successfully deleted websites from your list`);
-          this.setState(prevState => ({
-            amountOfRowsToBeLoaded: prevState.amountOfRowsToBeLoaded - 1
-          }));
-          ReactGA.event({
-            category: 'Lists',
-            action: 'Removed website from list'
-          });
-        }
-      });
+    const { deleteSiteFromList, match } = this.props;
+    deleteSiteFromList(websiteId, match.params.id).then(res => {
+      if (res.type === 'DELETE_SITE_FROM_LIST_FAIL') {
+        toastAlert('error', `Something went wrong deleting website`);
+        ReactGA.event({
+          category: 'Lists',
+          action: 'Removing website from list failed'
+        });
+      } else {
+        toastAlert('info', `Successfully deleted websites from your list`);
+        this.setState(prevState => ({
+          amountOfRowsToBeLoaded: prevState.amountOfRowsToBeLoaded - 1
+        }));
+        ReactGA.event({
+          category: 'Lists',
+          action: 'Removed website from list'
+        });
+      }
+    });
   }
 
   handleKeyPress = event => {
+    const { match, update } = this.props;
     if (event.key === 'Enter') {
-      const siteID = this.props.match.params.id;
+      const siteID = match.params.id;
       const name = event.target.value;
-      this.props.update(siteID, name).then(res => {
+      update(siteID, name).then(res => {
         if (res.type === 'LIST_TITLE_UPDATE_FAIL') {
           toastAlert('error', `Something went wrong deleting the list`);
         } else {
@@ -121,16 +123,14 @@ class Home extends PureComponent {
   };
 
   analyze = async urlsToQuery => {
+    const { siteRank } = this.props;
     if (urlsToQuery.length > 0) {
       const { getBulkTraffic } = this.props;
       this.setState(prevState => ({
         amountOfRowsToBeLoaded:
           prevState.amountOfRowsToBeLoaded + urlsToQuery.length
       }));
-      const res = await getBulkTraffic(
-        urlsToQuery,
-        this.props.siteRank.currentListId
-      );
+      const res = await getBulkTraffic(urlsToQuery, siteRank.currentListId);
       if (res.type === 'GET_TRAFFIC_REQUEST_FAIL') {
         ReactGA.event({
           category: 'Lists',
@@ -155,12 +155,14 @@ class Home extends PureComponent {
   };
 
   refreshList = async () => {
-    await this.props.refreshList(this.props.match.params.id);
+    const { refreshList, match } = this.props;
+    await refreshList(match.params.id);
   };
 
   sortStats = sortType => {
-    if (sortType === this.state.currentSortType) {
-      if (this.state.currentSortDirection === 'asc') {
+    const { currentSortType, currentSortDirection } = this.state;
+    if (sortType === currentSortType) {
+      if (currentSortDirection === 'asc') {
         this.setState({ currentSortDirection: 'desc' });
       } else {
         this.setState({ currentSortDirection: 'asc' });
@@ -171,8 +173,9 @@ class Home extends PureComponent {
   };
 
   renderTable = (isLoading, sortedStats) => {
+    const { amountOfRowsToBeLoaded } = this.state;
     if (isLoading) {
-      return <Skeleton rows={this.state.amountOfRowsToBeLoaded} columns={5} />;
+      return <Skeleton rows={amountOfRowsToBeLoaded} columns={5} />;
     }
 
     const rows = sortedStats.map(stat => (
@@ -216,8 +219,9 @@ class Home extends PureComponent {
   };
 
   renderCaret = sortType => {
-    if (this.state.currentSortType === sortType) {
-      if (this.state.currentSortDirection === 'asc') {
+    const { currentSortType, currentSortDirection } = this.state;
+    if (currentSortType === sortType) {
+      if (currentSortDirection === 'asc') {
         return (
           <FontAwesomeIcon
             icon={faCaretUp}
@@ -236,14 +240,19 @@ class Home extends PureComponent {
   };
 
   render() {
-    const { stats, invalidUrls, isLoading } = this.props.siteRank;
-    const { name } = this.props.lists;
-    const { currentEditValue } = this.state;
+    const { lists, siteRank } = this.props;
+    const { stats, invalidUrls, isLoading } = siteRank;
+    const {
+      currentEditValue,
+      currentSortType,
+      currentSortDirection,
+      isEditable
+    } = this.state;
 
     const sortedStats = orderBy(
       stats,
-      [this.state.currentSortType],
-      [this.state.currentSortDirection]
+      [currentSortType],
+      [currentSortDirection]
     );
 
     return (
@@ -263,14 +272,14 @@ class Home extends PureComponent {
           <div className="col">
             <div className="Home__header">
               <div className="editableField">
-                {this.state.isEditable ? (
+                {isEditable ? (
                   <EditableField
                     value={currentEditValue}
                     className="EditableField__placeholder"
                     type="text"
                     editChange={this.handleChange}
                     editPress={this.handleKeyPress}
-                    placeholder={name}
+                    placeholder={lists.name}
                     onBlur={() => {
                       this.buttonSwitch();
                       this.handleKeyPress({

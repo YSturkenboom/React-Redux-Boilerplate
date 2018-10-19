@@ -41,11 +41,11 @@ export default class Loader extends PureComponent {
   };
 
   render() {
-    // const { inTable } = this.props;
+    const { children } = this.props;
 
     return (
       <Table className="skeleton-load">
-        <thead>{this.props.children}</thead>
+        <thead>{children}</thead>
         <tbody>{this.skeletonContent()}</tbody>
       </Table>
     );

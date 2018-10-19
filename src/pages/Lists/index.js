@@ -19,9 +19,10 @@ class Lists extends PureComponent {
   }
 
   componentDidMount() {
+    const { list } = this.props;
     ReactGA.initialize('UA-92045603-2');
     ReactGA.pageview('/lists');
-    this.props.list();
+    list();
   }
 
   onDeleteWebsite = async (id, name) => {
@@ -33,7 +34,8 @@ class Lists extends PureComponent {
       cancelColor: 'link text-danger'
     });
     if (confirmed) {
-      this.props.deleteList(id).then(res => {
+      const { deleteList } = this.props;
+      deleteList(id).then(res => {
         if (res.type === 'LIST_DELETE_FAIL') {
           toastAlert('error', `Something went wrong deleting the list`);
           ReactGA.event({
@@ -52,7 +54,8 @@ class Lists extends PureComponent {
   };
 
   addNewList = async () => {
-    this.props.create().then(res => {
+    const { create, history } = this.props;
+    create().then(res => {
       if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
         toastAlert('error', `Something went wrong adding a new list`);
         ReactGA.event({
@@ -65,24 +68,27 @@ class Lists extends PureComponent {
           action: 'Created new list'
         });
         toastAlert('success', `Successfully added a new list`);
-        this.props.history.push(`/list/${res.newListId.data._id}`);
+        history.push(`/list/${res.newListId.data._id}`);
       }
     });
   };
 
   render() {
-    const { isLoading, data } = this.props.lists;
-    let lists;
+    const { lists } = this.props;
+    const { isLoading, data } = lists;
+    let listArr;
     if (data) {
-      lists = orderBy(data, ['createdAt'], ['desc']).map(list => (
+      listArr = orderBy(data, ['createdAt'], ['desc']).map(list => (
         <List
           key={list._id}
           list={list}
-          onDeleteWebsite={() => this.onDeleteWebsite(list._id, list.name)}
+          onDelistArrleteWebsite={() =>
+            this.onDeleteWebsite(list._id, list.name)
+          }
         />
       ));
     } else {
-      lists = [];
+      listArr = [];
     }
 
     return (
@@ -91,7 +97,7 @@ class Lists extends PureComponent {
         {!isLoading && (
           <div className="Lists__overview row">
             <AddSiteButton addNewList={this.addNewList} />
-            {lists}
+            {listArr}
           </div>
         )}
         <FloatingCircleButton addNewList={this.addNewList} />
