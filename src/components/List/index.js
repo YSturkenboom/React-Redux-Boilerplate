@@ -11,7 +11,14 @@ export default class ListsOverview extends PureComponent {
     return (
       <div className="SitesList col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <div className="list__item">
-          <Link key={list._id} to={`/list/${list._id}`} className="anchor">
+          <Link
+            key={list._id}
+            to={{
+              pathname: `/list/${list._id}`,
+              state: { currentEditValue: list.name }
+            }}
+            className="anchor"
+          >
             {' '}
           </Link>
 

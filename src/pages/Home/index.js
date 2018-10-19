@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import ReactGA from 'react-ga';
 import { connect } from 'react-redux';
-import { orderBy } from 'lodash';
+import { orderBy, get } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPen,
@@ -30,7 +30,7 @@ class Home extends PureComponent {
     super(props);
     this.state = {
       isEditable: false,
-      currentEditValue: '',
+      currentEditValue: get(props, 'location.state.currentEditValue', ''),
       currentSortType: 'globalRank',
       currentSortDirection: 'asc',
       amountOfRowsToBeLoaded: 1,
@@ -43,7 +43,7 @@ class Home extends PureComponent {
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // Google Analytics
     ReactGA.pageview('/list');
 
@@ -51,7 +51,6 @@ class Home extends PureComponent {
       match,
       create,
       history,
-      lists,
       getSingleList,
       getRanksForWebsitesInList
     } = this.props;
@@ -69,9 +68,7 @@ class Home extends PureComponent {
     }
 
     // Load list into state
-    getSingleList(match.params.id).then(() =>
-      this.setState({ currentEditValue: lists.name })
-    );
+    await getSingleList(match.params.id);
 
     // Load ranks from list into state (separate for instantaneous UI updates)
     getRanksForWebsitesInList(match.params.id);
@@ -154,7 +151,7 @@ class Home extends PureComponent {
 
         const res = await getBulkTraffic(urlsToQuery, siteRank.currentListId);
 
-        if (res.status === 400) {
+        if (res.type === 'GET_TRAFFIC_FAIL') {
           ReactGA.event({
             category: 'Lists',
             action: 'Adding websites to list failed'
@@ -190,10 +187,9 @@ class Home extends PureComponent {
     this.setState(() => ({
       amountOfRowsToBeLoaded: siteRank.stats.length
     }));
-    this.setState({ refreshing: true });
-    await refreshList(match.params.id).finally(() => {
-      this.setState({ refreshing: false });
-    });
+    await this.setState({ refreshing: true });
+    await refreshList(match.params.id);
+    await this.setState({ refreshing: false });
   };
 
   sortStats = sortType => {

@@ -87,7 +87,9 @@ class Lists extends PureComponent {
           });
 
           toastAlert('success', `Successfully added a new list`);
-          history.push(`/list/${res.newListId.data._id}`);
+          history.push(`/list/${res.newListId.data._id}`, {
+            state: { currentEditValue: 'Untitled List' }
+          });
         }
       });
     }
