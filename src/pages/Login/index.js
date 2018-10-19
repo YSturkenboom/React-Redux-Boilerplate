@@ -35,7 +35,6 @@ class Login extends PureComponent {
   componentDidMount() {
     const { checkSession } = this.props;
 
-    ReactGA.initialize('UA-92045603-2');
     ReactGA.pageview('/login');
 
     checkSession();

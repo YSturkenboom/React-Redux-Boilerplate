@@ -18,7 +18,6 @@ class Lists extends PureComponent {
 
   componentDidMount() {
     const { list } = this.props;
-    ReactGA.initialize('UA-92045603-2');
     ReactGA.pageview('/lists');
     list();
   }

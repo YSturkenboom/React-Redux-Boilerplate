@@ -9,7 +9,6 @@ export default ({ staticContext }) => {
   // because it will be undefined if rendered through a BrowserRoute
   if (staticContext) staticContext.status = '404'; // eslint-disable-line no-param-reassign
 
-  ReactGA.initialize('UA-92045603-2');
   ReactGA.pageview('/not-found');
 
   return (

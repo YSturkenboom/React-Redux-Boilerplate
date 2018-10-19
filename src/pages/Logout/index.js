@@ -8,7 +8,6 @@ class Logout extends PureComponent {
   componentDidMount() {
     const { logout } = this.props;
 
-    ReactGA.initialize('UA-92045603-2');
     ReactGA.pageview('/logout');
 
     logout();

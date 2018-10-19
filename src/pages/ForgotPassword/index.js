@@ -35,7 +35,6 @@ class ForgotPassword extends PureComponent {
     const { checkSession } = this.props;
 
     // Google Analytics
-    ReactGA.initialize('UA-92045603-2');
     ReactGA.pageview('/forgot-password');
 
     checkSession();

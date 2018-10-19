@@ -43,7 +43,6 @@ class Home extends PureComponent {
 
   componentDidMount() {
     // Google Analytics
-    ReactGA.initialize('UA-92045603-2');
     ReactGA.pageview('/list');
 
     const {

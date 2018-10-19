@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ReactGA from 'react-ga';
 import { Route } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import Helmet from 'react-helmet';
@@ -18,6 +19,8 @@ import './styles.scss';
 axios.defaults.withCredentials = true;
 
 faConfig.autoAddCss = false;
+
+ReactGA.initialize('UA-92045603-2');
 
 const scrollToTop = () => {
   if (typeof window === 'object') {
