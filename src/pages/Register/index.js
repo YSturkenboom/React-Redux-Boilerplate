@@ -66,8 +66,7 @@ class Register extends PureComponent {
         toast.error('Sorry could not create an account');
         this.setState({ loading: false });
       } else {
-        this.setState({ completed: true });
-        this.setState({ loading: false });
+        this.setState({ completed: true, loading: false });
         toast.success('Account successfully created !');
         ReactGA.event({
           category: 'Accounts',

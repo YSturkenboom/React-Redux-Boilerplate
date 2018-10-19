@@ -74,7 +74,6 @@ class Home extends PureComponent {
 
     // Load ranks from list into state (separate for instantaneous UI updates)
     getRanksForWebsitesInList(match.params.id).then(() => {
-      console.log('went fine');
       this.setState(() => ({
         amountOfRowsToBeLoaded: siteRank.stats.length
       }));
