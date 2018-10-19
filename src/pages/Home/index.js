@@ -151,8 +151,6 @@ class Home extends PureComponent {
     if (!busy) {
       this.setState({ busy: true });
 
-      console.log();
-
       if (urlsToQuery.length > 0) {
         const { getBulkTraffic } = this.props;
         this.setState(prevState => ({
@@ -161,8 +159,6 @@ class Home extends PureComponent {
         }));
 
         const res = await getBulkTraffic(urlsToQuery, siteRank.currentListId);
-
-        console.log('wat de fuck', res);
 
         if (res.status === 400) {
           ReactGA.event({
