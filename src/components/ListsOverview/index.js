@@ -21,8 +21,11 @@ export default class ListsOverview extends PureComponent {
         </Link>
 
         <div className="list__date">{list.date}</div>
+
         <div className="list__name">{list.name}</div>
+
         <div className="list__amount">{list.amount} websites</div>
+
         <FontAwesomeIcon
           className="trashIcon"
           icon={faTrash}

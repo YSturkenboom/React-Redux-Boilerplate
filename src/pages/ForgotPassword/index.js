@@ -98,17 +98,20 @@ class ForgotPassword extends PureComponent {
                 )}
                 <span className="spacer" />
                 {error && <Alert color="danger">{error}</Alert>}
+
                 <Form onSubmit={this.onSubmitVerify}>
                   <FormGroup>
                     <Label hidden for="email">
                       E-mail
                     </Label>
+
                     <InputGroup>
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <FontAwesomeIcon icon={faEnvelope} />
                         </InputGroupText>
                       </InputGroupAddon>
+
                       <Input
                         type="email"
                         name="email"
@@ -122,13 +125,17 @@ class ForgotPassword extends PureComponent {
                       />
                     </InputGroup>
                   </FormGroup>
+
                   <span className="spacer" />
                   <span className="spacer" />
+
                   <Button block size="lg" color="primary">
                     Reset Password
                   </Button>
                 </Form>
+
                 <span className="spacer" />
+
                 <Link to="/register" className="text-center text-muted">
                   <small>Register</small>
                 </Link>

@@ -149,13 +149,16 @@ class Home extends PureComponent {
 
     if (!busy) {
       this.setState({ busy: true });
+
       if (urlsToQuery.length > 0) {
         const { getBulkTraffic } = this.props;
         this.setState(prevState => ({
           amountOfRowsToBeLoaded:
             prevState.amountOfRowsToBeLoaded + urlsToQuery.length
         }));
+
         const res = await getBulkTraffic(urlsToQuery, siteRank.currentListId);
+
         if (res.type === 'GET_TRAFFIC_REQUEST_FAIL') {
           ReactGA.event({
             category: 'Lists',
@@ -168,11 +171,13 @@ class Home extends PureComponent {
           );
           return false;
         }
+
         ReactGA.event({
           category: 'Lists',
           action: 'Added websites to list',
           value: urlsToQuery.length
         });
+
         this.setState({ busy: false });
         toastAlert('success', `Successfully added websites to your list`);
         return true;
@@ -190,6 +195,7 @@ class Home extends PureComponent {
 
   sortStats = sortType => {
     const { currentSortType, currentSortDirection } = this.state;
+
     if (sortType === currentSortType) {
       if (currentSortDirection === 'asc') {
         this.setState({ currentSortDirection: 'desc' });
@@ -222,21 +228,25 @@ class Home extends PureComponent {
             Website
             {this.renderCaret('url')}
           </th>
+
           <th onClick={() => this.sortStats('globalPageviews')}>
             <FontAwesomeIcon icon={faEye} />
             Pageviews
             {this.renderCaret('globalPageviews')}
           </th>
+
           <th onClick={() => this.sortStats('uniquePageViews')}>
             <FontAwesomeIcon icon={faUserFriends} />
             Unique visitors
             {this.renderCaret('uniquePageViews')}
           </th>
+
           <th onClick={() => this.sortStats('globalRank')}>
             <FontAwesomeIcon icon={faGlobe} />
             Global rank
             {this.renderCaret('globalRank')}
           </th>
+
           <th>
             <FontAwesomeIcon icon={faStar} />
             Top country
@@ -287,6 +297,7 @@ class Home extends PureComponent {
     return (
       <div className="Home body">
         <Helmet title="Analyze" />
+
         <div className="row">
           <div className="col">
             <SearchBar
@@ -297,6 +308,7 @@ class Home extends PureComponent {
             />
           </div>
         </div>
+
         <div className="row">
           <div className="col">
             <div className="Home__header">
@@ -325,6 +337,7 @@ class Home extends PureComponent {
 
                 <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
               </div>
+
               <button
                 className="btn btn-primary btn-icon"
                 onClick={this.refreshList}

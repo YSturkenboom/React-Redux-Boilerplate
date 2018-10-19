@@ -100,6 +100,7 @@ class Login extends PureComponent {
                       />
                     </InputGroup>
                   </FormGroup>
+
                   <FormGroup>
                     <Label hidden for="password">
                       Password
@@ -122,21 +123,26 @@ class Login extends PureComponent {
                       />
                     </InputGroup>
                   </FormGroup>
+
                   <FormGroup check>
                     <Input type="checkbox" id="signedIn" />
                     <Label className="text-muted" check for="signedIn">
                       <small>Keep me signed in</small>
                     </Label>
                   </FormGroup>
+
                   <span className="spacer" />
                   <span className="spacer" />
+
                   <Button block size="lg" color="secondary">
                     Login
                   </Button>
                 </Form>
+
                 <span className="spacer" />
                 <small className="text-center"> or </small>
                 <span className="spacer" />
+
                 <Button
                   onClick={() => history.push('/register')}
                   block
@@ -145,12 +151,14 @@ class Login extends PureComponent {
                 >
                   Create a new account
                 </Button>
+
                 <span className="spacer" />
 
                 <a href="/forgot-password" className="text-center text-muted">
                   <small>Forgot your password?</small>
                 </a>
               </Card>
+
               <a
                 className="storyofams__link"
                 href="https://storyofams.com/"

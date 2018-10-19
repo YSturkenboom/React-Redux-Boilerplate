@@ -50,6 +50,7 @@ class ResetPassword extends PureComponent {
 
     if (!busy) {
       this.setState({ busy: true });
+
       if (password !== password2) {
         toast.error('Sorry, the passwords are differents');
       } else if (password.length < 8 && password.length) {
@@ -59,6 +60,7 @@ class ResetPassword extends PureComponent {
         resetPassword(token, password).then(res => {
           if (res.type === 'RESET_PASSWORD_FAILED') {
             this.setState({ busy: false });
+
             ReactGA.event({
               category: 'Accounts',
               action: 'Account activation failed / Password set failed'
@@ -66,6 +68,7 @@ class ResetPassword extends PureComponent {
             toast.error('Sorry, the password could not be reset');
           } else {
             this.setState({ busy: false });
+
             ReactGA.event({
               category: 'Accounts',
               action:
@@ -106,19 +109,23 @@ class ResetPassword extends PureComponent {
               <img alt="logo" src={require('../../images/amsalyze-logo.png')} />
               <Card body className="authentication__window">
                 <h4 className="text-center">Password Reset</h4>
+
                 <span className="spacer" />
                 {error && <Alert color="danger">{error}</Alert>}
+
                 <Form onSubmit={this.onSubmitVerify}>
                   <FormGroup>
                     <Label hidden for="password">
                       New Password
                     </Label>
+
                     <InputGroup>
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <FontAwesomeIcon icon={faLock} />
                         </InputGroupText>
                       </InputGroupAddon>
+
                       <Input
                         type="password"
                         name="password"
@@ -131,16 +138,19 @@ class ResetPassword extends PureComponent {
                       />
                     </InputGroup>
                   </FormGroup>
+
                   <FormGroup>
                     <Label hidden for="password2">
                       New Password
                     </Label>
+
                     <InputGroup>
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <FontAwesomeIcon icon={faRepeat} />
                         </InputGroupText>
                       </InputGroupAddon>
+
                       <Input
                         type="password"
                         name="password2"
@@ -153,11 +163,15 @@ class ResetPassword extends PureComponent {
                       />
                     </InputGroup>
                   </FormGroup>
+
                   <span className="spacer" />
+
                   <Button block size="lg" color="primary">
                     Reset Password
                   </Button>
+
                   <span className="spacer" />
+
                   <Link to="/login" className="text-center text-muted">
                     <small>Login</small>
                   </Link>

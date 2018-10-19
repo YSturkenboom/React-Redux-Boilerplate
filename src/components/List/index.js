@@ -14,13 +14,17 @@ export default class ListsOverview extends PureComponent {
           <Link key={list._id} to={`/list/${list._id}`} className="anchor">
             {' '}
           </Link>
+
           <div className="list__date">
             <time>{format(list.createdAt, 'DD/MM/YYYY')}</time>
           </div>
+
           <div className="list__name">{list.name}</div>
+
           <div className="list__amount">
             {list.websites ? `${list.websites.length} websites` : ''}
           </div>
+
           <FontAwesomeIcon
             className="trashIcon"
             icon={faTrash}

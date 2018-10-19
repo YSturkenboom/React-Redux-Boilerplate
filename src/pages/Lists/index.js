@@ -25,6 +25,7 @@ class Lists extends PureComponent {
 
   onDeleteWebsite = async (id, name) => {
     const { busy } = this.state;
+
     if (!busy) {
       const confirmed = await confirm({
         title: `Deleting list "${name}"`,
@@ -33,13 +34,16 @@ class Lists extends PureComponent {
         confirmColor: 'primary',
         cancelColor: 'link text-danger'
       });
+
       if (confirmed) {
         this.setState({ busy: true });
         const { deleteList } = this.props;
+
         deleteList(id).then(res => {
           if (res.type === 'LIST_DELETE_FAIL') {
             toastAlert('error', `Something went wrong deleting the list`);
             this.setState({ busy: false });
+
             ReactGA.event({
               category: 'Lists',
               action: 'List deletion failed'
@@ -47,6 +51,7 @@ class Lists extends PureComponent {
           } else {
             toastAlert('info', `Successfully deleted the list`);
             this.setState({ busy: false });
+
             ReactGA.event({
               category: 'Lists',
               action: 'Deleted list'
@@ -60,22 +65,27 @@ class Lists extends PureComponent {
   addNewList = async () => {
     const { busy } = this.state;
     const { create, history } = this.props;
+
     if (!busy) {
       this.setState({ busy: true });
+
       create().then(res => {
         if (res.type === 'CREATE_LIST_REQUEST_FAIL') {
           toastAlert('error', `Something went wrong adding a new list`);
           this.setState({ busy: false });
+
           ReactGA.event({
             category: 'Lists',
             action: 'New list creation failed'
           });
         } else {
           this.setState({ busy: false });
+
           ReactGA.event({
             category: 'Lists',
             action: 'Created new list'
           });
+
           toastAlert('success', `Successfully added a new list`);
           history.push(`/list/${res.newListId.data._id}`);
         }
@@ -87,6 +97,7 @@ class Lists extends PureComponent {
     const { lists } = this.props;
     const { isLoading, data } = lists;
     let listArr;
+
     if (data) {
       listArr = orderBy(data, ['createdAt'], ['desc']).map(list => (
         <List

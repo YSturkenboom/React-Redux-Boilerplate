@@ -68,6 +68,7 @@ class Navigation extends Component {
               alt="amsalyze-logo"
             />
           </NavbarBrand>
+
           <NavbarToggler
             onClick={this.toggle}
             className={!isOpen && 'collapsed'}
@@ -76,6 +77,7 @@ class Navigation extends Component {
             <span className="icon-bar" />
             <span className="icon-bar" />
           </NavbarToggler>
+
           <Collapse isOpen={isOpen} navbar>
             <Nav navbar>
               <div>
@@ -89,6 +91,7 @@ class Navigation extends Component {
                   </NavLink>
                 </NavItem>
               </div>
+
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav>
                   <span>
@@ -96,6 +99,7 @@ class Navigation extends Component {
                   </span>
                   <span>Profile</span>
                 </DropdownToggle>
+
                 <DropdownMenu right>
                   <DropdownItem to="/logout" tag={RouterNavLink}>
                     Log out

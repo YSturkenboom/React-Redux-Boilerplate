@@ -123,6 +123,7 @@ class SearchBar extends PureComponent {
                 placeholder: 'Add a website (e.g. www.google.com)'
               }}
             />
+
             <div>
               <button
                 type="submit"

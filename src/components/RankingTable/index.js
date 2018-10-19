@@ -22,10 +22,12 @@ export default class RankingTable extends PureComponent {
           Delete
         </button>
       </td>
+
       <td className="table__column">
         <div className="table__row__rank">#{entry.rank}</div>
         <div className="table__row__category">{entry.category}</div>
       </td>
+
       <td className="table__column">
         <div className="table__row__rank">#{entry.rank}</div>
         <div className="table__row__category">{entry.category}</div>
