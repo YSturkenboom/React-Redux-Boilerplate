@@ -34,7 +34,8 @@ class Home extends PureComponent {
       currentSortType: 'globalRank',
       currentSortDirection: 'asc',
       amountOfRowsToBeLoaded: 1,
-      busy: false
+      busy: false,
+      refreshing: false
     };
     this.onDelete = this.onDelete.bind(this);
     this.buttonSwitch = this.buttonSwitch.bind(this);
@@ -150,6 +151,8 @@ class Home extends PureComponent {
     if (!busy) {
       this.setState({ busy: true });
 
+      console.log();
+
       if (urlsToQuery.length > 0) {
         const { getBulkTraffic } = this.props;
         this.setState(prevState => ({
@@ -159,7 +162,9 @@ class Home extends PureComponent {
 
         const res = await getBulkTraffic(urlsToQuery, siteRank.currentListId);
 
-        if (res.type === 'GET_TRAFFIC_REQUEST_FAIL') {
+        console.log('wat de fuck', res);
+
+        if (res.status === 400) {
           ReactGA.event({
             category: 'Lists',
             action: 'Adding websites to list failed'
@@ -182,15 +187,20 @@ class Home extends PureComponent {
         toastAlert('success', `Successfully added websites to your list`);
         return true;
       }
+
+      // if there are no new sites in the tags, remove the (useless) tags
+      this.setState({ busy: false });
+      return true;
     }
-    // if there are no new sites in the tags, remove the (useless) tags
-    this.setState({ busy: false });
-    return true;
+    return false;
   };
 
   refreshList = async () => {
     const { refreshList, match } = this.props;
-    await refreshList(match.params.id);
+    this.setState({ refreshing: true });
+    await refreshList(match.params.id).finally(() => {
+      this.setState({ refreshing: false });
+    });
   };
 
   sortStats = sortType => {
@@ -285,7 +295,8 @@ class Home extends PureComponent {
       currentEditValue,
       currentSortType,
       currentSortDirection,
-      isEditable
+      isEditable,
+      refreshing
     } = this.state;
 
     const sortedStats = orderBy(
@@ -337,15 +348,25 @@ class Home extends PureComponent {
 
                 <FontAwesomeIcon icon={faPen} onClick={this.buttonSwitch} />
               </div>
-
-              <button
-                className="btn btn-primary btn-icon"
-                onClick={this.refreshList}
-                type="submit"
-              >
-                Refresh
-                <FontAwesomeIcon icon={faSyncAlt} />
-              </button>
+              {refreshing ? (
+                <button
+                  className="btn btn-primary btn-icon"
+                  onClick={this.refreshList}
+                  type="submit"
+                >
+                  Refresh
+                  <FontAwesomeIcon icon={faSyncAlt} className="fa-spin" />
+                </button>
+              ) : (
+                <button
+                  className="btn btn-primary btn-icon"
+                  onClick={this.refreshList}
+                  type="submit"
+                >
+                  Refresh
+                  <FontAwesomeIcon icon={faSyncAlt} />
+                </button>
+              )}
             </div>
           </div>
         </div>

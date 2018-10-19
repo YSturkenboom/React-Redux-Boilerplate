@@ -20,7 +20,8 @@ class SearchBar extends PureComponent {
     super();
     this.state = {
       tags: DEFAULT_TAGS,
-      tag: ''
+      tag: '',
+      loading: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeInput = this.handleChangeInput.bind(this);
@@ -94,8 +95,7 @@ class SearchBar extends PureComponent {
   }
 
   render() {
-    const { tags, tag } = this.state;
-    const { isLoading } = this.props;
+    const { tags, tag, loading } = this.state;
     return (
       <div>
         <div className="d-flex flex-column">
@@ -130,7 +130,7 @@ class SearchBar extends PureComponent {
                 className="btn btn-primary form__button py-3 btn-icon"
                 onClick={this.handleSubmit}
               >
-                {isLoading ? (
+                {loading ? (
                   <div>
                     Analyzing...
                     <FontAwesomeIcon
