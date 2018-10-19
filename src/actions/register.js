@@ -17,9 +17,9 @@ export const register = (
       company,
       email
     });
-    return dispatch({ type: 'AUTH_REGISTER', account: res.data.account });
+    return dispatch({ type: 'REGISTER_SUCCESS', account: res.data.account });
   } catch (err) {
     const res = err.response;
-    return dispatch({ type: 'REGISTER_FAILED', err: res.data.error });
+    return dispatch({ type: 'REGISTER_FAIL', err: res.data.error });
   }
 };

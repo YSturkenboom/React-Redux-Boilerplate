@@ -6,7 +6,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'AUTH_REGISTER': {
+    case 'REGISTER_SUCCESS': {
       if (action.account) {
         return { isRegistered: true, account: action.account };
       }
@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
     case 'AUTH_NOT_LOGGED_IN':
       return { checkingSession: false };
 
-    case 'REGISTRATION_FAILED': {
+    case 'REGISTER_FAIL': {
       const error = action.err || 'Error registering.';
       return { ...state, error };
     }

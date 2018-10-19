@@ -17,19 +17,19 @@ export const deleteSiteFromList = (siteId, listId) => async dispatch => {
 export const createNewList = () => async dispatch => {
   try {
     const newListId = await axios.post(`${apiUrl}/lists/create`, {});
-    return dispatch({ type: 'CREATE_LIST_REQUEST_SUCCESS', newListId });
+    return dispatch({ type: 'CREATE_LIST_SUCCESS', newListId });
   } catch (err) {
-    return dispatch({ type: 'CREATE_LIST_REQUEST_FAIL', err });
+    return dispatch({ type: 'CREATE_LIST_FAIL', err });
   }
 };
 
 export const getList = () => async dispatch => {
   try {
     const result = await axios.get(`${apiUrl}/lists/list`, {});
-    return dispatch({ type: 'LISTS_LIST_REQUEST_SUCCESS', result });
+    return dispatch({ type: 'LISTS_LIST_SUCCESS', result });
   } catch (err) {
     return dispatch({
-      type: 'LISTS_LIST_REQUEST_FAIL',
+      type: 'LISTS_LIST_FAIL',
       error: 'oh noooo',
       realErr: err
     });
@@ -39,10 +39,10 @@ export const getList = () => async dispatch => {
 export const getSingleList = id => async dispatch => {
   try {
     const result = await axios.get(`${apiUrl}/lists/read/${id}`, {});
-    return dispatch({ type: 'SINGLE_LIST_REQUEST_SUCCESS', result });
+    return dispatch({ type: 'LIST_READ_SUCCESS', result });
   } catch (err) {
     return dispatch({
-      type: 'SINGLE_LIST_REQUEST_FAIL',
+      type: 'LIST_READ_FAIL',
       err
     });
   }
