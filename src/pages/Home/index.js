@@ -26,8 +26,8 @@ import { toastAlert } from '../../utils/helpers';
 import './styles.scss';
 
 class Home extends PureComponent {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isEditable: false,
       currentEditValue: '',
@@ -52,7 +52,6 @@ class Home extends PureComponent {
       create,
       history,
       lists,
-      siteRank,
       getSingleList,
       getRanksForWebsitesInList
     } = this.props;
@@ -75,16 +74,12 @@ class Home extends PureComponent {
     );
 
     // Load ranks from list into state (separate for instantaneous UI updates)
-    getRanksForWebsitesInList(match.params.id).then(() => {
-      this.setState(() => ({
-        amountOfRowsToBeLoaded: siteRank.stats.length
-      }));
-    });
+    getRanksForWebsitesInList(match.params.id);
   }
 
   // deletes single website
   onDelete(websiteId) {
-    const { deleteSiteFromList, match } = this.props;
+    const { deleteSiteFromList, match, siteRank } = this.props;
     const { busy } = this.state;
     if (!busy) {
       this.setState({ busy: true });
@@ -99,8 +94,8 @@ class Home extends PureComponent {
         } else {
           this.setState({ busy: false });
           toastAlert('info', `Successfully deleted websites from your list`);
-          this.setState(prevState => ({
-            amountOfRowsToBeLoaded: prevState.amountOfRowsToBeLoaded - 1
+          this.setState(() => ({
+            amountOfRowsToBeLoaded: siteRank.stats.length
           }));
           ReactGA.event({
             category: 'Lists',
@@ -153,9 +148,8 @@ class Home extends PureComponent {
 
       if (urlsToQuery.length > 0) {
         const { getBulkTraffic } = this.props;
-        this.setState(prevState => ({
-          amountOfRowsToBeLoaded:
-            prevState.amountOfRowsToBeLoaded + urlsToQuery.length
+        this.setState(() => ({
+          amountOfRowsToBeLoaded: siteRank.stats.length + urlsToQuery.length
         }));
 
         const res = await getBulkTraffic(urlsToQuery, siteRank.currentListId);
@@ -192,7 +186,10 @@ class Home extends PureComponent {
   };
 
   refreshList = async () => {
-    const { refreshList, match } = this.props;
+    const { refreshList, match, siteRank } = this.props;
+    this.setState(() => ({
+      amountOfRowsToBeLoaded: siteRank.stats.length
+    }));
     this.setState({ refreshing: true });
     await refreshList(match.params.id).finally(() => {
       this.setState({ refreshing: false });
@@ -215,8 +212,45 @@ class Home extends PureComponent {
 
   renderTable = (isLoading, sortedStats) => {
     const { amountOfRowsToBeLoaded } = this.state;
+
+    const tableHead = (
+      <thead>
+        <th onClick={() => this.sortStats('url')}>
+          Website
+          {this.renderCaret('url')}
+        </th>
+
+        <th onClick={() => this.sortStats('globalPageviewsPerMonth')}>
+          <FontAwesomeIcon icon={faEye} />
+          Pageviews
+          {this.renderCaret('globalPageviewsPerMonth')}
+        </th>
+
+        <th onClick={() => this.sortStats('uniquePageViews')}>
+          <FontAwesomeIcon icon={faUserFriends} />
+          Unique visitors
+          {this.renderCaret('uniquePageViews')}
+        </th>
+
+        <th onClick={() => this.sortStats('globalRank')}>
+          <FontAwesomeIcon icon={faGlobe} />
+          Global rank
+          {this.renderCaret('globalRank')}
+        </th>
+
+        <th>
+          <FontAwesomeIcon icon={faStar} />
+          Most popular in
+        </th>
+      </thead>
+    );
+
     if (isLoading) {
-      return <Skeleton rows={amountOfRowsToBeLoaded} columns={5} />;
+      return (
+        <Skeleton rows={amountOfRowsToBeLoaded} columns={5}>
+          {tableHead}
+        </Skeleton>
+      );
     }
 
     const rows = sortedStats.map(stat => (
@@ -229,35 +263,7 @@ class Home extends PureComponent {
 
     return (
       <Table responsive className="RankTable">
-        <thead>
-          <th onClick={() => this.sortStats('url')}>
-            Website
-            {this.renderCaret('url')}
-          </th>
-
-          <th onClick={() => this.sortStats('globalPageviews')}>
-            <FontAwesomeIcon icon={faEye} />
-            Pageviews
-            {this.renderCaret('globalPageviews')}
-          </th>
-
-          <th onClick={() => this.sortStats('uniquePageViews')}>
-            <FontAwesomeIcon icon={faUserFriends} />
-            Unique visitors
-            {this.renderCaret('uniquePageViews')}
-          </th>
-
-          <th onClick={() => this.sortStats('globalRank')}>
-            <FontAwesomeIcon icon={faGlobe} />
-            Global rank
-            {this.renderCaret('globalRank')}
-          </th>
-
-          <th>
-            <FontAwesomeIcon icon={faStar} />
-            Top country
-          </th>
-        </thead>
+        {tableHead}
         <tbody>{rows}</tbody>
       </Table>
     );

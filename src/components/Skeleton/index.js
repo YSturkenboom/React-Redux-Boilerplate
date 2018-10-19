@@ -45,7 +45,7 @@ export default class Loader extends PureComponent {
 
     return (
       <Table className="skeleton-load">
-        <thead>{children}</thead>
+        {children}
         <tbody>{this.skeletonContent()}</tbody>
       </Table>
     );

@@ -70,16 +70,17 @@ class SearchBar extends PureComponent {
     }
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
+  handleSubmit = async () => {
     const { ranks, actionOnSubmit } = this.props;
     const { tags } = this.state;
     const oldUrls = map(ranks, 'url');
+    await this.setState({ loading: true });
     const diff = filter(
       cleanUrls(tags),
       item => !includes(cleanUrls(oldUrls), item)
     );
-    actionOnSubmit(diff).then(shouldRemove => {
+    actionOnSubmit(diff).then(async shouldRemove => {
+      await this.setState({ loading: false });
       if (shouldRemove) {
         this.setState({ tags: [] });
       }

@@ -12,6 +12,16 @@
 .skeleton-load {
   span {
     line-height: 1.5;
-    min-height: 100px;
+    min-height: 81px;
+  }
+
+  td {
+    width: 19%;
+    border-right: 1px solid #e8e8e8;
+
+    &:first-child {
+      width: 24%;
+      padding: 5px 0;
+    }
   }
 }
