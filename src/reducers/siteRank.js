@@ -10,37 +10,37 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'CREATE_LIST_REQUEST_SUCCESS': {
+    case 'CREATE_LIST_SUCCESS': {
       const currentListId = action.newListId.data._id;
       return { ...state, currentListId };
     }
-    case 'CREATE_LIST_REQUEST_FAIL': {
+    case 'CREATE_LIST_FAIL': {
       const error = action.err || 'Error retrieving site ranks.';
       return { ...state, error };
     }
-    case 'GET_RANK_FOR_WEBSITE_SUCCESS': {
+    case 'GET_RANKS_FOR_WEBSITES_SUCCESS': {
       const { websites } = action.result.data;
       return { ...state, ranks: websites, isLoading: false };
     }
-    case 'GET_RANK_FOR_WEBSITE_FAIL': {
-      const error = action || 'Error retrieving ranks for sites in list.';
+    case 'GET_RANKS_FOR_WEBSITES_FAIL': {
+      const error = action.error || 'Error retrieving ranks for sites in list.';
       return { ...state, error, isLoading: false };
     }
-    case 'GET_TRAFFIC_REQUEST_SUCCESS': {
+    case 'GET_TRAFFIC_SUCCESS': {
       const newStats = sortBy(
         [...state.stats, ...action.payload],
         'globalRank'
       );
       return { ...state, stats: newStats, isLoading: false };
     }
-    case 'GET_TRAFFIC_REQUEST_FAIL': {
+    case 'GET_TRAFFIC_FAIL': {
       const { invalidUrls } = action;
       return { ...state, invalidUrls, isLoading: false };
     }
-    case 'GET_TRAFFIC_REQUEST_PENDING': {
+    case 'GET_TRAFFIC_PENDING': {
       return { ...state, isLoading: true };
     }
-    case 'SINGLE_LIST_REQUEST_SUCCESS': {
+    case 'LIST_READ_SUCCESS': {
       const { _id, websites } = action.result.data;
       return {
         ...state,
@@ -49,7 +49,7 @@ export default (state = initialState, action) => {
         isLoading: false
       };
     }
-    case 'SINGLE_LIST_REQUEST_FAIL': {
+    case 'LIST_READ_FAIL': {
       return { ...state, isLoading: false };
     }
     case 'DELETE_SITE_FROM_LIST_SUCCESS': {

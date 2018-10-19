@@ -42,13 +42,19 @@ class Home extends PureComponent {
   }
 
   componentDidMount() {
-    const { getSingleList, getRanksForWebsitesInList } = this.props;
-
     // Google Analytics
     ReactGA.initialize('UA-92045603-2');
     ReactGA.pageview('/list');
 
-    const { match, create, history, lists, siteRank } = this.props;
+    const {
+      match,
+      create,
+      history,
+      lists,
+      siteRank,
+      getSingleList,
+      getRanksForWebsitesInList
+    } = this.props;
 
     // the tab was clicked to create a new list, immediately make the list and Redirect
     if (match.params.id === 'new') {
@@ -69,6 +75,7 @@ class Home extends PureComponent {
 
     // Load ranks from list into state (separate for instantaneous UI updates)
     getRanksForWebsitesInList(match.params.id).then(() => {
+      console.log('went fine');
       this.setState(() => ({
         amountOfRowsToBeLoaded: siteRank.stats.length
       }));
