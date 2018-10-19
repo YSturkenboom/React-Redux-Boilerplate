@@ -64,6 +64,8 @@ class SearchBar extends PureComponent {
   handleKeyUp = e => {
     if (e.key === 'Enter') {
       this.handleSubmit(e);
+    } else if (e.key === ' ') {
+      console.log('check');
     }
   };
 
@@ -96,14 +98,14 @@ class SearchBar extends PureComponent {
           <div className="d-flex search-bar">
             <TagsInput
               addOnBlur
-              validate={input => isUrl(input)}
+              validate={input => isUrl(input) && input.includes('.')}
               placeholder="google.com"
               // labelField="sites"
               value={this.state.tags}
               onChange={this.handleChange}
               inputValue={this.state.tag}
               onChangeInput={this.handleChangeInput}
-              addKeys={[9, 13, 32, 188]}
+              addKeys={[9, 13, 188]}
               onlyUnique
               renderLayout={(tagComponents, inputComponent) => (
                 <span>
@@ -138,9 +140,7 @@ class SearchBar extends PureComponent {
             </div>
           </div>
         </div>
-        <div className="toolTip mt-3">
-          Press space to add multiple URL&#39;s
-        </div>
+        <div className="toolTip mt-3">Press tab to add multiple URL&#39;s</div>
       </div>
     );
   }
