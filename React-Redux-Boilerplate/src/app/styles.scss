@@ -1,0 +1,26 @@
+@import '../theme/variables';
+@import '../theme/modules/_typography';
+@import '../theme/modules/_buttons';
+
+html {
+  overflow-y: scroll;
+}
+
+body,
+html {
+  height: 100%;
+  width: 100%;
+}
+
+#react-view {
+  height: 100%;
+}
+
+.App {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  background-color: #fafafa;
+}
